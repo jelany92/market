@@ -1,0 +1,116 @@
+.nav li > form > button.logout {
+    color: #FFFFFF;
+}
+
+.nav li > form > button.logout:hover {
+    color: #ed1712;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+body > div.wrap > div.container {
+    padding: 15px 15px 20px;
+}
+
+div.checkbox-spacer {
+    margin-bottom: 5px !important;
+    min-width: 33%;
+    max-width: 33%;
+    display: inline-block;
+}
+
+label.color-picker-label {
+    font-weight: normal;
+}
+
+.color-picker-spacing {
+    margin-top: 6px;
+}
+
+div.card-attach-to-tinymce {
+    border-radius: 0;
+    margin-top: -18px;
+    width: 100.3%;
+}
+
+div.image-sortable-list {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+div.image-sortable-list  div.image-sortable {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    margin: 5px;
+    display: inline-block;
+    background-color: #EEE;
+}
+
+div.image-sortable-list div {
+    display: inline-block;
+}
+
+
+
+
+div.modal-fullscreen {
+    z-index: 1000;
+    width: 81.3%;
+    max-width: none;
+    height: 99%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%) !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+}
+
+div.modal-fullscreen div.modal-content, div.modal-fullscreen div.modal-contained-div {
+    height: 100%;
+}
+
+div.modal-fullscreen div.modal-body {
+    padding: 0;
+    height: calc(100% - 50px);
+}
+
+div.modal-contained-backdrop {
+    background-color: #000000;
+}
+
+div.modal-spinner-container {
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.modal-contained-div div.carousel, div.modal-contained-div div.carousel-inner, div.modal-contained-div div.carousel-item {
+    height: 99.9%;
+}
+
+div.modal-contained-div div.carousel-item img {
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+div#presentation-modal{
+    overflow: hidden;
+}
+
+input.fade-disable {
+    transition: all 0.5s ease;
+}

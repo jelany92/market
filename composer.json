@@ -1,0 +1,62 @@
+{
+    "name": "Faktencheck",
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.2.0",
+        "yiisoft/yii2": "~2.0.14",
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
+        "philippfrenzel/yii2fullcalendar":"~3.9.0",
+        "2amigos/yii2-tinymce-widget" : "~1.1",
+        "kartik-v/yii2-widget-datepicker": "dev-master",
+        "kartik-v/yii2-widget-datetimepicker": "*",
+        "yiisoft/yii2-bootstrap4": "~2.0.6",
+        "kartik-v/yii2-detail-view": "@dev",
+        "kartik-v/yii2-widget-activeform": "dev-master",
+        "sjaakp/yii2-sortable-behavior": "*",
+        "yiisoft/yii2-imagine": "*",
+        "kartik-v/yii2-icons": "@dev",
+        "kartik-v/yii2-widget-select2": "dev-master",
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "kartik-v/yii2-widget-sidenav": "*",
+        "kartik-v/yii2-export": "@dev",
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-grid": "@dev",
+        "yii2tech/spreadsheet": "*",
+        "2amigos/yii2-translateable-behavior" : "~1.1",
+        "codemix/yii2-localeurls": "^1.7",
+        "onmotion/yii2-widget-apexcharts": "^1.0",
+        "coderius/yii2-hit-counter": "1.0.2.2",
+        "kartik-v/yii2-editable": "dev-master",
+        "kartik-v/yii2-social": "@dev",
+        "yiisoft/yii2-authclient": "~2.1.0",
+        "aneeshikmat/yii2-time-down-counter": "v1.1.0-stable"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "~2.0.0",
+        "yiisoft/yii2-gii": "~2.0.0",
+        "yiisoft/yii2-faker": "~2.0.0",
+        "codeception/base": "^2.2.3",
+        "codeception/verify": "~0.3.1",
+        "codeception/codeception": "^2.5"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    }
+}

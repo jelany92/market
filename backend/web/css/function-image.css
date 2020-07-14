@@ -1,0 +1,15 @@
+.ui-sortable-placeholder {
+    height: 0px !important;
+    padding: 15px 0 50px 0;
+}
+
+.kv-file-content {
+    width: auto !important;
+    height: 100px !important;
+}
+
+.carousel-inner img {
+    margin: auto;
+    max-height: 500px;
+}
+

@@ -1,0 +1,10 @@
+suite_namespace: backend\tests\functional
+actor: FunctionalTester
+modules:
+    enabled:
+      - Yii2:
+          # set cleanup to false if you want to see test DB after executing a test case
+          cleanup: true
+          configFile: 'config/test.php'
+      - Filesystem:
+      - Asserts:

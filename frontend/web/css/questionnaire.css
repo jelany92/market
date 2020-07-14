@@ -1,0 +1,105 @@
+h4.function-title {
+    display: inline-block;
+}
+
+a.btn-presentation {
+    margin-left: 25px;
+    color: #333;
+    font-weight: normal;
+}
+
+a.btn-presentation:hover {
+    color: #666;
+}
+a.btn-presentation:focus {
+    color: #454545;
+}
+
+div.modal-fullscreen {
+    z-index: 1000;
+    width: 81.3%;
+    max-width: none;
+    height: 99%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%) !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+}
+
+div.modal-fullscreen div.modal-content, div.modal-fullscreen div.modal-contained-div {
+    height: 100%;
+}
+
+div.modal-fullscreen div.modal-body {
+    padding: 0;
+    height: calc(100% - 50px);
+}
+
+div.modal-contained-backdrop {
+    background-color: #000000;
+}
+
+div.modal-spinner-container {
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.modal-contained-div div.carousel, div.modal-contained-div div.carousel-inner, div.modal-contained-div div.carousel-item {
+    height: 99.9%;
+}
+
+div.modal-contained-div div.carousel-item img {
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+div#presentation-modal{
+    overflow: hidden;
+}
+
+.card-header a {
+    color: #0f0f0f;
+}
+
+.card-header a:hover {
+    text-decoration: none;
+    color: #ed1712;
+}
+
+div.btn-presentation {
+    margin-bottom: -6px;
+    width: 34px;
+    height: 30px;
+    background: url('/images/presentation.png') no-repeat center;
+    background-size: cover;
+    display: inline-block;
+}
+
+div.btn-presentation:hover {
+    background-image: url("/images/presentation-hover.png");
+}
+
+img.presentation-carousel-control {
+    width: 25px;
+    pointer-events: none;
+}
+
+.radio-list-max > .form-check {
+    padding-right: 30px;
+    display: inline-block;
+}
+
+.function-hr{
+    border-top: 1px solid #ccc;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
