@@ -10,8 +10,23 @@ return [
     'timeZone'            => 'Europe/Berlin',
     'basePath'            => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
-    'modules'             => [],
+    'bootstrap'           => ['log'],
+    'modules'             => [
+        'gridview' => [
+            'class'          => '\kartik\grid\Module',
+            //'downloadAction' => 'export',
+            'downloadAction' => 'gridview/export/download',
+        ],
+        'social'   => [
+            // the module class
+            'class'    => 'kartik\social\Module',
+
+            // the global settings for the facebook widget
+            'facebook' => [
+                'appId' => '228100621678999',
+            ],
+        ],
+    ],
     'components'          => [
         'request' => [
             'csrfParam' => '_csrf-backend',
