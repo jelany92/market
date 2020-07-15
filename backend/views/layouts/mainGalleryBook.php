@@ -61,7 +61,7 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
         NavBar::begin([
                           'brandLabel' => 'Adam Markt',
                           'brandUrl'   => Yii::$app->homeUrl,
-                          'options'    => ['class' => 'sticky-top navbar-expand-lg navbar-dark bg-blue ml-auto',],
+                          'options'    => ['class' => 'sticky-top navbar-expand-lg navbar-dark bg-dark ml-auto',],
                       ]);
         $menuItems = [
             [
@@ -114,19 +114,18 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
         <div class="navSearch">
             <?php
             $form = ActiveForm::begin([
-                                          'id'     => 'navSearchForm',
-                                          'method' => 'GET',
-                                          'action' => Url::toRoute('/search/global-search'),
+                                          'id'      => 'navSearchForm',
+                                          'method'  => 'GET',
+                                          'options' => [
+                                              'style' => 'text-align: center;',
+                                          ],
+                                          'action'  => Url::toRoute('/search/global-search'),
                                       ]);
-            ?>
-
-            <?php
             echo Html::textInput('search', (Yii::$app->controller->id == 'search' && Yii::$app->controller->action->id == 'global-search') ? Yii::$app->request->get('search') : null, [
-                'autocomplete' => 'off',
-                'class'        => 'navSearchTextBox pull-right',
                 'id'           => 'navSearchString',
+                'autocomplete' => 'off',
+                'class'        => 'navSearchTextBox',
                 'placeholder'  => Yii::t('app', 'Search to') . '...',
-                'value'        => 'test',
             ]);
             echo Html::submitButton(Icon::show('search'), ['class' => 'btn btn-secondary navSearchSubmit'])
             ?>

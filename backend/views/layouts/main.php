@@ -115,7 +115,7 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                               'brandLabel' => 'Option Main',
                               'options'    => [
                                   'class' => 'navbar-expand-lg navbar-dark bg-dark ml-auto',
-                                  'style' => 'margin-top: -20px;',
+                                  'style' => 'margin-top: -10px;',
                               ],
                           ]);
 
@@ -240,7 +240,7 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
             ];
             echo Nav::widget([
                                  'options' => [
-                                     'class' => Yii::$app->language == 'ar' ? 'navbar-nav navbar-left ml-auto pull-right' : 'navbar-nav navbar-left ml-auto',
+                                     'class' => 'navbar-nav ml-auto',
                                  ],
                                  'items'   => $menuItems,
                              ]);
