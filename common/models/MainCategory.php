@@ -47,9 +47,8 @@ class MainCategory extends \yii\db\ActiveRecord
             [['company_id'], 'integer'],
             [['created_at', 'updated_at', 'file'], 'safe'],
             [['category_name'], 'string', 'max' => 50],
-            [['category_name'], 'unique'],
-            [['category_photo'], 'string', 'max' => 255],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserModel::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id', 'category_name'], 'unique', 'targetAttribute' => ['company_id', 'category_name']],            [['category_photo'], 'string', 'max' => 255],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 
@@ -115,7 +114,7 @@ class MainCategory extends \yii\db\ActiveRecord
     {
         if ($companyId == null)
         {
-            $companyId = UserModel::JELANY_BOOK_CATEGORY;
+            $companyId = AdminUser::JELANY_BOOK_CATEGORY;
         }
         return ArrayHelper::map(self::find()->andWhere(['company_id' => $companyId])->all(),'id', 'category_name');
     }

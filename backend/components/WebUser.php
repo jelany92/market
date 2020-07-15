@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jelani.qattan
- * Date: 17.07.2018
- * Time: 11:59
- */
-
 namespace backend\components;
 
 

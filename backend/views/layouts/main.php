@@ -123,7 +123,7 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
             $menuItems = [];
             if ($category instanceof MainCategory)
             {
-                $teams = MainCategory::getMainCategoryList();
+                $teams = MainCategory::getMainCategoryList(Yii::$app->user->id);
             }
             $menuItems = [
                 [

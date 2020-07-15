@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use common\components\ChangeFormat;
+use common\models\AdminUser;
 use common\models\query\traits\TimestampBehaviorTrait;
 use common\models\UserModel;
 use Yii;
@@ -40,7 +41,7 @@ class TaxOffice extends \yii\db\ActiveRecord
             [['income'], 'validateNumber'],
             [['reason'], 'string'],
             [['selected_date', 'created_at', 'updated_at'], 'safe'],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserModel::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 
@@ -74,7 +75,7 @@ class TaxOffice extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(UserModel::class, ['id' => 'company_id']);
+        return $this->hasOne(AdminUser::class, ['id' => 'company_id']);
     }
 
     /**

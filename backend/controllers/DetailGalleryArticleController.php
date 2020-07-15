@@ -92,7 +92,7 @@ class DetailGalleryArticleController extends BaseController
             $transaction = Yii::$app->db->beginTransaction();
             try
             {
-                $modelUser                        = UserModel::find()->andWhere(['id' => Yii::$app->user->id])->one();
+                $modelUser                        = AdminUser::find()->andWhere(['id' => Yii::$app->user->id])->one();
                 $modelGalleryBookForm->company_id = Yii::$app->user->id;
                 $modelGalleryBookForm->type       = $modelUser->category;
                 $modelDetailGalleryArticle        = new DetailGalleryArticle();

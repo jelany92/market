@@ -2,35 +2,33 @@
 
 use kartik\mpdf\Pdf;
 
-$params = array_merge(
-    require __DIR__ . '/../../common/config/params.php',
-    require __DIR__ . '/../../common/config/params-local.php',
-    require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
-);
+$params = array_merge(require __DIR__ . '/../../common/config/params.php', require __DIR__ . '/../../common/config/params-local.php', require __DIR__ . '/params.php', require __DIR__ . '/params-local.php');
 return [
-    'id' => 'faktencheck-backend',
-    'name' => 'Faktencheck-Admin',
-    'language' => 'de',
-    'timeZone' => 'Europe/Berlin',
-    'basePath' => dirname(__DIR__),
+    'id'                  => 'admin-backend',
+    'name'                => 'Admin-Kattan',
+    'language'            => 'en',
+    'timeZone'            => 'Europe/Berlin',
+    'basePath'            => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    //'bootstrap' => ['log'],
-    'modules' => [],
-    'components' => [
+    'bootstrap' => ['log'],
+    'modules'             => [],
+    'components'          => [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
-        'user' => [
-            'identityClass' => 'common\models\AdminUser',
-            'class' => 'backend\components\WebUser',
+        'user'    => [
+            'identityClass'   => 'common\models\AdminUser',
+            'class'           => 'backend\components\WebUser',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'identityCookie'  => [
+                'name'     => '_identity-backend',
+                'httpOnly' => true,
+            ],
         ],
 
-        'session' => [
+        'session'      => [
             // this is the name of the session cookie used for login on the backend
-            'name' => 'faktencheck-admin',
+            'name' => 'admin',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -49,19 +47,22 @@ return [
         ],
 
         'pdf' => [
-            'class' => Pdf::class,
-            'format' => Pdf::FORMAT_A4,
+            'class'       => Pdf::class,
+            'format'      => Pdf::FORMAT_A4,
             'orientation' => Pdf::ORIENT_PORTRAIT,
             'destination' => Pdf::DEST_BROWSER,
             // refer settings section for all configuration options
         ],
         'log' => [
             'flushInterVal' => 1,
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'traceLevel'    => YII_DEBUG ? 3 : 0,
+            'targets'       => [
                 [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'class'          => 'yii\log\FileTarget',
+                    'levels'         => [
+                        'error',
+                        'warning',
+                    ],
                     'exportInterval' => 1,
                 ],
                 [
@@ -70,7 +71,7 @@ return [
                     'levels'  => ['error'],
                     'except'  => ['yii\web\HttpException:404'],
                     'message' => [
-                        'from'    => ['errors@faktencheck.com'],
+                        'from'    => ['errors@kattan.com'],
                         'to'      => [
                             'j_robben92@hotmai.com',
                         ],
@@ -80,6 +81,6 @@ return [
             ],
         ],
     ],
-    'params' => $params,
+    'params'              => $params,
 ];
 

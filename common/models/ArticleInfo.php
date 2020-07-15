@@ -59,7 +59,7 @@ class ArticleInfo extends \yii\db\ActiveRecord
             [['article_photo'], 'string', 'max' => 255],
             [['article_unit'], 'string', 'max' => 10],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => MainCategory::class, 'targetAttribute' => ['category_id' => 'id']],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserModel::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 
@@ -110,7 +110,7 @@ public function attributeLabels()
      */
     public function getUser()
     {
-        return $this->hasOne(UserModel::class, ['id' => 'company_id']);
+        return $this->hasOne(AdminUser::class, ['id' => 'company_id']);
     }
 
     /**

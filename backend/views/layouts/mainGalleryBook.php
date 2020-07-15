@@ -86,7 +86,7 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
             $menuItems    = [];
             if ($category instanceof MainCategory)
             {
-                $mainCategory = MainCategory::getMainCategoryList();
+                $mainCategory = MainCategory::getMainCategoryList(Yii::$app->user->id);
             }
             $menuItems   = [
                 [
@@ -146,7 +146,7 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
                 $authorName   = array_combine(\common\models\BookGallery::getAuthorNameList(2), \common\models\BookGallery::getAuthorNameList(2));
                 if ($category instanceof MainCategory)
                 {
-                    $mainCategory = MainCategory::getMainCategoryList();
+                    $mainCategory = MainCategory::getMainCategoryList(Yii::$app->user->id);
                 }
                 $subMenuItems = [
                     [

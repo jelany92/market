@@ -46,7 +46,7 @@ use yii\web\JsExpression;
         'data'          => BookAuthorName::getBookAuthorNameList(),
     ]) ?>
 
-    <?= $form->field($modelGalleryBookForm, 'main_category_id')->dropDownList(MainCategory::getMainCategoryList(), ['prompt' => Yii::t('app', 'please Choose'),]) ?>
+    <?= $form->field($modelGalleryBookForm, 'main_category_id')->dropDownList(MainCategory::getMainCategoryList(Yii::$app->user->id), ['prompt' => Yii::t('app', 'please Choose'),]) ?>
 
     <?= $form->field($modelGalleryBookForm, 'subcategory_id', [])->widget(Select2::class, [
         'model'         => $modelGalleryBookForm,

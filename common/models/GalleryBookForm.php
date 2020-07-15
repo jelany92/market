@@ -71,7 +71,7 @@ class GalleryBookForm extends Model
             //[['file_book_photo'], 'file', 'maxSize' => BookGallery::MAX_FILE_SIZE_PHOTO],
             //[['file_book_pdf'], 'file', 'maxSize' => BookGallery::MAX_FILE_SIZE_PDF],
             [['main_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => MainCategory::class, 'targetAttribute' => ['main_category_id' => 'id']],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserModel::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 

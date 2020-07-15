@@ -44,7 +44,6 @@ class AdminUserController extends BaseController
      */
     public function actionView($id)
     {
-
         $model = $this->findModel($id);
 
         $loginProvider = new ActiveDataProvider([

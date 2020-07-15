@@ -4,6 +4,7 @@ namespace backend\models;
 
 use app\models\query\IncomingRevenueQuery;
 use common\components\ChangeFormat;
+use common\models\AdminUser;
 use common\models\query\traits\TimestampBehaviorTrait;
 use common\models\UserModel;
 use Yii;
@@ -41,7 +42,7 @@ class IncomingRevenue extends \yii\db\ActiveRecord
             [['id', 'company_id'], 'integer'],
             [['daily_incoming_revenue'], 'validateNumber'],
             [['selected_date', 'created_at', 'updated_at'], 'safe'],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => UserModel::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 
@@ -117,7 +118,7 @@ class IncomingRevenue extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(UserModel::class, ['id' => 'company_id']);
+        return $this->hasOne(AdminUser::class, ['id' => 'company_id']);
     }
 
     /**
