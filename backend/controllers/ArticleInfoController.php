@@ -105,6 +105,7 @@ class ArticleInfoController extends BaseController
         $fileUrls     = '';
         if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
+            $model->company_id = Yii::$app->user->id;
             $model->save();
             Yii::$app->session->addFlash('success', Yii::t('app', 'done'));
             $model               = new ArticleInfo();
