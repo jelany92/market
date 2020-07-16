@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use common\components\ChangeFormat;
+use common\models\AdminUser;
 use common\models\ArticlePrice;
 use common\models\query\traits\TimestampBehaviorTrait;
 use common\models\UserModel;
