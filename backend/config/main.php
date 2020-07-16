@@ -51,7 +51,7 @@ return [
 
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName'  => false,
+            'showScriptName'  => true,
             'rules'           => [],
             'class'           => 'codemix\localeurls\UrlManager',
             'languages'       => [
