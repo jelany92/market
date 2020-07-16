@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use common\components\ChangeFormat;
+use common\models\AdminUser;
 use common\models\query\traits\TimestampBehaviorTrait;
 use common\models\User;
 use common\models\UserModel;
@@ -47,7 +48,7 @@ class Capital extends \yii\db\ActiveRecord
             [['selected_date', 'created_at', 'updated_at'], 'safe'],
             [['status'], 'string'],
             [['name'], 'string', 'max' => 100],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
 
         ];
     }

@@ -5,7 +5,7 @@ use backend\tests\util\TestUtilTest;
 
 class CustomerCest
 {
-    public function before(AcceptanceTester $I)
+    public function _before(AcceptanceTester $I)
     {
         TestUtilTest::loginUser($I,'admin','Meinaicovo1');
     }
@@ -19,7 +19,7 @@ class CustomerCest
      * display customerlist
      * @param AcceptanceTester $I
      */
-    public function displayCustomerList(AcceptanceTester $I)
+    public function _displayCustomerList(AcceptanceTester $I)
     {
         $I->amGoingTo("open the customer list");
         $I->canSee('Kunden'); // 'Verwaltung->Administrator'

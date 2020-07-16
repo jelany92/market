@@ -2,11 +2,12 @@
 
 namespace backend\controllers;
 
+use common\controller\BaseController;
 use common\models\ArticleInfo;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
-class SearchController extends Controller
+class SearchController extends BaseController
 {
     /**
      * @param string $search

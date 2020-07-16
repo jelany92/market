@@ -2,17 +2,17 @@
 
 namespace backend\controllers;
 
-use Yii;
+use common\controller\BaseController;
 use common\models\CustomerEmployer;
 use common\models\searchModel\CustomerEmployerSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * NewCustomerController implements the CRUD actions for NewCustomer model.
  */
-class CustomerEmployerController extends Controller
+class CustomerEmployerController extends BaseController
 {
     /**
      * {@inheritdoc}
@@ -21,7 +21,7 @@ class CustomerEmployerController extends Controller
     {
         return [
             'verbs' => [
-                'class'   => VerbFilter::className(),
+                'class'   => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

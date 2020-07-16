@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Capital;
 use backend\models\searchModel\CapitalSearch;
+use common\controller\BaseController;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -12,7 +13,7 @@ use yii\web\NotFoundHttpException;
 /**
  * CapitalController implements the CRUD actions for Capital model.
  */
-class CapitalController extends Controller
+class CapitalController extends BaseController
 {
     /**
      * {@inheritdoc}

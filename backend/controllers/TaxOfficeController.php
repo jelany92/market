@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\TaxOffice;
 use backend\models\searchModel\TaxOfficeSearch;
+use common\controller\BaseController;
 use phpDocumentor\Reflection\Types\Integer;
 use Yii;
 use yii\filters\VerbFilter;
@@ -14,7 +15,7 @@ use yii\web\NotFoundHttpException;
 /**
  * TaxOfficeController implements the CRUD actions for TaxOffice model.
  */
-class TaxOfficeController extends Controller
+class TaxOfficeController extends BaseController
 {
     /**
      * {@inheritdoc}

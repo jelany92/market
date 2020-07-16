@@ -3,10 +3,13 @@ actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://admin.faktencheck.local
+            url: http://admin.kattan
             browser: chrome
+            clear_cookies: true
             #port: 9515 // chrome driver standalone only
             window_size: false
             wait: 2
         - Yii2:
-            part: [init,fixtures]
+            configFile: test-local.php
+            part: [init, fixtures]
+            cleanup: false

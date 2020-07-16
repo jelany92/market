@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\components\FileUpload;
+use common\controller\BaseController;
 use common\models\ArticleInfo;
 use common\models\MainCategory;
 use common\models\searchModel\ArticleInfoSearch;
@@ -17,7 +18,7 @@ use yii\web\NotFoundHttpException;
 /**
  * ArticleInfoController implements the CRUD actions for ArticleInfo model.
  */
-class ArticleInfoController extends Controller
+class ArticleInfoController extends BaseController
 {
     /**
      * {@inheritdoc}

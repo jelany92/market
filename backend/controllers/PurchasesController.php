@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\IncomingRevenue;
 use common\components\QueryHelper;
+use common\controller\BaseController;
 use Yii;
 use backend\models\Purchases;
 use backend\models\searchModel\PurchasesSearch;
@@ -18,7 +19,7 @@ use yii2tech\spreadsheet\Spreadsheet;
 /**
  * PurchasesController implements the CRUD actions for Purchases model.
  */
-class PurchasesController extends Controller
+class PurchasesController extends BaseController
 {
     /**
      * {@inheritdoc}

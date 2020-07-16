@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\InvoicesPhoto;
 use backend\models\PurchaseInvoices;
 use backend\models\searchModel\PurchaseInvoicesSearch;
+use common\controller\BaseController;
 use common\models\ArticlePrice;
 use kartik\mpdf\Pdf;
 use Yii;
@@ -19,7 +20,7 @@ use yii2tech\spreadsheet\Spreadsheet;
 /**
  * PurchaseInvoicesController implements the CRUD actions for PurchaseInvoices model.
  */
-class PurchaseInvoicesController extends Controller
+class PurchaseInvoicesController extends BaseController
 {
     /**
      * {@inheritdoc}

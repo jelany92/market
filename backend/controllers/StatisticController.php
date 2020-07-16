@@ -5,10 +5,11 @@ namespace backend\controllers;
 use backend\models\MarketExpense;
 use backend\models\Purchases;
 use common\components\QueryHelper;
+use common\controller\BaseController;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 
-class StatisticController extends Controller
+class StatisticController extends BaseController
 {
     public function actionMonthIncome($year, $month)
     {
