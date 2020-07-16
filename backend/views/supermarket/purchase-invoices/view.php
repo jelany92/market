@@ -95,7 +95,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'article_info_id',
                 'value'     => function ($model) {
-                    return $model->articleInfo->article_name_ar;
+                    if (isset($model->articleInfo->article_name_ar))
+                    {
+                        return $model->articleInfo->article_name_ar;
+                    }
                 },
             ],
             'articleInfo.article_quantity',
