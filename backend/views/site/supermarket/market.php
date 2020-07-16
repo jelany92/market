@@ -84,7 +84,7 @@ $series = [
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-    <?php if (Yii::$app->user->can('main-category.*')) : ?>
+    <?php if (!Yii::$app->user->can('main-category.*')) : ?>
         <p>
             <?= Html::a(Yii::t('app', 'Demo Data'), ['demo-data'], ['class' => 'btn btn-success']) ?>
         </p>
