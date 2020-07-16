@@ -105,18 +105,10 @@ class ArticlePriceController extends BaseController
                  ]);*/
 
             return $this->redirect([
-                                       'view',
-                                       'id' => $model->id,
+                                       '/purchase-invoices/view',
+                                       'id' => $model->purchase_invoices_id,
                                    ]);
         }
-        if ($model->load(Yii::$app->request->post()) && $model->save())
-        {
-            return $this->redirect([
-                                       'view',
-                                       'id' => $model->id,
-                                   ]);
-        }
-
         $articleList = ArrayHelper::map(ArticleInfo::find()->andWhere(['company_id' => Yii::$app->user->id])->all(), 'id', 'article_name_ar');
         return $this->render('/supermarket/article-price/create', [
             'model'       => $model,
@@ -141,9 +133,10 @@ class ArticlePriceController extends BaseController
         {
             $model->article_prise_per_piece = $model->article_total_prise / $model->article_count;
             $model->save();
+            Yii::$app->session->addFlash('success', Yii::t('app', 'done'));
             return $this->redirect([
-                                       'view',
-                                       'id' => $model->id,
+                                       '/purchase-invoices/view',
+                                       'id' => $model->purchase_invoices_id,
                                    ]);
         }
         $articleList = ArrayHelper::map(ArticleInfo::find()->andWhere(['company_id' => Yii::$app->user->id])->all(), 'id', 'article_name_ar');
@@ -166,7 +159,7 @@ class ArticlePriceController extends BaseController
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['/supermarket/article-price/index']);
+        return $this->redirect(['/article-price/index']);
     }
 
     /**

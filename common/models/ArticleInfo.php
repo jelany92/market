@@ -10,6 +10,7 @@ use Yii;
  *
  * @property int            $id
  * @property int|null       $category_id
+ * @property int|null       $company_id
  * @property string         $article_name_ar
  * @property string|null    $article_photo
  * @property string|null    $article_unit
@@ -29,6 +30,7 @@ class ArticleInfo extends \yii\db\ActiveRecord
         'KG'  => 'KG',
         'G'   => 'G',
         'L'   => 'L',
+        'ML'  => 'ML',
         'BOX' => 'Paket',
     ];
 
