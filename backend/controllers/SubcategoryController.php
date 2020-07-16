@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\controller\BaseController;
 use Yii;
 use common\models\Subcategory;
 use common\models\searchModel\SubcategorySearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * SubcategoryController implements the CRUD actions for Subcategory model.
  */
-class SubcategoryController extends Controller
+class SubcategoryController extends BaseController
 {
     /**
      * {@inheritdoc}

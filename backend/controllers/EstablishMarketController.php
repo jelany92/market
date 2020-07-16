@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\controller\BaseController;
 use Yii;
 use backend\models\EstablishMarket;
 use backend\models\searchModel\EstablishMarketSearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * EstablishMarketController implements the CRUD actions for EstablishMarket model.
  */
-class EstablishMarketController extends Controller
+class EstablishMarketController extends BaseController
 {
     /**
      * {@inheritdoc}

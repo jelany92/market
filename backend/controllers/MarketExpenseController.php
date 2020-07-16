@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\components\QueryHelper;
+use common\controller\BaseController;
 use Yii;
 use backend\models\MarketExpense;
 use backend\models\searchModel\MarketExpenseSearch;
@@ -14,7 +15,7 @@ use yii\filters\VerbFilter;
 /**
  * MarketExpenseController implements the CRUD actions for MarketExpense model.
  */
-class MarketExpenseController extends Controller
+class MarketExpenseController extends BaseController
 {
     /**
      * {@inheritdoc}

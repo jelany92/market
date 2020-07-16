@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\controller\BaseController;
 use Yii;
 use backend\models\IncomingRevenue;
 use backend\models\searchModel\IncomingRevenueSearch;
@@ -15,7 +16,7 @@ use yii2tech\spreadsheet\Spreadsheet;
 /**
  * IncomingRevenueController implements the CRUD actions for IncomingRevenue model.
  */
-class IncomingRevenueController extends Controller
+class IncomingRevenueController extends BaseController
 {
     /**
      * {@inheritdoc}

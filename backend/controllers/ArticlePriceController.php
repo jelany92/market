@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\components\QueryHelper;
+use common\controller\BaseController;
 use common\models\ArticleInfo;
 use common\models\ArticlePrice;
 use common\models\searchModel\ArticlePriceSearch;
@@ -19,7 +20,7 @@ use yii\web\Response;
 /**
  * ArticlePriceController implements the CRUD actions for ArticlePrice model.
  */
-class ArticlePriceController extends Controller
+class ArticlePriceController extends BaseController
 {
     /**
      * {@inheritdoc}

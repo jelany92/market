@@ -8,24 +8,20 @@ use backend\models\MarketExpense;
 use backend\models\PurchaseInvoices;
 use backend\models\Purchases;
 use backend\models\TaxOffice;
-use common\models\AdminUser;
+use common\controller\BaseController;
 use common\models\ArticleInfo;
-use common\models\Category;
 use common\models\CustomerEmployer;
 use common\models\MainCategory;
-use common\models\Order;
 use common\models\search\AdminUserSearch;
-use Yii;
 use common\models\UserModel;
-use common\models\searchModel\UserModelSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * UserModelController implements the CRUD actions for UserModel model.
  */
-class UserModelController extends Controller
+class UserModelController extends BaseController
 {
     /**
      * {@inheritdoc}

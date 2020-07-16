@@ -9,6 +9,7 @@
 namespace backend\tests\util;
 
 use backend\tests\AcceptanceTester;
+use yii\test\Fixture;
 
 class TestUtilTest
 {
@@ -33,7 +34,7 @@ class TestUtilTest
      * @param $instance
      * @param $index
      *
-     * @return fixture element specified by parameters
+     * @return Fixture element specified by parameters
      */
     public static function getFixtureElement($I, $fixtureName, $instance, $index = null)
     {

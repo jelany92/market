@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\ArticleInventory;
 use backend\models\searchModel\ArticleInventorySearch;
+use common\controller\BaseController;
 use common\models\ArticleInfo;
 use common\models\ArticlePrice;
 use Yii;
@@ -19,7 +20,7 @@ use yii\filters\VerbFilter;
 /**
  * ArticleInStoredController implements the CRUD actions for ArticleInStored model.
  */
-class ArticleInStoredController extends Controller
+class ArticleInStoredController extends BaseController
 {
     /**
      * {@inheritdoc}

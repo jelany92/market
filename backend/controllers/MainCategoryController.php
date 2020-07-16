@@ -6,6 +6,7 @@ use backend\models\searchModel\ArticleSearch;
 use backend\models\searchModel\CategorySearch;
 use backend\models\searchModel\MainCategorySearch;
 use common\components\FileUpload;
+use common\controller\BaseController;
 use common\models\Article;
 use common\models\ArticleInfo;
 use common\models\MainCategory;
@@ -19,7 +20,7 @@ use yii\web\NotFoundHttpException;
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
-class MainCategoryController extends Controller
+class MainCategoryController extends BaseController
 {
     /**
      * {@inheritdoc}
