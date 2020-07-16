@@ -65,10 +65,10 @@ class ArticleInfo extends \yii\db\ActiveRecord
         ];
     }
 
-/**
- * {@inheritdoc}
- */
-public function attributeLabels()
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
     {
         return [
             'id'                => Yii::t('app', 'ID'),
@@ -134,6 +134,15 @@ public function attributeLabels()
             return $minPrice;
         }
         return null;
+    }
+
+    /**
+     * @return array
+     * @throws \yii\db\Exception
+     */
+    public static function getArticleNameList() : array
+    {
+        return self::find()->select(['articleName' => 'if(article_quantity IS NOT NULL , CONCAT(article_name_ar, " ( ",article_quantity, " ", article_unit, " ) "), article_name_ar)'])->andWhere(['company_id' => Yii::$app->user->id])->createCommand()->queryAll(\PDO::FETCH_COLUMN);
     }
 
     /**

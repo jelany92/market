@@ -109,10 +109,8 @@ class ArticlePriceController extends BaseController
                                        'id' => $model->purchase_invoices_id,
                                    ]);
         }
-        $articleList = ArrayHelper::map(ArticleInfo::find()->andWhere(['company_id' => Yii::$app->user->id])->all(), 'id', 'article_name_ar');
         return $this->render('/supermarket/article-price/create', [
             'model'       => $model,
-            'articleList' => $articleList,
         ]);
     }
 
