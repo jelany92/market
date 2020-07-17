@@ -99,6 +99,7 @@ $this->title = 'My Yii Application';
                                                           'lang' => 'de',
                                                           //... more options to be defined here!
                                                       ],
+                                                      'themeSystem' => 'bootstrap4',
                                                       'clientOptions' => [
                                                           //'hiddenDays'         => [0],
                                                           // alle Tage auser Samstag un Sontag

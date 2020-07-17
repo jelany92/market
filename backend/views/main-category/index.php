@@ -1,10 +1,10 @@
 <?php
 
 use yii\bootstrap4\Html;
-use yii\grid\GridView;
+use common\components\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\searchModel\CategorySearch */
+/* @var $searchModel backend\models\searchModel\MainCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title                   = Yii::t('app', 'Categories');
@@ -17,7 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create') . ' ' . Yii::t('app', 'Category'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
 
     <?= GridView::widget([
                              'dataProvider' => $dataProvider,

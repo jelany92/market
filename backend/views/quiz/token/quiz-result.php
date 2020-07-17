@@ -18,7 +18,6 @@ $this->title = Yii::t('app', 'Your Answer')
     <?= GridView::widget([
                              'dataProvider' => $dataProvider,
                              'options'      => [
-                                 'id'    => 'permission_grid',
                                  'style' => 'overflow: auto; word-wrap: break-word;',
                              ],
                              'rowOptions'   => function ($model) {
