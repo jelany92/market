@@ -1,15 +1,15 @@
 <?php
 
-use yii\bootstrap4\Html;
-use kartik\form\ActiveForm;
-use kartik\date\DatePicker;
+use common\models\ArticleInfo;
 use common\models\ArticlePrice;
+use kartik\date\DatePicker;
+use kartik\form\ActiveForm;
 use kartik\select2\Select2;
+use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ArticlePrice */
 /* @var $form yii\widgets\ActiveForm */
-/* @var $articleList array */
 ?>
 
 <div class="article-price-form">
@@ -28,7 +28,7 @@ use kartik\select2\Select2;
             'maximumInputLength' => false,
         ],
         'size'          => Select2::LARGE,
-        'data'          => $articleList,
+        'data'          => ArticleInfo::getArticleNameList(),
     ]) ?>
     <?= $form->field($model, 'article_total_prise')->textInput() ?>
 

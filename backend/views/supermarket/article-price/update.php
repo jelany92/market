@@ -3,7 +3,6 @@
 use yii\bootstrap4\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\ArticlePrice */
-/* @var $articleList  array */
 
 $this->title = Yii::t('app', 'Update Article Price: {name}', [
     'name' => $model->id,
@@ -18,7 +17,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 
     <?= $this->render('_form', [
         'model'       => $model,
-        'articleList' => $articleList,
     ]) ?>
 
 </div>

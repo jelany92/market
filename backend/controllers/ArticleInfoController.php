@@ -111,10 +111,8 @@ class ArticleInfoController extends BaseController
             $model               = new ArticleInfo();
             $model->category_id  = 7;
             $model->article_unit = 'K';
-            $articleList         = ArrayHelper::map(MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id])->all(), 'id', 'category_name');
             return $this->render('/supermarket/article-info/create', [
                 'model'       => $model,
-                'articleList' => $articleList,
                 'fileUrls'    => $fileUrls,
             ]);
             return $this->redirect([

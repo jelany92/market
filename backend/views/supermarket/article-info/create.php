@@ -4,7 +4,6 @@ use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ArticleInfo */
-/* @var $articleList array */
 /* @var $fileUrls string */
 
 $this->title                   = Yii::t('app', 'Create Article Info');
@@ -19,9 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model'       => $model,
-        'articleList' => $articleList,
-        'fileUrls'    => $fileUrls,
+        'model'    => $model,
+        'fileUrls' => $fileUrls,
 
     ]) ?>
 
