@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model \backend\models\quiz\Excercise */
 
-$this->title = 'Excercise ' . $model->id;
+$this->title = $model->mainCategoryExercise->main_category_exercise_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Main Category Exercises'), 'url' => ['quiz/main-category-exercise']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Excercise'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

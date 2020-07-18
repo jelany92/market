@@ -12,10 +12,17 @@ $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Main Category Exercises'),
     'url'   => ['quiz/main-category-exercise/index'],
 ];
+
+$this->params['breadcrumbs'][] = [
+    'label' => $modelModelMainCategoryExercise->main_category_exercise_name,
+    'url'   => ['quiz/main-category-exercise'],
+];
+
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Excercise'),
     'url'   => ['index'],
 ];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="excercise-crud-create">

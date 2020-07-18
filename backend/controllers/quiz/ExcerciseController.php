@@ -110,7 +110,8 @@ class ExcerciseController extends Controller
         else
         {
             return $this->render('update', [
-                'model' => $model,
+                'model'                          => $model,
+                'modelModelMainCategoryExercise' => $model->mainCategoryExercise,
             ]);
         }
     }
