@@ -2,7 +2,7 @@
 
 use common\models\ArticleInfo;
 use yii\bootstrap4\Html;
-use yii\grid\GridView;
+use common\components\GridView;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -46,19 +46,22 @@ $filesPath                     = DIRECTORY_SEPARATOR . Yii::$app->params['upload
         ], ['class' => 'btn btn-success']) ?>
     </p>
     <br><br><br>
-    <div class="col-sm-8">
-        <?= DetailView::widget([
-                                   'model'      => $model,
-                                   'attributes' => [
-                                       'category_name',
-                                   ],
-                               ]) ?>
-    </div>
-    <div class="category-photo col-sm-4">
-        <div class="view-info text-right">
-            <?= Html::img($filesPath, ['style' => 'width:100%;height: 300px']) ?>
+    <div class="row col-xl-12">
+        <div class="col-sm-9">
+            <?= DetailView::widget([
+                                       'model'      => $model,
+                                       'attributes' => [
+                                           'category_name',
+                                       ],
+                                   ]) ?>
+        </div>
+        <div class="category-photo col-sm-3">
+            <div class="view-info text-right">
+                <?= Html::img($filesPath, ['style' => 'width:100%;height: 300px']) ?>
+            </div>
         </div>
     </div>
+
     <br>
     <div class="row col-md-12">
         <?php if (0 < $dataProviderArticle->count) : ?>
