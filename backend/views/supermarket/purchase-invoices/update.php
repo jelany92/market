@@ -9,14 +9,14 @@ use yii\bootstrap4\Html;
 
 
 $this->title                   = Yii::t('app', 'Update Purchase Invoices: {name}', [
-    'name' => $model->id,
+    'name' => $model->invoice_name,
 ]);
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Purchase Invoices'),
     'url'   => ['index'],
 ];
 $this->params['breadcrumbs'][] = [
-    'label' => $model->id,
+    'label' => $model->invoice_name,
     'url'   => [
         'view',
         'id' => $model->id,

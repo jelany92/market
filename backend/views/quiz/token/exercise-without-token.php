@@ -7,6 +7,8 @@
 
 use yii\bootstrap4\Html;
 use yii\widgets\ActiveForm;
+use yii\bootstrap4\Accordion;
+use yii\bootstrap\Collapse;
 
 $this->title                   = Yii::t('app', 'Exercise');
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,24 +26,24 @@ foreach ($exercises as $exercise) : ?>
         'answer_c' => $exercise['answer_c'],
         'answer_d' => $exercise['answer_d'],
     ] ?>
-    <div class="panel-group" id="accordion_<?= $exercise['id'] ?>">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#<?= $exercise['id'] ?>" aria-expanded="true" aria-controls="collapse<?= $exercise['id'] ?>" id="heading<?= $exercise['id'] ?>" class="d-block"><?= $exercise['question'] ?></a>
-                </h3>
-            </div>
-            <div id="<?= $exercise['id'] ?>" class="panel-collapse collapse <?= ($isExpanded) ? 'in' : '' ?>" role="tab" aria-labelledby="heading-<?= $exercise['id'] ?>" data-parent="#accordion">
-                <div class="panel-body">
-                    <?= $form->field($modelQuizAnswerForm, 'answer')->radioList($answers, [
-                        'name'      => 'Answers[' . $exercise['id'] . ']',
-                        'separator' => '<br>',
-                    ])->label(false) ?>
 
-                </div>
-            </div>
-        </div>
-    </div>
+    <?= Accordion::widget([
+                              'items'             => [
+                                  [
+                                      'label'    => $exercise['question'],
+                                      'content'  => $form->field($modelQuizAnswerForm, 'answer')->radioList($answers, [
+                                          'name'      => 'Answers[' . $exercise['id'] . ']',
+                                          'separator' => '<br>',
+                                      ])->label(false),
+                                      'collapse' => '',
+                                  ],
+                              ],
+                              'itemToggleOptions' => [
+                                  'aria-expanded' => false,
+                                  'data-toggle'   => 'collapse',
+                              ],
+                          ]) ?>
+    <br>
     <?php
     $no++;
     $isExpanded = false;

@@ -264,13 +264,12 @@ class PurchaseInvoicesController extends BaseController
         $modelArticlePrice = new ActiveDataProvider([
             'query' => ArticlePrice::find()->andWhere(['purchase_invoices_id' => $purchaseInvoicesId]),
         ]);
-        $view = '@backend/components/view/pdf-file/price-per-invoices-pdf.php';
+        $view = '@backend/components/pdf-file/price-per-invoices-pdf.php';
         $content = $this->render($view, [
             'model'                    => $model,
             'dataProviderArticlePrice' => $modelArticlePrice,
 
         ]);
-        //print_r($content);die();
         /* @var $mpdf \Mpdf\Mpdf */
         $date    = date('d.m.Y');
 

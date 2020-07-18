@@ -21,9 +21,16 @@ $this->title = Yii::t('app', 'Your Answer')
                                  'style' => 'overflow: auto; word-wrap: break-word;',
                              ],
                              'rowOptions'   => function ($model) {
-                                 if ($model->excercise[$model->student_answer] == $model->excercise[$model->excercise->correct_answer])
+                                 if (!empty($model->student_answer))
                                  {
-                                     return ['style' => 'background-color:#4FFFB0'];
+                                     if ($model->excercise[$model->student_answer] == $model->excercise[$model->excercise->correct_answer])
+                                     {
+                                         return ['style' => 'background-color:#4FFFB0'];
+                                     }
+                                     else
+                                     {
+                                         return ['style' => 'background-color:#F88379'];
+                                     }
                                  }
                                  else
                                  {
@@ -44,7 +51,10 @@ $this->title = Yii::t('app', 'Your Answer')
                                  [
                                      'attribute' => 'student_answer',
                                      'value'     => function ($model) {
-                                         return $model->excercise[$model->student_answer];
+                                         if (!empty($model->student_answer))
+                                         {
+                                             return $model->excercise[$model->student_answer];
+                                         }
                                      },
                                  ],
                                  [

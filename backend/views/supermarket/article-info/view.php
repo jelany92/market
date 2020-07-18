@@ -39,27 +39,29 @@ $filesPath                     = DIRECTORY_SEPARATOR . Yii::$app->params['upload
                     ]) ?>
     </p>
     <br><br>
-    <div class="col-sm-9">
-        <?= DetailView::widget([
-                                   'model'      => $model,
-                                   //'options' => ['class' => ''],
-                                   'attributes' => [
-                                       [
-                                           'attribute' => 'category_id',
-                                           'value'     => function ($model) {
-                                               return MainCategory::getMainCategoryList(Yii::$app->user->id)[$model->category_id];
-                                           },
+    <div class="row col-sm-12">
+        <div class="col-sm-9">
+            <?= DetailView::widget([
+                                       'model'      => $model,
+                                       //'options' => ['class' => ''],
+                                       'attributes' => [
+                                           [
+                                               'attribute' => 'category_id',
+                                               'value'     => function ($model) {
+                                                   return MainCategory::getMainCategoryList(Yii::$app->user->id)[$model->category_id];
+                                               },
+                                           ],
+                                           'article_name_ar',
+                                           'article_quantity',
+                                           'article_unit',
+                                           'article_buy_price',
                                        ],
-                                       'article_name_ar',
-                                       'article_quantity',
-                                       'article_unit',
-                                       'article_buy_price',
-                                   ],
-                               ]) ?>
-    </div>
-    <div class="single-products col-sm-3">
-        <div class="view-info text-right">
-            <?= Html::img($filesPath, ['style' => 'width:100%;height: 300px']) ?>
+                                   ]) ?>
+        </div>
+        <div class="single-products col-sm-3">
+            <div class="view-info text-right">
+                <?= Html::img($filesPath, ['style' => 'width:100%;height: 300px']) ?>
+            </div>
         </div>
     </div>
 
@@ -69,6 +71,9 @@ $filesPath                     = DIRECTORY_SEPARATOR . Yii::$app->params['upload
 
         <?= GridView::widget([
                                  'dataProvider' => $dataProviderArticlePrice,
+                                 'options'      => [
+                                     'style' => 'overflow: auto; word-wrap: break-word;',
+                                 ],
                                  'columns'      => [
                                      ['class' => 'yii\grid\SerialColumn'],
 
