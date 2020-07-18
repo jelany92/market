@@ -172,7 +172,9 @@ class TokenController extends Controller
      * @param string $token
      *
      * @return string|Response
+     * @throws \Throwable
      * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionStartExerciseWithoutToken(int $mainCategoryExerciseId, string $token)
     {

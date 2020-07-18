@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "673e99636468babdcabe28a267e36e93",
+    "content-hash": "82771deda2b9122c90caa216210d7f61",
     "packages": [
         {
             "name": "2amigos/yii2-tinymce-widget",
@@ -111,6 +111,51 @@
                 "yii"
             ],
             "time": "2018-10-31T15:11:24+00:00"
+        },
+        {
+            "name": "aneeshikmat/yii2-time-down-counter",
+            "version": "v1.1.0-stable",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aneeshikmat/yii2-time-down-counter.git",
+                "reference": "aa0aa49b257f191cd70e11b2ff2ea9693c5711ae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aneeshikmat/yii2-time-down-counter/zipball/aa0aa49b257f191cd70e11b2ff2ea9693c5711ae",
+                "reference": "aa0aa49b257f191cd70e11b2ff2ea9693c5711ae",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-widget",
+            "autoload": {
+                "psr-4": {
+                    "aneeshikmat\\yii2\\Yii2TimerCountDown\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anees Hikmat",
+                    "email": "aneeshikmat@gmail.com"
+                }
+            ],
+            "description": "Widget for yii2, to start count down timer with a lot of options, This widget build dependence of timeDownCounter JS library",
+            "keywords": [
+                "counter",
+                "down",
+                "time",
+                "widget",
+                "yii2",
+                "yii2 countdown timer",
+                "yii2 timer"
+            ],
+            "time": "2020-02-14T12:37:16+00:00"
         },
         {
             "name": "bower-asset/bootstrap",

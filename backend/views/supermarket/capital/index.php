@@ -4,6 +4,7 @@ use yii\bootstrap4\Html;
 use common\components\GridView;
 use common\widgets\Table;
 use yii\bootstrap4\Accordion;
+use common\widgets\AccordionWidget;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\searchModel\CapitalSearch */
@@ -87,21 +88,16 @@ foreach ($tableInformationStock as $key => $stock)
         ],
     ];
 }
-
-
 ?>
 <div class="capital-index">
-    <?= Accordion::widget([
-                              'items'             => [
-                                  [
-                                      'label'   => Yii::t('app', 'Capital Person'),
-                                      'content' => Table::widget($tableContent),
-                                  ],
-                              ],
-                              'itemToggleOptions' => [
-                                  'class' => 'btn-link btn collapsed',
-                              ],
-                          ]) ?>
+    <?= AccordionWidget::widget([
+                                    'items' => [
+                                        [
+                                            'label'   => '<div class="card-header">' . Yii::t('app', 'Capital Person') . '</div>',
+                                            'content' => Table::widget($tableContent),
+                                        ],
+                                    ],
+                                ]) ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

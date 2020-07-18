@@ -23,7 +23,7 @@ $this->title = Yii::t('app', 'Your Answer')
                              'rowOptions'   => function ($model) {
                                  if (!empty($model->student_answer))
                                  {
-                                     if ($model->excercise[$model->student_answer] == $model->excercise[$model->excercise->correct_answer])
+                                     if ($model->student_answer == $model->excercise->correct_answer)
                                      {
                                          return ['style' => 'background-color:#4FFFB0'];
                                      }
@@ -53,14 +53,14 @@ $this->title = Yii::t('app', 'Your Answer')
                                      'value'     => function ($model) {
                                          if (!empty($model->student_answer))
                                          {
-                                             return $model->excercise[$model->student_answer];
+                                             return $model->student_answer;
                                          }
                                      },
                                  ],
                                  [
                                      'label' => Yii::t('app', 'Correct Answer'),
                                      'value' => function ($model) {
-                                         return $model->excercise[$model->excercise->correct_answer];
+                                         return $model->excercise->correct_answer;
                                      },
                                  ],
                              ],
