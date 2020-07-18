@@ -95,6 +95,7 @@ return [
 
     //Capital
     'Capitals'                                      => 'معلومات رأس المال',
+    'Capital Person'                                => 'المؤسسين',
 
     //Article In Inventory
     'Article In Inventory'                          => 'الجرد',
@@ -111,6 +112,7 @@ return [
     'Invoice Name'                                  => 'اسم الفاتورة',
     'Invoice Description'                           => 'نوع المشتريات',
     'Photo'                                         => 'ملف الفاتورة',
+    'Price this Invoice'                            => 'اسعار عناصر الفاتورة',
 
     //article price
     'Article Count'                                 => 'عدد القطع',

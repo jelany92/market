@@ -88,15 +88,28 @@ class Excercise extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param string $questionType
+     *
      * @return array
      */
-    public function getCorrectAnswers() : array
+    public function getCorrectAnswers(string $questionType): array
     {
-        return [
-            'answer_a' => 'A',
-            'answer_b' => 'B',
-            'answer_c' => 'C',
-            'answer_d' => 'D',
-        ];
+        if ($questionType == 'tow_choice')
+        {
+            $correctAnswer = [
+                'answer_a' => 'A',
+                'answer_b' => 'B',
+            ];
+        }
+        else
+        {
+            $correctAnswer = [
+                'answer_a' => 'A',
+                'answer_b' => 'B',
+                'answer_c' => 'C',
+                'answer_d' => 'D',
+            ];
+        }
+        return $correctAnswer;
     }
 }

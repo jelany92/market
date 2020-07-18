@@ -29,42 +29,45 @@ $this->params['breadcrumbs'][] = $this->title;
             'delete',
             'id' => $model->id,
         ], [
-            'class' => 'btn btn-danger',
-            'data'  => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method'  => 'post',
-            ],
-        ]) ?>
+                        'class' => 'btn btn-danger',
+                        'data'  => [
+                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                            'method'  => 'post',
+                        ],
+                    ]) ?>
     </p>
 
     <?= DetailView::widget([
-        'model'      => $model,
-        'attributes' => [
-            'invoice_name',
-            'invoice_description',
-            'seller_name',
-            'amount',
-            'selected_date',
-            [
-                'attribute' => 'invoicePhotos.photo_path',
-                'value'     => function ($model) {
-                    $url = [];
-                    foreach ($model->invoicePhotos as $file)
-                    {
-                        $filesPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryMail'] . DIRECTORY_SEPARATOR . $file->photo_path;
-                        $url[]     = Html::a(Yii::t('app', 'Rechnung File'), $filesPath, ['target' => '_blank']);
-                    }
-                    return implode("<br>", $url);
-                },
-                'format'    => 'raw',
-            ],
-        ],
-    ]) ?>
+                               'model'      => $model,
+                               'attributes' => [
+                                   'invoice_name',
+                                   'invoice_description',
+                                   'seller_name',
+                                   'amount',
+                                   'selected_date',
+                                   [
+                                       'attribute' => 'invoicePhotos.photo_path',
+                                       'value'     => function ($model) {
+                                           $url = [];
+                                           foreach ($model->invoicePhotos as $file)
+                                           {
+                                               $filesPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryMail'] . DIRECTORY_SEPARATOR . $file->photo_path;
+                                               $url[]     = Html::a(Yii::t('app', 'Rechnung File'), $filesPath, ['target' => '_blank']);
+                                           }
+                                           return implode("<br>", $url);
+                                       },
+                                       'format'    => 'raw',
+                                   ],
+                               ],
+                           ]) ?>
 
     <h1>
         <?= Yii::t('app', 'Price this Invoice') ?>
 
-        <?= Html::a(Yii::t('app', 'Article Preis'), ['/article-price/create', 'purchaseInvoicesId' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create') . ' ' . Yii::t('app', 'Article Price'), [
+            '/article-price/create',
+            'purchaseInvoicesId' => $model->id,
+        ], ['class' => 'btn btn-success']) ?>
 
         <?= Html::a(Yii::t('app', Yii::t('app', 'Invoice Export')), [
             'purchase-invoices/export',
@@ -73,70 +76,69 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= Html::a('PDF', [
             '/purchase-invoices/view-pdf',
-            'purchaseInvoicesId'    => $model->id,
+            'purchaseInvoicesId' => $model->id,
         ], [
-            'class'       => 'btn btn-danger',
-            'target'      => '_blank',
-            'data-toggle' => 'tooltip',
-            'title'       => 'Will open the generated PDF file in a new window',
-        ]) ?>
+                        'class'       => 'btn btn-danger',
+                        'target'      => '_blank',
+                        'data-toggle' => 'tooltip',
+                        'title'       => 'Will open the generated PDF file in a new window',
+                    ]) ?>
     </h1>
 
 
     <?= GridView::widget([
-        'dataProvider' => $dataProviderArticlePrice,
-        'options'      => [
-            'id'    => 'permission_grid',
-            'style' => 'overflow: auto; word-wrap: break-word;',
-        ],
-        'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
+                             'dataProvider' => $dataProviderArticlePrice,
+                             'options'      => [
+                                 'style' => 'overflow: auto; word-wrap: break-word;',
+                             ],
+                             'columns'      => [
+                                 ['class' => 'yii\grid\SerialColumn'],
 
-            [
-                'attribute' => 'article_info_id',
-                'value'     => function ($model) {
-                    if (isset($model->articleInfo->article_name_ar))
-                    {
-                        return $model->articleInfo->article_name_ar;
-                    }
-                },
-            ],
-            'articleInfo.article_quantity',
-            'article_prise_per_piece',
-            'article_count',
-            'article_total_prise',
+                                 [
+                                     'attribute' => 'article_info_id',
+                                     'value'     => function ($model) {
+                                         if (isset($model->articleInfo->article_name_ar))
+                                         {
+                                             return $model->articleInfo->article_name_ar;
+                                         }
+                                     },
+                                 ],
+                                 'articleInfo.article_quantity',
+                                 'article_prise_per_piece',
+                                 'article_count',
+                                 'article_total_prise',
 
-            [
-                'class'      => 'common\components\ActionColumn',
-                'template'   => '{view} {update} {delete}',
-                'urlCreator' => function ($action, $model, $key, $index) {
-                    if ($action === 'view')
-                    {
-                        $url = Yii::$app->urlManager->createUrl([
-                            '/article-price/view',
-                            'id' => $model->id,
-                        ]);
-                        return $url;
-                    }
-                    if ($action === 'update')
-                    {
-                        $url = Yii::$app->urlManager->createUrl([
-                            '/article-price/update',
-                            'id' => $model->id,
-                        ]);
-                        return $url;
-                    }
-                    if ($action === 'delete')
-                    {
-                        $url = Yii::$app->urlManager->createUrl([
-                            '/article-price/delete',
-                            'id' => $model->id,
-                        ]);
-                        return $url;
-                    }
-                },
-            ],
-        ],
-    ]); ?>
+                                 [
+                                     'class'      => 'common\components\ActionColumn',
+                                     'template'   => '{view} {update} {delete}',
+                                     'urlCreator' => function ($action, $model, $key, $index) {
+                                         if ($action === 'view')
+                                         {
+                                             $url = Yii::$app->urlManager->createUrl([
+                                                                                         '/article-price/view',
+                                                                                         'id' => $model->id,
+                                                                                     ]);
+                                             return $url;
+                                         }
+                                         if ($action === 'update')
+                                         {
+                                             $url = Yii::$app->urlManager->createUrl([
+                                                                                         '/article-price/update',
+                                                                                         'id' => $model->id,
+                                                                                     ]);
+                                             return $url;
+                                         }
+                                         if ($action === 'delete')
+                                         {
+                                             $url = Yii::$app->urlManager->createUrl([
+                                                                                         '/article-price/delete',
+                                                                                         'id' => $model->id,
+                                                                                     ]);
+                                             return $url;
+                                         }
+                                     },
+                                 ],
+                             ],
+                         ]); ?>
 
 </div>

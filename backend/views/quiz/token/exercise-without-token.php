@@ -7,41 +7,53 @@
 
 use yii\bootstrap4\Html;
 use yii\widgets\ActiveForm;
+use common\widgets\AccordionWidget;
+use aneeshikmat\yii2\Yii2TimerCountDown\Yii2TimerCountDown;
 
 $this->title                   = Yii::t('app', 'Exercise');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $form = ActiveForm::begin(); ?>
 
+
+<div id="time-down-counter-2"></div>
+
 <?php
 $no         = 1;
 $isExpanded = true;
-
 foreach ($exercises as $exercise) : ?>
-    <?php $answers = [
+    <?php
+
+    $answers = [
         'answer_a' => $exercise['answer_a'],
         'answer_b' => $exercise['answer_b'],
         'answer_c' => $exercise['answer_c'],
         'answer_d' => $exercise['answer_d'],
-    ] ?>
-    <div class="panel-group" id="accordion_<?= $exercise['id'] ?>">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#<?= $exercise['id'] ?>" aria-expanded="true" aria-controls="collapse<?= $exercise['id'] ?>" id="heading<?= $exercise['id'] ?>" class="d-block"><?= $exercise['question'] ?></a>
-                </h3>
-            </div>
-            <div id="<?= $exercise['id'] ?>" class="panel-collapse collapse <?= ($isExpanded) ? 'in' : '' ?>" role="tab" aria-labelledby="heading-<?= $exercise['id'] ?>" data-parent="#accordion">
-                <div class="panel-body">
-                    <?= $form->field($modelQuizAnswerForm, 'answer')->radioList($answers, [
-                        'name'      => 'Answers[' . $exercise['id'] . ']',
-                        'separator' => '<br>',
-                    ])->label(false) ?>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    ];
+    if (0 < count(array_filter($answers)))
+    {
+        $content = $form->field($modelQuizAnswerForm, 'answer')->radioList($answers, [
+            'name'      => 'Answers[' . $exercise['id'] . ']',
+            'separator' => '<br>',
+            '<div class="panel-body"></div>',
+        ])->label(false);
+    }
+    else
+    {
+        $content = $form->field($modelQuizAnswerForm, 'answer')->textInput([
+                                                                               'maxlength' => true,
+                                                                               'name'      => 'Answers[' . $exercise['id'] . ']',
+                                                                           ])->label(false);
+    }
+    ?>
+    <?= AccordionWidget::widget([
+                                    'items' => [
+                                        [
+                                            'label'   => '<div class="card-header">' . $exercise['question'] . '</div>',
+                                            'content' => $content,
+                                        ],
+                                    ],
+                                ]) ?>
     <?php
     $no++;
     $isExpanded = false;

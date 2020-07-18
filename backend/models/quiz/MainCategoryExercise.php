@@ -3,6 +3,7 @@
 namespace backend\models\quiz;
 
 use common\models\query\traits\TimestampBehaviorTrait;
+use Yii;
 
 /**
  * This is the model class for table "quiz_main_category_exercise".
@@ -47,12 +48,21 @@ class MainCategoryExercise extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id'                          => 'ID',
             'main_category_exercise_name' => 'Main Category Exercise Name',
-            'description' => 'Description',
-            'question_type' => 'Question Type',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'description'                 => 'Description',
+            'question_type'               => 'Question Type',
+            'created_at'                  => 'Created At',
+            'updated_at'                  => 'Updated At',
+        ];
+    }
+
+    public static function getQuestionType()
+    {
+        return [
+            'tow_choice'  => Yii::t('app', 'Tow Choice'),
+            'four_choice' => Yii::t('app', 'Four Choice'),
+            'text'        => Yii::t('app', 'Text'),
         ];
     }
 

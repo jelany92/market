@@ -2,6 +2,7 @@
 
 namespace backend\controllers\quiz;
 
+use backend\models\quiz\MainCategoryExercise;
 use Yii;
 use backend\models\quiz\Excercise;
 use backend\models\quiz\search\ExcerciseSearch;
@@ -46,11 +47,10 @@ class ExcerciseController extends Controller
     }
 
     /**
-     * Displays a single Excercise model.
+     * @param $id
      *
-     * @param integer $id
-     *
-     * @return mixed
+     * @return string
+     * @throws NotFoundHttpException
      */
     public function actionView($id)
     {
@@ -60,15 +60,15 @@ class ExcerciseController extends Controller
     }
 
     /**
-     * Creates a new Excercise model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     *
      * @param int $mainCategoryExerciseId
-     * @return mixed
+     *
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
     public function actionCreate(int $mainCategoryExerciseId)
     {
-        $model = new Excercise();
+        $model                          = new Excercise();
+        $modelModelMainCategoryExercise = $this->findModelMainCategoryExercise($mainCategoryExerciseId);
         if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $model->main_category_exercise_id = $mainCategoryExerciseId;
@@ -82,7 +82,8 @@ class ExcerciseController extends Controller
         else
         {
             return $this->render('create', [
-                'model' => $model,
+                'model'                          => $model,
+                'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
             ]);
         }
     }
@@ -141,6 +142,27 @@ class ExcerciseController extends Controller
     protected function findModel($id)
     {
         if (($model = Excercise::findOne($id)) !== null)
+        {
+            return $model;
+        }
+        else
+        {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Finds the Excercise model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     *
+     * @param integer $id
+     *
+     * @return Excercise the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelMainCategoryExercise($mainCategoryExerciseId)
+    {
+        if (($model = MainCategoryExercise::findOne($mainCategoryExerciseId)) !== null)
         {
             return $model;
         }
