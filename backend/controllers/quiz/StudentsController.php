@@ -47,22 +47,6 @@ class StudentsController extends Controller
     }
 
     /**
-     * Displays a single StudentsCrud model.
-     *
-     * @param integer $id
-     *
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        $model = $this->findModel($id);
-        return $this->redirect([
-                                   '/quiz/students/view',
-                                   'model' => $model,
-                               ]);
-    }
-
-    /**
      * Creates a new StudentsCrud model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      *
