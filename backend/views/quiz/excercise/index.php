@@ -47,7 +47,7 @@ $this->title = Yii::t('app', 'Question')
                                  [
                                      'attribute' => 'correct_answer',
                                      'value'     => function ($model) {
-                                         return $model[$model->correct_answer];
+                                         return $model->correct_answer;
                                      },
                                  ],
 
