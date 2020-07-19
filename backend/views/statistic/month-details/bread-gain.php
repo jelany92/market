@@ -23,18 +23,18 @@ $breadGain  = $countBread * Purchases::BRED_GAIN;
 
     <div class="row">
         <div class="col-sm-12">
-            <h1>
+            <h3>
                 <?= Yii::t('app', 'مبلغ مشتريات الخبز الشهري') ?>
                 <?= $breadCount['result'] ?>
-            </h1>
-            <h1>
+            </h3>
+            <h3>
                 <?= Yii::t('app', 'عدد ربطات الخبز الشهرية') ?>
                 <?= $countBread ?>
-            </h1>
-            <h1>
+            </h3>
+            <h3>
                 <?= Yii::t('app', 'مكسب ربطات الخبز الشهرية') ?>
                 <?= $breadGain ?>
-            </h1>
+            </h3>
         </div>
     </div>
 </div>
