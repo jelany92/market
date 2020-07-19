@@ -7,6 +7,7 @@ use common\controller\BaseController;
 use Yii;
 use backend\models\MarketExpense;
 use backend\models\searchModel\MarketExpenseSearch;
+use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -37,6 +38,23 @@ class MarketExpenseController extends BaseController
      *
      * @return mixed
      */
+    public function actionIndexGroup()
+    {
+        $query = MarketExpense::find()->andWhere(['company_id' => \Yii::$app->user->id])->groupBy('reason');
+
+        $dataProvider = new ActiveDataProvider([
+                                                   'query' => $query,
+                                               ]);
+        return $this->render('/supermarket/market-expense/index-group', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all MarketExpense models.
+     *
+     * @return mixed
+     */
     public function actionIndex()
     {
         $modelMarketExpense = new MarketExpense();
@@ -44,7 +62,7 @@ class MarketExpenseController extends BaseController
         $show               = false;
         if ($modelMarketExpense->load(Yii::$app->request->post()))
         {
-            $show = true;
+            $show   = true;
             $result = QueryHelper::sumsSearchResult(MarketExpense::tableName(), 'expense', 'reason', $modelMarketExpense->reason, $modelMarketExpense->from, $modelMarketExpense->to);
         }
         $searchModel  = new MarketExpenseSearch();

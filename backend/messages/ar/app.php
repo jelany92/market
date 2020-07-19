@@ -6,6 +6,7 @@ return [
     'Update'                                        => 'تعديل',
     'Delete'                                        => 'مسح',
     'Save'                                          => 'حفط',
+    'export'                                        => 'تصدير',
 
     //Login
     'Login'                                         => 'تسجيل الدخول',
@@ -116,5 +117,11 @@ return [
 
     //article price
     'Article Count'                                 => 'عدد القطع',
+
+    //Market
+    'Market Expenses In Group'                      => 'مصاريف السوق في المجموعة',
+    'Market Expenses In Group'                      => 'مصاريف السوق في المجموعة',
+    'Price in Group'                                => 'اسعار نفقات المحل مجمعين',
+
 
 ];
