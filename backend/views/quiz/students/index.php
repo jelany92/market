@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
                              'dataProvider' => $dataProvider,
                              'filterModel'  => $searchModel,
                              'options'      => [
-                                 'id'    => 'permission_grid',
                                  'style' => 'overflow: auto; word-wrap: break-word;',
                              ],
                              'columns'      => [
@@ -56,8 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                      },
                                      'format'    => 'raw',
                                  ],
-                                 ['class' => 'yii\grid\ActionColumn'],
-                             ],
+                                 [
+                                     'class'    => 'common\components\ActionColumn',
+                                     'template' => '{update} {delete}',
+                                 ],                             ],
                          ]); ?>
     <?php Pjax::end(); ?>
 </div>

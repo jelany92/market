@@ -32,7 +32,7 @@ foreach ($exercises as $exercise) : ?>
     ];
     if (0 < count(array_filter($answers)))
     {
-        $content = $form->field($modelQuizAnswerForm, 'answer')->radioList($answers, [
+        $content = $form->field($modelQuizAnswerForm, 'answer')->radioList(array_filter($answers), [
             'name'      => 'Answers[' . $exercise['id'] . ']',
             'separator' => '<br>',
             '<div class="panel-body"></div>',

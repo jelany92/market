@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = [
 ];
 
 $this->params['breadcrumbs'][] = [
-    'label' => Yii::t('app', 'Excercise'),
+    'label' => Yii::t('app', 'Exercise'),
     'url'   => ['index'],
 ];
 
