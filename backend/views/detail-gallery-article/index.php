@@ -83,7 +83,7 @@ foreach ($subcategoryNames as $key => $subcategoryName)
                                      },
                                  ],
                                  'selected_date',
-                                 ['class' => 'yii\grid\ActionColumn'],
+                                 ['class' => 'common\components\ActionColumn'],
                              ],
                          ]); ?>
 

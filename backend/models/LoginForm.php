@@ -14,6 +14,7 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
+    public $rememberMe;
 
     private $_user;
 
@@ -26,13 +27,17 @@ class LoginForm extends Model
         return [// username and password are both required
             [['username', 'password'], 'required'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],];
+            ['password', 'validatePassword'],
+            ['rememberMe', 'boolean'],
+        ];
+
     }
     public function attributeLabels()
     {
         return [
             'username'             => Yii::t('app', 'Benutzername'),
             'password'             => Yii::t('app', 'Passwort'),
+            'rememberMe'           => Yii::t('app', 'Remember'),
         ];
     }
 
@@ -78,9 +83,12 @@ class LoginForm extends Model
             {
                 $isLoggedIn = Yii::$app->user->login($user, 0);
                 $this->addLogEntry();
-            }else{
-                $this->addError('password', Yii::t('app','Benutzername oder Passwort falsch'));
             }
+            else
+            {
+                $this->addError('password', Yii::t('app', 'Benutzername oder Passwort falsch'));
+            }
+            Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
             return $isLoggedIn;
         }
         return false;

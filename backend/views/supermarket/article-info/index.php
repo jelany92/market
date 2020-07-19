@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                              'dataProvider' => $dataProvider,
                              'filterModel'  => $searchModel,
                              'options'      => [
-                                 'id'    => 'permission_grid',
                                  'style' => 'overflow: auto; word-wrap: break-word;',
                              ],
                              'columns'      => [

@@ -79,8 +79,6 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
                                        'data-numposts' => 5,
                                    ],
                                ]); ?>
-
-    <br><br><br>
     <div class="col-sm-3">
         <div class="view-info">
             <?= Html::img($filesPath, ['style' => 'width:100%height: 300px;margin-top: 50px']) ?>
@@ -113,7 +111,7 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
                                ]) ?>
     </div>
 </div>
-<div style="margin-top: 350px;">
+<div>
     <h1><?= Yii::t('app', 'قراءة الكتاب') ?></h1>
     <p>
     <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [

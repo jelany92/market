@@ -11,22 +11,7 @@ use onmotion\apexcharts\ApexchartsWidget;
 /* @var $modelIncomingRevenue ArrayDataProvider */
 /* @var $queryDailyInfo array */
 
-$monthName                     = [
-    '',
-    'Januar',
-    'Februar',
-    'März',
-    'April',
-    'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Dezember',
-];
-$this->title                   = Yii::t('app', $monthName[$month]);
+$this->title                   = Yii::$app->params['months'][$month];
 $this->params['breadcrumbs'][] = $this->title;
 $ein                           = QueryHelper::getMonthData($year, $month, 'incoming_revenue', 'daily_incoming_revenue');
 $date                          = [];

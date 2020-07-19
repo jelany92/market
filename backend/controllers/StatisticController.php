@@ -60,7 +60,7 @@ class StatisticController extends BaseController
 
     public function actionMonthMarketExpense($year, $month)
     {
-        $staticDailyInfoMarketExpenseList = QueryHelper::getDailyInfo($year, $month, 'market_expense', 'expense', 'reason', 'selected_date');
+        $staticDailyInfoMarketExpenseList = QueryHelper::getDailyInfo($year, $month, 'market_expense', 'expense', 'reason', '');
         $dataProviderMarketExpense        = new ArrayDataProvider
         ([
              'allModels'  => $staticDailyInfoMarketExpenseList,
@@ -75,45 +75,43 @@ class StatisticController extends BaseController
         ]);
     }
 
-    public function actionMonthDailyResult($year, $month)
+    /**
+     * @param int $year
+     * @param int $month
+     *
+     * @return string
+     */
+    public function actionMonthDailyResult(int $year, int $month)
     {
-        //$incomingRevenue = QueryHelper::getDailyInfo($year, $month, 'incoming_revenue', 'daily_incoming_revenue', 'id');
-        $purchasesArray     = QueryHelper::sumsSameResult(Purchases::tableName(), 'purchases', $year, $month, 'selected_date');
-        $marketExpenseArray = QueryHelper::sumsSameResult(MarketExpense::tableName(), 'expense', $year, $month, 'selected_date');
-        //var_dump($purchasesArray);
-        //var_dump($marketExpenseArray);
-        $result = [];
-        foreach ($purchasesArray as $kayPurchases => $purchases)
-        {
-            foreach ($marketExpenseArray as $keyMarketExpense => $marketExpense)
-            {
-                if ($marketExpense['selected_date'] == $purchases['selected_date'])
-                {
-                    $result[$marketExpense['selected_date']]['result']        = $marketExpense['result'] + $purchases['result'];
-                    $result[$marketExpense['selected_date']]['selected_date'] = $marketExpense['selected_date'];
-                }
-                elseif ($marketExpense['selected_date'] != $purchases['selected_date'])
-                {
-                    //$result[] = $marketExpense['result'];
-                    $result[$marketExpense['selected_date']][] = $marketExpense['result'];
-                    $result[$marketExpense['selected_date']][] = $marketExpense['selected_date'];
-                }
-            }
-            //$result[$purchases['selected_date']][] = $purchases['result'];
-            //$result[$purchases['selected_date']][] = $purchases['selected_date'];
-        }
-        var_dump($result);
-        die();
-        $dataProviderResult = new ArrayDataProvider
+        $dataProviderDailyCash = new ArrayDataProvider
         ([
-             'allModels'  => $result,
+             'allModels'  => QueryHelper::getResult($year, $month),
              'pagination' => false,
          ]);
 
         return $this->render('month-details/daily-result', [
-            'month'              => $month,
-            'year'               => $year,
-            'dataProviderResult' => $dataProviderResult,
+            'month'                 => $month,
+            'year'                  => $year,
+            'dataProviderDailyCash' => $dataProviderDailyCash,
+        ]);
+    }
+
+    /**
+     * @param int $year
+     * @param int $month
+     *
+     * @return string
+     */
+    public function actionBreadGain(int $year, int $month)
+    {
+        $from      = $year . '-' . $month . '-01';
+        $to        = date("Y-m-t", strtotime($from));
+        $breadCount = QueryHelper::sumsSearchResult('purchases', 'purchases', 'reason', 'خبز', $from, $to);
+
+        return $this->render('month-details/bread-gain', [
+            'month'     => $month,
+            'year'      => $year,
+            'breadCount' => $breadCount,
         ]);
     }
 }
