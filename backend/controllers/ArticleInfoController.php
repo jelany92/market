@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\ArticleIGain;
 use common\components\FileUpload;
 use common\controller\BaseController;
 use common\models\ArticleInfo;
@@ -112,8 +113,8 @@ class ArticleInfoController extends BaseController
             $model->category_id  = 7;
             $model->article_unit = 'K';
             return $this->render('/supermarket/article-info/create', [
-                'model'       => $model,
-                'fileUrls'    => $fileUrls,
+                'model'    => $model,
+                'fileUrls' => $fileUrls,
             ]);
             return $this->redirect([
                                        'view',
@@ -181,6 +182,25 @@ class ArticleInfoController extends BaseController
 
         return $this->redirect(['/supermarket/article-info/index']);
     }
+
+
+    public function actionArticleGain()
+    {
+        $modelArticleIGain = new ArticleIGain();
+        if ($modelArticleIGain->load(Yii::$app->request->post()) && $modelArticleIGain->validate())
+        {
+            return $this->render('/supermarket/article-info/article-gain', [
+                'modelArticleIGain' => $modelArticleIGain,
+                'show'              => true,
+            ]);
+        }
+
+        return $this->render('/supermarket/article-info/article-gain', [
+            'modelArticleIGain' => $modelArticleIGain,
+            'show'              => false,
+        ]);
+    }
+
 
     /**
      * Finds the ArticleInfo model based on its primary key value.
