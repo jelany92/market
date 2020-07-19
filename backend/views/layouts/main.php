@@ -142,6 +142,11 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                             'url'   => ['/article-in-stored/index-inventory'],
                             'visible' => Yii::$app->user->can('article-in-stored.*'),
                         ],
+                        [
+                            'label' => Yii::t('app', 'Article Gain'),
+                            'url'   => ['/article-info/article-gain'],
+                            'visible' => Yii::$app->user->can('article-info.*'),
+                        ],
                     ],
                     'visible' => Yii::$app->user->can('article-info.*'),
                 ],

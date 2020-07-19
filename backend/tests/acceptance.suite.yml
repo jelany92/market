@@ -3,7 +3,7 @@ actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://admin.kattan
+            url: http://admin-kattan
             browser: chrome
             clear_cookies: true
             #port: 9515 // chrome driver standalone only
