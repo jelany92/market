@@ -57,9 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Market Expense'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', Yii::t('app', 'Market Expense export')), [
+        <?= Html::a(Yii::t('app', 'Market Expense') . ' ' . Yii::t('app', 'export'), [
             'purchases/export',
         ], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Price in Group'), ['index-group'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= GridView::widget([
