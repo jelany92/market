@@ -246,7 +246,7 @@ class QueryHelper extends \yii\helpers\StringHelper
                                                                                                                                               'selected_date',
                                                                                                                                               $from,
                                                                                                                                               $to,
-                                                                                                                                          ])->one();
+                                                                                                                                          ])->andWhere(['company_id' => Yii::$app->user->id])->one();
             }
             return (new Query())->select(['result' => 'SUM(tn.' . $rowName . ')'])->from(['tn' => $tableName])->andWhere([
                                                                                                                              'like',
