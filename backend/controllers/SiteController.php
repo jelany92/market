@@ -2,16 +2,22 @@
 
 namespace backend\controllers;
 
+use backend\components\DummyData;
+use backend\models\Capital;
 use backend\models\EstablishMarket;
 use backend\models\ForgotPasswordForm;
 use backend\models\IncomingRevenue;
 use backend\models\LoginForm;
 use backend\models\MarketExpense;
+use backend\models\PurchaseInvoices;
 use backend\models\Purchases;
 use backend\models\ResetPasswordForm;
+use backend\models\TaxOffice;
 use common\components\QueryHelper;
 use common\models\AdminUser;
+use common\models\ArticleInfo;
 use common\models\DetailGalleryArticle;
+use common\models\MainCategory;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ArrayDataProvider;
@@ -354,7 +360,7 @@ class SiteController extends Controller
     {
         $date                      = date('d.m.Y');
         $dataProviderMarketExpense = QueryHelper::getDailyInfo($year, $month, 'market_expense', 'expense', 'reason');
-        $content                   = $this->render('month-pdf', [
+        $content                   = $this->render('supermarket/month-pdf', [
             'year'                      => $year,
             'month'                     => $month,
             'dataProviderMarketExpense' => $dataProviderMarketExpense,
@@ -362,8 +368,7 @@ class SiteController extends Controller
         $pdf                       = Yii::$app->pdf;
         $mpdf                      = $pdf->api;
         $mpdf->SetHeader($date . ' Kattan Shop');
-        print_r($content);
-        die();
+        print_r($content);die();
         $mpdf->WriteHtml($content);
         return $mpdf->Output($date, 'D');
 

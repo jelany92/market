@@ -14,21 +14,6 @@ use common\components\QueryHelper;
 /* @var $this yii\web\View */
 /* @var $showCreate boolean */
 
-$monthName = [
-    '',
-    'Januar',
-    'Februar',
-    'März',
-    'April',
-    'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Dezember',
-];
 
 $this->title                   = $date;
 $this->params['breadcrumbs'][] = $this->title;

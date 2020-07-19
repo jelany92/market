@@ -11,22 +11,7 @@ use onmotion\apexcharts\ApexchartsWidget;
 /* @var $dataProviderMarketExpense ArrayDataProvider */
 /* @var $staticDailyInfoMarketExpenseList array */
 
-$monthName                     = [
-    '',
-    'Januar',
-    'Februar',
-    'März',
-    'April',
-    'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Dezember',
-];
-$this->title                   = Yii::t('app', $monthName[$month]);
+$this->title                   = Yii::$app->params['months'][$month];
 $this->params['breadcrumbs'][] = $this->title;
 
 $ausMarket = QueryHelper::getMonthData($year, $month, 'market_expense', 'expense');
@@ -97,10 +82,10 @@ $series = [
     <div class="row">
         <div class="col-sm-12">
             <h1>
-                <?= $ausMarket ?>
                 <?= Yii::t('app', 'نفقات المحل') ?>
-                <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
+                <?= $ausMarket ?>
             </h1>
+            <?= Html::a(Yii::t('app', 'All Ausgeben'), ['market-expense/index'], ['class' => 'btn btn-success']) ?>
             <?= GridView::widget([
                 'dataProvider' => $dataProviderMarketExpense,
                 'columns'      => [

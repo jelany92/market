@@ -13,22 +13,7 @@ use common\widgets\Table;
 /* @var $modelPurchases ArrayDataProvider */
 /* @var $dataProviderMarketExpense ArrayDataProvider */
 
-$monthName                     = [
-    '',
-    'Januar',
-    'Februar',
-    'März',
-    'April',
-    'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Dezember',
-];
-$this->title                   = Yii::t('app', $monthName[$month]);
+$this->title                   = Yii::$app->params['months'][$month];
 $this->params['breadcrumbs'][] = $this->title;
 
 $ein       = QueryHelper::getMonthData($year, $month, 'incoming_revenue', 'daily_incoming_revenue');
@@ -137,8 +122,8 @@ $result    = $ein - $aus - $ausMarket;
                 <h1>
                     <?= $ein ?>
                     <?= Yii::t('app', 'تفاصيل الدخل') ?>
-                    <?= Html::a(Yii::t('app', 'All Einkommen'), ['incoming-revenue/index'], ['class' => 'btn btn-success']) ?>
                 </h1>
+                <?= Html::a(Yii::t('app', 'All Einkommen'), ['incoming-revenue/index'], ['class' => 'btn btn-success']) ?>
                 <?= GridView::widget([
                     'dataProvider' => $modelIncomingRevenue,
                     'columns'      => [
@@ -152,10 +137,13 @@ $result    = $ein - $aus - $ausMarket;
                 <h1>
                     <?= $aus ?>
                     <?= Yii::t('app', 'تفاصيل المدفوعات شراء بضاعة') ?>
-                    <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
                 </h1>
+                <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
                 <?= GridView::widget([
                     'dataProvider' => $modelPurchases,
+                    'options'      => [
+                        'style' => 'overflow: auto; word-wrap: break-word;',
+                    ],
                     'columns'      => [
                         ['class' => 'yii\grid\SerialColumn'],
                         'date',
@@ -168,8 +156,8 @@ $result    = $ein - $aus - $ausMarket;
                 <h1>
                     <?= $ausMarket ?>
                     <?= Yii::t('app', 'تفاصيل المدفوعات للمحل') ?>
-                    <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
                 </h1>
+                <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
                 <?= GridView::widget([
                     'dataProvider' => $dataProviderMarketExpense,
                     'columns'      => [
@@ -184,8 +172,8 @@ $result    = $ein - $aus - $ausMarket;
                 <h1>
                     <?= $result ?>
                     <?= Yii::t('app', 'الرصيد اليومي') ?>
-                    <?= Html::a(Yii::t('app', 'All Einkommen'), ['incoming-revenue/index'], ['class' => 'btn btn-success']) ?>
                 </h1>
+                <?= Html::a(Yii::t('app', 'All Einkommen'), ['incoming-revenue/index'], ['class' => 'btn btn-success']) ?>
                 <?= GridView::widget([
                     'dataProvider' => $dataProviderDailyCash,
                     'columns'      => [

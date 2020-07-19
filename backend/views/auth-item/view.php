@@ -37,12 +37,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'delete',
                         'id' => $model->name,
                     ], [
-                        'class' => 'btn btn-danger',
-                        'data'  => [
-                            'confirm' => Yii::t('app', 'Wollen Sie diesen Eintrag wirklich löschen?'),
-                            'method'  => 'post',
-                        ],
-                    ]) ?>
+                                    'class' => 'btn btn-danger',
+                                    'data'  => [
+                                        'confirm' => Yii::t('app', 'Wollen Sie diesen Eintrag wirklich löschen?'),
+                                        'method'  => 'post',
+                                    ],
+                                ]) ?>
                 <?php endif; ?>
             </p>
         </div>
@@ -51,15 +51,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-sm-12">
 
             <?= DetailView::widget([
+                                       'model'      => $model,
+                                       'attributes' => [
+                                           'description:ntext',
+                                           $model->getTypeColumn(),
+                                           'name',
+                                       ],
 
-                'model'      => $model,
-                'attributes' => [
-                    'description:ntext',
-                    $model->getTypeColumn(),
-                    'name',
-                ],
-
-            ]) ?>
+                                   ]) ?>
         </div>
     </div>
     <div class="row">
@@ -67,53 +66,58 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <h2><?= Yii::t('app', 'Übergeordnete') ?></h2>
             <?= GridView::widget([
+                                     'dataProvider' => $dataProviderParent,
+                                     'options'      => [
+                                         'style' => 'overflow: auto; word-wrap: break-word;',
+                                     ],
+                                     'layout'       => "{items}",
+                                     'columns'      => [
 
-                'dataProvider' => $dataProviderParent,
-                'layout'       => "{items}",
-                'columns'      => [
+                                         'name',
+                                         $model->getTypeColumn(),
+                                         'description:ntext',
+                                         [
+                                             'class'          => 'common\components\ActionColumn',
+                                             'template'       => '{view} {update}',
+                                             'visibleButtons' => [
+                                                 'update' => \Yii::$app->user->can('auth-item.update'),
+                                                 'view'   => \Yii::$app->user->can('auth-item.view'),
+                                             ],
+                                         ],
+                                     ],
 
-                    'name',
-                    $model->getTypeColumn(),
-                    'description:ntext',
-                    [
-                        'class'          => 'common\components\ActionColumn',
-                        'template'       => '{view} {update}',
-                        'visibleButtons' => [
-                            'update' => \Yii::$app->user->can('auth-item.update'),
-                            'view'   => \Yii::$app->user->can('auth-item.view'),
-                        ],
-                    ],
-                ],
-
-            ]); ?>
+                                 ]); ?>
 
             <?php if (0 < $dataProviderUser->count): ?>
                 <h2><?= Yii::t('app', 'Benutzer mit dieser Rolle'); ?></h2>
                 <?= GridView::widget([
-                    'dataProvider' => $dataProviderUser,
-                    'layout'       => "{items}",
-                    'columns'      => [
-                        'username',
-                        'first_name',
-                        'last_name',
-                        'active_until',
-                        // action column
-                        [
-                            'class'          => 'common\components\ActionColumn',
-                            'template'       => '{view} {update}',
-                            'urlCreator'     => function ($action, AdminUser $adminUserModel, $key, $index) {
-                                return Url::to([
-                                    'admin-user/' . $action,
-                                    'id' => $adminUserModel->id,
-                                ]);
-                            },
-                            'visibleButtons' => [
-                                'update' => \Yii::$app->user->can('admin-user.update'),
-                                'view'   => \Yii::$app->user->can('admin-user.view'),
-                            ],
-                        ],
-                    ],
-                ]); ?>
+                                         'dataProvider' => $dataProviderUser,
+                                         'options'      => [
+                                             'style' => 'overflow: auto; word-wrap: break-word;',
+                                         ],
+                                         'layout'       => "{items}",
+                                         'columns'      => [
+                                             'username',
+                                             'first_name',
+                                             'last_name',
+                                             'active_until',
+                                             // action column
+                                             [
+                                                 'class'          => 'common\components\ActionColumn',
+                                                 'template'       => '{view} {update}',
+                                                 'urlCreator'     => function ($action, AdminUser $adminUserModel, $key, $index) {
+                                                     return Url::to([
+                                                                        'admin-user/' . $action,
+                                                                        'id' => $adminUserModel->id,
+                                                                    ]);
+                                                 },
+                                                 'visibleButtons' => [
+                                                     'update' => \Yii::$app->user->can('admin-user.update'),
+                                                     'view'   => \Yii::$app->user->can('admin-user.view'),
+                                                 ],
+                                             ],
+                                         ],
+                                     ]); ?>
 
             <?php endif; ?>
         </div>
@@ -123,57 +127,59 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php if ($model->type != AuthItem::TYPE_PERMISSION): ?>
                 <h2><?= Yii::t('app', 'Zugeordnete Elemente') ?></h2>
                 <?= GridView::widget([
+                                         'dataProvider' => $dataProviderChild,
+                                         'options'      => [
+                                             'style' => 'overflow: auto; word-wrap: break-word;',
+                                         ],
+                                         'layout'       => "{items}",
+                                         'options'      => [
+                                             'id'    => 'auth_item_grid',
+                                             'class' => 'grid-view',
+                                         ],
+                                         'columns'      => [
+                                             'name',
+                                             $model->getTypeColumn(),
+                                             'description:ntext',
+                                             [
+                                                 'class'          => 'common\components\ActionColumn',
+                                                 'template'       => ' {view} {update} {unassign}',
+                                                 'buttons'        => [
+                                                     'unassign' => function ($url) {
+                                                         return Html::a(Icon::show('minus-circle'), $url, [
+                                                             'title' => Yii::t('app', 'Element entfernen'),
+                                                             'data'  => [
+                                                                 'confirm' => Yii::t('app', 'Wollen Sie diesen Eintrag wirklich löschen?'),
+                                                                 'method'  => 'post',
+                                                             ],
+                                                         ]);
+                                                     },
+                                                 ],
+                                                 'urlCreator'     => function ($action, $child, $key, $index) use ($model) {
+                                                     if ($action == 'unassign')
+                                                     {
+                                                         return Url::to([
+                                                                            $action,
+                                                                            'child'  => $key,
+                                                                            'parent' => $model->name,
+                                                                        ]);
+                                                     }
+                                                     return Url::to([
+                                                                        $action,
+                                                                        'id' => $key,
+                                                                    ]);
+                                                 },
+                                                 'visibleButtons' => [
+                                                     'update'   => \Yii::$app->user->can('auth-item.update'),
+                                                     'view'     => \Yii::$app->user->can('auth-item.view'),
+                                                     'unassign' => function ($model, $key, $index) {
+                                                         /** @var $model common\models\AuthItem */
+                                                         return \Yii::$app->user->can('auth-item.unassign') && !$model->isSuperPermission();
+                                                     },
+                                                 ],
+                                             ],
+                                         ],
 
-                    'dataProvider' => $dataProviderChild,
-                    'layout'       => "{items}",
-                    'options' => [
-                        'id'    => 'auth_item_grid',
-                        'class' => 'grid-view',
-                    ],
-                    'columns'      => [
-                        'name',
-                        $model->getTypeColumn(),
-                        'description:ntext',
-                        [
-                            'class'          => 'common\components\ActionColumn',
-                            'template'       => ' {view} {update} {unassign}',
-                            'buttons'        => [
-                                'unassign' => function ($url) {
-                                    return Html::a(Icon::show('minus-circle'), $url, [
-                                            'title' => Yii::t('app', 'Element entfernen'),
-                                            'data'  => [
-                                                'confirm' => Yii::t('app', 'Wollen Sie diesen Eintrag wirklich löschen?'),
-                                                'method'  => 'post',
-                                            ],
-                                    ]);
-                                },
-                            ],
-                            'urlCreator'     => function ($action, $child, $key, $index) use ($model) {
-                                if ($action == 'unassign')
-                                {
-                                    return Url::to([
-                                        $action,
-                                        'child'  => $key,
-                                        'parent' => $model->name,
-                                    ]);
-                                }
-                                return Url::to([
-                                    $action,
-                                    'id' => $key,
-                                ]);
-                            },
-                            'visibleButtons' => [
-                                'update'   => \Yii::$app->user->can('auth-item.update'),
-                                'view'     => \Yii::$app->user->can('auth-item.view'),
-                                'unassign' => function ($model, $key, $index) {
-                                    /** @var $model common\models\AuthItem */
-                                    return \Yii::$app->user->can('auth-item.unassign') && !$model->isSuperPermission();
-                                },
-                            ],
-                        ],
-                    ],
-
-                ]); ?>
+                                     ]); ?>
 
             <?php endif; ?>
 

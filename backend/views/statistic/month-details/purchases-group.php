@@ -45,10 +45,10 @@ $result    = $ein - $aus - $ausMarket;
     <div class="row">
         <div class="col-sm-12">
             <h1>
-                <?= $aus ?>
                 <?= Yii::t('app', 'تفاصيل المدفوعات مجمعين (شراء بضاعة)') ?>
-                <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
+                <?= $aus ?>
             </h1>
+            <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
             <?= GridView::widget([
                                      'dataProvider' => $dataProviderPurchasesGroup,
                                      'columns'      => [
