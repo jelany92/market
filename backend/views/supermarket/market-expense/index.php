@@ -73,7 +73,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                  'selected_date',
                                  [
                                      'class'    => 'common\components\ActionColumn',
-                                     'template' => '{update} {delete}',
                                  ],
                              ],
                          ]); ?>

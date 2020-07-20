@@ -23,22 +23,21 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel'  => $searchModel,
-        'options'      => [
-            'id'    => 'incoming_revenue_grid',
-            'class' => 'grid-view',
-        ],
-        'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'daily_incoming_revenue',
-            'selected_date',
-            [
-                'class'    => 'common\components\ActionColumn',
-                'template' => '{update} {delete}',
-            ],
-        ],
-    ]); ?>
+                             'dataProvider' => $dataProvider,
+                             'filterModel'  => $searchModel,
+                             'options'      => [
+                                 'id'    => 'incoming_revenue_grid',
+                                 'class' => 'grid-view',
+                             ],
+                             'columns'      => [
+                                 ['class' => 'yii\grid\SerialColumn'],
+                                 'daily_incoming_revenue',
+                                 'selected_date',
+                                 [
+                                     'class' => 'common\components\ActionColumn',
+                                 ],
+                             ],
+                         ]); ?>
 
 
 </div>

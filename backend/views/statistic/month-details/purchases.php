@@ -36,29 +36,26 @@ $ausMarket = QueryHelper::getMonthData($year, $month, 'market_expense', 'expense
 $result    = $ein - $aus - $ausMarket;
 ?>
 
-<?= $this->render('/site/supermarket/_sub_navigation',[
+<?= $this->render('/site/supermarket/_sub_navigation', [
     'year'  => $year,
     'month' => $month,
 ]) ?>
-<div class="container">
-
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>
-                <?= Yii::t('app', 'تفاصيل المدفوعات (شراء بضاعة)') ?>
-                <?= $aus ?>
-            </h1>
-            <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
-            <?= GridView::widget([
-                'dataProvider' => $modelPurchases,
-                'columns'      => [
-                    ['class' => 'yii\grid\SerialColumn'],
-                    'date',
-                    'total',
-                    'reason',
-                ],
-            ]) ?>
-        </div>
+<div class="row">
+    <div class="col-sm-12">
+        <h1>
+            <?= Yii::t('app', 'تفاصيل المدفوعات (شراء بضاعة)') ?>
+            <?= $aus ?>
+        </h1>
+        <?= Html::a(Yii::t('app', 'All Ausgeben'), ['purchases/index'], ['class' => 'btn btn-success']) ?>
+        <?= GridView::widget([
+                                 'dataProvider' => $modelPurchases,
+                                 'columns'      => [
+                                     ['class' => 'yii\grid\SerialColumn'],
+                                     'date',
+                                     'total',
+                                     'reason',
+                                 ],
+                             ]) ?>
     </div>
 </div>
 
