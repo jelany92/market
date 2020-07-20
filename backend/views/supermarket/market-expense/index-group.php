@@ -26,12 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                              'dataProvider' => $dataProvider,
                              'columns'      => [
                                  'reason',
-                                 [
-                                     'attribute' => 'company_id',
-                                     'value'     => function ($model) {
-                                         return $model['result'];
-                                     },
-                                 ],
+                                 'expense',
                                  'selected_date',
                              ],
                          ]); ?>

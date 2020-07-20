@@ -20,16 +20,23 @@ $price                         = [];
 
 foreach ($queryDailyInfo as $dailyInfo)
 {
-    $date[] = [$dailyInfo['date'],$dailyInfo['total']];
+    $date[] = [
+        $dailyInfo['date'],
+        $dailyInfo['total'],
+    ];
 }
 $series = [
     [
         'name' => Yii::t('app', 'احصائيات الدخل'),
-        'data' => $date
+        'data' => $date,
     ],
 ];
 
 ?>
+<?= $this->render('/site/supermarket/_sub_navigation', [
+    'year'  => $year,
+    'month' => $month,
+]) ?>
 <?= ApexchartsWidget::widget([
                                  'type'         => 'histogram',
                                  // default area
@@ -68,29 +75,21 @@ $series = [
                                  ],
                                  'series'       => $series,
                              ]); ?>
-
-<?= $this->render('/site/supermarket/_sub_navigation', [
-    'year'  => $year,
-    'month' => $month,
-]) ?>
-<div class="container">
-
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>
-                <?= $ein ?>
-                <?= Yii::t('app', 'تفاصيل الدخل') ?>
-                <?= Html::a(Yii::t('app', 'All Einkommen'), ['incoming-revenue/index'], ['class' => 'btn btn-success']) ?>
-            </h1>
-            <?= GridView::widget([
-                                     'dataProvider' => $modelIncomingRevenue,
-                                     'columns'      => [
-                                         ['class' => 'yii\grid\SerialColumn'],
-                                         'date',
-                                         'total',
-                                     ],
-                                 ]) ?>
-        </div>
+<h1>
+    <?= $ein ?>
+    <?= Yii::t('app', 'تفاصيل الدخل') ?>
+    <?= Html::a(Yii::t('app', 'All Einkommen'), ['incoming-revenue/index'], ['class' => 'btn btn-success']) ?>
+</h1>
+<div class="row">
+    <div class="col-sm-12">
+        <?= GridView::widget([
+                                 'dataProvider' => $modelIncomingRevenue,
+                                 'columns'      => [
+                                     ['class' => 'yii\grid\SerialColumn'],
+                                     'date',
+                                     'total',
+                                 ],
+                             ]) ?>
     </div>
 </div>
 

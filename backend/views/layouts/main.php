@@ -188,6 +188,11 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                             'url'   => ['/establish-market/index'],
                             'visible' => Yii::$app->user->can('establish-market.*'),
                         ],
+                        [
+                            'label' => Yii::t('app', 'History'),
+                            'url'   => ['/history/index'],
+                            //'visible' => Yii::$app->user->can('history.*'),
+                        ],
                     ],
                     'visible' => Yii::$app->user->can('incoming-revenue.*'),
                 ],

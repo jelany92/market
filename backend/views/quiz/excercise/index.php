@@ -24,7 +24,6 @@ $this->title = Yii::t('app', 'Question')
                              'dataProvider' => $dataProvider,
                              'filterModel'  => $searchModel,
                              'options'      => [
-                                 'id'    => 'permission_grid',
                                  'style' => 'overflow: auto; word-wrap: break-word;',
                              ],
                              'columns'      => [

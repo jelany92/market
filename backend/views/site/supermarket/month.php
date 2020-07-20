@@ -21,21 +21,11 @@ $aus       = QueryHelper::getMonthData($year, $month, 'purchases', 'purchases');
 $ausMarket = QueryHelper::getMonthData($year, $month, 'market_expense', 'expense');
 $result    = $ein - $aus - $ausMarket;
 ?>
-
+<?= $this->render('_sub_navigation',[
+    'year'  => $year,
+    'month' => $month,
+]) ?>
 <div class="Monat Ansicht-index">
-    <form method="post">
-        <?php
-        for ($m = 1; $m <= 12; $m++)
-        {
-            $monthName = date('F', mktime(0, 0, 0, $m, 1)) . '<br>';
-            echo Html::a(Yii::t('app', $monthName), ['month-view' . '?year=' . $year . '&month=' . $m], [
-                    '',
-                    'class' => 'btn btn-primary',
-                    'style' => $month == $m ? 'background-color: #40a7ff;' : '',
-                ]) . ' ';
-        }
-        ?>
-    </form>
     <h1>
         <?= Html::a('zurück', [
             'site/view',
@@ -58,10 +48,7 @@ $result    = $ein - $aus - $ausMarket;
         ]) ?>
         </br>
     </h1>
-    <?= $this->render('_sub_navigation',[
-        'year'  => $year,
-        'month' => $month,
-    ]) ?>
+
     <?= Table::widget([
         'tableArray' => [
             [

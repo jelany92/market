@@ -2,10 +2,12 @@
 
 namespace backend\controllers;
 
+use backend\models\History;
 use common\controller\BaseController;
 use Yii;
 use backend\models\IncomingRevenue;
 use backend\models\searchModel\IncomingRevenueSearch;
+use yii\bootstrap4\Html;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -49,6 +51,19 @@ class IncomingRevenueController extends BaseController
         ]);
     }
 
+    /**
+     * @param int $id
+     *
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id)
+    {
+        return $this->render('/supermarket/incoming-revenue/view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
 
     /**
      * Creates a new IncomingRevenue model.
@@ -66,6 +81,11 @@ class IncomingRevenueController extends BaseController
         {
             $model->company_id = Yii::$app->user->id;
             $model->save();
+            $url = Html::a($model->reason, [
+                'view',
+                'id' => $model->id,
+            ]);
+            History::saveAutomaticHistoryEntry('Incoming Revenue', 'Gekündigt zum ', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء الدخل اليومي'));
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
         }

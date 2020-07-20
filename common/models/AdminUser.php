@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\History;
 use common\models\auth\AuthAssignment;
 use common\models\auth\AuthItem;
 use common\models\traits\TimestampBehaviorTrait;
@@ -111,6 +112,16 @@ class AdminUser extends ActiveRecord implements IdentityInterface
     public function getAuthAssignments()
     {
         return $this->hasMany(AuthAssignment::class, ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Histories]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getHistories()
+    {
+        return $this->hasMany(History::class, ['company_id' => 'id']);
     }
 
     /**

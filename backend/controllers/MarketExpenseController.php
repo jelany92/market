@@ -2,11 +2,13 @@
 
 namespace backend\controllers;
 
+use backend\models\History;
 use common\components\QueryHelper;
 use common\controller\BaseController;
 use Yii;
 use backend\models\MarketExpense;
 use backend\models\searchModel\MarketExpenseSearch;
+use yii\bootstrap4\Html;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\db\Query;
@@ -42,19 +44,16 @@ class MarketExpenseController extends BaseController
      */
     public function actionIndexGroup()
     {
-        $query =  (new Query())->select([
-                                         'result' => 'SUM(tn.expense)',
-                                         'reason',
-                                         'selected_date',
-                                     ])->from(['tn' => MarketExpense::tableName()])->andWhere(['company_id' => Yii::$app->user->id])->groupBy('reason');
-        $dataProviderMarketExpenseGroup = new ActiveDataProvider
-        ([
-             'query'  => $query,
-             'pagination' => false,
-         ]);
-
+        $query        = MarketExpense::find()->select([
+                                                          'expense' => 'SUM(expense)',
+                                                          'reason',
+                                                          'selected_date',
+                                                      ])->andWhere(['company_id' => \Yii::$app->user->id])->groupBy('reason');
+        $dataProvider = new ActiveDataProvider([
+                                                   'query' => $query,
+                                               ]);
         return $this->render('/supermarket/market-expense/index-group', [
-            'dataProvider' => $dataProviderMarketExpenseGroup,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -73,14 +72,28 @@ class MarketExpenseController extends BaseController
             $show   = true;
             $result = QueryHelper::sumsSearchResult(MarketExpense::tableName(), 'expense', 'reason', $modelMarketExpense->reason, $modelMarketExpense->from, $modelMarketExpense->to);
         }
-        $searchModel  = new MarketExpenseSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel                      = new MarketExpenseSearch();
+        $dataProvider                     = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->sort->defaultOrder = ['selected_date' => SORT_DESC];
         return $this->render('/supermarket/market-expense/index', [
             'model'        => $modelMarketExpense,
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
             'result'       => $result,
             'show'         => $show,
+        ]);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView(int $id)
+    {
+        return $this->render('/supermarket/market-expense/view', [
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -99,6 +112,11 @@ class MarketExpenseController extends BaseController
         {
             $model->company_id = Yii::$app->user->id;
             $model->save();
+            $url = Html::a($model->reason, [
+                'view',
+                'id' => $model->id,
+            ]);
+            History::saveAutomaticHistoryEntry('Market expense', 'Gekündigt zum ', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'Market expense was created for today') . ' ' . $model->selected_date);
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
         }
