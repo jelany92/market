@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\History;
 use backend\models\searchModel\ArticleSearch;
 use backend\models\searchModel\CategorySearch;
 use backend\models\searchModel\MainCategorySearch;
@@ -12,6 +13,7 @@ use common\models\ArticleInfo;
 use common\models\MainCategory;
 use common\models\Subcategory;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -100,6 +102,11 @@ class MainCategoryController extends BaseController
         {
             $model->company_id = Yii::$app->user->id;
             $model->save();
+            $url = Html::a($model->category_name, [
+                'view',
+                'id' => $model->id,
+            ]);
+            History::saveAutomaticHistoryEntry('Tax Office', 'Tax Office', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'done'));
             return $this->redirect([
                                        'view',

@@ -116,7 +116,7 @@ class MarketExpenseController extends BaseController
                 'view',
                 'id' => $model->id,
             ]);
-            History::saveAutomaticHistoryEntry('Market expense', 'Gekündigt zum ', $url);
+            History::saveAutomaticHistoryEntry('Market expense', 'Market expense', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'Market expense was created for today') . ' ' . $model->selected_date);
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
         }

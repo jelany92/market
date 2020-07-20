@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+use backend\models\History;
 use backend\models\IncomingRevenue;
 use common\components\QueryHelper;
 use common\controller\BaseController;
 use Yii;
 use backend\models\Purchases;
 use backend\models\searchModel\PurchasesSearch;
+use yii\bootstrap4\Html;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -81,6 +83,11 @@ class PurchasesController extends BaseController
         {
             $model->company_id = Yii::$app->user->id;
             $model->save();
+            $url = Html::a($model->reason, [
+                'view',
+                'id' => $model->id,
+            ]);
+            History::saveAutomaticHistoryEntry('Purchases', 'Purchases', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء مصروف لليوم'));
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
         }

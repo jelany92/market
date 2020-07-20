@@ -2,10 +2,12 @@
 
 namespace backend\controllers;
 
+use backend\models\History;
 use common\controller\BaseController;
 use Yii;
 use common\models\Subcategory;
 use common\models\searchModel\SubcategorySearch;
+use yii\bootstrap4\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,8 +73,14 @@ class SubcategoryController extends BaseController
     {
         $model                   = new Subcategory();
         $model->main_category_id = $mainCategoryId;
-        if ($model->load(Yii::$app->request->post()) && $model->save())
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
+            $model->save();
+            $url = Html::a($model->subcategory_name, [
+                'view',
+                'id' => $model->id,
+            ]);
+            History::saveAutomaticHistoryEntry('Market expense', 'Market expense', $url);
             return $this->redirect([
                                        'view',
                                        'id' => $model->id,
