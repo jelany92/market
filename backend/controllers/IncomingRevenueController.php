@@ -81,7 +81,7 @@ class IncomingRevenueController extends BaseController
         {
             $model->company_id = Yii::$app->user->id;
             $model->save();
-            $url = Html::a($model->reason, [
+            $url = Html::a('Incoming Revenue', [
                 'view',
                 'id' => $model->id,
             ]);
