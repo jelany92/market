@@ -5,6 +5,7 @@ namespace common\models;
 use backend\models\History;
 use common\models\auth\AuthAssignment;
 use common\models\auth\AuthItem;
+use common\models\queries\AdminUserQuery;
 use common\models\traits\TimestampBehaviorTrait;
 use Yii;
 use yii\base\NotSupportedException;
@@ -135,11 +136,11 @@ class AdminUser extends ActiveRecord implements IdentityInterface
 
     /**
      * {@inheritdoc}
-     * @return \common\models\queries\AdminUserQuery the active query used by this AR class.
+     * @return AdminUserQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \common\models\queries\AdminUserQuery(get_called_class());
+        return new AdminUserQuery(get_called_class());
     }
 
     /**

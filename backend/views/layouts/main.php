@@ -5,16 +5,16 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use backend\components\LanguageDropdown;
+use common\models\MainCategory;
 use common\widgets\Alert;
 use kartik\icons\Icon;
 use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
-use common\models\MainCategory;
-use backend\components\LanguageDropdown;
-use kartik\form\ActiveForm;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 Icon::map($this);
 AppAsset::register($this);
@@ -128,23 +128,23 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                     'label'   => Yii::t('app', 'Merchandise'),
                     'items'   => [
                         [
-                            'label' => Yii::t('app', 'Article'),
-                            'url'   => ['/article-info/index'],
+                            'label'   => Yii::t('app', 'Article'),
+                            'url'     => ['/article-info/index'],
                             'visible' => Yii::$app->user->can('article-info.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Article Price'),
-                            'url'   => ['/article-price/index'],
+                            'label'   => Yii::t('app', 'Article Price'),
+                            'url'     => ['/article-price/index'],
                             'visible' => Yii::$app->user->can('article-price.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Article In Inventory'),
-                            'url'   => ['/article-in-stored/index-inventory'],
+                            'label'   => Yii::t('app', 'Article In Inventory'),
+                            'url'     => ['/article-in-stored/index-inventory'],
                             'visible' => Yii::$app->user->can('article-in-stored.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Article Gain'),
-                            'url'   => ['/article-info/article-gain'],
+                            'label'   => Yii::t('app', 'Article Gain'),
+                            'url'     => ['/article-info/article-gain'],
                             'visible' => Yii::$app->user->can('article-info.*'),
                         ],
                     ],
@@ -154,38 +154,38 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                     'label'   => Yii::t('app', 'Market Information'),
                     'items'   => [
                         [
-                            'label' => Yii::t('app', 'Incoming Revenues'),
-                            'url'   => ['/incoming-revenue/index'],
+                            'label'   => Yii::t('app', 'Incoming Revenues'),
+                            'url'     => ['/incoming-revenue/index'],
                             'visible' => Yii::$app->user->can('incoming-revenue.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Purchases'),
-                            'url'   => ['/purchases/index'],
+                            'label'   => Yii::t('app', 'Purchases'),
+                            'url'     => ['/purchases/index'],
                             'visible' => Yii::$app->user->can('purchases.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Market Expense'),
-                            'url'   => ['/market-expense/index'],
+                            'label'   => Yii::t('app', 'Market Expense'),
+                            'url'     => ['/market-expense/index'],
                             'visible' => Yii::$app->user->can('market-expense.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Tax Office'),
-                            'url'   => ['/tax-office/index'],
+                            'label'   => Yii::t('app', 'Tax Office'),
+                            'url'     => ['/tax-office/index'],
                             'visible' => Yii::$app->user->can('tax-office.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Purchase Invoices'),
-                            'url'   => ['/purchase-invoices/index'],
+                            'label'   => Yii::t('app', 'Purchase Invoices'),
+                            'url'     => ['/purchase-invoices/index'],
                             'visible' => Yii::$app->user->can('purchase-invoices.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Capital'),
-                            'url'   => ['/capital/index'],
+                            'label'   => Yii::t('app', 'Capital'),
+                            'url'     => ['/capital/index'],
                             'visible' => Yii::$app->user->can('capital.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Establish Markets'),
-                            'url'   => ['/establish-market/index'],
+                            'label'   => Yii::t('app', 'Establish Markets'),
+                            'url'     => ['/establish-market/index'],
                             'visible' => Yii::$app->user->can('establish-market.*'),
                         ],
                         [
@@ -200,23 +200,23 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                     'label'   => Yii::t('app', 'Customer Info'),
                     'items'   => [
                         [
-                            'label' => Yii::t('app', 'Employer'),
-                            'url'   => ['/customer-employer/index'],
+                            'label'   => Yii::t('app', 'Employer'),
+                            'url'     => ['/customer-employer/index'],
                             'visible' => Yii::$app->user->can('customer-employer.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Company'),
-                            'url'   => ['/user-model/index'],
+                            'label'   => Yii::t('app', 'Company'),
+                            'url'     => ['/user-model/index'],
                             'visible' => Yii::$app->user->can('user-model.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Admin User'),
-                            'url'   => ['/admin-user/index'],
+                            'label'   => Yii::t('app', 'Admin User'),
+                            'url'     => ['/admin-user/index'],
                             'visible' => Yii::$app->user->can('admin-user.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'Permission'),
-                            'url'   => ['/auth-item/index'],
+                            'label'   => Yii::t('app', 'Permission'),
+                            'url'     => ['/auth-item/index'],
                             'visible' => Yii::$app->user->can('auth-item.*'),
                         ],
                     ],
@@ -224,8 +224,8 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                 ],
 
                 [
-                    'label' => Yii::t('app', 'Book Gallery'),
-                    'url'   => ['/detail-gallery-article/index'],
+                    'label'   => Yii::t('app', 'Book Gallery'),
+                    'url'     => ['/detail-gallery-article/index'],
                     'visible' => Yii::$app->user->can('detail-gallery-article.*'),
                 ],
 
