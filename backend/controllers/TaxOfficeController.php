@@ -2,11 +2,13 @@
 
 namespace backend\controllers;
 
+use backend\models\History;
 use backend\models\TaxOffice;
 use backend\models\searchModel\TaxOfficeSearch;
 use common\controller\BaseController;
 use phpDocumentor\Reflection\Types\Integer;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -64,6 +66,11 @@ class TaxOfficeController extends BaseController
         {
             $model->company_id = Yii::$app->user->id;
             $model->save();
+            $url = Html::a($model->reason, [
+                'view',
+                'id' => $model->id,
+            ]);
+            History::saveAutomaticHistoryEntry('Tax Office', 'Tax Office', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء مسترجعات من الضرائب لليوم'));
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
 

@@ -21,7 +21,7 @@ class HistoryController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class'   => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -31,22 +31,25 @@ class HistoryController extends Controller
 
     /**
      * Lists all History models.
+     *
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new HistorySearch();
+        $searchModel  = new HistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
      * Displays a single History model.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -60,14 +63,21 @@ class HistoryController extends Controller
     /**
      * Creates a new History model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
     {
         $model = new History();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء تاريخ الماركت لليوم') . ' ' . $model->edited_date_at);
+            $model->save();
+            return $this->redirect([
+                                       'view',
+                                       'id' => $model->id,
+                                   ]);
         }
 
         return $this->render('create', [
@@ -78,7 +88,9 @@ class HistoryController extends Controller
     /**
      * Updates an existing History model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -86,8 +98,13 @@ class HistoryController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            $model->save();
+            return $this->redirect([
+                                       'view',
+                                       'id' => $model->id,
+                                   ]);
         }
 
         return $this->render('update', [
@@ -98,7 +115,9 @@ class HistoryController extends Controller
     /**
      * Deletes an existing History model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
      * @param integer $id
+     *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -112,13 +131,16 @@ class HistoryController extends Controller
     /**
      * Finds the History model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
+     *
      * @param integer $id
+     *
      * @return History the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = History::findOne($id)) !== null) {
+        if (($model = History::findOne($id)) !== null)
+        {
             return $model;
         }
 

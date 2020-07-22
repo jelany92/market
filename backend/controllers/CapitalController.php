@@ -3,9 +3,11 @@
 namespace backend\controllers;
 
 use backend\models\Capital;
+use backend\models\History;
 use backend\models\searchModel\CapitalSearch;
 use common\controller\BaseController;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -98,6 +100,11 @@ class CapitalController extends BaseController
         {
             $model->company_id = Yii::$app->user->id;
             $model->save();
+            $url = Html::a($model->name, [
+                'view',
+                'id' => $model->id,
+            ]);
+            History::saveAutomaticHistoryEntry('Capital', 'Gekündigt zum ', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء راس مال الماركت لليوم') . ' ' . $model->selected_date);
             return $this->redirect([
                                        '/capital/index',

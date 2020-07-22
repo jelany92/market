@@ -18,9 +18,9 @@ class HelpTestMethod
     {
         $I->amOnPage('/site/login');
         $I->wait(1);
-        $I->fillField('//*[@id="loginform-username"]', 'admin-test'); //username
+        $I->fillField('//*[@id="loginform-username"]', 'ahmad'); //username
         $I->fillField('//*[@id="loginform-password"]', 'ahmadsms'); //password
-        $I->click('//*[@id="login-form"]/div[3]/button'); //login
+        $I->click('//*[@id="login-form"]/div[4]/button'); //login
         $I->waitForText(Yii::t('app', 'Total income for the month'), 1);
     }
 
