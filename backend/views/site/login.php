@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'btn btn-primary',
                     'name'  => 'login-button',
                 ]) ?>
+
+                <?= Html::a(Yii::t('app', 'Create') . ' ' . Yii::t('app', 'New Customer'), ['site/create-company'], ['class' => 'btn btn-success']) ?>
+
             </div>
 
             <?= Html::a(Yii::t('app', 'Passwort vergessen') . ' ' . Yii::t('app', '?'), ['forgot-password']) ?>

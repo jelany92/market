@@ -130,6 +130,7 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
             $menuItems = [
                 [
                     'label'   => Yii::t('app', 'Categories'),
+                    'url'     => ['/main-category/index'],
                     'items'   => items($teams, '/main-category/view'),
                     'visible' => Yii::$app->user->can('main-category.*'),
                 ],
@@ -198,8 +199,8 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                             'visible' => Yii::$app->user->can('establish-market.*'),
                         ],
                         [
-                            'label' => Yii::t('app', 'History'),
-                            'url'   => ['/history/index'],
+                            'label'   => Yii::t('app', 'History'),
+                            'url'     => ['/history/index'],
                             'visible' => Yii::$app->user->can('history.*'),
                         ],
                     ],

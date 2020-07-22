@@ -16,6 +16,7 @@ use backend\models\TaxOffice;
 use common\components\QueryHelper;
 use common\models\AdminUser;
 use common\models\ArticleInfo;
+use common\models\auth\AuthAssignment;
 use common\models\DetailGalleryArticle;
 use common\models\MainCategory;
 use Yii;
@@ -47,6 +48,7 @@ class SiteController extends Controller
                         'actions' => [
                             'login',
                             'error',
+                            'create-company',
                         ],
                         'allow'   => true,
                     ],
@@ -138,9 +140,9 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
-     * @param  int    $mainCategory mainCategoryId
-     * @param  int    $subcategory  subcategoryId
-     * @param  string $author       authorName
+     * @param int    $mainCategory mainCategoryId
+     * @param int    $subcategory  subcategoryId
+     * @param string $author       authorName
      *
      * @return string
      */
@@ -227,7 +229,7 @@ class SiteController extends Controller
         $events                      = [];
 
         // Zeigt all ArbeitsZeit für eingeloggt user von wann bis wann
-        foreach ($incomingRevenues AS $time)
+        foreach ($incomingRevenues as $time)
         {
             $Event         = new \yii2fullcalendar\models\Event();
             $Event->id     = $time->id;
@@ -238,7 +240,7 @@ class SiteController extends Controller
             $events[]      = $Event;
         }
 
-        foreach ($incomingRevenues AS $time)
+        foreach ($incomingRevenues as $time)
         {
             $manyPurchasesInOneDay = (new Query())->from(['purchases'])->select(['result' => 'SUM(purchases)'])->andWhere([
                                                                                                                               'selected_date' => $time['selected_date'],
@@ -259,7 +261,7 @@ class SiteController extends Controller
             $events[]              = $Event;
         }
 
-        foreach ($purchases AS $time)
+        foreach ($purchases as $time)
         {
             $Event         = new \yii2fullcalendar\models\Event();
             $Event->id     = $time->id;
@@ -270,7 +272,7 @@ class SiteController extends Controller
             $events[]      = $Event;
         }
 
-        foreach ($marketExpense AS $time)
+        foreach ($marketExpense as $time)
         {
             $Event         = new \yii2fullcalendar\models\Event();
             $Event->id     = $time->id;
@@ -368,7 +370,8 @@ class SiteController extends Controller
         $pdf                       = Yii::$app->pdf;
         $mpdf                      = $pdf->api;
         $mpdf->SetHeader($date . ' Kattan Shop');
-        print_r($content);die();
+        print_r($content);
+        die();
         $mpdf->WriteHtml($content);
         return $mpdf->Output($date, 'D');
 
@@ -486,6 +489,34 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+
+    /**
+     * create customer action.
+     *
+     * @return string
+     */
+    function actionCreateCompany()
+    {
+        $modelAdminUser              = new AdminUser();
+        $date                        = new \DateTime();
+        $modelAdminUser->active_from = $date->format('Y-m-d H:i');
+        $modelAdminUser->category    = 'Market';
+        if ($modelAdminUser->load(Yii::$app->request->post()) && $modelAdminUser->validate())
+        {
+            $modelAdminUser->password = Yii::$app->security->generatePasswordHash($modelAdminUser->password);
+            $modelAdminUser->save();
+            $modelAdminUser->checkAndWriteAssignment('admin-market');
+            Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء حساب جديد'));
+            return $this->render('login', [
+                'model' => new LoginForm(),
+            ]);
+        }
+
+        return $this->render('create-company', [
+            'model' => $modelAdminUser,
+        ]);
     }
 
     /**

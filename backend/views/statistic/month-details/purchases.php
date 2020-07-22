@@ -37,6 +37,7 @@ $result    = $ein - $aus - $ausMarket;
 ?>
 
 <?= $this->render('/site/supermarket/_sub_navigation', [
+    'controller' => 'statistic/month-purchases',
     'year'  => $year,
     'month' => $month,
 ]) ?>

@@ -34,6 +34,7 @@ $series = [
 ?>
 
 <?= $this->render('/site/supermarket/_sub_navigation',[
+    'controller' => 'statistic/month-market-expense',
     'year'  => $year,
     'month' => $month,
 ]) ?>

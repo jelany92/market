@@ -17,8 +17,9 @@ $breadGain   = $countBread * Purchases::BRED_GAIN;
 ?>
 
 <?= $this->render('/site/supermarket/_sub_navigation', [
-    'year'  => $year,
-    'month' => $month,
+    'controller' => 'statistic/bread-gain',
+    'year'       => $year,
+    'month'      => $month,
 ]) ?>
 <div class="row">
     <?= Table::widget([
@@ -30,7 +31,7 @@ $breadGain   = $countBread * Purchases::BRED_GAIN;
                                   ],
                                   [
                                       'type' => 'td',
-                                      'html' => $breadCount['result'],
+                                      'html' => isset($breadCount['result']) ? $breadCount['result'] : '',
                                   ],
                               ],
                               [
@@ -40,7 +41,7 @@ $breadGain   = $countBread * Purchases::BRED_GAIN;
                                   ],
                                   [
                                       'type' => 'td',
-                                      'html' => $countBread,
+                                      'html' => isset($countBread) ? $countBread : '',
                                   ],
                               ],
                               [
@@ -50,7 +51,7 @@ $breadGain   = $countBread * Purchases::BRED_GAIN;
                                   ],
                                   [
                                       'type' => 'td',
-                                      'html' => $breadGain,
+                                      'html' => isset($breadGain) ? $breadGain : '',
                                   ],
                               ],
                           ],

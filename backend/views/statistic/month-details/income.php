@@ -34,8 +34,9 @@ $series = [
 
 ?>
 <?= $this->render('/site/supermarket/_sub_navigation', [
-    'year'  => $year,
-    'month' => $month,
+    'controller' => 'statistic/month-income',
+    'year'       => $year,
+    'month'      => $month,
 ]) ?>
 <?= ApexchartsWidget::widget([
                                  'type'         => 'histogram',

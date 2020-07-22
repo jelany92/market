@@ -17,6 +17,7 @@ return [
     'Password'                             => 'كلمة المرور',
     'Remember'                             => 'تذكرني',
     'Please fill in the following fields'  => 'يرجى ملء الحقول التالية لتسجيل الدخول',
+    'New Customer'                         => 'حساب جديد',
     'Passwort vergessen'                   => 'نسيت كلمة المرور',
     '?'                                    => '؟',
     //nav
