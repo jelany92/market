@@ -40,7 +40,7 @@ class HistorySearch extends History
      */
     public function search($params)
     {
-        $query = History::find();
+        $query = History::find()->andWhere(['company_id' => \Yii::$app->user->identity->id]);
 
         // add conditions that should always apply here
 
