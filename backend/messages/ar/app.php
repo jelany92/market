@@ -7,6 +7,8 @@ return [
     'Delete'                               => 'مسح',
     'Save'                                 => 'حفط',
     'export'                               => 'تصدير',
+    'From Date'                            => 'من تاريخ',
+    'To Date'                              => 'الى تاريخ',
 
     //Login
     'Login'                                => 'تسجيل الدخول',
@@ -27,7 +29,7 @@ return [
     'Article Information'                  => 'معلومات المنتج',
     'Market Information'                   => 'معلومات المتجر',
     'Capital'                              => 'رأس مال المؤسسين',
-    'Establish Markets'                    => 'تاسيس المحل',
+    'Establish Markets'                    => 'تكاليف تاسيس المحل',
     'Purchase Invoices'                    => 'فواتير الشراء',
     'Incoming Revenues'                    => 'الإيرادات الواردة',
     'Purchases'                            => 'المشتريات',
@@ -119,9 +121,13 @@ return [
     'Invoice Description'                  => 'نوع المشتريات',
     'Photo'                                => 'ملف الفاتورة',
     'Price this Invoice'                   => 'اسعار عناصر الفاتورة',
+    'Photo Path'                           => 'الملف',
 
     //article price
     'Article Count'                        => 'عدد القطع',
+
+    //purchases
+    'Price Purchase in Group'              => 'اسعار مشتريات المحل مجمعين',
 
     // article inventory
     'new Inventory'                        => 'جرد جديد',
@@ -129,7 +135,10 @@ return [
 
     //Market
     'Market Expenses In Group'             => 'مصاريف السوق في المجموعة',
-    'Price in Group'                       => 'اسعار نفقات المحل مجمعين',
+    'Price Market Expenses in Group'       => 'اسعار نفقات المحل مجمعين',
+
+    //Establish Market
+    'Establish Market'                     => 'مبلغ تاسيس المحل',
 
 
 ];

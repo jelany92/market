@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\History;
 use backend\models\IncomingRevenue;
+use backend\models\MarketExpense;
 use common\components\QueryHelper;
 use common\controller\BaseController;
 use Yii;
@@ -36,6 +37,26 @@ class PurchasesController extends BaseController
                 ],
             ],
         ];
+    }
+
+    /**
+     * Lists all MarketExpense models.
+     *
+     * @return mixed
+     */
+    public function actionIndexGroup()
+    {
+        $query        = Purchases::find()->select([
+                                                      'purchases' => 'SUM(purchases)',
+                                                      'reason',
+                                                      'selected_date',
+                                                  ])->andWhere(['company_id' => \Yii::$app->user->id])->groupBy('reason');
+        $dataProvider = new ActiveDataProvider([
+                                                   'query' => $query,
+                                               ]);
+        return $this->render('/supermarket/purchases/index-group', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\EstablishMarket */
 
-$this->title                   = Yii::t('app', 'Create Establish Market');
+$this->title                   = Yii::t('app', 'Create') . ' ' . Yii::t('app', 'Establish Market');
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Establish Markets'),
     'url'   => ['index'],
