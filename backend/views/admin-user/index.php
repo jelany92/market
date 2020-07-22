@@ -19,33 +19,49 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Neuen Benutzer erstellen'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget(['dataProvider' => $dataProvider,
-                          'filterModel'  => $searchModel,
-                          'options'      => [
-                              'id'    => 'admin_user_grid',
-                              'class' => 'grid-view',
-                          ],
-                          'columns'      => [
+    <?= GridView::widget([
+                             'dataProvider' => $dataProvider,
+                             'filterModel'  => $searchModel,
+                             'options'      => [
+                                 'id'    => 'admin_user_grid',
+                                 'class' => 'grid-view',
+                                 'style' => 'overflow: auto; word-wrap: break-word;',
+                             ],
+                             'columns'      => [
+                                 [ // column for username as url
+                                     'attribute' => 'username',
+                                     'value'     => function ($model) {
+                                         return Html::a(Html::encode($model->username), Yii::$app->urlManager->createUrl([
+                                                                                                                             'admin-user/view',
+                                                                                                                             'id' => $model->id,
+                                                                                                                         ]));
+                                     },
+                                     'format'    => 'raw',
+                                 ],
+                                 'first_name',
+                                 'last_name',
+                                 [
+                                     'filter'    => Html::activeDropDownList($searchModel, 'role', AuthItem::getRoleList(), [
+                                         'class'  => 'form-control',
+                                         'prompt' => Yii::t('app', 'alle Rollen'),
+                                     ]),
+                                     'label'     => Yii::t('app', 'Rolle'),
+                                     'attribute' => 'role',
+                                     'value'     => function ($model) {
+                                         return Html::encode($model->getRole());
+                                     },
+                                     'format'    => 'raw',
+                                 ],
+                                 'active_from:datetime',
+                                 'active_until:datetime',
 
-                              [ // column for username as url
-                                  'attribute' => 'username',
-                                  'value'     => function ($model) {
-                                      return Html::a(Html::encode($model->username), Yii::$app->urlManager->createUrl(['admin-user/view', 'id' => $model->id]));
-                                  },
-                                  'format'    => 'raw',],
-                              'first_name',
-                              'last_name',
-                              ['filter'    => Html::activeDropDownList($searchModel, 'role', AuthItem::getRoleList(), ['class' => 'form-control', 'prompt' => Yii::t('app', 'alle Rollen')]),
-                               'label'     => Yii::t('app', 'Rolle'),
-                               'attribute' => 'role',
-                               'value'     => function ($model) {
-                                   return Html::encode($model->getRole());
-                               },
-                               'format'    => 'raw',],
-                              'active_from:datetime',
-                              'active_until:datetime',
-
-                              ['class'          => 'common\components\ActionColumn',
-                               'visibleButtons' => ['update' => \Yii::$app->user->can('admin-user.update'),
-                                                    'view'   => \Yii::$app->user->can('admin-user.view'),]],],]); ?>
+                                 [
+                                     'class'          => 'common\components\ActionColumn',
+                                     'visibleButtons' => [
+                                         'update' => \Yii::$app->user->can('admin-user.update'),
+                                         'view'   => \Yii::$app->user->can('admin-user.view'),
+                                     ],
+                                 ],
+                             ],
+                         ]); ?>
 </div>
