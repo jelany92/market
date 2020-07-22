@@ -36,9 +36,10 @@ $ausMarket = QueryHelper::getMonthData($year, $month, 'market_expense', 'expense
 $result    = $ein - $aus - $ausMarket;
 ?>
 
-<?= $this->render('/site/supermarket/_sub_navigation',[
-    'year'  => $year,
-    'month' => $month,
+<?= $this->render('/site/supermarket/_sub_navigation', [
+    'controller' => 'statistic/month-purchases-group',
+    'year'       => $year,
+    'month'      => $month,
 ]) ?>
 <div class="container">
 

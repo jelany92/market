@@ -4,7 +4,9 @@ use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Tabs;
 
-/* @var $model common\models\UserStamm */
+/* @var $controller string */
+/* @var $year integer */
+/* @var $month string */
 ?>
 <div class="col-sm-12">
     <div class="row">
@@ -13,7 +15,7 @@ use yii\bootstrap4\Tabs;
             for ($m = 1; $m <= 12; $m++)
             {
                 $monthName = date('F', mktime(0, 0, 0, $m, 1)) . '<br>';
-                echo Html::a(Yii::t('app', $monthName), ['month-view' . '?year=' . $year . '&month=' . $m], [
+                echo Html::a(Yii::t('app', $monthName), [$controller . '?year=' . $year . '&month=' . $m], [
                         '',
                         'class' => 'btn btn-primary',
                         'style' => $month == $m ? 'background-color: #40a7ff;' : '',

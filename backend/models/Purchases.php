@@ -27,8 +27,8 @@ class Purchases extends \yii\db\ActiveRecord
     public $from;
     public $to;
 
-    const BRED_PRICE = '0.35';
-    const BRED_GAIN  = '0.25';
+    const BRED_PRICE = '0.37';
+    const BRED_GAIN  = '0.23';
     /**
      * {@inheritdoc}
      */

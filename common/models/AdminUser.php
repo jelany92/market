@@ -20,8 +20,10 @@ use yii\web\IdentityInterface;
  * @property string           $username
  * @property string           $first_name
  * @property string           $last_name
+ * @property string           $company_name
  * @property string           $password
  * @property string           $password_reset_token
+ * @property string           $category
  * @property string           $email
  * @property string           $active_from
  * @property string           $active_until
@@ -65,8 +67,8 @@ class AdminUser extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'first_name', 'last_name', 'password', 'email', 'active_from',], 'required', 'except' => self::SCENARIO_DEACTIVATE],
-            [['username', 'first_name', 'last_name',], 'string', 'max' => 25,],
+            [['username', 'first_name', 'last_name', 'password', 'email', 'active_from', 'company_name', 'category'], 'required', 'except' => self::SCENARIO_DEACTIVATE],
+            [['username', 'first_name', 'last_name', 'company_name','category'], 'string', 'max' => 25,],
             [['password','password_reset_token', 'email',], 'string', 'max' => 255,],
             [['username'], 'unique',],
             [['email'], 'unique',],
