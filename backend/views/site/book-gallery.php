@@ -23,14 +23,14 @@ $this->registerAssetBundle('backend\assets\BookGallery');
 
     <div class="row">
         <?php foreach ($modelDetailGalleryArticle as $detailGalleryArticle) : ?>
-            <div class="books-view col-md-3">
+            <div class="books-view col-6 col-sm-3">
                 <?php
                 $filesPhotoPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGalleryPhoto'] . DIRECTORY_SEPARATOR . $detailGalleryArticle->bookGalleries->book_photo;
                 $filePath       = Yii::getAlias('backend') . DIRECTORY_SEPARATOR . 'web' . $filesPhotoPath;
                 $filesPdfPath   = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGalleryPdf'] . DIRECTORY_SEPARATOR . $detailGalleryArticle->bookGalleries->book_pdf;
                 $filesPdfRoot   = isset($detailGalleryArticle->bookGalleries->book_pdf) ? $detailGalleryArticle->bookGalleries->getAbsolutePath(Yii::$app->params['uploadDirectoryBookGalleryPdf'], $detailGalleryArticle->bookGalleries->book_pdf) : '';
                 ?>
-                <?= Html::a(Html::img($filesPhotoPath, ['style' => 'width:100%;height: 330px']), [
+                <?= Html::a(Html::img($filesPhotoPath, ['style' => 'width:100%;height: 350px']), [
                     'detail-gallery-article/view',
                     'id' => $detailGalleryArticle->id,
                 ]) ?>
