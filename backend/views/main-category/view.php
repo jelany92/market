@@ -63,102 +63,100 @@ $filesPath                     = DIRECTORY_SEPARATOR . Yii::$app->params['upload
     </div>
 
     <br>
-    <div class="row col-md-12">
-        <?php if (0 < $dataProviderArticle->count) : ?>
-            <div class="col-md-12">
-                <h1><?= Yii::t('app', 'Article') ?></h1>
-                <?= GridView::widget([
-                                         'dataProvider' => $dataProviderArticle,
-                                         'columns'      => [
-                                             ['class' => 'yii\grid\SerialColumn'],
+    <?php if (0 < $dataProviderArticle->count) : ?>
+        <div class="col-md-12">
+            <h1><?= Yii::t('app', 'Article') ?></h1>
+            <?= GridView::widget([
+                                     'dataProvider' => $dataProviderArticle,
+                                     'columns'      => [
+                                         ['class' => 'yii\grid\SerialColumn'],
 
-                                             'article_name_ar',
-                                             //'article_count',
-                                             [
-                                                 'attribute' => 'article_unit',
-                                                 'value'     => function ($model) {
-                                                     if ($model->article_unit != null)
-                                                     {
-                                                         return ArticleInfo::UNIT_LIST[$model->article_unit];
-                                                     }
-                                                 },
-                                             ],
-                                             [
-                                                 'class'      => 'common\components\ActionColumn',
-                                                 'template'   => '{view} {update} {delete}',
-                                                 'urlCreator' => function ($action, $model, $key, $index) {
-                                                     if ($action === 'view')
-                                                     {
-                                                         $url = Yii::$app->urlManager->createUrl([
-                                                                                                     '/article-info/view',
-                                                                                                     'id' => $model->id,
-                                                                                                 ]);
-                                                         return $url;
-                                                     }
-                                                     if ($action === 'update')
-                                                     {
-                                                         $url = Yii::$app->urlManager->createUrl([
-                                                                                                     '/article-info/update',
-                                                                                                     'id' => $model->id,
-                                                                                                 ]);
-                                                         return $url;
-                                                     }
-                                                     if ($action === 'delete')
-                                                     {
-                                                         $url = Yii::$app->urlManager->createUrl([
-                                                                                                     '/article-info/delete',
-                                                                                                     'id' => $model->id,
-                                                                                                 ]);
-                                                         return $url;
-                                                     }
-                                                 },
-                                             ],
+                                         'article_name_ar',
+                                         //'article_count',
+                                         [
+                                             'attribute' => 'article_unit',
+                                             'value'     => function ($model) {
+                                                 if ($model->article_unit != null)
+                                                 {
+                                                     return ArticleInfo::UNIT_LIST[$model->article_unit];
+                                                 }
+                                             },
                                          ],
-                                     ]); ?>
-            </div>
-        <?php endif; ?>
-        <?php if (0 < $dataProviderSubcategory->count) : ?>
-            <div class="col-md-12">
-                <h1><?= Yii::t('app', 'Subcategory') ?></h1>
-                <?= GridView::widget([
-                                         'dataProvider' => $dataProviderSubcategory,
-                                         'columns'      => [
-                                             ['class' => 'yii\grid\SerialColumn'],
+                                         [
+                                             'class'      => 'common\components\ActionColumn',
+                                             'template'   => '{view} {update} {delete}',
+                                             'urlCreator' => function ($action, $model, $key, $index) {
+                                                 if ($action === 'view')
+                                                 {
+                                                     $url = Yii::$app->urlManager->createUrl([
+                                                                                                 '/article-info/view',
+                                                                                                 'id' => $model->id,
+                                                                                             ]);
+                                                     return $url;
+                                                 }
+                                                 if ($action === 'update')
+                                                 {
+                                                     $url = Yii::$app->urlManager->createUrl([
+                                                                                                 '/article-info/update',
+                                                                                                 'id' => $model->id,
+                                                                                             ]);
+                                                     return $url;
+                                                 }
+                                                 if ($action === 'delete')
+                                                 {
+                                                     $url = Yii::$app->urlManager->createUrl([
+                                                                                                 '/article-info/delete',
+                                                                                                 'id' => $model->id,
+                                                                                             ]);
+                                                     return $url;
+                                                 }
+                                             },
+                                         ],
+                                     ],
+                                 ]); ?>
+        </div>
+    <?php endif; ?>
+    <?php if (0 < $dataProviderSubcategory->count) : ?>
+        <div class="col-md-12">
+            <h1><?= Yii::t('app', 'Subcategory') ?></h1>
+            <?= GridView::widget([
+                                     'dataProvider' => $dataProviderSubcategory,
+                                     'columns'      => [
+                                         ['class' => 'yii\grid\SerialColumn'],
 
-                                             'subcategory_name',
-                                             [
-                                                 'class'      => 'common\components\ActionColumn',
-                                                 'template'   => '{view} {update} {delete}',
-                                                 'urlCreator' => function ($action, $model, $key, $index) {
-                                                     if ($action === 'view')
-                                                     {
-                                                         $url = Yii::$app->urlManager->createUrl([
-                                                                                                     'subcategory/view',
-                                                                                                     'id' => $model->id,
-                                                                                                 ]);
-                                                         return $url;
-                                                     }
-                                                     if ($action === 'update')
-                                                     {
-                                                         $url = Yii::$app->urlManager->createUrl([
-                                                                                                     'subcategory/update',
-                                                                                                     'id' => $model->id,
-                                                                                                 ]);
-                                                         return $url;
-                                                     }
-                                                     if ($action === 'delete')
-                                                     {
-                                                         $url = Yii::$app->urlManager->createUrl([
-                                                                                                     'subcategory/delete',
-                                                                                                     'id' => $model->id,
-                                                                                                 ]);
-                                                         return $url;
-                                                     }
-                                                 },
-                                             ],
+                                         'subcategory_name',
+                                         [
+                                             'class'      => 'common\components\ActionColumn',
+                                             'template'   => '{view} {update} {delete}',
+                                             'urlCreator' => function ($action, $model, $key, $index) {
+                                                 if ($action === 'view')
+                                                 {
+                                                     $url = Yii::$app->urlManager->createUrl([
+                                                                                                 'subcategory/view',
+                                                                                                 'id' => $model->id,
+                                                                                             ]);
+                                                     return $url;
+                                                 }
+                                                 if ($action === 'update')
+                                                 {
+                                                     $url = Yii::$app->urlManager->createUrl([
+                                                                                                 'subcategory/update',
+                                                                                                 'id' => $model->id,
+                                                                                             ]);
+                                                     return $url;
+                                                 }
+                                                 if ($action === 'delete')
+                                                 {
+                                                     $url = Yii::$app->urlManager->createUrl([
+                                                                                                 'subcategory/delete',
+                                                                                                 'id' => $model->id,
+                                                                                             ]);
+                                                     return $url;
+                                                 }
+                                             },
                                          ],
-                                     ]); ?>
-            </div>
-        <?php endif; ?>
-    </div>
+                                     ],
+                                 ]); ?>
+        </div>
+    <?php endif; ?>
 </div>

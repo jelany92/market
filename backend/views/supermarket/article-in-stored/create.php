@@ -6,7 +6,7 @@ use yii\bootstrap4\Html;
 /* @var $model backend\models\ArticleInStored */
 
 $this->title = Yii::t('app', 'Create Article In Stored');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Article In Storeds'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Article In Storeds'), 'url' => ['index-inventory']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-in-stored-create">

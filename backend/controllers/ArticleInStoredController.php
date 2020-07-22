@@ -44,12 +44,14 @@ class ArticleInStoredController extends BaseController
      */
     public function actionIndexInventory()
     {
-        $searchModel  = new ArticleInventorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel     = new ArticleInventorySearch();
+        $dataProvider    = $searchModel->search(Yii::$app->request->queryParams);
+        $existNullColumn = ArticleInStored::find()->innerJoinWith(['articleInventory'])->andWhere(['company_id' => Yii::$app->user->identity->id, 'count' => null])->exists();
 
         return $this->render('/supermarket/article-in-stored/inventory', [
-            'searchModel'  => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel'     => $searchModel,
+            'dataProvider'    => $dataProvider,
+            'existNullColumn' => $existNullColumn,
         ]);
     }
 
@@ -174,8 +176,9 @@ class ArticleInStoredController extends BaseController
     {
         $model = new ArticleInStored();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
+            $model->save();
             return $this->redirect([
                                        '/supermarket/article-in-stored/view',
                                        'id' => $model->id,
@@ -260,6 +263,7 @@ class ArticleInStoredController extends BaseController
         try
         {
             $modelArticleInventory                 = new ArticleInventory();
+            $modelArticleInventory->company_id     = Yii::$app->user->identity->id;
             $modelArticleInventory->inventory_name = 'جرد' . ' ' . $date->format('Y-m-d');
             $modelArticleInventory->save();
             foreach ($modelArticleInfo as $articleInfo)
