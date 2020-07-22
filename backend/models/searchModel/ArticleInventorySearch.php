@@ -39,7 +39,7 @@ class ArticleInventorySearch extends ArticleInventory
      */
     public function search($params)
     {
-        $query = ArticleInventory::find();
+        $query = ArticleInventory::find()->andWhere(['company_id' => \Yii::$app->user->identity->id]);
 
         // add conditions that should always apply here
 

@@ -85,6 +85,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                  [
                                      'class'     => 'kartik\grid\EditableColumn',
                                      'attribute' => 'count',
+                                     'editableOptions' => [
+                                         'header' => Yii::t('app', 'Add count'),
+                                         'inputType' => kartik\editable\Editable::INPUT_TEXT,
+                                         'options' => [
+                                             'pluginOptions' => [
+
+                                             ]
+                                         ]
+                                     ],
                                  ],
 
                                  [

@@ -15,8 +15,11 @@ class m200602_092159_article_in_stored extends Migration
         // article inventory
         $this->createTable('article_inventory', [
             'id'             => $this->primaryKey(),
+            'company_id'     => $this->integer()->notNull(),
             'inventory_name' => $this->string(255)->notNull(),
         ], 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
+        $this->addForeignKey('fk_article_inventory_user_id', 'article_inventory', 'company_id', 'admin_user', 'id');
+
         // article stored
         $this->createTable('article_in_stored', [
             'id'                   => $this->primaryKey(),
@@ -39,6 +42,7 @@ class m200602_092159_article_in_stored extends Migration
         $this->dropForeignKey('fk_article_in_stored_article_inventory_id', 'article_in_stored');
         $this->dropForeignKey('fk_article_in_stored_article_info_id', 'article_in_stored');
         $this->dropTable('article_in_stored');
+        $this->dropForeignKey('fk_article_inventory_user_id', 'article_inventory');
         $this->dropTable('article_inventory');
     }
 }

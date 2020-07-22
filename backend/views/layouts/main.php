@@ -79,7 +79,7 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
             $firstMenuItems[] = '<li>' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton(Yii::t('app', 'Logout') . ' (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']) . Html::endForm() . '</li>';
         }
         echo Nav::widget([
-                             'options' => ['class' => Yii::$app->language == 'ar' ? 'navbar-right ml-auto pull-right' : 'navbar-right ml-auto'],
+                             'options' => ['class' => 'navbar-right ml-auto'],
                              'items'   => $firstMenuItems,
                          ]);
         ?>
@@ -94,11 +94,20 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                                   ]);
 
         ?>
+        <?php
+        echo Html::textInput('search', (Yii::$app->controller->id == 'search' && Yii::$app->controller->action->id == 'global-search') ? Yii::$app->request->get('search') : null, [
+            'autocomplete' => 'off',
+            'class'        => 'navSearchTextBox pull-center',
+            'id'           => 'navSearchString',
+            'placeholder'  => Yii::t('app', 'Search to') . '...',
+            'value'        => 'test',
+        ]);
+        echo Html::submitButton(Icon::show('search'), ['class' => 'btn btn-secondary navSearchSubmit'])
+        ?>
         <?php ActiveForm::end(); ?>
 
         <?php NavBar::end(); ?>
     </div>
-
 
     <div class="wrap">
         <?php if (!Yii::$app->user->isGuest) : ?>
@@ -145,7 +154,7 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                         [
                             'label'   => Yii::t('app', 'Article Gain'),
                             'url'     => ['/article-info/article-gain'],
-                            'visible' => Yii::$app->user->can('article-info.*'),
+                            'visible' => Yii::$app->user->can('adam-market.*'),
                         ],
                     ],
                     'visible' => Yii::$app->user->can('article-info.*'),
@@ -191,7 +200,7 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                         [
                             'label' => Yii::t('app', 'History'),
                             'url'   => ['/history/index'],
-                            //'visible' => Yii::$app->user->can('history.*'),
+                            'visible' => Yii::$app->user->can('history.*'),
                         ],
                     ],
                     'visible' => Yii::$app->user->can('incoming-revenue.*'),

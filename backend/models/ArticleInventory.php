@@ -2,13 +2,15 @@
 
 namespace backend\models;
 
+use common\models\AdminUser;
 use Yii;
 
 /**
  * This is the model class for table "article_inventory".
  *
- * @property int $id
- * @property string $inventory_name
+ * @property int               $id
+ * @property int               $company_id
+ * @property string            $inventory_name
  *
  * @property ArticleInStored[] $articleInStoreds
  */
@@ -28,8 +30,11 @@ class ArticleInventory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['inventory_name'], 'required'],
+            [['inventory_name', 'company_id'], 'required'],
             [['inventory_name'], 'string', 'max' => 255],
+            [['company_id'], 'integer'],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
+
         ];
     }
 
@@ -40,6 +45,7 @@ class ArticleInventory extends \yii\db\ActiveRecord
     {
         return [
             'id'             => Yii::t('app', 'ID'),
+            'company_id'     => Yii::t('app', 'Company'),
             'inventory_name' => Yii::t('app', 'Inventory Name'),
         ];
     }

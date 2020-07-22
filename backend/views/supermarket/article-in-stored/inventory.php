@@ -6,6 +6,7 @@ use yii\bootstrap4\Html;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\searchModel\ArticleInventorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $existNullColumn boolean */
 
 $this->title                   = Yii::t('app', 'Article In Inventory');
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,8 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Article In Stored'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'Create new Inventory'), ['inventory'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create') . ' ' . Yii::t('app', 'Article In Stored'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php if (!$existNullColumn) : ?>
+            <?= Html::a(Yii::t('app', 'Create') . ' ' . Yii::t('app', 'new Inventory'), ['inventory'], ['class' => 'btn btn-success']) ?>
+        <?php endif; ?>
     </p>
 
     <?= GridView::widget([
