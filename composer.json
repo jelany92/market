@@ -42,7 +42,7 @@
         "kartik-v/yii2-editable": "dev-master",
         "kartik-v/yii2-social": "@dev",
         "yiisoft/yii2-authclient": "~2.1.0",
-        "kartik-v/bootstrap-popover-x": "1.4.7"
+        "kartik-v/bootstrap-popover-x": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
