@@ -20,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if ($show == false) : ?>
 
         <?php $form = ActiveForm::begin([
-            'type'   => ActiveForm::TYPE_HORIZONTAL,
-            'action' => ['index'],
-            'method' => 'post',
-        ]); ?>
+                                            'type'   => ActiveForm::TYPE_HORIZONTAL,
+                                            'action' => ['index'],
+                                            'method' => 'post',
+                                        ]); ?>
 
         <?= $form->field($model, 'reason') ?>
         <?= $form->field($model, 'from')->widget(DatePicker::class, [
@@ -59,21 +59,22 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', Yii::t('app', 'Purchases export')), [
             'purchases/export',
         ], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Price Purchase in Group'), ['index-group'], ['class' => 'btn btn-info']) ?>
     </p>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel'  => $searchModel,
-        'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'reason',
-            'purchases',
-            'selected_date',
-            [
-                'class'    => 'common\components\ActionColumn',
-                'template' => '{update} {delete}',
-            ],
-        ],
-    ]); ?>
+                             'dataProvider' => $dataProvider,
+                             'filterModel'  => $searchModel,
+                             'columns'      => [
+                                 ['class' => 'yii\grid\SerialColumn'],
+                                 'reason',
+                                 'purchases',
+                                 'selected_date',
+                                 [
+                                     'class'    => 'common\components\ActionColumn',
+                                     'template' => '{update} {delete}',
+                                 ],
+                             ],
+                         ]); ?>
 
 </div>

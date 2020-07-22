@@ -28,6 +28,7 @@ class SearchController extends BaseController
         $dataProvider = new ActiveDataProvider([
                                                    'query' => $articleInfo,
                                                ]);
+
         return $this->render('global-search', ['dataProvider' => $dataProvider,]);
     }
 

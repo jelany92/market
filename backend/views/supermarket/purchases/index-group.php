@@ -8,15 +8,14 @@ use yii\bootstrap4\Html;
 /* @var $form yii\widgets\ActiveForm */
 /* @var $show bool */
 
-$this->title                   = Yii::t('app', 'Market Expenses In Group');
+$this->title                   = Yii::t('app', 'Price Purchase in Group');
 $this->params['breadcrumbs'][] = [
-    'label' => Yii::t('app', 'Market Expenses'),
+    'label' => Yii::t('app', 'Purchases'),
     'url'   => ['index'],
 ];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="market-expense-index">
-
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -24,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                              'dataProvider' => $dataProvider,
                              'columns'      => [
                                  'reason',
-                                 'expense',
+                                 'purchases',
                              ],
                          ]); ?>
 </div>
