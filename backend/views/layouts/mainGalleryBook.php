@@ -18,6 +18,7 @@ use yii\bootstrap4\NavBar;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
+Icon::map($this);
 BookGallery::register($this);
 
 function items($teams, $view, $param)
