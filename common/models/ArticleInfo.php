@@ -4,6 +4,8 @@ namespace common\models;
 
 use common\models\query\traits\TimestampBehaviorTrait;
 use Yii;
+use yii\helpers\Url;
+
 
 /**
  * This is the model class for table "article_info".
@@ -26,12 +28,20 @@ class ArticleInfo extends \yii\db\ActiveRecord
 {
     use TimestampBehaviorTrait;
 
+    const DIRECTORY_ARTICLE_IMAGES = 'https://backend.adam-market.store/images/article_file/';
+
     const UNIT_LIST = [
         'KG'  => 'KG',
         'G'   => 'G',
         'L'   => 'L',
         'ML'  => 'ML',
         'BOX' => 'Paket',
+    ];
+
+    const PRICE_LIST = [
+        '0'   => 'E EUR (Euro)',
+        'G'   => '$ USD (Dollar)',
+        'L'   => '£ GBP (Pound)',
     ];
 
     public $file;
@@ -53,7 +63,7 @@ class ArticleInfo extends \yii\db\ActiveRecord
         return [
             [['category_id', 'article_quantity'], 'integer'],
             [['article_buy_price'], 'double'],
-            [['article_name_ar'], 'unique'],
+            [['company_id', 'category_id', 'article_name_ar', 'article_quantity'], 'unique', 'targetAttribute' => ['company_id', 'category_id', 'article_name_ar', 'article_quantity']],
             [['article_name_ar', 'category_id'], 'required'],
             [['created_at', 'updated_at', 'file'], 'safe'],
             [['article_name_ar', 'article_name_en'], 'trim'],
@@ -143,6 +153,17 @@ class ArticleInfo extends \yii\db\ActiveRecord
     public static function getArticleNameList() : array
     {
         return self::find()->select(['articleName' => 'if(article_quantity IS NOT NULL , CONCAT(article_name_ar, " ( ",article_quantity, " ", article_unit, " ) "), article_name_ar)'])->andWhere(['company_id' => Yii::$app->user->id])->createCommand()->queryAll(\PDO::FETCH_COLUMN);
+    }
+
+    /**
+     * category images path
+     *
+     * @param string $fileName
+     * @return string
+     */
+    public static function articleImagePath(string $fileName) : string
+    {
+        return Url::to(self::DIRECTORY_ARTICLE_IMAGES . $fileName);
     }
 
     /**
