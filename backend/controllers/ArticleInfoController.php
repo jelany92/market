@@ -72,12 +72,12 @@ class ArticleInfoController extends BaseController
     /**
      * Displays a single ArticleInfo model.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
         $model                    = $this->findModel($id);
         $modelIncomingRevenue     = $model->articlePrices;

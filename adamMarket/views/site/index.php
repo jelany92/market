@@ -33,7 +33,7 @@ $this->title = 'Book Gallery';
 
                 <div class="toolbox-center">
                     <div class="toolbox-info">
-                        Showing <span>12 of 56</span> Products
+                        <?= Yii::t('app', 'Showing'); ?> <span><?= count($articles) ?> of <?= count($articles); ?> </span> <?= Yii::t('app', 'Products'); ?>
                     </div><!-- End .toolbox-info -->
                 </div><!-- End .toolbox-center -->
 
@@ -67,7 +67,7 @@ $this->title = 'Book Gallery';
                                                 'alt'   => 'Product image',
                                                 'class' => 'product-image',
                                             ],
-                                        ]), ['']); ?>
+                                        ]), ['article/view', 'id' => $article->id]); ?>
 
                                     <?php endif; ?>
 
@@ -137,7 +137,7 @@ $this->title = 'Book Gallery';
                 <div class="sidebar-filter-wrapper">
                     <div class="widget widget-clean">
                         <?= Html::label(Icon::show('bars', ['style' => 'margin-right: 5px;']) . Yii::t('app', 'Filters'), ['class' => 'widget widget-clean']) ?>
-                        <?= Html::a(Yii::t('app', 'Clean All'), '#', ['options' => ['class' => 'sidebar-filter-clear']]) ?>
+                        <?= Html::a(Yii::t('app', 'Clear All'), '#', ['options' => ['class' => 'sidebar-filter-clear']]) ?>
                     </div><!-- End .widget -->
                     <div class="widget widget-collapsible">
                         <h3 class="widget-title">
@@ -155,7 +155,7 @@ $this->title = 'Book Gallery';
                                     <div class="filter-items filter-items-count">
                                         <div class="filter-item">
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="cat-<?= $mainCategory->id?>">
+                                                <input type="checkbox" class="custom-control-input" id="cat-<?= $mainCategory->id ?>">
                                                 <?= Html::label($mainCategory->category_name, 'cat-' . $mainCategory->id, ['class' => 'custom-control-label']) ?>
                                             </div><!-- End .custom-checkbox -->
                                             <span class="item-count">

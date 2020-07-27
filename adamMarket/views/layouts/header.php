@@ -201,7 +201,7 @@ $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id
         </div><!-- End .container -->
     </div><!-- End .header-middle -->
     <div class="sticky-header">
-        <div class="container" style="text-align: center">
+        <div class="container">
             <ul class="menu">
                 <?php foreach ($categoryNameList as $category) : ?>
                     <li>

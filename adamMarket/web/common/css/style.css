@@ -2,7 +2,7 @@
 @import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
 
 html {
-    font-size: 62.5%;
+    font-size: 70%;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     font-size-adjust: 100%
@@ -687,8 +687,8 @@ blockquote.text-white cite span {
 }
 
 .header-dropdown > a::after, .header-dropdown > span::after {
-    font-family: "molla";
-    content: '\f110';
+    font-family: 'FontAwesome';
+    content: '\f078';
     position: absolute;
     right: 0;
     top: 50%;
@@ -1604,7 +1604,7 @@ blockquote.text-white cite span {
     }
 
     .top-menu:not(.top-link-menu) > li::after {
-        font-family: "molla";
+        font-family: 'FontAwesome';
         content: '\f110';
         position: absolute;
         right: 0;
@@ -1897,8 +1897,8 @@ blockquote.text-white cite span {
 }
 
 .menu.sf-arrows .sf-with-ul::after {
-    font-family: 'molla';
-    content: '\f110';
+    font-family: 'FontAwesome';
+    content: '\f078';
     position: absolute;
     right: 0;
     top: 50%;
@@ -2176,8 +2176,8 @@ blockquote.text-white cite span {
 }
 
 .category-dropdown .dropdown-toggle:after {
+    font-family: 'FontAwesome';
     content: '\f131';
-    font-family: 'molla';
     border: none;
     font-size: 2.3rem;
     line-height: 1;
@@ -2383,7 +2383,7 @@ blockquote.text-white cite span {
 
 .menu-vertical.sf-arrows .sf-with-ul::after {
     display: block;
-    font-family: 'molla';
+    font-family: 'FontAwesome';
     content: '\f112';
     position: absolute;
     right: 1.8rem;
@@ -2722,7 +2722,7 @@ blockquote.text-white cite span {
 }
 
 .mmenu-btn::after {
-    font-family: "molla";
+    font-family: 'FontAwesome';
     content: '\f110';
     display: inline-block
 }
@@ -4446,8 +4446,7 @@ p {
 .header-12 .dropdown.category-dropdown .dropdown-toggle:before {
     display: block;
     height: auto;
-    content: '';
-    font-family: 'molla';
+    font-family: 'FontAwesome';
     content: '\f110';
     position: absolute;
     left: auto;
@@ -5776,7 +5775,7 @@ p {
 .breadcrumb-item + .breadcrumb-item:before {
     color: #999999;
     content: '\f112';
-    font-family: "molla";
+    font-family: 'FontAwesome';
     padding-right: .7rem;
     font-size: 1.1rem;
     vertical-align: middle;
@@ -6096,7 +6095,7 @@ p {
     right: 1.2rem;
     top: 50%;
     color: #cc9966;
-    font-family: "molla";
+    font-family: 'FontAwesome';
     line-height: 1;
     transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -7348,11 +7347,11 @@ p {
     font-size: 1.4rem;
     letter-spacing: 0.1em;
     line-height: 1;
-    font-family: "molla"
 }
 
 .ratings:before, .ratings-val:before {
-    content: "\f318" "\f318" "\f318" "\f318" "\f318"
+    font-family: 'FontAwesome';
+    content: "\f005" "\f005" "\f005" "\f005" "\f005"
 }
 
 .ratings-val {
@@ -7442,7 +7441,7 @@ p {
 }
 
 .btn-product:before {
-    font-family: "molla";
+    font-family: 'FontAwesome';
     margin-right: .9rem
 }
 
@@ -7513,7 +7512,7 @@ p {
 }
 
 .btn-product-icon:before {
-    font-family: "molla"
+    font-family: 'FontAwesome';
 }
 
 .btn-product-icon span {
@@ -7530,7 +7529,8 @@ p {
 }
 
 .btn-cart:before {
-    content: '\e812'
+    font-family: 'FontAwesome';
+    content: '\f07a'
 }
 
 .btn-wishlist {
@@ -9576,8 +9576,8 @@ small.form-text {
 }
 
 .select-custom::after {
-    font-family: "molla";
-    content: '\f110';
+    font-family: 'FontAwesome';
+    content: '\f078';
     position: absolute;
     display: inline-block;
     right: 1.9rem;
@@ -9643,8 +9643,8 @@ small.form-text {
 .custom-control-label::after {
     left: 0;
     top: .6rem;
-    width: 1.6rem;
-    height: 1.6rem
+    width: 2rem;
+    height: 2rem
 }
 
 .custom-checkbox .custom-control-label::before {
@@ -9652,14 +9652,14 @@ small.form-text {
 }
 
 .custom-checkbox .custom-control-label::after {
+    font-family: 'FontAwesome';
+    content: '\f00c';
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
     background-image: none;
     font-size: 1rem;
-    font-family: 'molla';
-    content: '\ec2d';
     line-height: 1;
     text-align: center;
     opacity: 0;
@@ -10580,7 +10580,7 @@ small.form-text {
     height: 5rem;
     margin-top: -2.5rem;
     margin-left: -2.5rem;
-    font-family: "molla";
+    font-family: 'FontAwesome';
     position: absolute;
     left: 50%;
     top: 50%;
@@ -11607,10 +11607,10 @@ button:focus {
 }
 
 .widget-collapsible .widget-title a:after {
+    font-family: 'FontAwesome';
+    content: '\f078';
     color: #333333;
-    content: '\f110';
     display: block;
-    font-family: 'molla';
     font-size: 1.4rem;
     line-height: 1;
     position: absolute;
@@ -11620,7 +11620,8 @@ button:focus {
 }
 
 .widget-collapsible .widget-title a.collapsed:after {
-    content: '\e802'
+    font-family: 'FontAwesome';
+    content: '\f08d'
 }
 
 .widget-collapsible .widget-title a:focus {
@@ -17763,6 +17764,7 @@ button:focus {
 }
 
 .icon-black-tie:before {
+    font-family: 'FontAwesome';
     content: '\f27e'
 }
 
@@ -17807,18 +17809,22 @@ button:focus {
 }
 
 .icon-minus:before {
-    content: '\f28e'
+    font-family: 'FontAwesome';
+    content: '\f068'
 }
 
 .icon-shopping-bag:before {
+    font-family: 'FontAwesome';
     content: '\f290'
 }
 
 .icon-bluetooth:before {
+    font-family: 'FontAwesome';
     content: '\f293'
 }
 
 .icon-bluetooth-b:before {
+    font-family: 'FontAwesome';
     content: '\f294'
 }
 
@@ -17899,7 +17905,8 @@ button:focus {
 }
 
 .icon-plus:before {
-    content: '\f2c2'
+    font-family: 'FontAwesome';
+    content: '\f067'
 }
 
 .icon-quora:before {

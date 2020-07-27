@@ -13,12 +13,11 @@ class AppAsset extends AssetBundle
     public $baseUrl  = '@web';
     public $css      = [
         'common/css/bootstrap.min.css',
+        'common/css/font-awesome.min.css',
         'common/css/style.css',
         'common/css/plugins/owl-carousel/owl.carousel.css',
         'common/css/plugins/magnific-popup/magnific-popup.css',
         'common/css/plugins/nouislider/nouislider.css',
-        'href="https://use.fontawesome.com/releases/v5.13.0/css/all.css',
-        'common/css/font-awesome.min.css',
     ];
     public $js       = [
         "common/js/main.js",
