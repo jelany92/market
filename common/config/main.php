@@ -13,6 +13,14 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yidas\yii\fontawesome\FontawesomeAsset' => [
+                    'cdn' => true,
+                    'cdnCSS' => ['//maxcdn.bootstrapcdn.com/font-awesome/5.11.0/css/font-awesome.min.css'],
+                ],
+            ],
+        ],
         'log' => [
             'targets' => [
                 [

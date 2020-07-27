@@ -12,6 +12,8 @@ use kartik\form\ActiveForm;
 use yii\helpers\Url;
 
 Icon::map($this);
+\yidas\yii\fontawesome\FontawesomeAsset::register($this);
+
 $navBarColor      = '#e73918';
 $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id' => 1])->all(), 'id', 'category_name');
 ?>
@@ -112,7 +114,7 @@ $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id
                     </div><!-- End .header-search-wrapper -->
                     <?php ActiveForm::end(); ?>
                 </div><!-- End .header-search -->
-                <div class="dropdown compare-dropdown">
+                <div class="dropdown cart-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
                         <?= Icon::show('random') ?>
                     </a>
@@ -201,8 +203,8 @@ $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id
         </div><!-- End .container -->
     </div><!-- End .header-middle -->
     <div class="sticky-header">
-        <div class="row" style="margin-left: 255px;">
-            <ul class="menu sf-arrows">
+        <div class="container" style="text-align: center">
+            <ul class="menu">
                 <?php foreach ($categoryNameList as $category) : ?>
                     <li>
                         <?= Html::a($category, ['site/index']) ?>

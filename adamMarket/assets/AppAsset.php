@@ -12,27 +12,29 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl  = '@web';
     public $css      = [
-        'assets/css/bootstrap.min.css',
-        'assets/css/style.css',
-        'assets/css/plugins/owl-carousel/owl.carousel.css',
-        'assets/css/plugins/magnific-popup/magnific-popup.css',
-        'assets/css/plugins/nouislider/nouislider.css',
+        'common/css/bootstrap.min.css',
+        'common/css/style.css',
+        'common/css/plugins/owl-carousel/owl.carousel.css',
+        'common/css/plugins/magnific-popup/magnific-popup.css',
+        'common/css/plugins/nouislider/nouislider.css',
+        'href="https://use.fontawesome.com/releases/v5.13.0/css/all.css',
     ];
     public $js       = [
-        "assets/js/main.js",
-        "assets/js/jquery.min.js",
-        "assets/js/bootstrap.bundle.min.js",
-        "assets/js/jquery.hoverIntent.min.js",
-        "assets/js/jquery.waypoints.min.js",
-        "assets/js/superfish.min.js",
-        "assets/js/owl.carousel.min.js",
-        "assets/js/wNumb.js",
-        "assets/js/bootstrap-input-spinner.js",
-        "assets/js/jquery.magnific-popup.min.js",
-        "assets/js/nouislider.min.js",
+        "common/js/main.js",
+        "common/js/jquery.min.js",
+        "common/js/bootstrap.bundle.min.js",
+        "common/js/jquery.hoverIntent.min.js",
+        "common/js/jquery.waypoints.min.js",
+        "common/js/superfish.min.js",
+        "common/js/owl.carousel.min.js",
+        "common/js/wNumb.js",
+        "common/js/bootstrap-input-spinner.js",
+        "common/js/jquery.magnific-popup.min.js",
+        "common/js/nouislider.min.js",
     ];
     public $depends  = [
         'yii\web\YiiAsset',
         //'yii\bootstrap\BootstrapAsset',
+        'yidas\yii\fontawesome\FontawesomeAsset',
     ];
 }
