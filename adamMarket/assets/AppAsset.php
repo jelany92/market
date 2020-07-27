@@ -18,6 +18,7 @@ class AppAsset extends AssetBundle
         'common/css/plugins/magnific-popup/magnific-popup.css',
         'common/css/plugins/nouislider/nouislider.css',
         'href="https://use.fontawesome.com/releases/v5.13.0/css/all.css',
+        'common/css/font-awesome.min.css',
     ];
     public $js       = [
         "common/js/main.js",

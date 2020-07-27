@@ -8,7 +8,9 @@ use adamMarket\assets\AppAsset;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Breadcrumbs;
 use common\widgets\Alert;
+use kartik\icons\Icon;
 
+Icon::map($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -18,7 +20,6 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
