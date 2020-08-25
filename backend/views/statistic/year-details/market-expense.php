@@ -11,7 +11,6 @@ use kartik\icons\Icon;
 /* @var $month integer */
 /* @var $year integer */
 /* @var $dataProvider \yii\data\ArrayDataProvider */
-$this->registerJsFile('@web/js/date_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 $this->title                   = Yii::t('app', 'Jahr');
 $this->params['breadcrumbs'][] = $this->title;
@@ -20,12 +19,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="Monat Ansicht-index">
 
-    <?= $this->render('_sub_navigation_year', [
+    <?= $this->render('/site/supermarket/_sub_navigation_year', [
         'controller' => 'site/year-view',
         'year'       => $year,
     ]) ?>
 
-    <h1><?= Yii::t('app', 'اجمالي دخل المحل') . ' : ' . QueryHelper::getYearData($year, 'incoming_revenue', 'daily_incoming_revenue') ?></h1>
+    <h1><?= Yii::t('app', 'اجمالي نفقات المحل') . ' : ' . QueryHelper::getYearData($year, 'market_expense', 'expense') ?></h1>
 
     <?= GridView::widget([
                              'dataProvider' => $dataProvider,

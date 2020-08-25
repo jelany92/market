@@ -104,14 +104,87 @@ class StatisticController extends BaseController
      */
     public function actionBreadGain(int $year, int $month)
     {
-        $from      = $year . '-' . $month . '-01';
-        $to        = date("Y-m-t", strtotime($from));
+        $from       = $year . '-' . $month . '-01';
+        $to         = date("Y-m-t", strtotime($from));
         $breadCount = QueryHelper::sumsSearchResult('purchases', 'purchases', 'reason', 'خبز', $from, $to);
 
         return $this->render('month-details/bread-gain', [
-            'month'     => $month,
-            'year'      => $year,
+            'month'      => $month,
+            'year'       => $year,
             'breadCount' => $breadCount,
+        ]);
+    }
+
+
+    public function actionYearIncome(int $year)
+    {
+        $yearData = QueryHelper::getYearData($year, 'incoming_revenue', 'daily_incoming_revenue');
+        $provider = new ArrayDataProvider([
+                                              'allModels' => $yearData,
+                                          ]);
+        for ($month = 1; $month <= 12; $month++)
+        {
+            $modelIncomingRevenue[] = [QueryHelper::getMonthData($year, $month, 'incoming_revenue', 'daily_incoming_revenue')];
+        }
+        $dataProvider = new ArrayDataProvider([
+                                                  'allModels'  => $modelIncomingRevenue,
+                                                  'pagination' => false,
+                                              ]);
+
+        return $this->render('year-details/income', [
+            'statistikMonatProvider' => $provider,
+            'month'                  => $month,
+            'year'                   => $year,
+            'dataProvider'           => $dataProvider,
+        ]);
+    }
+
+
+    public function actionYearPurchases($year)
+    {
+        $yearData = QueryHelper::getYearData($year, 'purchases', 'purchases');
+        $provider = new ArrayDataProvider([
+                                              'allModels' => $yearData,
+                                          ]);
+        for ($month = 1; $month <= 12; $month++)
+        {
+            $modelIncomingRevenue[] = [QueryHelper::getMonthData($year, $month, 'purchases', 'purchases')];
+        }
+
+        $dataProvider = new ArrayDataProvider([
+                                                  'allModels'  => $modelIncomingRevenue,
+                                                  'pagination' => false,
+                                              ]);
+
+        return $this->render('year-details/purchases', [
+            'statistikMonatProvider' => $provider,
+            'month'                  => $month,
+            'year'                   => $year,
+            'dataProvider'           => $dataProvider,
+        ]);
+    }
+
+    public function actionYearMarketExpense($year)
+    {
+        $yearData = QueryHelper::getYearData($year, 'market_expense', 'expense');
+        $provider = new ArrayDataProvider([
+                                              'allModels' => $yearData,
+                                          ]);
+        for ($month = 1; $month <= 12; $month++)
+        {
+            $modelIncomingRevenue[] = [QueryHelper::getMonthData($year, $month, 'market_expense', 'expense')];
+        }
+
+        $dataProvider = new ArrayDataProvider([
+                                                  'allModels'  => $modelIncomingRevenue,
+                                                  'pagination' => false,
+                                              ]);
+
+        return $this->render('year-details/market-expense', [
+            'statistikMonatProvider' => $provider,
+            'month'                  => $month,
+            'year'                   => $year,
+            'dataProvider'           => $dataProvider,
         ]);
     }
 }
