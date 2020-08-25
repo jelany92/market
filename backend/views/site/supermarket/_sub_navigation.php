@@ -3,26 +3,16 @@
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Tabs;
+use common\components\ListeHelper;
 
 /* @var $controller string */
 /* @var $year integer */
 /* @var $month string */
+$this->registerJsFile('@web/js/date_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 <div class="col-sm-12">
     <div class="row">
-        <form method="post">
-            <?php
-            for ($m = 1; $m <= 12; $m++)
-            {
-                $monthName = date('F', mktime(0, 0, 0, $m, 1)) . '<br>';
-                echo Html::a(Yii::t('app', $monthName), [$controller . '?year=' . $year . '&month=' . $m], [
-                        '',
-                        'class' => 'btn btn-primary',
-                        'style' => $month == $m ? 'background-color: #40a7ff;' : '',
-                    ]) . ' ';
-            }
-            ?>
-        </form>
+        <?= '<h1>' . Yii::t('app', 'Statistics for whole month') . ' ' . ListeHelper::monthList($year) . '</h1>'; ?>
     </div>
 </div>
 <br>

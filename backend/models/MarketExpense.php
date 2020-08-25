@@ -5,7 +5,7 @@ namespace backend\models;
 use app\models\query\MarketExpensesQuery;
 use common\components\ChangeFormat;
 use common\models\AdminUser;
-use common\models\query\traits\TimestampBehaviorTrait;
+use common\models\traits\TimestampBehaviorTrait;
 use common\models\UserModel;
 use Yii;
 use yii\db\ActiveQuery;

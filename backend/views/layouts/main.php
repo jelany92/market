@@ -157,6 +157,11 @@ $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id]
                             'url'     => ['/article-info/article-gain'],
                             'visible' => Yii::$app->user->can('adam-market.*'),
                         ],
+                        [
+                            'label'   => Yii::t('app', 'Article Returned Goods'),
+                            'url'     => ['/returned-goods'],
+                            'visible' => Yii::$app->user->can('adam-market.*'),
+                        ],
                     ],
                     'visible' => Yii::$app->user->can('article-info.*'),
                 ],

@@ -72,6 +72,8 @@ return [
     'TStatistics for whole month'          => 'إحصائيات شهر كامل',
     'Statistics for quarter'               => 'إحصائيات الربع سنوي',
     'Statistics for year'                  => 'إحصائيات سنة كاملة',
+    'Choose Month'                         => 'اختيار شهر',
+    'Choose Year'                          => 'اختيار سنة',
 
     //capital
     'Status'                               => 'الحالة',

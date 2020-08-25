@@ -1,0 +1,24 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-size: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+@page  {
+    margin-left: 25mm;
+    margin-right: 20mm;
+    margin-top: 15mm;
+    margin-bottom: 23mm;
+    header: document_header;
+    footer: document_footer;
+}

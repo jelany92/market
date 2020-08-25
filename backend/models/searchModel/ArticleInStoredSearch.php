@@ -63,13 +63,13 @@ class ArticleInStoredSearch extends ArticleInStored
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'article_info_id' => $this->article_info_id,
-            'count' => $this->count,
-            'selected_date' => $this->selected_date,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+                                   'id'              => $this->id,
+                                   'article_info_id' => $this->article_info_id,
+                                   'count'           => $this->count,
+                                   'selected_date'   => $this->selected_date,
+                                   'created_at'      => $this->created_at,
+                                   'updated_at'      => $this->updated_at,
+                               ]);
 
         return $dataProvider;
     }

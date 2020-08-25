@@ -4,6 +4,7 @@ use common\components\QueryHelper;
 use yii\bootstrap4\Html;
 use common\components\GridView;
 use common\widgets\Table;
+use yii\data\ArrayDataProvider;
 
 /* @var $this yii\web\View */
 /* @var $month integer */

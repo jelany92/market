@@ -6,13 +6,19 @@ use backend\models\MarketExpense;
 use backend\models\Purchases;
 use backend\models\TaxOffice;
 use common\components\GridView;
-use common\widgets\Table;
-use yii\bootstrap4\Html;
-use onmotion\apexcharts\ApexchartsWidget;
 use common\components\QueryHelper;
+use common\widgets\Table;
+use onmotion\apexcharts\ApexchartsWidget;
+use yii\bootstrap4\Html;
+use common\components\ListeHelper;
 
 /* @var $this yii\web\View */
 /* @var $showCreate boolean */
+/* @var $date data */
+/* @var $showCreateIncomingRevenue boolean */
+/* @var $staticDailyInfoIncomingList array */
+/* @var $staticDailyInfoMarketExpenseList array */
+/* @var $staticDailyInfoPurchasesList array */
 
 
 $this->title                   = $date;
@@ -26,10 +32,10 @@ $amountExpense                 = MarketExpense::sumResultMarketExpense()['result
 $resultCash                    = $amountCash - $amountPurchases - $amountExpense;
 $totalIncomeOfTheShop          = IncomingRevenue::sumResultIncomingRevenue()['result'];
 
-$incoming    = [];
+$incoming          = [];
 $StaticDailyResult = [];
-$expense     = [];
-$purchases   = [];
+$expense           = [];
+$purchases         = [];
 foreach ($staticDailyInfoIncomingList as $dailyInfoIncoming)
 {
     $incoming[] = [
@@ -105,6 +111,13 @@ $series = [
         ],
     ]) ?>
     <?= Html::a(Yii::t('app', 'Tax Office'), ['tax-office/create'], [
+        'class' => 'btn btn-success',
+        'data'  => [
+            'method' => 'post',
+            'params' => ['date' => $date],
+        ],
+    ]) ?>
+    <?= Html::a(Yii::t('app', 'Returned Goods'), ['returned-goods/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
@@ -283,16 +296,10 @@ $series = [
                          ],
                      ]) ?>
 <?php
-echo '<h1>'.Yii::t('app', 'Statistics for whole month').'</h1>';
-for ($m = 1; $m <= 12; $m++)
-{
-    $monthName = date('F', mktime(0, 0, 0, $m, 1)) . '<br>';
-    echo Html::a(Yii::t('app', $monthName), ['site/month-view' . '?year=' . $year . '&month=' . $m], [
-        '',
-        'class' => 'btn btn-primary',
-    ]);
-}
-echo '<h1>'.Yii::t('app', 'Statistics for quarter').'</h1>';
+
+echo '<h1>' . Yii::t('app', 'Statistics for whole month') . ' ' . ListeHelper::monthList($year) . '</h1>';
+
+echo '<h1>' . Yii::t('app', 'Statistics for quarter') . '</h1>';
 for ($i = 1; $i <= 4; $i++)
 {
     echo Html::a(Yii::t('app', $i), ['arbeitszeit/quartal-ansicht' . '?year=' . $year . '&quartal=' . $i], [
@@ -301,15 +308,11 @@ for ($i = 1; $i <= 4; $i++)
     ]);
 
 }
-echo '<h1>'.Yii::t('app', 'Statistics for year').'</h1>';
 
-for ($i = 2019; $i <= 2030; $i++)
-{
-    echo Html::a(Yii::t('app', $i), ['site/year-view' . '?year=' . $i], [
-        '',
-        'class' => 'btn btn-primary',
-    ]);
-}
+echo '<h1>' . Yii::t('app', 'Statistics for year') . ' ' . ListeHelper::YearList() . '</h1>';
+
+$this->registerJsFile('@web/js/date_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
 ?>
 <?= ApexchartsWidget::widget([
                                  'type'         => 'bar',
