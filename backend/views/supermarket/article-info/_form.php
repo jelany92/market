@@ -36,7 +36,7 @@ use kartik\form\ActiveForm;
             //'deleteUrl'            => Yii::$app->urlManager->createUrl('/purchase-invoices/delete-file'),
             'initialCaption'       => Yii::t('app', 'Datei auswählen'),
             'browseLabel'          => Yii::t('app', 'Auswählen'),
-            'removeLabel'          => Yii::t('app', 'Löschen'),
+            'removeLabel'          => Yii::t('app', 'Delete'),
         ],
     ]); ?>
 

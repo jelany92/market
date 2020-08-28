@@ -9,6 +9,7 @@ return [
     'export'                               => 'تصدير',
     'From Date'                            => 'من تاريخ',
     'To Date'                              => 'الى تاريخ',
+    'Print PDF'                            => 'ملف PDF',
 
     //Login
     'Login'                                => 'تسجيل الدخول',
@@ -143,5 +144,6 @@ return [
     //Establish Market
     'Establish Market'                     => 'مبلغ تاسيس المحل',
 
-
+    //Returned Goods
+    'Returned Goods'                       => 'بضائع مرتجعة',
 ];

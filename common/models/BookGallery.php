@@ -27,7 +27,7 @@ class BookGallery extends \yii\db\ActiveRecord
     use TimestampBehaviorTrait;
 
     const MAX_FILE_SIZE_PHOTO = 5000000; // ~5 MB
-    const MAX_FILE_SIZE_PDF   = 10000000; // ~10 MB
+    const MAX_FILE_SIZE_PDF   = 5000; // ~10 MB
 
     public $authorName;
 
