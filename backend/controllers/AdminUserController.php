@@ -147,6 +147,7 @@ class AdminUserController extends BaseController
             try
             {
                 $dbUserModel->setAttributes($formModel->attributes);
+                $dbUserModel->category = 'Market';
                 if ($dbUserModel->save())
                 {
                     $dbUserModel->checkAndWriteAssignment($formModel->role);
