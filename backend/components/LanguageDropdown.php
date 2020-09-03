@@ -54,6 +54,11 @@ class LanguageDropdown extends Dropdown
         }
     }
 
+    /**
+     * @param $code
+     *
+     * @return mixed|string|null
+     */
     public static function label($code)
     {
         if (self::$_labels === null)
