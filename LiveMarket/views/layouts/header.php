@@ -15,7 +15,9 @@ $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id
 $language         = [
     [
         'label' => LanguageDropdown::label(Yii::$app->language),
-        'items' => LanguageDropdown::widget([]),
+        'items' => LanguageDropdown::widget([
+                                                //'options' => ['style' => ['color' => $navBarColor]],
+                                            ]),
     ],
 ];
 ?>
@@ -53,6 +55,16 @@ $language         = [
                                 <li><a href="#">German</a></li>
                             </ul>
                         </li>
+                        <li class="dropdown dropdown-small lang">
+                            <?php
+                            //echo Html::dropDownList('lang', 'ul', $language);
+                            echo Nav::widget([
+                                                 'options' => ['class' => 'navbar-auto ml-auto'],
+                                                 'items'   => $language,
+                                             ]);
+                            ?>
+                        </li>
+
                         <!-- End .header-dropdown -->
                     </ul>
                     <!-- /.list-unstyled -->

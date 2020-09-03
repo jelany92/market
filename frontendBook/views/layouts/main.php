@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use frontendBook\assets\AppAsset;
@@ -23,7 +24,9 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?= $this->render('header') ?>
+    <?= $this->render('headerTop') ?>
+    <?= $this->render('headerMain') ?>
+    <?= $this->render('headerNavigation') ?>
     <?= $content ?>
     <?= $this->render('footer') ?>
 
