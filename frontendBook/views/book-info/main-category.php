@@ -6,6 +6,7 @@ use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 /* @var $modelDetailGalleryArticle DetailGalleryArticle */
+/* @var $mainCategories array */
 
 $this->title = Yii::t('app', 'Main Category');
 ?>
@@ -22,7 +23,7 @@ $this->title = Yii::t('app', 'Main Category');
             <div class="row">
                 <!-- shop -->
                 <?php foreach ($mainCategories as $mainCategory) : ?>
-                    <div class="col-md-4 col-xs-2">
+                    <div class="col-md-4 col-xs-6">
                         <div class="shop">
                             <div class="shop-img">
                                 <?php if ($mainCategory->category_photo != null) : ?>

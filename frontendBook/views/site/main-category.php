@@ -25,7 +25,7 @@ $this->title = 'Book Gallery';
 
             <!-- Products tab & slick -->
             <?php foreach ($modelDetailGalleryArticle as $detailGalleryArticle) : ?>
-                <div class="col-md-3" style="padding-bottom: 50px;">
+                <div class="col-md-3 col-xs-6" style="padding-bottom: 50px;">
                     <!-- product -->
                     <div class="product">
                         <div class="product-img">
