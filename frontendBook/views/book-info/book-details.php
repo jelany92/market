@@ -3,6 +3,7 @@
 use common\models\DetailGalleryArticle;
 use common\widgets\Table;
 use yii\bootstrap4\Html;
+use kartik\social\FacebookPlugin;
 
 /* @var $this yii\web\View */
 /* @var $detailGalleryArticle \common\models\DetailGalleryArticle */
@@ -86,7 +87,34 @@ $tableContent = [
 ];
 ?>
 <div class="container">
+    <h3><?= Yii::t('app', 'If you like the content, don`t forget Like and share it for the benefit') ?></h3>
+    <?= FacebookPlugin::widget([
+                                   'type'     => FacebookPlugin::LIKE,
+                                   'settings' => [
+                                       'size'          => 'large',
+                                       'layout'        => 'button_count',
+                                       'mobile_iframe' => 'false',
+                                   ],
+                               ]); ?>
+    <br>
+    <br>
+    <?= FacebookPlugin::widget([
+                                   'type'     => FacebookPlugin::SHARE,
+                                   'settings' => [
+                                       'size'          => 'large',
+                                       'layout'        => 'button_count',
+                                       'mobile_iframe' => 'false',
+                                   ],
+                               ]); ?>
+    <?= '<h1>' . Yii::t('app', 'Comment') . '</h1>' ?>
 
+    <?= FacebookPlugin::widget([
+                                   'type'     => FacebookPlugin::COMMENT,
+                                   'settings' => [
+                                       'data-width'    => 1000,
+                                       'data-numposts' => 5,
+                                   ],
+                               ]); ?>
     <br>
     <h1><?= Html::encode($this->title) ?></h1>
     <br>

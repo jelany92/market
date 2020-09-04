@@ -51,34 +51,6 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
         <?php endif; ?>
     </p>
 
-    <h3><?= Yii::t('app', 'ان اعجبك المحتوى لاتنسى Like و مشاركته لتعم الفائدة') ?></h3>
-    <?= FacebookPlugin::widget([
-                                   'type'     => FacebookPlugin::LIKE,
-                                   'settings' => [
-                                       'size'          => 'large',
-                                       'layout'        => 'button_count',
-                                       'mobile_iframe' => 'false',
-                                   ],
-                               ]); ?>
-    <br>
-    <br>
-    <?= FacebookPlugin::widget([
-                                   'type'     => FacebookPlugin::SHARE,
-                                   'settings' => [
-                                       'size'          => 'large',
-                                       'layout'        => 'button_count',
-                                       'mobile_iframe' => 'false',
-                                   ],
-                               ]); ?>
-    <?= '<h1>' . Yii::t('app', 'Comment') . '</h1>' ?>
-
-    <?= FacebookPlugin::widget([
-                                   'type'     => FacebookPlugin::COMMENT,
-                                   'settings' => [
-                                       'data-width'    => 1000,
-                                       'data-numposts' => 5,
-                                   ],
-                               ]); ?>
     <div class="col-sm-3">
         <div class="view-info">
             <?= Html::img($filesPath, ['style' => 'width:100%height: 300px;margin-top: 50px']) ?>

@@ -39,10 +39,6 @@ $this->registerJsFile('@web/common/js/language_list.js', ['depends' => [\yii\web
                                            'onchange' => 'myFunctionLanguage()',
                                            //'prompt'   => Yii::$app->urlManager->languages[Yii::$app->language],
                                        ]) ?>
-                <?= \yii\bootstrap\Nav::widget([
-                                      'options' => ['class' => 'navbar-right ml-auto'],
-                                      'items'   => $menuItems,
-                                  ]);?>
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <li>
                         <?= '<i class="fa fa-user-o"></i>' . Html::a(Yii::t('app', 'My Account'), ['/site/login'], ['class' => 'add-to-cart-btn',]) ?>

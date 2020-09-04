@@ -8,6 +8,17 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules'             => [
+        'social'   => [
+            // the module class
+            'class'    => 'kartik\social\Module',
+
+            // the global settings for the facebook widget
+            'facebook' => [
+                'appId' => '228100621678999',
+            ],
+        ],
+    ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'authManager' => [
