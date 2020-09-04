@@ -29,7 +29,7 @@ class DetailGalleryArticle extends \yii\db\ActiveRecord
 {
     use TimestampBehaviorTrait;
 
-    const DIRECTORY_SUBCATEGORY_IMAGES = 'https://kattan-shop.adam-market.store/images/book_gallery/';
+    const DIRECTORY_SUBCATEGORY_IMAGES = 'https://backend.adam-market.store/images/book_gallery/';
 
     /**
      * {@inheritdoc}

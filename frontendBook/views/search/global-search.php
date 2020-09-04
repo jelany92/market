@@ -7,6 +7,7 @@ use common\components\GridView;
 /* @var $searchModels array */
 /* @var $dataProviders array */
 /* @var $tabItems array */
+/* @var $dataProvider \yii\data\ArrayDataProvider */
 $this->title                   = Yii::t('app', 'Global search');
 $this->params['breadcrumbs'][] = $this->title;
 ?>

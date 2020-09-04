@@ -24,6 +24,13 @@ $this->title = Yii::t('app', 'Author');
                              'columns'      => [
                                  ['class' => 'yii\grid\SerialColumn'],
                                  'name',
+                                 [
+                                     'attribute' => 'name',
+                                     'value'     => function($model){
+                                        return Html::a($model->name, ['search/global-search', 'search' => $model->name]);
+                                     },
+                                     'format' => 'raw',
+                                 ],
                              ],
                          ]); ?>
 

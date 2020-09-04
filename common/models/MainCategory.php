@@ -24,7 +24,7 @@ class MainCategory extends \yii\db\ActiveRecord
 {
     use TimestampBehaviorTrait;
 
-    const DIRECTORY_MAIN_CATEGORY_IMAGES = 'https://kattan-shop.adam-market.store/images/category/';
+    const DIRECTORY_MAIN_CATEGORY_IMAGES = 'https://backend.adam-market.store/images/category/';
 
     public $file;
 

@@ -3,14 +3,16 @@
 use common\components\LanguageDropdown;
 use yii\bootstrap4\Html;
 
+
 $menuItems = [
     [
-        'label' => LanguageDropdown::label(Yii::$app->language),
+        'label' => Yii::$app->language,
         'items' => LanguageDropdown::widget(),
     ],
 ];
 
-//var_dump($menuItems[0]['items']);die();
+$this->registerJsFile('@web/common/js/language_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
 ?>
 <!-- HEADER -->
 <header>
@@ -29,8 +31,18 @@ $menuItems = [
             </ul>
 
             <ul class="header-links pull-right">
-
-                <?= Html::dropDownList(Html::a(Yii::$app->urlManager->languages[Yii::$app->language], ['test']), null, Yii::$app->urlManager->languages, []) ?>
+                <?= Html::dropDownList('language', [
+                    'id'   => 'languageId',
+                    'name' => 'languageName',
+                ], Yii::$app->urlManager->languages, [
+                                           'class'    => 'btn btn-info',
+                                           'onchange' => 'myFunctionLanguage()',
+                                           //'prompt'   => Yii::$app->urlManager->languages[Yii::$app->language],
+                                       ]) ?>
+                <?= \yii\bootstrap\Nav::widget([
+                                      'options' => ['class' => 'navbar-right ml-auto'],
+                                      'items'   => $menuItems,
+                                  ]);?>
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <li>
                         <?= '<i class="fa fa-user-o"></i>' . Html::a(Yii::t('app', 'My Account'), ['/site/login'], ['class' => 'add-to-cart-btn',]) ?>
