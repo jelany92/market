@@ -4,12 +4,12 @@ namespace backend\controllers;
 
 use common\components\FileUpload;
 use common\controller\BaseController;
+use common\models\AdminUser;
 use common\models\BookAuthorName;
 use common\models\BookGallery;
 use common\models\GalleryBookForm;
 use common\models\GallerySaveCategory;
 use common\models\Subcategory;
-use common\models\UserModel;
 use Yii;
 use common\models\DetailGalleryArticle;
 use common\models\searchModel\DetailGalleryArticlelSearch;
@@ -249,6 +249,7 @@ class DetailGalleryArticleController extends BaseController
     {
         $model = $this->findModel($id);
         BookGallery::deleteAll(['detail_gallery_article_id' => $id]);
+        GallerySaveCategory::deleteAll(['detail_gallery_article_id' => $id]);
         $model->delete();
         return $this->redirect(['index']);
     }

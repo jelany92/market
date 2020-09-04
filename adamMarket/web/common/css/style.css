@@ -21,7 +21,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     text-align: revert;
-
 }
 
 ::-moz-selection {
