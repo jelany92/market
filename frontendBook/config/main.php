@@ -44,9 +44,9 @@ return [
             'rules'           => [],
             'class'           => 'codemix\localeurls\UrlManager',
             'languages'       => [
-                'en' => 'English',
-                'de' => 'Deutsh',
-                'ar' => 'العربية',
+                'en',
+                'de',
+                'ar',
             ],
         ],
 
