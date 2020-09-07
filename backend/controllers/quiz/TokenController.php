@@ -167,6 +167,49 @@ class TokenController extends Controller
         ]);
     }
 
+    public function actionAjaxSaveSingleAnswer(string $token)
+    {
+        $model = new StudentAnswers();
+        $ajax  = Yii::$app->request->isAjax;
+        $post  = Yii::$app->request->post();
+        if ($ajax)
+        {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($model->validate())
+            {
+                var_dump($data);die();
+                $student = Students::find()->andWhere(['token' => $token])->one();
+                $model->student_id = $student->id;
+                foreach ($post['Answers'] as $key => $answer)
+                {
+                    $model->excercise_id   = $key;
+                    $model->student_answer     = $answer;
+                }
+                $model->save();
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model'   => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            }
+            else
+            {
+                return [
+                    'data' => [
+                        'success' => false,
+                        'model'   => null,
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1,
+                    // Some semantic codes that you know them for yourself
+                ];
+            }
+        }
+    }
+
     /**
      * @param int    $mainCategoryExerciseId
      * @param string $token
@@ -213,6 +256,7 @@ class TokenController extends Controller
         return $this->render('exercise-without-token', [
             'exercises'           => $exercises,
             'modelQuizAnswerForm' => $modelQuizAnswerForm,
+            'token'               => $token,
         ]);
     }
 
