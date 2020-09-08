@@ -1,19 +1,21 @@
 <?php
 
-use yii\bootstrap4\Html;
 use common\components\GridView;
+use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 /* @var $correctAnswer integer */
 /* @var $searchModel \backend\models\quiz\search\ExcerciseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Your Answer')
+$this->title = Yii::t('app', 'Your Answer');
+$percentage  = number_format(($correctAnswer / $dataProvider->count) * 100, 2) . '%';;
 ?>
 <div class="excercise-crud-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <h1><?= Yii::t('app', 'You have') . ' ' . $correctAnswer . ' ' . Yii::t('app', 'right answer from') . ' ' . $dataProvider->count ?></h1>
+    <h1><?= Yii::t('app', 'Percentage') . ' ' . $percentage ?></h1>
 
     <?= GridView::widget([
                              'dataProvider' => $dataProvider,
@@ -53,14 +55,14 @@ $this->title = Yii::t('app', 'Your Answer')
                                      'value'     => function ($model) {
                                          if (!empty($model->student_answer))
                                          {
-                                             return $model->student_answer;
+                                             return $model->excercise[$model->student_answer];
                                          }
                                      },
                                  ],
                                  [
                                      'label' => Yii::t('app', 'Correct Answer'),
                                      'value' => function ($model) {
-                                         return $model->excercise->correct_answer;
+                                         return $model->excercise[$model->excercise->correct_answer];
                                      },
                                  ],
                              ],
