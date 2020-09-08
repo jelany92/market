@@ -81,21 +81,21 @@ class Subcategory extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param int|null $mainCategoryId
+     * @return array
+     */
+    public static function getSubcategoryList() : array
+    {
+        return ArrayHelper::map(self::find()->all(),'id', 'subcategory_name');
+    }
+
+    /**
+     * @param int $mainCategoryId
      *
      * @return array
      */
-    public static function getSubcategoryList(int $mainCategoryId = null) : array
+    public static function getSubcategoryWithMainCategoryIdList(int $mainCategoryId) : array
     {
-        if (isset($mainCategoryId))
-        {
-            $all = self::find()->andWhere(['main_category_id' => $mainCategoryId])->all();
-        }
-        else
-        {
-            $all = self::find()->all();
-        }
-        return ArrayHelper::map($all,'id', 'subcategory_name');
+        return self::find()->select(['id', 'name' => 'subcategory_name'])->andWhere(['main_category_id' => $mainCategoryId])->asArray()->all();
     }
 
     /**
