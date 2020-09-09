@@ -51,7 +51,7 @@ class DetailGalleryArticle extends \yii\db\ActiveRecord
             [['article_name_ar', 'article_name_en'], 'string', 'max' => 100],
             [['type'], 'string', 'max' => 255],
             [['main_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => MainCategory::class, 'targetAttribute' => ['main_category_id' => 'id']],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 
@@ -133,7 +133,7 @@ class DetailGalleryArticle extends \yii\db\ActiveRecord
      */
     public function getBookAuthorName()
     {
-        return $this->hasOne(BookAuthorName::class, ['id' => 'book_author_name_id']);
+        return $this->hasOne(BookAuthorName::class, ['id' => 'book_author_name_id'])->via('bookGalleries');
     }
 
     /**
