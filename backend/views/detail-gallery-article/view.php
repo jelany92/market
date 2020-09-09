@@ -45,36 +45,38 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
         <?php endif; ?>
     </p>
 
-    <div class="col-sm-3">
-        <div class="view-info">
-            <?= Html::img($filesPath, ['style' => 'width:100%height: 300px;margin-top: 50px']) ?>
-        </div>
-    </div>
-    <div class="text col-sm-9">
+    <div class="row">
+        <div class="text col-sm-9">
 
-        <?= DetailView::widget([
-                                   'model'      => $model,
-                                   'attributes' => [
-                                       'article_name_ar',
-                                       'article_name_en',
-                                       'bookGalleries.bookAuthorName.name',
-                                       [
-                                           'attribute' => 'bookGalleries.book_pdf',
-                                           'value'     => function ($model) {
-                                               if (isset($model->bookGalleries->book_pdf))
-                                               {
-                                                   return Html::a(Yii::t('app', 'Download'), [
-                                                       'detail-gallery-article/download',
-                                                       'id' => $model->id,
-                                                   ]);
-                                               }
-                                           },
-                                           'format'    => 'raw',
+            <?= DetailView::widget([
+                                       'model'      => $model,
+                                       'attributes' => [
+                                           'article_name_ar',
+                                           'article_name_en',
+                                           'bookGalleries.bookAuthorName.name',
+                                           [
+                                               'attribute' => 'bookGalleries.book_pdf',
+                                               'value'     => function ($model) {
+                                                   if (isset($model->bookGalleries->book_pdf))
+                                                   {
+                                                       return Html::a(Yii::t('app', 'Download'), [
+                                                           'detail-gallery-article/download',
+                                                           'id' => $model->id,
+                                                       ]);
+                                                   }
+                                               },
+                                               'format'    => 'raw',
+                                           ],
+                                           'description:raw',
+                                           'selected_date',
                                        ],
-                                       'description:raw',
-                                       'selected_date',
-                                   ],
-                               ]) ?>
+                                   ]) ?>
+        </div>
+        <div class="col-sm-3" style="">
+            <div class="view-info">
+                <?= Html::img($filesPath, ['style' => 'width:100%height: 300px;margin-top: 50px']) ?>
+            </div>
+        </div>
     </div>
 </div>
 <div>
