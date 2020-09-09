@@ -26,11 +26,6 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
 
     <p>
         <?php if (Yii::$app->user->can('detail-gallery-article.update') && Yii::$app->user->id == $model->company_id) : ?>
-
-            <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [
-                'class'  => 'btn btn-primary',
-                'target' => '_blank',
-            ]) ?>
             <?= Html::a(Yii::t('app', 'Update'), [
                 'update',
                 'id' => $model->id,
