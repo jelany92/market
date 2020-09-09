@@ -26,7 +26,6 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
     <?= $this->render('header') ?>
     <main class="main">
         <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
@@ -35,7 +34,6 @@ AppAsset::register($this);
     </main>
     <?= $this->render('footer') ?>
 
-</div>
 
 <?php $this->endBody() ?>
 </body>

@@ -2,12 +2,10 @@
 
 use backend\components\LanguageDropdown;
 use common\models\MainCategory;
-use kartik\form\ActiveForm;
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 
 Icon::map($this);
 $navBarColor      = '#e73918';
@@ -15,9 +13,7 @@ $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id
 $language         = [
     [
         'label' => LanguageDropdown::label(Yii::$app->language),
-        'items' => LanguageDropdown::widget([
-                                                //'options' => ['style' => ['color' => $navBarColor]],
-                                            ]),
+        'items' => LanguageDropdown::widget([]),
     ],
 ];
 ?>

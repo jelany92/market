@@ -29,20 +29,21 @@ $this->registerJsFile('@web/common/js/language_list.js', ['depends' => [\yii\web
                 <li><a href="#"><i class="fa fa-envelope-o"></i> jelany.kattan@hotmail.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Germany</a></li>
             </ul>
-
+            <?php
+            $language = [
+                [
+                    'label' => LanguageDropdown::label(Yii::$app->language),
+                    'items' => LanguageDropdown::widget([]),
+                ],
+            ];
+            echo \yii\bootstrap\Nav::widget([
+                                                //'options' => ['class' => 'navbar-auto ml-auto'],
+                                                'items' => $language,
+                                            ]);
+            ?>
             <ul class="header-links pull-right">
-                <?= Html::dropDownList('language', [
-                    'id'   => 'languageId',
-                    'name' => 'languageName',
-                ], Yii::$app->urlManager->languages, [
-                                           'class'    => 'btn btn-info',
-                                           'onchange' => 'myFunctionLanguage()',
-                                           //'prompt'   => Yii::$app->urlManager->languages[Yii::$app->language],
-                                       ]) ?>
-                <?= \yii\bootstrap\Nav::widget([
-                                      'options' => ['class' => 'navbar-right ml-auto'],
-                                      'items'   => $menuItems,
-                                  ]);?>
+
+                <!-- End .header-dropdown -->
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <li>
                         <?= '<i class="fa fa-user-o"></i>' . Html::a(Yii::t('app', 'My Account'), ['/site/login'], ['class' => 'add-to-cart-btn',]) ?>

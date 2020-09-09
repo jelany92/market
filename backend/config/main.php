@@ -17,7 +17,7 @@ return [
             //'downloadAction' => 'export',
             'downloadAction' => 'gridview/export/download',
         ],
-        'social'   => [
+        /*'social'   => [
             // the module class
             'class'    => 'kartik\social\Module',
 
@@ -25,7 +25,7 @@ return [
             'facebook' => [
                 'appId' => '228100621678999',
             ],
-        ],
+        ],*/
     ],
     'components'          => [
         'request' => [

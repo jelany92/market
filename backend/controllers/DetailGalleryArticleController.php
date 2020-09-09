@@ -7,14 +7,15 @@ use common\controller\BaseController;
 use common\models\AdminUser;
 use common\models\BookAuthorName;
 use common\models\BookGallery;
+use common\models\DetailGalleryArticle;
 use common\models\GalleryBookForm;
 use common\models\GallerySaveCategory;
+use common\models\searchModel\DetailGalleryArticlelSearch;
 use common\models\Subcategory;
 use Yii;
-use common\models\DetailGalleryArticle;
-use common\models\searchModel\DetailGalleryArticlelSearch;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**
@@ -49,7 +50,10 @@ class DetailGalleryArticleController extends BaseController
     public function actionIndex(string $mainCategoryName = null, int $subcategoryId = null)
     {
         $mainCategoryNames = DetailGalleryArticle::find()->select('main_category.category_name')->innerJoinWith('mainCategory')->andWhere(['detail_gallery_article.company_id' => Yii::$app->user->id])->distinct(true)->createCommand()->queryAll(\PDO::FETCH_COLUMN);
-        $subcategoryNames  = DetailGalleryArticle::find()->select('subcategory.id,subcategory.subcategory_name')->innerJoinWith('mainCategory')->innerJoinWith('subcategories')->andWhere(['detail_gallery_article.company_id' => Yii::$app->user->id, 'main_category.category_name' => $mainCategoryName])->distinct(true)->createCommand()->queryAll(\PDO::FETCH_KEY_PAIR,\PDO::FETCH_COLUMN);
+        $subcategoryNames  = DetailGalleryArticle::find()->select('subcategory.id,subcategory.subcategory_name')->innerJoinWith('mainCategory')->innerJoinWith('subcategories')->andWhere([
+                                                                                                                                                                                              'detail_gallery_article.company_id' => Yii::$app->user->id,
+                                                                                                                                                                                              'main_category.category_name'       => $mainCategoryName,
+                                                                                                                                                                                          ])->distinct(true)->createCommand()->queryAll(\PDO::FETCH_KEY_PAIR, \PDO::FETCH_COLUMN);
         $searchModel       = new DetailGalleryArticlelSearch();
         $dataProvider      = $searchModel->search(Yii::$app->request->queryParams, $mainCategoryName, $subcategoryId);
         return $this->render('index', [
@@ -116,7 +120,7 @@ class DetailGalleryArticleController extends BaseController
                 $modelBookAuthorName = BookAuthorName::find()->andWhere(['name' => $modelGalleryBookForm->authorName])->one();
                 if ($modelBookAuthorName == null)
                 {
-                    $modelBookAuthorName = new BookAuthorName();
+                    $modelBookAuthorName       = new BookAuthorName();
                     $modelBookAuthorName->name = $modelGalleryBookForm->authorName;
                     $modelBookAuthorName->save();
                 }
@@ -183,8 +187,14 @@ class DetailGalleryArticleController extends BaseController
             $transaction = Yii::$app->db->beginTransaction();
             try
             {
+                $modelBookAuthorName = BookAuthorName::find()->andWhere(['id' => $modelGalleryBookForm->authorName])->one();
+                if ($modelBookAuthorName == null)
+                {
+                    $modelBookAuthorName       = new BookAuthorName();
+                    $modelBookAuthorName->name = $modelGalleryBookForm->authorName;
+                    $modelBookAuthorName->save();
+                }
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere(['id' => $model->id])->one();
-
                 $modelDetailGalleryArticle->saveDetailGalleryArticle($modelGalleryBookForm);
                 GallerySaveCategory::deleteAll(['detail_gallery_article_id' => $modelDetailGalleryArticle->id]);
                 foreach ($modelGalleryBookForm->subcategory_id as $category)
@@ -206,13 +216,6 @@ class DetailGalleryArticleController extends BaseController
 
                 $modelBookGallery = $modelDetailGalleryArticle->bookGalleries;
 
-                $modelBookAuthorName = BookAuthorName::find()->andWhere(['name' => $modelGalleryBookForm->authorName])->one();
-                if ($modelBookAuthorName == null)
-                {
-                    $modelBookAuthorName = new BookAuthorName();
-                    $modelBookAuthorName->name = $modelGalleryBookForm->authorName;
-                    $modelBookAuthorName->save();
-                }
                 $modelBookGallery->saveDetailBookGallery($modelGalleryBookForm, $modelDetailGalleryArticle->id, $modelBookAuthorName->id);
                 Yii::$app->session->addFlash('success', Yii::t('app', 'done'));
                 $transaction->commit();
@@ -305,6 +308,27 @@ class DetailGalleryArticleController extends BaseController
         }
         Yii::$app->session->addFlash('error', Yii::t('app', 'الكتاب غير متوفر حاليا'));
         return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSubcat()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (isset($_POST['depdrop_parents']))
+        {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null)
+            {
+                $cat_id = $parents[0];
+                return [
+                    'output'   => Subcategory::getSubcategoryWithMainCategoryIdList($cat_id),
+                    'selected' => '',
+                ];
+            }
+        }
+        return [
+            'output'   => '',
+            'selected' => '',
+        ];
     }
 
     /**

@@ -24,20 +24,19 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->user->isGuest) : ?>
-
-        <h1><?= Html::encode('اذا كنت تريد مشاهدة جميع الكتب يرجي تسجيل الدخول') . ' ' . Html::a(Yii::t('app', 'Sign in'), [
-                'site/login',
-            ], ['class' => 'btn btn-primary']) ?> </h1>
-
-    <?php endif; ?>
-
     <p>
-        <?php if (Yii::$app->user->can('detail-gallery-article.view') && Yii::$app->user->id == $model->company_id) : ?>
+        <?php if (Yii::$app->user->can('detail-gallery-article.update') && Yii::$app->user->id == $model->company_id) : ?>
+
+            <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [
+                'class'  => 'btn btn-primary',
+                'target' => '_blank',
+            ]) ?>
             <?= Html::a(Yii::t('app', 'Update'), [
                 'update',
                 'id' => $model->id,
             ], ['class' => 'btn btn-primary']) ?>
+        <?php endif; ?>
+        <?php if (Yii::$app->user->can('detail-gallery-article.delete') && Yii::$app->user->id == $model->company_id) : ?>
             <?= Html::a(Yii::t('app', 'Delete'), [
                 'delete',
                 'id' => $model->id,
@@ -51,34 +50,6 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
         <?php endif; ?>
     </p>
 
-    <h3><?= Yii::t('app', 'ان اعجبك المحتوى لاتنسى Like و مشاركته لتعم الفائدة') ?></h3>
-    <?= FacebookPlugin::widget([
-                                   'type'     => FacebookPlugin::LIKE,
-                                   'settings' => [
-                                       'size'          => 'large',
-                                       'layout'        => 'button_count',
-                                       'mobile_iframe' => 'false',
-                                   ],
-                               ]); ?>
-    <br>
-    <br>
-    <?= FacebookPlugin::widget([
-                                   'type'     => FacebookPlugin::SHARE,
-                                   'settings' => [
-                                       'size'          => 'large',
-                                       'layout'        => 'button_count',
-                                       'mobile_iframe' => 'false',
-                                   ],
-                               ]); ?>
-    <?= '<h1>' . Yii::t('app', 'Comment') . '</h1>' ?>
-
-    <?= FacebookPlugin::widget([
-                                   'type'     => FacebookPlugin::COMMENT,
-                                   'settings' => [
-                                       'data-width'    => 1000,
-                                       'data-numposts' => 5,
-                                   ],
-                               ]); ?>
     <div class="col-sm-3">
         <div class="view-info">
             <?= Html::img($filesPath, ['style' => 'width:100%height: 300px;margin-top: 50px']) ?>
@@ -114,9 +85,9 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
 <div>
     <h1><?= Yii::t('app', 'قراءة الكتاب') ?></h1>
     <p>
-    <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [
-        'class'  => 'btn btn-primary',
-        'target' => '_blank',
-    ]) ?>
+        <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [
+            'class'  => 'btn btn-primary',
+            'target' => '_blank',
+        ]) ?>
     </p>
 </div>

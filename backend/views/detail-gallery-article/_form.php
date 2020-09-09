@@ -6,10 +6,12 @@ use common\models\MainCategory;
 use common\models\Subcategory;
 use dosamigos\tinymce\TinyMce;
 use kartik\date\DatePicker;
+use kartik\depdrop\DepDrop;
 use kartik\file\FileInput;
 use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\bootstrap4\Html;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
@@ -46,23 +48,37 @@ use yii\web\JsExpression;
         'data'          => BookAuthorName::getBookAuthorNameList(),
     ]) ?>
 
-    <?= $form->field($modelGalleryBookForm, 'main_category_id')->dropDownList(MainCategory::getMainCategoryList(Yii::$app->user->id), ['prompt' => Yii::t('app', 'please Choose'),]) ?>
-
-    <?= $form->field($modelGalleryBookForm, 'subcategory_id', [])->widget(Select2::class, [
-        'model'         => $modelGalleryBookForm,
-        'attribute'     => 'subcategory_id',
-        'options'       => [
-            'placeholder' => 'please Choose ...',
-            'multiple'    => true,
-        ],
-        'pluginOptions' => [
-            'allowClear'         => true,
-            'tags'               => true,
-            'maximumInputLength' => false,
-        ],
-        'size'          => Select2::LARGE,
-        'data'          => Subcategory::getSubcategoryList(),
+    <?= $form->field($modelGalleryBookForm, 'main_category_id')->dropDownList(MainCategory::getMainCategoryList(Yii::$app->user->id), [
+        'id'     => 'main_category_id',
+        'prompt' => Yii::t('app', 'please Choose'),
     ]) ?>
+
+    <?= $form->field($modelGalleryBookForm, 'subcategory_id', [])->widget(DepDrop::class, [
+        'type'           => DepDrop::TYPE_SELECT2,
+        'select2Options' => [
+            'pluginOptions' => [
+                'allowClear'         => true,
+                'tags'               => true,
+                'maximumInputLength' => false,
+            ],
+            'options'       => [
+                'multiple' => true,
+            ],
+            'size'          => Select2::LARGE,
+        ],
+        // DepDrop
+        'data'           => $modelGalleryBookForm->main_category_id != null ? Subcategory::getSubcategoryList($modelGalleryBookForm->main_category_id) : '',
+        'options'        => [
+            'id'       => 'subcategory_id',
+            'prompt'   => Yii::t('app', 'please Choose'),
+            'multiple' => true,
+        ],
+        'pluginOptions'  => [
+            'depends'     => ['main_category_id'],
+            'placeholder' => 'Select...',
+            'url'         => Url::to(['detail-gallery-article/subcat']),
+        ],
+    ]); ?>
 
     <?= $form->field($modelGalleryBookForm, 'file_book_photo')->widget(FileInput::class, [
         'options'       => ['accept' => 'image/*'],
