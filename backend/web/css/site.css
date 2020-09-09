@@ -101,8 +101,8 @@ a.desc:after {
 }
 
 .view-info {
-    width: 300px;
-    margin-top: -50px;
+    width:100%;
+    height: 400px;
 }
 
 .category-photo {

@@ -2,7 +2,6 @@
 
 use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
-use kartik\social\FacebookPlugin;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\DetailGalleryArticle */
@@ -46,8 +45,7 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
     </p>
 
     <div class="row">
-        <div class="text col-sm-9">
-
+        <div class="text col-md-9">
             <?= DetailView::widget([
                                        'model'      => $model,
                                        'attributes' => [
@@ -72,10 +70,8 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
                                        ],
                                    ]) ?>
         </div>
-        <div class="col-sm-3" style="">
-            <div class="view-info">
-                <?= Html::img($filesPath, ['style' => 'width:100%height: 300px;margin-top: 50px']) ?>
-            </div>
+        <div class="col-md-3">
+            <?= Html::img($filesPath, ['class' => 'view-info']) ?>
         </div>
     </div>
 </div>
