@@ -56,15 +56,15 @@ foreach ($tableInformationWithdrawal as $key => $withdrawal)
     $tableContent['tableArray'][] = [
         [
             'type' => 'td',
+            'html' => $withdrawal['name'],
+        ],
+        [
+            'type' => 'td',
             'html' => Yii::t('app', 'Withdrawal'),
         ],
         [
             'type' => 'td',
             'html' => $withdrawal['amount'],
-        ],
-        [
-            'type' => 'td',
-            'html' => $withdrawal['name'],
         ],
     ];
 }
@@ -73,17 +73,17 @@ foreach ($tableInformationStock as $key => $stock)
     $tableContent['tableArray'][] = [
         [
             'type'  => 'td',
+            'html'  => $stock['name'],
+            'style' => 'background-color:#22b94f',
+        ],
+        [
+            'type'  => 'td',
             'html'  => Yii::t('app', 'Stock'),
             'style' => 'background-color:#22b94f',
         ],
         [
             'type'  => 'td',
             'html'  => $stock['stock'],
-            'style' => 'background-color:#22b94f',
-        ],
-        [
-            'type'  => 'td',
-            'html'  => $stock['name'],
             'style' => 'background-color:#22b94f',
         ],
     ];
