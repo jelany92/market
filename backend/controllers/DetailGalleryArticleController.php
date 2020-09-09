@@ -18,7 +18,7 @@ use yii\filters\VerbFilter;
 use yii\web\Response;
 
 /**
- * DetailGalleryArticleController implements the CRUD actions for DetailGalleryArticle model.
+ * DetailGalleryArticleController implements the CRUD actions forsaveDetailBookGallery DetailGalleryArticle model.
  */
 class DetailGalleryArticleController extends BaseController
 {
@@ -122,6 +122,7 @@ class DetailGalleryArticleController extends BaseController
                 }
                 $modelBookGallery = new BookGallery();
                 $modelBookGallery->saveDetailBookGallery($modelGalleryBookForm, $modelDetailGalleryArticle->id, $modelBookAuthorName->id);
+               
                 $transaction->commit();
             }
             catch (\Exception $e)
