@@ -65,8 +65,9 @@ use yii\web\JsExpression;
                 'multiple' => true,
             ],
             'size'          => Select2::LARGE,
-            'data'          => $modelGalleryBookForm->main_category_id != null ? Subcategory::getSubcategoryWithMainCategoryIdList($modelGalleryBookForm->main_category_id): '',
         ],
+        // DepDrop
+        'data'           => $modelGalleryBookForm->main_category_id != null ? Subcategory::getSubcategoryList($modelGalleryBookForm->main_category_id) : '',
         'options'        => [
             'id'       => 'subcategory_id',
             'prompt'   => Yii::t('app', 'please Choose'),

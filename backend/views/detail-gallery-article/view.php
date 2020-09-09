@@ -24,20 +24,19 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->user->isGuest) : ?>
-
-        <h1><?= Html::encode('اذا كنت تريد مشاهدة جميع الكتب يرجي تسجيل الدخول') . ' ' . Html::a(Yii::t('app', 'Sign in'), [
-                'site/login',
-            ], ['class' => 'btn btn-primary']) ?> </h1>
-
-    <?php endif; ?>
-
     <p>
-        <?php if (Yii::$app->user->can('detail-gallery-article.view') && Yii::$app->user->id == $model->company_id) : ?>
+        <?php if (Yii::$app->user->can('detail-gallery-article.update') && Yii::$app->user->id == $model->company_id) : ?>
+
+            <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [
+                'class'  => 'btn btn-primary',
+                'target' => '_blank',
+            ]) ?>
             <?= Html::a(Yii::t('app', 'Update'), [
                 'update',
                 'id' => $model->id,
             ], ['class' => 'btn btn-primary']) ?>
+        <?php endif; ?>
+        <?php if (Yii::$app->user->can('detail-gallery-article.delete') && Yii::$app->user->id == $model->company_id) : ?>
             <?= Html::a(Yii::t('app', 'Delete'), [
                 'delete',
                 'id' => $model->id,
@@ -86,9 +85,9 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
 <div>
     <h1><?= Yii::t('app', 'قراءة الكتاب') ?></h1>
     <p>
-    <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [
-        'class'  => 'btn btn-primary',
-        'target' => '_blank',
-    ]) ?>
+        <?= Html::a(Yii::t('app', 'Read'), $model->link_to_preview, [
+            'class'  => 'btn btn-primary',
+            'target' => '_blank',
+        ]) ?>
     </p>
 </div>

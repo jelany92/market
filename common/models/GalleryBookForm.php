@@ -124,7 +124,7 @@ class GalleryBookForm extends Model
     public function setAttributeForBookGallery($model, int $detailGalleryArticleId)
     {
         $this->detail_gallery_article_id = $detailGalleryArticleId;
-        $this->authorName                = $model->bookAuthorName->name;
+        $this->authorName                = $model->bookAuthorName->id;
         $this->book_photo                = $model->book_photo;
         $this->book_pdf                  = $model->book_pdf;
         $this->book_serial_number        = $model->book_serial_number;

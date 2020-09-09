@@ -186,8 +186,14 @@ class DetailGalleryArticleController extends BaseController
             $transaction = Yii::$app->db->beginTransaction();
             try
             {
+                $modelBookAuthorName = BookAuthorName::find()->andWhere(['id' => $modelGalleryBookForm->authorName])->one();
+                if ($modelBookAuthorName == null)
+                {
+                    $modelBookAuthorName       = new BookAuthorName();
+                    $modelBookAuthorName->name = $modelGalleryBookForm->authorName;
+                    $modelBookAuthorName->save();
+                }
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere(['id' => $model->id])->one();
-
                 $modelDetailGalleryArticle->saveDetailGalleryArticle($modelGalleryBookForm);
                 GallerySaveCategory::deleteAll(['detail_gallery_article_id' => $modelDetailGalleryArticle->id]);
                 foreach ($modelGalleryBookForm->subcategory_id as $category)
@@ -209,13 +215,6 @@ class DetailGalleryArticleController extends BaseController
 
                 $modelBookGallery = $modelDetailGalleryArticle->bookGalleries;
 
-                $modelBookAuthorName = BookAuthorName::find()->andWhere(['name' => $modelGalleryBookForm->authorName])->one();
-                if ($modelBookAuthorName == null)
-                {
-                    $modelBookAuthorName       = new BookAuthorName();
-                    $modelBookAuthorName->name = $modelGalleryBookForm->authorName;
-                    $modelBookAuthorName->save();
-                }
                 $modelBookGallery->saveDetailBookGallery($modelGalleryBookForm, $modelDetailGalleryArticle->id, $modelBookAuthorName->id);
                 Yii::$app->session->addFlash('success', Yii::t('app', 'done'));
                 $transaction->commit();
