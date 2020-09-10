@@ -1,5 +1,6 @@
 <?php
 return [
+    'icon-framework'                => \kartik\icons\Icon::FAS,
     'uploadDirectory'               => 'uploads',
     'adminEmail'                    => 'admin@example.com',
     'supportEmail'                  => 'support@example.com',

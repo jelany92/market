@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\traits\TimestampBehaviorTrait;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -117,5 +118,23 @@ class Subcategory extends \yii\db\ActiveRecord
         $this->main_category_id = $mainCategoryId;
         $this->subcategory_name = $name;
         $this->save();
+    }
+
+    /**
+     * @param array $nameList
+     *
+     * @return string
+     */
+    public static function getSubcategoryLink(array $nameList): string
+    {
+        $subcategory = [];
+        foreach ($nameList as $name)
+        {
+            $subcategory[] = Html::a($name, [
+                'book-info/subcategory',
+                'subcategoryName' => $name,
+            ]);
+        }
+        return implode(', ', $subcategory);
     }
 }

@@ -5,6 +5,7 @@ namespace common\models;
 use common\models\query\MainCategoryQuery;
 use common\models\traits\TimestampBehaviorTrait;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
@@ -117,6 +118,19 @@ class MainCategory extends \yii\db\ActiveRecord
             $companyId = AdminUser::JELANY_BOOK_CATEGORY;
         }
         return ArrayHelper::map(self::find()->andWhere(['company_id' => $companyId])->all(),'id', 'category_name');
+    }
+
+    /**
+     * @param MainCategory $mainCategory
+     *
+     * @return string
+     */
+    public static function getMainCategoryLink(MainCategory $mainCategory): string
+    {
+        return Html::a($mainCategory->category_name, [
+            'book-info/subcategories',
+            'mainCategoryId' => $mainCategory->id
+        ]);
     }
 
     /**

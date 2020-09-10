@@ -4,6 +4,9 @@ use common\models\DetailGalleryArticle;
 use common\widgets\Table;
 use yii\bootstrap4\Html;
 use kartik\social\FacebookPlugin;
+use common\models\Subcategory;
+use common\models\MainCategory;
+use common\models\BookAuthorName;
 
 /* @var $this yii\web\View */
 /* @var $detailGalleryArticle \common\models\DetailGalleryArticle */
@@ -14,8 +17,6 @@ foreach ($detailGalleryArticle->gallerySaveCategory as $gallerySaveCategory)
 {
     $subcategory[] = $gallerySaveCategory->subcategory->subcategory_name;
 }
-
-
 $tableContent = [
     'tableArray' => [
         [
@@ -36,7 +37,7 @@ $tableContent = [
             ],
             [
                 'type' => 'td',
-                'html' => $detailGalleryArticle->mainCategory->category_name,
+                'html' => MainCategory::getMainCategoryLink($detailGalleryArticle->mainCategory),
             ],
         ],
         [
@@ -46,7 +47,7 @@ $tableContent = [
             ],
             [
                 'type' => 'td',
-                'html' => implode(', ', $subcategory),
+                'html' =>  Subcategory::getSubcategoryLink($subcategory),
             ],
         ],
         [
@@ -56,7 +57,7 @@ $tableContent = [
             ],
             [
                 'type' => 'td',
-                'html' => $detailGalleryArticle->bookGalleries->bookAuthorName->name,
+                'html' => BookAuthorName::getBookAuthorNameLink($detailGalleryArticle->bookGalleries->bookAuthorName->name),
             ],
         ],
         [

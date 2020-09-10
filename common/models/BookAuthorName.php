@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\traits\TimestampBehaviorTrait;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -87,5 +88,16 @@ class BookAuthorName extends \yii\db\ActiveRecord
     public static function getBookAuthorNameList(): array
     {
         return ArrayHelper::map(self::find()->andWhere(['company_id' => Yii::$app->user->id])->all(), 'id', 'name');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getBookAuthorNameLink(string $name): string
+    {
+        return Html::a($name, [
+            'search/global-search',
+            'search' => $name,
+        ]);
     }
 }

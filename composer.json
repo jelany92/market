@@ -45,7 +45,8 @@
         "kartik-v/bootstrap-popover-x": "dev-master",
         "yidas/yii2-fontawesome": "^5.0",
         "kartik-v/yii2-helpers": "dev-master",
-        "kartik-v/yii2-widget-depdrop": "dev-master"
+        "kartik-v/yii2-widget-depdrop": "dev-master",
+        "kartik-v/yii2-nav-x": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

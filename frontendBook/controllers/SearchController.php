@@ -16,15 +16,21 @@ class SearchController extends Controller
      */
     public function actionGlobalSearch(string $search)
     {
-        $articleInfo  = DetailGalleryArticle::find()->andWhere([
-                                                                   'and',
-                                                                   [
-                                                                       'like',
-                                                                       'article_name_ar',
-                                                                       $search,
-                                                                   ],
-                                                                   ['company_id' => UserModel::JELANY_BOOK_CATEGORY],
-                                                               ]);
+        $articleInfo  = DetailGalleryArticle::find()->innerJoinWith('bookAuthorName')->andWhere([
+                                                                                                    'or',
+                                                                                                    [
+                                                                                                        'like',
+                                                                                                        'name',
+                                                                                                        $search,
+                                                                                                    ],
+                                                                                                    ['and',
+                                                                                                    [
+                                                                                                        'like',
+                                                                                                        'article_name_ar',
+                                                                                                        $search,
+                                                                                                    ],
+                                                                                                    ['detail_gallery_article.company_id' => UserModel::JELANY_BOOK_CATEGORY],
+                                                                                                ]]);
         $dataProvider = new ActiveDataProvider([
                                                    'query' => $articleInfo,
                                                ]);

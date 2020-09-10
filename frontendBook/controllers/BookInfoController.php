@@ -35,12 +35,20 @@ class BookInfoController extends Controller
     /**
      * Displays Main Category.
      *
+     * @param null $mainCategoryId
+     *
      * @return string
-     * @throws \yii\db\Exception
      */
-    public function actionSubcategories()
+    public function actionSubcategories($mainCategoryId = null)
     {
-        $subcategories = Subcategory::find()->all();
+        if (isset($mainCategoryId))
+        {
+            $subcategories = Subcategory::find()->andWhere(['main_category_id' => $mainCategoryId])->all();
+        }
+        else
+        {
+            $subcategories = Subcategory::find()->all();
+        }
         return $this->render('subcategories', [
             'subcategories' => $subcategories,
         ]);
@@ -49,7 +57,7 @@ class BookInfoController extends Controller
     /**
      * Displays Main Category.
      *
-     * @param  string $subcategoryName
+     * @param string $subcategoryName
      *
      * @return string
      * @throws \yii\db\Exception

@@ -23,11 +23,20 @@ $this->title = Yii::t('app', 'Author');
                              ],
                              'columns'      => [
                                  ['class' => 'yii\grid\SerialColumn'],
-                                 'name',
                                  [
                                      'attribute' => 'name',
-                                     'value'     => function($model){
-                                        return Html::a($model->name, ['search/global-search', 'search' => $model->name]);
+                                     'value'     => function ($model) {
+                                         return Html::a($model->name, [
+                                             'search/global-search',
+                                             'search' => $model->name,
+                                         ]);
+                                     },
+                                     'format'    => 'raw',
+                                 ],
+                                 [
+                                     'label'  => Yii::t('app', 'Book Number'),
+                                     'value'  => function ($model) {
+                                         return count($model->bookGalleries);
                                      },
                                      'format' => 'raw',
                                  ],

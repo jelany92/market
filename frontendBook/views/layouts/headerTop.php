@@ -1,7 +1,8 @@
 <?php
 
 use common\components\LanguageDropdown;
-use yii\bootstrap4\Html;
+use yii\bootstrap\Html;
+use yii\bootstrap\NavBar;
 
 
 $menuItems = [
@@ -29,21 +30,24 @@ $this->registerJsFile('@web/common/js/language_list.js', ['depends' => [\yii\web
                 <li><a href="#"><i class="fa fa-envelope-o"></i> jelany.kattan@hotmail.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Germany</a></li>
             </ul>
-            <?php
-            $language = [
-                [
-                    'label' => LanguageDropdown::label(Yii::$app->language),
-                    'items' => LanguageDropdown::widget([]),
-                ],
-            ];
-            echo \yii\bootstrap\Nav::widget([
-                                                //'options' => ['class' => 'navbar-auto ml-auto'],
-                                                'items' => $language,
-                                            ]);
-            ?>
             <ul class="header-links pull-right">
 
                 <!-- End .header-dropdown -->
+                <?php
+                $language = [
+                    [
+                        'label' => LanguageDropdown::label(Yii::$app->language),
+                        'items' => LanguageDropdown::widget([]),
+                    ],
+                ];
+                echo \yii\bootstrap\Nav::widget([
+                                                    'options' => [
+                                                        'class' => 'nav navbar-right top-header pull-right',
+                                                        'style' => 'margin-bottom: -20px; margin-top: -8px;',
+                                                    ],
+                                                    'items'   => $language,
+                                                ]);
+                ?>
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <li>
                         <?= '<i class="fa fa-user-o"></i>' . Html::a(Yii::t('app', 'My Account'), ['/site/login'], ['class' => 'add-to-cart-btn',]) ?>

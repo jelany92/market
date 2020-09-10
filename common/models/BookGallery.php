@@ -50,7 +50,7 @@ class BookGallery extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['detail_gallery_article_id'], 'integer',],
+            [['id', 'detail_gallery_article_id'], 'integer',],
             [['created_at', 'updated_at', 'file_book_photo',], 'safe',],
             [['book_photo', 'book_pdf', 'book_serial_number', 'authorName'], 'string', 'max' => 255,],
             [['authorName'], 'string', 'max' => 100,],

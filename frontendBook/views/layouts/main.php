@@ -5,8 +5,10 @@
 /* @var $content string */
 
 use frontendBook\assets\AppAsset;
+use kartik\icons\Icon;
 use yii\bootstrap\Html;
 
+//Icon::map($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
