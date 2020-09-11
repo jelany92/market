@@ -51,16 +51,16 @@ Table OF Contents
 	01 -> GENERAL
 ===========================================================*/
 
-/*----------------------------*\
-	Typography
-\*----------------------------*/
-
 body {
+  text-align: revert !important;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: #333;
-  text-align: revert;
 }
+
+/*----------------------------*\
+	Typography
+\*----------------------------*/
 
 h1, h2, h3, h4, h5, h6 {
   color: #2B2D42;
@@ -672,7 +672,6 @@ textarea.input {
     background: #15161D;
     height: 100vh;
     max-width: 250px;
-    width: 0%;
     overflow: hidden;
     z-index: 22;
     padding-top: 60px;

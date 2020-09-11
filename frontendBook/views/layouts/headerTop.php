@@ -1,18 +1,15 @@
 <?php
 
-use common\components\LanguageDropdown;
 use yii\bootstrap\Html;
-use yii\bootstrap\NavBar;
+use backend\components\LanguageDropdown;
 
 
-$menuItems = [
+$language = [
     [
-        'label' => Yii::$app->language,
-        'items' => LanguageDropdown::widget(),
+        'label' => LanguageDropdown::label(Yii::$app->language),
+        'items' => LanguageDropdown::widget([]),
     ],
 ];
-
-$this->registerJsFile('@web/common/js/language_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 ?>
 <!-- HEADER -->
@@ -34,12 +31,7 @@ $this->registerJsFile('@web/common/js/language_list.js', ['depends' => [\yii\web
 
                 <!-- End .header-dropdown -->
                 <?php
-                $language = [
-                    [
-                        'label' => LanguageDropdown::label(Yii::$app->language),
-                        'items' => LanguageDropdown::widget([]),
-                    ],
-                ];
+
                 echo \yii\bootstrap\Nav::widget([
                                                     'options' => [
                                                         'class' => 'nav navbar-right top-header pull-right',

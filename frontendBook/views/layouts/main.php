@@ -6,7 +6,7 @@
 
 use frontendBook\assets\AppAsset;
 use kartik\icons\Icon;
-use yii\bootstrap\Html;
+use yii\bootstrap4\Html;
 
 //Icon::map($this);
 AppAsset::register($this);

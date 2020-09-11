@@ -69,9 +69,8 @@ $this->title = 'Book Gallery';
             <!-- /section title -->
 
             <!-- Products tab & slick -->
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="products-tabs">
+                <div class="row col-md-12">
+                    <div class="products-tabs col-md-12">
                         <!-- tab -->
                         <div id="tab1" class="tab-pane active">
                             <div class="products-slick" data-nav="#slick-nav-1">
@@ -114,7 +113,6 @@ $this->title = 'Book Gallery';
                     </div>
                     <!-- /tab -->
                 </div>
-            </div>
             <!-- Products tab & slick -->
         </div>
         <!-- /row -->
