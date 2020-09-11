@@ -62,6 +62,7 @@ class MainCategory extends \yii\db\ActiveRecord
             'id'             => Yii::t('app', 'ID'),
             'category_name'  => Yii::t('app', 'Category Name'),
             'category_photo' => Yii::t('app', 'Category Photo'),
+            'file'           => Yii::t('app', 'File'),
             'created_at'     => Yii::t('app', 'Created At'),
             'updated_at'     => Yii::t('app', 'Updated At'),
         ];

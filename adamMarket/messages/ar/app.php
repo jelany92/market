@@ -98,6 +98,10 @@ return [
     'Sßüßgkeit'                            => 'الحلويات',
     'Gewürze'                              => 'التوابل',
 
+    // Subcategory
+    'Subcategory'                          => 'التصنيف فرعي',
+    'Subcategory Name'                     => 'اسم الفئة الفرعية',
+
     //article
     'Articles'                             => 'المنتجات',
     'Article Photo'                        => 'صورة المنتج',

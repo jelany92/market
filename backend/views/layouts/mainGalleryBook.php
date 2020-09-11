@@ -154,7 +154,7 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
                         'items' => items($mainCategory, '/site/index', 'mainCategory'),
                     ],
                     [
-                        'label' => Yii::t('app', 'Subcategories'),
+                        'label' => Yii::t('app', 'Subcategory'),
                         'items' => items($subCategory, '/site/index', 'subcategory'),
                     ],
                     [
