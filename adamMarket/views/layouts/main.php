@@ -27,7 +27,8 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?= $this->render('header') ?>
+    <?= $this->render('headerTop') ?>
+    <?= $this->render('headerCentre') ?>
     <main class="main">
 
         <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
