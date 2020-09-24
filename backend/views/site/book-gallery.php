@@ -17,23 +17,22 @@ $this->registerAssetBundle('backend\assets\BookGallery');
         <?php /*endif; */ ?>
     --><?php /*endif; */ ?>
     <div class="text-xl-center">
-        <h1><?= Yii::t('app', 'مكتبتي') ?></h1>
+        <h1><?= Yii::t('app', 'My Library') ?></h1>
     </div>
     <br>
 
     <div class="row">
         <?php foreach ($modelDetailGalleryArticle as $detailGalleryArticle) : ?>
             <div class="books-view col-6 col-sm-3">
-                <?php
-                $filesPhotoPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGalleryPhoto'] . DIRECTORY_SEPARATOR . $detailGalleryArticle->bookGalleries->book_photo;
-                $filePath       = Yii::getAlias('backend') . DIRECTORY_SEPARATOR . 'web' . $filesPhotoPath;
-                $filesPdfPath   = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGalleryPdf'] . DIRECTORY_SEPARATOR . $detailGalleryArticle->bookGalleries->book_pdf;
-                $filesPdfRoot   = isset($detailGalleryArticle->bookGalleries->book_pdf) ? $detailGalleryArticle->bookGalleries->getAbsolutePath(Yii::$app->params['uploadDirectoryBookGalleryPdf'], $detailGalleryArticle->bookGalleries->book_pdf) : '';
-                ?>
-                <?= Html::a(Html::img($filesPhotoPath, ['style' => 'width:100%;height: 350px']), [
-                    'detail-gallery-article/view',
-                    'id' => $detailGalleryArticle->id,
-                ]) ?>
+                <?php if ($detailGalleryArticle->bookGalleries->book_photo != null) : ?>
+                    <?= Html::a(Html::img(\common\models\DetailGalleryArticle::subcategoryImagePath($detailGalleryArticle->bookGalleries->book_photo), [
+                        'style' => 'width:100%;height: 300px',
+                        'id' => $detailGalleryArticle->id,
+                    ]), ['detail-gallery-article/view', 'id' => $detailGalleryArticle->id,]) ?>
+                <?php else: ?>
+                    <?= Html::a('test', 'test', ['style' => "padding-top: 245px;"]) ?>
+                <?php endif; ?>
+
                 <div class="photo-title">
                     <h3><?= Html::a($detailGalleryArticle->article_name_ar, [
                             'detail-gallery-article/view',
@@ -46,8 +45,8 @@ $this->registerAssetBundle('backend\assets\BookGallery');
         <?php endforeach; ?>
         <div class="center-block">
             <?= \common\components\LinkPager::widget([
-                                                         'pagination' => $pages,
-                                                     ]); ?>
+                'pagination' => $pages,
+            ]); ?>
         </div>
     </div>
 </div>

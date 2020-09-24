@@ -16,8 +16,6 @@ if (Yii::$app->user->can('detail-gallery-article.view') && Yii::$app->user->id =
 }
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
-$filesPath    = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGalleryPhoto'] . DIRECTORY_SEPARATOR . $model->bookGalleries->book_photo;
-$filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGalleryPdf'] . DIRECTORY_SEPARATOR . $model->bookGalleries->book_pdf;
 ?>
 <div class="detail-gallery-article-view">
 
@@ -71,7 +69,7 @@ $filesPdfPath = DIRECTORY_SEPARATOR . Yii::$app->params['uploadDirectoryBookGall
                                    ]) ?>
         </div>
         <div class="col-md-3">
-            <?= Html::img($filesPath, ['class' => 'view-info']) ?>
+            <?= Html::img(\common\models\DetailGalleryArticle::subcategoryImagePath($model->bookGalleries->book_photo), ['class' => 'view-info']) ?>
         </div>
     </div>
 </div>

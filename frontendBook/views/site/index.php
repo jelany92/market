@@ -5,6 +5,7 @@ use common\models\DetailGalleryArticle;
 
 /* @var $this yii\web\View */
 /* @var $modelDetailGalleryArticle DetailGalleryArticle */
+/* @var $mainCategories array */
 
 $this->title = 'Book Gallery';
 
