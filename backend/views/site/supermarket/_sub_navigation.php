@@ -4,15 +4,15 @@ use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Tabs;
 use common\components\ListeHelper;
-
 /* @var $controller string */
 /* @var $year integer */
 /* @var $month string */
+
 $this->registerJsFile('@web/js/date_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 <div class="col-sm-12">
     <div class="row">
-        <?= '<h1>' . Yii::t('app', 'Statistics for whole month') . ' ' . ListeHelper::monthList($year) . '</h1>'; ?>
+        <?= '<h1>' . Yii::t('app', 'Statistics for whole month') . ' ' . ListeHelper::monthList($year, $month) . '</h1>'; ?>
     </div>
 </div>
 <br>

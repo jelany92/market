@@ -143,7 +143,7 @@ class QueryHelper extends \yii\helpers\StringHelper
 
     public static function getResult(int $year, string $month)
     {
-        $lastDay = date("t", strtotime(date($year . '-' . $month . "-t")));;
+        $lastDay = date("t", strtotime(date($year . '-' . $month )));;
         $count = [];
         for ($i = 1; $i <= $lastDay; $i++)
         {

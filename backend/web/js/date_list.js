@@ -17,3 +17,8 @@ function myFunctionMonth($year)
     }
 };
 
+
+$('#document').ready(function () {
+    var month = document.getElementsByClassName("selectElement")[0].id;
+    document.getElementById(month).value = month;
+});

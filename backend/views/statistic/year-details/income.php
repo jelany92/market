@@ -12,7 +12,7 @@ use kartik\icons\Icon;
 /* @var $year integer */
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 
-$this->title                   = Yii::t('app', 'Jahr');
+$this->title                   = Yii::t('app', 'Year');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

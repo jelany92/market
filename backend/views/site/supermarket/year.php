@@ -13,7 +13,7 @@ use kartik\icons\Icon;
 /* @var $dataProvider \yii\data\ArrayDataProvider */
 $this->registerJsFile('@web/js/date_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
-$this->title                   = Yii::t('app', 'Jahr');
+$this->title                   = Yii::t('app', 'Year');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

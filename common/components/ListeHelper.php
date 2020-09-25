@@ -14,6 +14,7 @@ class ListeHelper
      */
     public static function YearList(): string
     {
+
         $dateBeforeYears   = new DateTime();
         $beforeTenYears    = $dateBeforeYears->sub(new DateInterval('P10Y'));
         $dateAfterOneYears = new DateTime();
@@ -37,16 +38,18 @@ class ListeHelper
 
     /**
      * @param null $year
+     * @param null $month
      *
      * @return string
      */
-    public static function monthList($year = null)
+    public static function monthList($year = null, $month = null)
     {
         return Html::dropDownList('month', [
             'id'   => 'pdfId',
             'name' => 'pdfName',
         ], (\Yii::$app->params['months']), [
-                                      'class'    => 'btn btn-primary',
+                                      'id'       => $month,
+                                      'class'    => 'btn btn-primary selectElement',
                                       'onchange' => 'myFunctionMonth(' . $year . ')',
                                       //'style'    => $month == $m ? 'background-color: #40a7ff;' : '',
                                       'prompt'   => \Yii::t('app', 'Choose Month'),
