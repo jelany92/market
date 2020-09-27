@@ -14,11 +14,14 @@ use common\components\ListeHelper;
 
 /* @var $this yii\web\View */
 /* @var $showCreate boolean */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $date data */
 /* @var $showCreateIncomingRevenue boolean */
 /* @var $staticDailyInfoIncomingList array */
 /* @var $staticDailyInfoMarketExpenseList array */
 /* @var $staticDailyInfoPurchasesList array */
+/* @var $resultCash float */
+/* @var $dailyResult float */
 
 
 $this->title                   = $date;

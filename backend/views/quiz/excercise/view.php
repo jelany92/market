@@ -31,11 +31,40 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'mainCategoryExercise.main_category_exercise_name',
             'question:ntext',
-            'answer_a',
-            'answer_b',
-            'answer_c',
-            'answer_d',
-            'correct_answer',
+            [
+                'attribute' => 'answer_a',
+                'value'     => function ($model) {
+                    return $model->answer_a;
+                },
+                'visible' => !empty($model->answer_a),
+            ],
+            [
+                'attribute' => 'answer_b',
+                'value'     => function ($model) {
+                    return $model->answer_b;
+                },
+                'visible' => !empty($model->answer_b),
+            ],
+            [
+                'attribute' => 'answer_c',
+                'value'     => function ($model) {
+                    return $model->answer_c;
+                },
+                'visible' => !empty($model->answer_c),
+            ],
+            [
+                'attribute' => 'answer_d',
+                'value'     => function ($model) {
+                    return $model->answer_d;
+                },
+                'visible' => !empty($model->answer_d),
+            ],
+            [
+                'attribute' => 'correct_answer',
+                'value'     => function ($model) {
+                    return isset($model[$model->correct_answer]) ? $model[$model->correct_answer] : $model->correct_answer;
+                },
+            ],
         ],
     ]) ?>
 

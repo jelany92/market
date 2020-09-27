@@ -19,7 +19,7 @@ class ExcerciseSearch extends Excercise
     {
         return [
             [['id'], 'integer'],
-            [['question', 'answer_a', 'answer_b', 'answer_c', 'answer_d', 'correct_answer', 'created_at', 'updated_at'], 'safe'],
+            [['question', 'answer_a', 'answer_b', 'answer_c', 'answer_d', 'correct_answer', 'question_type', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -89,6 +89,10 @@ class ExcerciseSearch extends Excercise
                                                                                                                                   'like',
                                                                                                                                   'correct_answer',
                                                                                                                                   $this->correct_answer,
+                                                                                                                              ])->andFilterWhere([
+                                                                                                                                  'like',
+                                                                                                                                  'question_type',
+                                                                                                                                  $this->question_type,
                                                                                                                               ]);
 
         return $dataProvider;

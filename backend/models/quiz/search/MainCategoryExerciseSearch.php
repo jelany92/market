@@ -18,7 +18,7 @@ class MainCategoryExerciseSearch extends MainCategoryExercise
     {
         return [
             [['id'], 'integer'],
-            [['main_category_exercise_name', 'description', 'question_type', 'created_at', 'updated_at'], 'safe'],
+            [['main_category_exercise_name', 'description', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -64,8 +64,7 @@ class MainCategoryExerciseSearch extends MainCategoryExercise
         ]);
 
         $query->andFilterWhere(['like', 'main_category_exercise_name', $this->main_category_exercise_name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'question_type', $this->question_type]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

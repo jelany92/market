@@ -2,9 +2,12 @@
 
 use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
+use common\components\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\quiz\MainCategoryExercise */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
 
 $this->title = $model->main_category_exercise_name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Main Category Exercises'), 'url' => ['index']];
@@ -31,8 +34,36 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'main_category_exercise_name',
             'description:ntext',
-            'question_type',
         ],
     ]) ?>
 
+    <?= Html::a(Yii::t('app', 'Create') . ' ' . Yii::t('app', 'Question'), [
+            'quiz/excercise/create',
+            'mainCategoryExerciseId' => $model->id],
+        ['class' => 'btn btn-success']) ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'options'      => [
+            'style' => 'overflow: auto; word-wrap: break-word;',
+        ],
+        'columns'      => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'excercise_id',
+            'question_type',
+            [
+                'attribute' => 'question_type',
+                'value'     => function ($model) {
+                    return $model->question_type;
+                },
+            ],
+            [
+                'attribute' => 'correct_answer',
+                'value'     => function ($model) {
+                    return $model[$model->correct_answer];
+                },
+            ],
+        ],
+    ]); ?>
 </div>

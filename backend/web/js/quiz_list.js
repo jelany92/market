@@ -1,0 +1,59 @@
+function myFunctionAnswerType()
+{
+    var answerElement = document.getElementsByName('Excercise[question_type]')[0].value;
+    $('.conditional-field').hide();
+    if (answerElement == 1)
+    {
+        elementToShowTowChoice = $('.filter-exercise-tow_choice-field');
+        elementToShowTowChoice.show();
+        $('.answerOption').show();
+        $('.filter-right-answer-type-field').show();
+    }
+    else if (answerElement == 2)
+    {
+        elementToShowTowChoice   = $('.filter-exercise-tow_choice-field');
+        elementToShowTowChoice.show();
+        elementToShowFourChoice  = $('.filter-exercise-four_choice-field');
+        elementToShowFourChoice.show();
+        $('.filter-right-answer-type-field').show();
+    }
+    else if (answerElement == 3)
+    {
+        $('.filter-right-answer-type-field').show();
+    }
+};
+
+$('#document').ready(function ()
+{
+    var answerElement = document.getElementsByName('Excercise[question_type]')[0].value;
+    $('.conditional-field').hide();
+    if (answerElement == 1)
+    {
+        elementToShowTowChoice = $('.filter-exercise-tow_choice-field');
+        elementToShowTowChoice.show();
+        $('.answerOption').show();
+        $('.filter-right-answer-type-field').show();
+    }
+    else if (answerElement == 2)
+    {
+        elementToShowTowChoice   = $('.filter-exercise-tow_choice-field');
+        elementToShowTowChoice.show();
+        elementToShowFourChoice  = $('.filter-exercise-four_choice-field');
+        elementToShowFourChoice.show();
+        $('.filter-right-answer-type-field').show();
+    }
+    else if (answerElement == 3)
+    {
+        $('.filter-right-answer-type-field').show();
+    }
+});
+
+function myFunctionAnswer()
+{
+    var answerElement = document.getElementsByName('answerOption')[0].value;
+    if (answerElement == 'right')
+    {
+        document.getElementsByName('Excercise[answer_a]')[0].value = 'True';
+        document.getElementsByName('Excercise[answer_b]')[0].value = 'False';
+    }
+};

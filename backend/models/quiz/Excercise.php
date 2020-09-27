@@ -18,6 +18,7 @@ use yii\db\ActiveQuery;
  * @property string $answer_c
  * @property string $answer_d
  * @property string $correct_answer
+ * @property int    $question_type
  * @property string $created_at
  * @property string $updated_at
  *
@@ -28,6 +29,10 @@ class Excercise extends \yii\db\ActiveRecord
     use TimestampBehaviorTrait;
 
     public $answer;
+
+    const QUESTION_TYPE_TOW_CHOICE  =  1;
+    const QUESTION_TYPE_FOUR_CHOICE =  2;
+    const QUESTION_TYPE_TEXT        =  3;
     /**
      * @inheritdoc
      */
@@ -42,7 +47,9 @@ class Excercise extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['question_type', 'question', 'correct_answer'], 'required'],
             [['question'], 'string'],
+            [['question_type'], 'integer'],
             [['created_at', 'updated_at', 'answer'], 'safe'],
             [['answer_a', 'answer_b', 'answer_c', 'answer_d'], 'string', 'max' => 255],
             [['correct_answer'], 'string', 'max' => 10],
@@ -64,6 +71,7 @@ class Excercise extends \yii\db\ActiveRecord
             'answer_c'                  => Yii::t('app', 'Answer C'),
             'answer_d'                  => Yii::t('app', 'Answer D'),
             'correct_answer'            => Yii::t('app', 'Correct Answer'),
+            'question_type'             => Yii::t('app', 'Question Type'),
             'created_at'                => Yii::t('app', 'Created At'),
             'updated_at'                => Yii::t('app', 'Updated At'),
         ];
@@ -88,26 +96,75 @@ class Excercise extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public static function getQuestionType() : array
+    {
+        return [
+            self::QUESTION_TYPE_TOW_CHOICE  => Yii::t('app', 'Tow Choice'),
+            self::QUESTION_TYPE_FOUR_CHOICE => Yii::t('app', 'Four Choice'),
+            self::QUESTION_TYPE_TEXT        => Yii::t('app', 'Text'),
+        ];
+    }
+
+    /**
      * @param string $questionType
      *
      * @return array
      */
-    public function getCorrectAnswers(string $questionType): array
+    public static function getCorrectAnswerOptionList(string $questionType = null): array
     {
-        if ($questionType == 'tow_choice')
+    if ($questionType == self::QUESTION_TYPE_TOW_CHOICE)
+    {
+        $correctAnswer = [
+            'answer_a'=> 'A',
+            'answer_b'=> 'B',
+        ];
+    }
+    else if ($questionType == self::QUESTION_TYPE_FOUR_CHOICE)
+    {
+        $correctAnswer = [
+            'answer_a' => 'A',
+            'answer_b' => 'B',
+            'answer_c' => 'C',
+            'answer_d' => 'D',
+        ];
+    }
+    else if ($questionType == self::QUESTION_TYPE_TEXT)
+    {
+        $correctAnswer = [];
+    }
+    return $correctAnswer;
+    }
+
+    /**
+     * @param string $questionType
+     *
+     * @return array
+     */
+    public static function getCorrectAnswerOption(string $questionType): array
+    {
+        if ($questionType == self::QUESTION_TYPE_TOW_CHOICE)
         {
             $correctAnswer = [
-                'answer_a' => 'A',
-                'answer_b' => 'B',
+                ['id' => 'answer_a', 'name' => 'A'],
+                ['id' => 'answer_b', 'name' => 'B'],
             ];
         }
-        else
+        else if ($questionType == self::QUESTION_TYPE_FOUR_CHOICE)
         {
             $correctAnswer = [
-                'answer_a' => 'A',
-                'answer_b' => 'B',
-                'answer_c' => 'C',
-                'answer_d' => 'D',
+
+                ['id' => 'answer_a', 'name' => 'A'],
+                ['id' => 'answer_b', 'name' => 'B'],
+                ['id' => 'answer_c', 'name' => 'C'],
+                ['id' => 'answer_d', 'name' => 'D'],
+            ];
+        }
+        else if ($questionType == self::QUESTION_TYPE_TEXT)
+        {
+            $correctAnswer = [
+
             ];
         }
         return $correctAnswer;

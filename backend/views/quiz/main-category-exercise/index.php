@@ -38,16 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                      },
                                      'format'    => 'raw',
                                  ],
-                                 [
-                                     'attribute' => 'question_type',
-                                     'value'     => function ($model) {
-                                         return Html::a($model->question_type, [
-                                             'quiz/token/create-student',
-                                             'mainCategoryExerciseId' => $model->id,
-                                         ]);
-                                     },
-                                     'format'    => 'raw',
-                                 ],
                                  'description:ntext',
 
                                  ['class' => 'common\components\ActionColumn'],

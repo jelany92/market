@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `students`.
  */
-class m170523_132248_create_quiz_table extends Migration
+class m200912_132248_create_quiz_table extends Migration
 {
     /**
      * @inheritdoc
@@ -28,7 +28,6 @@ class m170523_132248_create_quiz_table extends Migration
             'id'                          => $this->primaryKey(),
             'main_category_exercise_name' => $this->string(100)->notNull(),
             'description'                 => $this->text(),
-            'question_type'               => $this->string(),
             'created_at'                  => $this->dateTime(),
             'updated_at'                  => $this->dateTime(),
         ], 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');
@@ -42,6 +41,7 @@ class m170523_132248_create_quiz_table extends Migration
             'answer_c'                  => $this->string(),
             'answer_d'                  => $this->string(),
             'correct_answer'            => $this->string(10),
+            'question_type'             => $this->tinyInteger(),
             'created_at'                => $this->dateTime(),
             'updated_at'                => $this->dateTime(),
         ], 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB');

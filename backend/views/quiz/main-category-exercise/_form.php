@@ -2,10 +2,8 @@
 
 use yii\bootstrap4\Html;
 use kartik\form\ActiveForm;
-use backend\models\quiz\MainCategoryExercise;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\quiz\MainCategoryExercise */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -18,8 +16,6 @@ use backend\models\quiz\MainCategoryExercise;
     <?= $form->field($model, 'main_category_exercise_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'question_type')->dropDownList(MainCategoryExercise::getQuestionType()) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

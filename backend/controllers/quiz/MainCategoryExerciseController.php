@@ -2,9 +2,11 @@
 
 namespace backend\controllers\quiz;
 
+use backend\models\quiz\Excercise;
 use backend\models\quiz\MainCategoryExercise;
 use backend\models\quiz\search\MainCategoryExerciseSearch;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -55,8 +57,13 @@ class MainCategoryExerciseController extends Controller
      */
     public function actionView($id)
     {
+        $model        = $this->findModel($id);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Excercise::find()->andWhere(['main_category_exercise_id' => $id]),
+        ]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model'        => $model,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -70,8 +77,9 @@ class MainCategoryExerciseController extends Controller
     {
         $model = new MainCategoryExercise();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
+            $model->save();
             return $this->redirect([
                                        'view',
                                        'id' => $model->id,

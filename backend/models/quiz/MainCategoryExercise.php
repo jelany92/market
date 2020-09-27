@@ -11,7 +11,6 @@ use Yii;
  * @property int $id
  * @property string $main_category_exercise_name
  * @property string|null $description
- * @property string|null $question_type
  * @property string|null $created_at
  * @property string|null $updated_at
  *
@@ -36,7 +35,7 @@ class MainCategoryExercise extends \yii\db\ActiveRecord
     {
         return [
             [['main_category_exercise_name'], 'required'],
-            [['description', 'question_type'], 'string'],
+            [['description'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
             [['main_category_exercise_name'], 'string', 'max' => 100],
         ];
@@ -51,7 +50,6 @@ class MainCategoryExercise extends \yii\db\ActiveRecord
             'id'                          => 'ID',
             'main_category_exercise_name' => 'Main Category Exercise Name',
             'description'                 => 'Description',
-            'question_type'               => 'Question Type',
             'created_at'                  => 'Created At',
             'updated_at'                  => 'Updated At',
         ];
@@ -63,6 +61,13 @@ class MainCategoryExercise extends \yii\db\ActiveRecord
             'tow_choice'  => Yii::t('app', 'Tow Choice'),
             'four_choice' => Yii::t('app', 'Four Choice'),
             'text'        => Yii::t('app', 'Text'),
+        ];
+    }
+
+    public static function getDefaultAnswerList()
+    {
+        return [
+            'right'  => Yii::t('app', 'True or False'),
         ];
     }
 

@@ -100,8 +100,10 @@ class ExcerciseController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
+
+            $model->save();
             return $this->redirect([
                                        'view',
                                        'id' => $model->id,
@@ -131,6 +133,26 @@ class ExcerciseController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionCorrectAnswer()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        if (isset($_POST['depdrop_parents']))
+        {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null)
+            {
+                $cat_id = $parents[0];
+                return [
+                    'output'   => Excercise::getCorrectAnswerOption($cat_id),
+                    'selected' => '',
+                ];
+            }
+        }
+        return [
+            'output'   => '',
+            'selected' => '',
+        ];
+    }
     /**
      * Finds the Excercise model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
