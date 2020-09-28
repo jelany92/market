@@ -1,7 +1,6 @@
 <?php
 
-use yii\helpers\Html;
-
+use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 /* @var $model \backend\models\quiz\Excercise */
@@ -32,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model'                          => $model,
         'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
+        'modelsAddress'                  => $modelsAddress,
 
     ]) ?>
 

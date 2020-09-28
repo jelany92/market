@@ -2,13 +2,18 @@
 
 namespace backend\controllers\quiz;
 
-use backend\models\quiz\MainCategoryExercise;
-use Yii;
 use backend\models\quiz\Excercise;
+use backend\models\quiz\ExerciseForm;
+use backend\models\quiz\MainCategoryExercise;
+use backend\models\quiz\Model;
 use backend\models\quiz\search\ExcerciseSearch;
+use kartik\form\ActiveForm;
+use Yii;
+use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * ExcerciseController implements the CRUD actions for Excercise model.
@@ -67,6 +72,66 @@ class ExcerciseController extends Controller
      */
     public function actionCreate(int $mainCategoryExerciseId)
     {
+        $modelForm         = new ExerciseForm();
+        $modelExerciseList = [new Excercise];
+
+        $modelModelMainCategoryExercise = $this->findModelMainCategoryExercise($mainCategoryExerciseId);
+        if ($modelForm->load(Yii::$app->request->post()))
+        {
+            $modelExerciseList = ExerciseForm::createMultiple(Excercise::class);
+            Model::loadMultiple($modelExerciseList, Yii::$app->request->post());
+
+            // ajax validation
+            if (Yii::$app->request->isAjax)
+            {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ArrayHelper::merge(ActiveForm::validateMultiple($modelExerciseList), ActiveForm::validate($modelForm));
+            }
+            $transaction = \Yii::$app->db->beginTransaction();
+            try
+            {
+                foreach ($modelExerciseList as $modelAddress)
+                {
+                    $modelExercise                            = new Excercise();
+                    $modelExercise->main_category_exercise_id = $mainCategoryExerciseId;
+                    $modelExercise->question_type             = $modelAddress->question_type;
+                    $modelExercise->question                  = $modelAddress->question;
+                    $modelExercise->answer_a                  = $modelAddress->answer_a;
+                    $modelExercise->answer_b                  = $modelAddress->answer_b;
+                    $modelExercise->answer_c                  = $modelAddress->answer_c;
+                    $modelExercise->answer_d                  = $modelAddress->answer_d;
+                    $modelExercise->correct_answer            = $modelAddress->correct_answer;
+                    if (!($modelExercise->save(false)))
+                    {
+                        $transaction->rollBack();
+                        break;
+                    }
+                }
+                $transaction->commit();
+                return $this->redirect([
+                                           'index',
+                                       ]);
+            }
+            catch (\Exception $e)
+            {
+                $transaction->rollBack();
+            }
+        }
+        return $this->render('create', [
+            'model'                          => $modelForm,
+            'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
+            'modelsAddress'                  => (empty($modelExerciseList)) ? [new Excercise()] : $modelExerciseList,
+        ]);
+    }
+
+    /**
+     * @param int $mainCategoryExerciseId
+     *
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function _actionCreate(int $mainCategoryExerciseId)
+    {
         $model                          = new Excercise();
         $modelModelMainCategoryExercise = $this->findModelMainCategoryExercise($mainCategoryExerciseId);
         if ($model->load(Yii::$app->request->post()) && $model->validate())
@@ -79,13 +144,10 @@ class ExcerciseController extends Controller
                                        'id' => $model->id,
                                    ]);
         }
-        else
-        {
-            return $this->render('create', [
-                'model'                          => $model,
-                'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
-            ]);
-        }
+        return $this->render('create', [
+            'model'                          => $model,
+            'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
+        ]);
     }
 
     /**
@@ -153,6 +215,7 @@ class ExcerciseController extends Controller
             'selected' => '',
         ];
     }
+
     /**
      * Finds the Excercise model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
