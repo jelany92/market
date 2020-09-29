@@ -55,22 +55,6 @@ class MainCategoryExercise extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getQuestionType()
-    {
-        return [
-            'tow_choice'  => Yii::t('app', 'Tow Choice'),
-            'four_choice' => Yii::t('app', 'Four Choice'),
-            'text'        => Yii::t('app', 'Text'),
-        ];
-    }
-
-    public static function getDefaultAnswerList()
-    {
-        return [
-            'right'  => Yii::t('app', 'True or False'),
-        ];
-    }
-
     /**
      * Gets query for [[QuizExercises]].
      *

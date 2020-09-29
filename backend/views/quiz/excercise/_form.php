@@ -8,6 +8,7 @@ use yii\helpers\Url;
 use backend\models\quiz\Excercise;
 use kartik\select2\Select2;
 use wbraganca\dynamicform\DynamicFormWidget;
+use kartik\icons\Icon;
 
 /* @var $this yii\web\View */
 /* @var $model Excercise */
@@ -59,8 +60,8 @@ $this->registerJsFile('@web/js/quiz_list.js', ['depends' => [\yii\web\JqueryAsse
                             <div class="panel-heading">
                                 <h3 class="panel-title pull-left">Address</h3>
                                 <div class="pull-right">
-                                    <button type="button" class="add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
-                                    <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
+                                    <?= Html::button(Icon::show('plus'), ['class' => 'btn btn-success add-item']) ?>
+                                    <?= Html::button(Icon::show('minus'), ['class' => 'btn btn-danger remove-item btn-xs']) ?>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -74,19 +75,19 @@ $this->registerJsFile('@web/js/quiz_list.js', ['depends' => [\yii\web\JqueryAsse
                                 ?>
                                 <?= $form->field($model, "[{$i}]question_type")->dropDownList(Excercise::getQuestionType(), [
                                     'id'       => 'question_type_id_' . $i,
-                                    'onchange' => 'myFunctionAnswerType(' . $i . ')',
+                                    'onchange' => "myFunctionAnswerType({$i})",
                                     'prompt'   => Yii::t('app', 'Choose Answer Type'),
                                 ]); ?>
 
                                 <?= $form->field($model, "[{$i}]question")->textarea(['rows' => 6]) ?>
 
-                                <?= Html::dropDownList('answerOption_' . $i, [
+                                <?= Html::dropDownList('answerOption' , [
                                     'id'   => 'answerId',
                                     'name' => 'answerName',
-                                ], MainCategoryExercise::getDefaultAnswerList(), [
-                                                           'id'       => 'answer_' . $i,
+                                ], Excercise::getDefaultAnswerList(), [
+                                                           //'id'       => $i,
                                                            'class'    => 'btn btn-primary conditional-field answerOption',
-                                                           'onchange' => 'myFunctionAnswer(' . $i . ')',
+                                                           'onchange' => 'myFunctionAnswer()',
                                                            'prompt'   => Yii::t('app', 'Choose Answer Option'),
                                                            'style'    => 'display:none',
                                                        ]); ?>

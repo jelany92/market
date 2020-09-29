@@ -79,7 +79,7 @@ class ExcerciseController extends Controller
         if ($modelForm->load(Yii::$app->request->post()))
         {
             $modelExerciseList = ExerciseForm::createMultiple(Excercise::class);
-            Model::loadMultiple($modelExerciseList, Yii::$app->request->post());
+            ExerciseForm::loadMultiple($modelExerciseList, Yii::$app->request->post());
 
             // ajax validation
             if (Yii::$app->request->isAjax)

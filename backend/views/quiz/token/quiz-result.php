@@ -9,7 +9,7 @@ use yii\bootstrap4\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Your Answer');
-$percentage  = number_format(($correctAnswer / $dataProvider->count) * 100, 2) . '%';;
+$percentage  = number_format(($correctAnswer / $dataProvider->count) * 100, 2) . '%';
 ?>
 <div class="excercise-crud-index">
 
@@ -62,7 +62,7 @@ $percentage  = number_format(($correctAnswer / $dataProvider->count) * 100, 2) .
                                  [
                                      'label' => Yii::t('app', 'Correct Answer'),
                                      'value' => function ($model) {
-                                         return $model->excercise[$model->excercise->correct_answer];
+                                         return isset($model->excercise[$model->excercise->correct_answer]) ? $model->excercise[$model->excercise->correct_answer] : $model->excercise->correct_answer;
                                      },
                                  ],
                              ],

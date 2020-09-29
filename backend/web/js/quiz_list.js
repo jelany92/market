@@ -1,6 +1,6 @@
 function myFunctionAnswerType($i)
 {
-    var answerElement = document.getElementsByName('Excercise[' + $i + '][question_type]')[0].value;
+    var answerElement = document.getElementsByName('ExerciseForm[' + $i + '][question_type]')[0].value;
     $('.conditional-field').hide();
     if (answerElement == 1)
     {
@@ -25,7 +25,7 @@ function myFunctionAnswerType($i)
 
 $('#document').ready(function ()
 {
-    var answerElement = document.getElementsByName('Excercise[question_type]')[0].value;
+    var answerElement = document.getElementsByName('ExerciseForm[question_type]')[0].value;
     $('.conditional-field').hide();
     if (answerElement == 1)
     {
@@ -48,13 +48,15 @@ $('#document').ready(function ()
     }
 });
 
-function myFunctionAnswer($i)
+function myFunctionAnswer()
 {
-    var answerElement = document.getElementsByName('answerOption_' + $i)[0].value;
+    var i             = document.getElementsByName('answerOption')[0].id;
+    alert(i);
+    var answerElement = document.getElementsByName('answerOption_' + i)[0].value;
     if (answerElement == 'right')
     {
-        document.getElementsByName('Excercise[' + $i + '][answer_a]')[0].value = 'True';
-        document.getElementsByName('Excercise[' + $i + '][answer_b]')[0].value = 'False';
+        document.getElementsByName('ExerciseForm[' + i + '][answer_a]')[0].value = 'True';
+        document.getElementsByName('ExerciseForm[' + i + '][answer_b]')[0].value = 'False';
     }
 };
 

@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'correct_answer',
                 'value'     => function ($model) {
-                    return $model[$model->correct_answer];
+                    return isset($model[$model->correct_answer]) ? $model[$model->correct_answer] : $model->correct_answer;
                 },
             ],
         ],

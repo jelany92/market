@@ -108,33 +108,42 @@ class Excercise extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param string $questionType
-     *
      * @return array
+     */
+    public static function getDefaultAnswerList()
+    {
+        return [
+            'right'  => Yii::t('app', 'True or False'),
+        ];
+    }
+
+    /**
+     * @param string|null $questionType
+     * @return array|string[]
      */
     public static function getCorrectAnswerOptionList(string $questionType = null): array
     {
-    if ($questionType == self::QUESTION_TYPE_TOW_CHOICE)
-    {
-        $correctAnswer = [
-            'answer_a'=> 'A',
-            'answer_b'=> 'B',
-        ];
-    }
-    else if ($questionType == self::QUESTION_TYPE_FOUR_CHOICE)
-    {
-        $correctAnswer = [
-            'answer_a' => 'A',
-            'answer_b' => 'B',
-            'answer_c' => 'C',
-            'answer_d' => 'D',
-        ];
-    }
-    else if ($questionType == self::QUESTION_TYPE_TEXT)
-    {
-        $correctAnswer = [];
-    }
-    return $correctAnswer;
+        if ($questionType == self::QUESTION_TYPE_TOW_CHOICE)
+        {
+            $correctAnswer = [
+                'answer_a'=> 'A',
+                'answer_b'=> 'B',
+            ];
+        }
+        else if ($questionType == self::QUESTION_TYPE_FOUR_CHOICE)
+        {
+            $correctAnswer = [
+                'answer_a' => 'A',
+                'answer_b' => 'B',
+                'answer_c' => 'C',
+                'answer_d' => 'D',
+            ];
+        }
+        else if ($questionType == self::QUESTION_TYPE_TEXT)
+        {
+            $correctAnswer = [];
+        }
+        return $correctAnswer;
     }
 
     /**
