@@ -60,7 +60,6 @@ class ExerciseForm extends \yii\base\Model
             [['created_at', 'updated_at', 'answer'], 'safe'],
             [['answer_a', 'answer_b', 'answer_c', 'answer_d'], 'string', 'max' => 255],
             [['correct_answer'], 'string', 'max' => 10],
-            [['main_category_exercise_id'], 'exist', 'skipOnError' => true, 'targetClass' => MainCategoryExercise::class, 'targetAttribute' => ['main_category_exercise_id' => 'id']],
         ];
     }
 
@@ -71,7 +70,6 @@ class ExerciseForm extends \yii\base\Model
     {
         return [
             'id'                        => Yii::t('app', 'ID'),
-            'main_category_exercise_id' => Yii::t('app', 'main_category_exercise_id'),
             'question'                  => Yii::t('app', 'Question'),
             'answer_a'                  => Yii::t('app', 'Answer A'),
             'answer_b'                  => Yii::t('app', 'Answer B'),
@@ -121,7 +119,17 @@ class ExerciseForm extends \yii\base\Model
         }
 
         unset($model, $formName, $post);
-
         return $models;
+    }
+
+    public function setValueFromModelToForm(Excercise $model)
+    {
+        $this->question                  = $model->question;
+        $this->answer_a                  = $model->answer_a;
+        $this->answer_b                  = $model->answer_b;
+        $this->answer_c                  = $model->answer_c;
+        $this->answer_d                  = $model->answer_d;
+        $this->correct_answer            = $model->correct_answer;
+        $this->question_type             = $model->question_type;
     }
 }

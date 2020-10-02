@@ -178,4 +178,17 @@ class Excercise extends \yii\db\ActiveRecord
         }
         return $correctAnswer;
     }
+
+    public function setValueFromFormToModel($modelForm)
+    {
+        $this->question                  = $modelForm->question;
+        $this->answer_a                  = $modelForm->answer_a;
+        $this->answer_b                  = $modelForm->answer_b;
+        $this->answer_c                  = $modelForm->answer_c;
+        $this->answer_d                  = $modelForm->answer_d;
+        $this->correct_answer            = $modelForm->correct_answer;
+        $this->question_type             = $modelForm->question_type;
+        $this->save();
+        var_dump($this->question, $modelForm->question);die();
+    }
 }

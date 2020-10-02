@@ -8,20 +8,17 @@ use yii\helpers\Html;
 
 $this->title                   = Yii::t('app', 'Update {modelClass}: ', [
         'modelClass' => 'Excercise',
-    ]) . $model->id;
+    ]) . $model->question;
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Excercise'),
     'url'   => ['index'],
 ];
-$this->params['breadcrumbs'][] = ['label' => $model->mainCategoryExercise->main_category_exercise_name, 'url' => ['quiz/main-category-exercise']];
-
 $this->params['breadcrumbs'][] = [
-    'label' => $model->id,
-    'url'   => [
-        'view',
-        'id' => $model->id,
-    ],
+    'label' => $modelModelMainCategoryExercise->main_category_exercise_name,
+    'url'   => ['quiz/main-category-exercise'],
 ];
+
+
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="excercise-crud-update">
@@ -31,6 +28,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
     <?= $this->render('_form', [
         'model'                          => $model,
         'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
+        'modelsAddress'                  => $modelsAddress,
     ]) ?>
 
 </div>

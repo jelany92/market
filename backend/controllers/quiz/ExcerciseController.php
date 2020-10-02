@@ -5,7 +5,6 @@ namespace backend\controllers\quiz;
 use backend\models\quiz\Excercise;
 use backend\models\quiz\ExerciseForm;
 use backend\models\quiz\MainCategoryExercise;
-use backend\models\quiz\Model;
 use backend\models\quiz\search\ExcerciseSearch;
 use kartik\form\ActiveForm;
 use Yii;
@@ -78,9 +77,8 @@ class ExcerciseController extends Controller
         $modelModelMainCategoryExercise = $this->findModelMainCategoryExercise($mainCategoryExerciseId);
         if ($modelForm->load(Yii::$app->request->post()))
         {
-            $modelExerciseList = ExerciseForm::createMultiple(Excercise::class);
+            $modelExerciseFormList = ExerciseForm::createMultiple(ExerciseForm::class);
             ExerciseForm::loadMultiple($modelExerciseList, Yii::$app->request->post());
-
             // ajax validation
             if (Yii::$app->request->isAjax)
             {
@@ -90,17 +88,17 @@ class ExcerciseController extends Controller
             $transaction = \Yii::$app->db->beginTransaction();
             try
             {
-                foreach ($modelExerciseList as $modelAddress)
+                foreach ($modelExerciseFormList as $modelExerciseForm)
                 {
                     $modelExercise                            = new Excercise();
                     $modelExercise->main_category_exercise_id = $mainCategoryExerciseId;
-                    $modelExercise->question_type             = $modelAddress->question_type;
-                    $modelExercise->question                  = $modelAddress->question;
-                    $modelExercise->answer_a                  = $modelAddress->answer_a;
-                    $modelExercise->answer_b                  = $modelAddress->answer_b;
-                    $modelExercise->answer_c                  = $modelAddress->answer_c;
-                    $modelExercise->answer_d                  = $modelAddress->answer_d;
-                    $modelExercise->correct_answer            = $modelAddress->correct_answer;
+                    $modelExercise->question_type             = $modelExerciseForm->question_type;
+                    $modelExercise->question                  = $modelExerciseForm->question;
+                    $modelExercise->answer_a                  = $modelExerciseForm->answer_a;
+                    $modelExercise->answer_b                  = $modelExerciseForm->answer_b;
+                    $modelExercise->answer_c                  = $modelExerciseForm->answer_c;
+                    $modelExercise->answer_d                  = $modelExerciseForm->answer_d;
+                    $modelExercise->correct_answer            = $modelExerciseForm->correct_answer;
                     if (!($modelExercise->save(false)))
                     {
                         $transaction->rollBack();
@@ -125,32 +123,6 @@ class ExcerciseController extends Controller
     }
 
     /**
-     * @param int $mainCategoryExerciseId
-     *
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function _actionCreate(int $mainCategoryExerciseId)
-    {
-        $model                          = new Excercise();
-        $modelModelMainCategoryExercise = $this->findModelMainCategoryExercise($mainCategoryExerciseId);
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
-        {
-            $model->main_category_exercise_id = $mainCategoryExerciseId;
-            $model->save();
-            Yii::$app->session->addFlash('app', 'done');
-            return $this->redirect([
-                                       'view',
-                                       'id' => $model->id,
-                                   ]);
-        }
-        return $this->render('create', [
-            'model'                          => $model,
-            'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
-        ]);
-    }
-
-    /**
      * Updates an existing Excercise model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
@@ -160,24 +132,23 @@ class ExcerciseController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        $model     = $this->findModel($id);
+        $modelForm = new ExerciseForm();
+        $modelForm->setValueFromModelToForm($model);
+        if ($modelForm->load(Yii::$app->request->post()) && $modelForm->validate())
         {
-
-            $model->save();
+            dd($modelForm);
+            $model->setValueFromFormToModel($modelForm);
             return $this->redirect([
                                        'view',
                                        'id' => $model->id,
                                    ]);
         }
-        else
-        {
-            return $this->render('update', [
-                'model'                          => $model,
-                'modelModelMainCategoryExercise' => $model->mainCategoryExercise,
-            ]);
-        }
+        return $this->render('update', [
+            'model'                          => $modelForm,
+            'modelModelMainCategoryExercise' => $model->mainCategoryExercise,
+            'modelsAddress'                  => (empty($model)) ? [new Excercise()] : [$model],
+        ]);
     }
 
     /**
@@ -233,7 +204,7 @@ class ExcerciseController extends Controller
         }
         else
         {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('The requested page does not exist . ');
         }
     }
 
@@ -254,7 +225,7 @@ class ExcerciseController extends Controller
         }
         else
         {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('The requested page does not exist . ');
         }
     }
 }
