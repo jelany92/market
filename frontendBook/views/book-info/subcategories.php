@@ -11,7 +11,6 @@ $this->title = Yii::t('app', 'Subcategory');
 ?>
 
 <div class="container">
-    <br>
     <?php foreach ($subcategories as $subcategory) : ?>
         <?= Html::a('<h1>' . $subcategory->subcategory_name . '</h1>', [
             'book-info/subcategory',
@@ -64,5 +63,6 @@ $this->title = Yii::t('app', 'Subcategory');
             <!-- /tab -->
         </div>
         <!-- Products tab & slick -->
+        <br>
     <?php endforeach; ?>
 </div>
