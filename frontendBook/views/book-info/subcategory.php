@@ -63,4 +63,6 @@ $this->title = Yii::t('app', 'Subcategory');
         </div>
         <!-- Products tab & slick -->
     <?php endforeach; ?>
+    <br>
+    <br>
 </div>
