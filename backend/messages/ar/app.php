@@ -147,4 +147,11 @@ return [
 
     //Returned Goods
     'Returned Goods'                       => 'بضائع مرتجعة',
+
+    //Customers
+    'Employer'                             => 'العمال',
+    'Company'                              => 'الشركات',
+    'Admin User'                           => 'المشرف',
+    'Permission'                           => 'الصلاحيات',
+
 ];
