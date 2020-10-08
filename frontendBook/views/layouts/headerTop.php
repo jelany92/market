@@ -1,7 +1,8 @@
 <?php
 
-use yii\bootstrap\Html;
 use backend\components\LanguageDropdown;
+use yii\bootstrap\Html;
+use yii\bootstrap\Nav;
 
 
 $language = [
@@ -32,13 +33,13 @@ $language = [
                 <!-- End .header-dropdown -->
                 <?php
 
-                echo \yii\bootstrap\Nav::widget([
-                                                    'options' => [
-                                                        'class' => 'nav navbar-right top-header pull-right',
-                                                        'style' => 'margin-bottom: -20px; margin-top: -8px;',
-                                                    ],
-                                                    'items'   => $language,
-                                                ]);
+                echo nav::widget([
+                                     'options' => [
+                                         'class' => 'nav navbar-right top-header pull-right',
+                                         'style' => 'margin-bottom: -20px; margin-top: -8px;',
+                                     ],
+                                     'items'   => $language,
+                                 ]);
                 ?>
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <li>

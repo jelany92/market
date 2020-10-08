@@ -54,12 +54,12 @@ $this->title = 'Book Gallery';
         <!-- row -->
         <div class="row">
             <!-- section title -->
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <div class="section-title">
-                    <h3 class="title"><?= Yii::t('app', 'New Book') ?></h3>
+                    <h3 class="title"><?= Yii::t('app', 'New Book')?></h3>
                     <div class="section-nav">
-                        <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
+                        <ul class="section-title section-tab-nav tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1"><?= Yii::t('app', 'New Book') ?></a></li>
                             <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
                             <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
                             <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
