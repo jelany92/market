@@ -4666,7 +4666,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 }
 
 .navbar-nav {
-    margin: 7.5px -15px
+    margin: 7.5px -10px !important;
 }
 
 .navbar-nav > li > a {
