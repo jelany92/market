@@ -43,14 +43,14 @@ $label = [
 ?>
 
 <!-- /NAVIGATION -->
-<nav id="navigation" class="navbar navbar-expand-lg ml-auto">
+<nav id="navigation" class="navbar-expand-lg ml-auto">
     <!-- container -->
     <div class="container" style="text-align: start">
             <?php
             echo Nav::widget([
                                  'options' => [
                                      'id'    => 'responsive-nav',
-                                     'class' => 'main-nav navbar-nav mr-auto',
+                                     'class' => 'navbar-nav main-nav ml-auto',
                                  ],
                                  'items'   => $label,
                              ]); ?>

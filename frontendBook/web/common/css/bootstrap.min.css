@@ -4678,7 +4678,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 @media (max-width: 767px) {
     .navbar-nav .open .dropdown-menu {
         position: static;
-        float: none;
+        float: revert;
         width: auto;
         margin-top: 0;
         background-color: transparent;
@@ -4702,12 +4702,12 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
 @media (min-width: 768px) {
     .navbar-nav {
-        float: left;
+        float: revert !important;
         margin: 0
     }
 
     .navbar-nav > li {
-        float: left
+        float: revert;
     }
 
     .navbar-nav > li > a {
