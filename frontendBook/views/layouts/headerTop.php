@@ -7,52 +7,76 @@ use yii\bootstrap\Nav;
 
 $language = [
     [
+        'label'       => Yii::$app->user->isGuest == true ? Yii::t('app', 'My Account') : Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Logout (' . Html::encode(Yii::$app->user->identity->username) . ')', ['class' => 'btn btn-link logout']) . Html::endForm(),
+        'url'         => ['/site/login'],
+        'linkOptions' => [
+            'class' => '<i class="fa fa-user-o"></i>',
+        ],
+    ],
+    [
         'label' => LanguageDropdown::label(Yii::$app->language),
         'items' => LanguageDropdown::widget([]),
     ],
 ];
 
+$label = [
+    [
+        'label'       => Yii::t('app', 'Book Gallery'),
+        'url'         => ['/site/index'],
+        'linkOptions' => [
+            'class' => 'add-to-cart-btn',
+        ],
+    ],
+    [
+        'label'       => Yii::t('app', '+49 157'),
+        'linkOptions' => [
+            'class' => 'fa fa-phone',
+        ],
+    ],
+    [
+        'label'       => 'jelany.kattan@hotmail.com',
+        'linkOptions' => [
+            'class' => 'fa fa-envelope-o',
+        ],
+    ],
+    [
+        'label'       => Yii::t('app', '1734 Germany'),
+        'linkOptions' => [
+            'class' => 'fa fa-map-marker',
+        ],
+    ],
+];
+
+
 ?>
 <!-- HEADER -->
 <header>
     <!-- TOP HEADER -->
-    <div id="top-header">
+    <nav id="top-header" class="header-links">
         <div class="container">
-            <ul class="header-links pull-left">
-                <li>
-                    <?= Html::a(Yii::t('app', 'Book Gallery'), ['/site/index'], [
-                        'class' => 'add-to-cart-btn',
-                    ]) ?>
-                </li>
-                <li><a href="#"><i class="fa fa-phone"></i> +49 157</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> jelany.kattan@hotmail.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Germany</a></li>
-            </ul>
-            <ul class="header-links pull-right">
-
-                <!-- End .header-dropdown -->
-                <?php
-
-                echo nav::widget([
-                                     'options' => [
-                                         'class' => 'nav navbar-right top-header pull-right',
-                                         'style' => 'margin-bottom: -20px; margin-top: -8px;',
-                                     ],
-                                     'items'   => $language,
-                                 ]);
-                ?>
-                <?php if (Yii::$app->user->isGuest) : ?>
-                    <li>
-                        <?= '<i class="fa fa-user-o"></i>' . Html::a(Yii::t('app', 'My Account'), ['/site/login'], ['class' => 'add-to-cart-btn',]) ?>
-                    </li>
-                <?php else : ?>
-                    <li>
-                        <?= Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Logout (' . Html::encode(Yii::$app->user->identity->username) . ')', ['class' => 'btn btn-link logout']) . Html::endForm() ?>
-                    </li>
-                <?php endif; ?>
-            </ul>
+            <div class="row">
+                <div class="col-xs-9">
+                    <?php
+                    echo nav::widget([
+                                         'options' => [
+                                             'class' => 'nav ml-auto',
+                                         ],
+                                         'items'   => $label,
+                                     ]);
+                    ?>
+                </div>
+                <div class="col-xs-3">
+                    <?php
+                    echo nav::widget([
+                                         'options' => [
+                                             'class' => 'nav ml-auto',
+                                         ],
+                                         'items'   => $language,
+                                     ]);
+                    ?>
+                </div>
+            </div>
         </div>
-    </div>
+    </nav>
     <!-- /TOP HEADER -->
 </header>
-
