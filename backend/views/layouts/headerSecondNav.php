@@ -197,7 +197,7 @@ $label = [
     <nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark ml-auto">
         <div class="container">
             <div class="row col-md-12" style="display: -webkit-box">
-                <div class="col-md-4">
+                <div class="col-10 col-md-4">
                     <?php
                     echo nav::widget([
                                          'options' => [
@@ -206,6 +206,9 @@ $label = [
                                          'items'   => $label,
                                      ]);
                     ?>
+                </div>
+
+                <div class="col-2 col-md-0">
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#itemNavSecond" aria-controls="itemNavSecond" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 </div>
                 <div class="col-md-8" style="display: -webkit-box">

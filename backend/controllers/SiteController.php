@@ -173,30 +173,31 @@ class SiteController extends Controller
             if (isset($mainCategory))
             {
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
-                                                                                        //'company_id'       => Yii::$app->user->id,
+                                                                                        'company_id'       => Yii::$app->user->id,
                                                                                         'main_category_id' => $mainCategory,
                                                                                     ]);
             }
             elseif (isset($subcategory))
             {
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->innerJoinWith('gallerySaveCategory')->andWhere([
-                                                                                                                              //'company_id'     => Yii::$app->user->id,
+                                                                                                                              'company_id'     => Yii::$app->user->id,
                                                                                                                               'subcategory_id' => $subcategory,
                                                                                                                           ]);
             }
             elseif (isset($author))
             {
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->innerJoinWith('bookAuthorName')->andWhere([
-                                                                                                                                                         'company_id'     => Yii::$app->user->id,
-                                                                                                                                                         'like',
-                                                                                                                                                         'name',
-                                                                                                                                                         $author,
-                                                                                                                                                     ]);
+                                                                                                                         'and',
+                                                                                                                         ['detail_gallery_article.company_id' => Yii::$app->user->id],
+                                                                                                                         ['like',
+                                                                                                                         'name',
+                                                                                                                         $author],
+                                                                                                                     ]);
+
             }
             else
             {
-                $modelDetailGalleryArticle = DetailGalleryArticle::find();
-                //->andWhere(['company_id' => Yii::$app->user->id]);
+                $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere(['company_id' => Yii::$app->user->id]);
 
             }
             $pages = new Pagination(['totalCount' => $modelDetailGalleryArticle->count()]);

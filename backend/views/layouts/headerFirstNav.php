@@ -41,7 +41,7 @@ $label = [
 <nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark ml-auto">
     <div class="container">
         <div class="row col-md-12" style="display: -webkit-box">
-            <div class="col-md-3">
+            <div class="col-10 col-sm-4">
                 <?php
                 echo nav::widget([
                                      'options' => [
@@ -51,6 +51,8 @@ $label = [
                                      'items'   => $label,
                                  ]);
                 ?>
+            </div>
+            <div class="col-2 col-md-0">
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#itemNavFirst" aria-controls="itemNavFirst" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             </div>
             <div class="col-md-5">
@@ -69,21 +71,23 @@ $label = [
                 <?php
                 echo Html::textInput('search', (Yii::$app->controller->id == 'search' && Yii::$app->controller->action->id == 'global-search') ? Yii::$app->request->get('search') : null, [
                     'autocomplete' => 'off',
-                    'class'        => 'navSearchTextBox pull-center',
                     'id'           => 'navSearchString',
                     'placeholder'  => Yii::t('app', 'Search to') . '...',
                     'value'        => 'test',
+                    'class'        => 'navSearchTextBox pull-center',
+                    'style'        => 'align-items: revert;',
                 ]);
                 echo Html::submitButton(Icon::show('search'), ['class' => 'btn btn-secondary navSearchSubmit'])
                 ?>
                 <?php ActiveForm::end(); ?>
             </div>
-            <div class="col-md-4 col-xs-6" style="display: -webkit-box">
+            <div class="col-md-3" style="display: -webkit-box">
                 <?php
                 echo nav::widget([
                                      'options' => [
                                          'id'    => 'itemNavFirst',
                                          'class' => 'collapse navbar-collapse navbar-nav ml-auto',
+                                         'style' => 'align-items: revert;'
                                      ],
                                      'items'   => $firstMenuItems,
                                  ]);
