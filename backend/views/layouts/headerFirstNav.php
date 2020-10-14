@@ -52,7 +52,7 @@ $label = [
                                  ]);
                 ?>
             </div>
-            <div class="col-1 col-md-0">
+            <div class="col-1">
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#itemNavFirst" aria-controls="itemNavFirst" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             </div>
             <div class="col-md-5">
