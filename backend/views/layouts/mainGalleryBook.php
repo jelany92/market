@@ -56,88 +56,13 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
     </head>
     <body>
     <?php $this->beginBody() ?>
-
     <div class="wrap">
-        <?php
-        NavBar::begin([
-                          'brandLabel' => 'Adam Markt',
-                          'brandUrl'   => Yii::$app->homeUrl,
-                          'options'    => ['class' => 'sticky-top navbar-expand-lg navbar-dark bg-dark ml-auto',],
-                      ]);
-        $menuItems = [
-            [
-                'label' => Yii::t('app', 'Home'),
-                'url'   => ['/site/index'],
-            ],
-            [
-                'label' => LanguageDropdown::label(Yii::$app->language),
-                'items' => LanguageDropdown::widget(),
-            ],
-        ];
-        if (Yii::$app->user->isGuest)
-        {
-            $menuItems[] = [
-                'label' => 'Login',
-                'url'   => ['/site/login'],
-            ];
-        }
-        else
-        {
-            $mainCategory = [];
-            $menuItems    = [];
-            if ($category instanceof MainCategory)
-            {
-                $mainCategory = MainCategory::getMainCategoryList(Yii::$app->user->id);
-            }
-            $menuItems   = [
-                [
-                    'label' => Yii::t('app', 'Categories'),
-                    'items' => items($mainCategory, '/main-category/view', 'id'),
-                ],
-                [
-                    'label' => Yii::t('app', 'Book Gallery'),
-                    'url'   => ['/detail-gallery-article/index'],
-                ],
-
-                [
-                    'label' => LanguageDropdown::label(Yii::$app->language),
-                    'items' => LanguageDropdown::widget(),
-                ],
-            ];
-            $menuItems[] = '<li>' . Html::beginForm(['/site/logout'], 'post') . Html::submitButton(Yii::t('app', 'Logout') . ' (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']) . Html::endForm() . '</li>';
-        }
-
-        echo Nav::widget([
-                             'options' => ['class' => Yii::$app->language == 'ar' ? 'navbar-right ml-auto pull-left' : 'navbar-right ml-auto'],
-                             'items'   => $menuItems,
-                         ]);
-        ?>
-        <div class="navSearch">
-            <?php
-            $form = ActiveForm::begin([
-                                          'id'      => 'navSearchForm',
-                                          'method'  => 'GET',
-                                          'options' => [
-                                              'style' => 'text-align: center;',
-                                          ],
-                                          'action'  => Url::toRoute('/search/global-search'),
-                                      ]);
-            echo Html::textInput('search', (Yii::$app->controller->id == 'search' && Yii::$app->controller->action->id == 'global-search') ? Yii::$app->request->get('search') : null, [
-                'id'           => 'navSearchString',
-                'autocomplete' => 'off',
-                'class'        => 'navSearchTextBox',
-                'placeholder'  => Yii::t('app', 'Search to') . '...',
-            ]);
-            echo Html::submitButton(Icon::show('search'), ['class' => 'btn btn-secondary navSearchSubmit'])
-            ?>
-            <?php ActiveForm::end(); ?>
-        </div>
-        <?php NavBar::end(); ?>
+        <?= $this->render('headerFirstNav') ?>
         <div>
             <div>
                 <?php
                 NavBar::begin([
-                                  'options' => ['class' => 'navbar-expand-lg bg-dark',],
+                                  'options' => ['class' => 'sticky-top navbar-expand-lg bg-dark',],
                               ]);
                 $subMenuItems = [];
                 $mainCategory = [];
@@ -149,6 +74,10 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
                     $mainCategory = MainCategory::getMainCategoryList(Yii::$app->user->id);
                 }
                 $subMenuItems = [
+                    [
+                        'label' => Yii::t('app', 'Book Gallery'),
+                        'url'   => ['/detail-gallery-article/index'],
+                    ],
                     [
                         'label' => Yii::t('app', 'Categories'),
                         'items' => items($mainCategory, '/site/index', 'mainCategory'),
@@ -163,7 +92,6 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
                     ],
                 ];
                 echo Nav::widget([
-                                     'options' => ['style' => 'padding-left: 300px; padding-right: 300px;'],
                                      'items'   => $subMenuItems,
                                  ]);
                 ?>
