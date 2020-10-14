@@ -55,7 +55,7 @@ $label = [
             <div class="col-1">
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#itemNavFirst" aria-controls="itemNavFirst" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <?php
                 $form = ActiveForm::begin([
                                               'id'      => 'itemNavFirst',
@@ -81,7 +81,7 @@ $label = [
                 ?>
                 <?php ActiveForm::end(); ?>
             </div>
-            <div class="col-md-3" style="display: -webkit-box">
+            <div class="col-md-4" style="display: -webkit-box">
                 <?php
                 echo nav::widget([
                                      'options' => [
