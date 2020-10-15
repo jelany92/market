@@ -92,15 +92,18 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
                     ],
                 ];
                 echo Nav::widget([
-                                     'items'   => $subMenuItems,
+                                     'items' => $subMenuItems,
                                  ]);
                 ?>
                 <?php NavBar::end(); ?>
-                <div class="container">
-                    <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
-                    <?= Alert::widget() ?>
-                    <?= $content ?>
-                </div>
+                <main class="d-flex">
+                    <?php echo $this->render('_sidebar') ?>
+                    <div class="container">
+                        <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
+                        <?= Alert::widget() ?>
+                        <?= $content ?>
+                    </div>
+                </main>
             </div>
         </div>
     </div>

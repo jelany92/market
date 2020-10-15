@@ -1,12 +1,7 @@
 <?php
 
-use backend\components\LanguageDropdown;
-use kartik\form\ActiveForm;
-use kartik\icons\Icon;
-use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
-use yii\helpers\Url;
 use common\models\MainCategory;
+use yii\bootstrap4\Nav;
 
 function items($teams, $view)
 {

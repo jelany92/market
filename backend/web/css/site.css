@@ -117,3 +117,7 @@ a.desc:after {
         padding-left: 0.5rem;
     }
 }
+
+.content-wrapper{
+    flex: 1;
+}

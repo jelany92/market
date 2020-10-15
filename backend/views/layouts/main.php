@@ -34,15 +34,16 @@ AppAsset::register($this);
     </head>
     <body>
     <?php $this->beginBody() ?>
-    <?= $this->render('headerFirstNav') ?>
-    <?= $this->render('headerSecondNav') ?>
 
-    <div class="wrap">
-        <div class="container">
-            <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
-            <?= Alert::widget() ?>
-            <?= $content ?>
-        </div>
+
+    <?= $this->render('headerFirstNav') ?>
+    <?php if (!Yii::$app->user->isGuest) : ?>
+        <?= $this->render('headerSecondNav') ?>
+    <?php endif; ?>
+    <div class="container p-3">
+        <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
+        <?= Alert::widget() ?>
+        <?= $content ?>
     </div>
 
     <footer class="footer">
