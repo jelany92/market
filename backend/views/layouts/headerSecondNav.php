@@ -2,6 +2,8 @@
 
 use common\models\MainCategory;
 use yii\bootstrap4\Nav;
+use yii\bootstrap4\Html;
+use kartik\icons\Icon;
 
 function items($teams, $view)
 {
@@ -192,7 +194,7 @@ $label = [
     <nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark ml-auto">
         <div class="container">
             <div class="row col-md-12" style="display: -webkit-box">
-                <div class="col-10 col-md-3">
+                <div class="col-10 col-md-4">
                     <?php
                     echo nav::widget([
                                          'options' => [
@@ -202,17 +204,21 @@ $label = [
                                      ]);
                     ?>
                 </div>
-
-                <div class="col-1">
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#itemNavSecond" aria-controls="itemNavSecond" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                </div>
+                <?= Html::button(Icon::show('bars'), [
+                    'class'         => 'navbar-toggler',
+                    'data-toggle'   => 'collapse',
+                    'data-target'   => '#itemNavSecond',
+                    'aria-controls' => 'itemNavSecond',
+                    'aria-expanded' => 'false',
+                    'aria-label'    => 'Toggle navigation',
+                ]) ?>
                 <div class="col-md-8" style="display: -webkit-box">
                     <?php
                     echo nav::widget([
                                          'options' => [
                                              'id'    => 'itemNavSecond',
                                              'class' => 'collapse navbar-collapse navbar-nav ml-auto',
-                                             'style' => 'align-items: revert;'
+                                             'style' => 'align-items: revert;',
                                          ],
                                          'items'   => $menuItems,
                                      ]);
