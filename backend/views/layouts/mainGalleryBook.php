@@ -20,28 +20,6 @@ use yii\widgets\ActiveForm;
 
 Icon::map($this);
 BookGallery::register($this);
-
-function items($teams, $view, $param)
-{
-    $items = [];
-    foreach ($teams as $key => $team)
-    {
-        $items[] = [
-            'label' => $team,
-            'url'   => [
-                $view,
-                $param => $key,
-            ],
-        ];
-    }
-    return $items;
-}
-
-$category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id])->one();
-
-$modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
-                                                                        'company_id' => Yii::$app->user->id,
-                                                                    ])->all();
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -60,42 +38,6 @@ $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
         <?= $this->render('headerFirstNav') ?>
         <div>
             <div>
-                <?php
-                NavBar::begin([
-                                  'options' => ['class' => 'sticky-top navbar-expand-lg bg-dark',],
-                              ]);
-                $subMenuItems = [];
-                $mainCategory = [];
-                $subMenuItems = [];
-                $subCategory  = Subcategory::getSubcategoryList();
-                $authorName   = array_combine(\common\models\BookGallery::getAuthorNameList(2), \common\models\BookGallery::getAuthorNameList(2));
-                if ($category instanceof MainCategory)
-                {
-                    $mainCategory = MainCategory::getMainCategoryList(Yii::$app->user->id);
-                }
-                $subMenuItems = [
-                    [
-                        'label' => Yii::t('app', 'Book Gallery'),
-                        'url'   => ['/detail-gallery-article/index'],
-                    ],
-                    [
-                        'label' => Yii::t('app', 'Categories'),
-                        'items' => items($mainCategory, '/site/index', 'mainCategory'),
-                    ],
-                    [
-                        'label' => Yii::t('app', 'Subcategory'),
-                        'items' => items($subCategory, '/site/index', 'subcategory'),
-                    ],
-                    [
-                        'label' => Yii::t('app', 'Author Name'),
-                        'items' => items($authorName, '/site/index', 'author'),
-                    ],
-                ];
-                echo Nav::widget([
-                                     'items' => $subMenuItems,
-                                 ]);
-                ?>
-                <?php NavBar::end(); ?>
                 <main class="d-flex">
                     <?php echo $this->render('_sidebar') ?>
                     <div class="container">
