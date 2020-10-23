@@ -35,10 +35,10 @@ AppAsset::register($this);
     <body>
     <?php $this->beginBody() ?>
 
-
     <?= $this->render('headerFirstNav') ?>
     <?php if (!Yii::$app->user->isGuest) : ?>
         <?= $this->render('headerSecondNav') ?>
+        <?= $this->render('side') ?>
     <?php endif; ?>
     <div class="container p-3">
         <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
