@@ -1,5 +1,5 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800");
-@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+﻿@import url("https://use.fontawesome.com/releases/v5.5.0/css/all.css");
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800");
 
 html {
     font-size: 70%;
@@ -687,7 +687,7 @@ blockquote.text-white cite span {
 
 .header-dropdown > a::after, .header-dropdown > span::after {
     font-family: 'FontAwesome';
-    content: '\f078';
+    content: '\f131';
     position: absolute;
     right: 0;
     top: 50%;

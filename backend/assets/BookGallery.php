@@ -13,6 +13,7 @@ class BookGallery extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/book-gallery.css',
+        'css/bootstrap.min.css',
     ];
     public $js = [
     ];

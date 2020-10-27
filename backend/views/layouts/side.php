@@ -11,6 +11,23 @@ use common\widgets\AccordionWidget;
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 
+function items($teams, $view)
+{
+    $items = [];
+
+    foreach ($teams as $key => $team)
+    {
+        $items[] = [
+            'label' => $team,
+            'url'   => [
+                $view,
+                'id' => $key,
+            ],
+        ];
+    }
+    return $items;
+}
+
 $category = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id])->one();
 
 $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
@@ -20,7 +37,7 @@ $subMenuItems              = [];
 $mainCategory              = [];
 $subMenuItems              = [];
 $subCategory               = Subcategory::getSubcategoryList();
-$authorName                = array_combine(BookGallery::getAuthorNameList(2), \common\models\BookGallery::getAuthorNameList(2));
+$authorName                = array_combine(BookGallery::getAuthorNameList(Yii::$app->user->id), BookGallery::getAuthorNameList(Yii::$app->user->id));
 if ($category instanceof MainCategory)
 {
     $mainCategory = MainCategory::getMainCategoryList(Yii::$app->user->id);
@@ -30,6 +47,7 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
 ]), [
 
                             ]);
+
 ?>
 <?php $subMenuItems[] = AccordionWidget::widget([
                                                     'items'   => [
@@ -40,6 +58,7 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
                                                             'content' => DropdownSide::widget([
                                                                                                   'items' => items($mainCategory, '/site/index', 'mainCategory'),
                                                                                               ]),
+
                                                             //  'expanded' => true,
                                                         ],
                                                         [
@@ -47,6 +66,7 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
                                                             'content' => DropdownSide::widget([
                                                                                                   'items' => items($subCategory, '/site/index', 'subcategory'),
                                                                                               ]),
+                                                            'hide'    => true,
                                                         ],
                                                         [
                                                             'label'   => Html::tag('div class="card-header"', Yii::t('app', 'Author Name')),
@@ -54,17 +74,56 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
                                                                                                   'items' => items($authorName, '/site/index', 'author'),
                                                                                                   //'view'          => $this->getView(),
                                                                                               ]),
-                                                            'options' => ['style' => 'width: 200px;'],
                                                         ],
+                                                        [
+                                                            'label'   => Html::tag('div class="card-header"', Yii::t('app', 'Quiz')),
+                                                            'content' => DropdownSide::widget([
+                                                                                                  'items' => [
+                                                                                                      [
+                                                                                                          'label' => Yii::t('app', 'Main Category Excercise'),
+                                                                                                          'url'   => ['/quiz/main-category-exercise/index'],
+
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          'label' => Yii::t('app', 'Excercise'),
+                                                                                                          'url'   => ['/quiz/excercise/index'],
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          'label' => Yii::t('app', 'Students'),
+                                                                                                          'url'   => ['quiz/students/index'],
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          'label' => Yii::t('app', 'Token'),
+                                                                                                          'url'   => ['quiz/token/index'],
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          'label' => Yii::t('app', 'Answers'),
+                                                                                                          'url'   => ['quiz/student-answers'],
+                                                                                                      ],
+                                                                                                      [
+                                                                                                          'label' => Yii::t('app', 'Summarize'),
+                                                                                                          'url'   => ['quiz/token/summary'],
+                                                                                                      ],
+                                                                                                  ],
+                                                                                              ]),
+                                                            'visible' => Yii::$app->user->can('*.*'),
+                                                        ],
+
+
                                                     ],
                                                     'options' => [
-                                                        'class' => 'navbar-nav',
-                                                        'style' => 'text-align: start; width: 220px;',
+                                                        'style' => 'text-align: start; width: 220px; color:antiquewhite',
                                                     ],
                                                 ]) ?>
 
+<?php
+
+
+?>
+
+
 <div class="row">
-    <div class="col-sm-2 col-xs-12 bg-dark" style="position: absolute; height: 100%">
+    <div class="col-sm-2 col-xs-12 bg-dark" style="position: fixed; height: 100%; top: 0px">
         <?php
         NavBar::begin([
                           'brandLabel' => Yii::t('app', 'Option'),
@@ -74,8 +133,11 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
                           ],
                       ]);
         echo Nav::widget([
-                             'options' => ['class' => 'nav navbar-nav list'],
                              'items'   => $subMenuItems,
+                             'options' => [
+                                 'class' => 'nav navbar-nav list',
+                                 'style' => 'margin-top: 60px;',
+                             ],
                          ]);
         ?>
         <?php
@@ -83,4 +145,3 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
         ?>
     </div>
 </div>
-

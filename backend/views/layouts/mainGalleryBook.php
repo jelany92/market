@@ -36,18 +36,16 @@ BookGallery::register($this);
     <?php $this->beginBody() ?>
     <div class="wrap">
         <?= $this->render('headerFirstNav') ?>
-        <div>
-            <div>
                 <main class="d-flex">
-                    <?php echo $this->render('_sidebar') ?>
+                    <div>
+                        <?php echo $this->render('_sidebar') ?>
+                    </div>
                     <div class="container">
                         <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
                         <?= Alert::widget() ?>
                         <?= $content ?>
                     </div>
                 </main>
-            </div>
-        </div>
     </div>
     <!--<div class="sidenav">
         <?php

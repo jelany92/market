@@ -5,36 +5,7 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\Html;
 use kartik\icons\Icon;
 
-function items($teams, $view)
-{
-    $items = [];
-
-    foreach ($teams as $key => $team)
-    {
-        $items[] = [
-            'label' => $team,
-            'url'   => [
-                $view,
-                'id' => $key,
-            ],
-        ];
-    }
-    return $items;
-}
-
-$category  = MainCategory::find()->andWhere(['company_id' => Yii::$app->user->id])->one();
-$menuItems = [];
-if ($category instanceof MainCategory)
-{
-    $teams = MainCategory::getMainCategoryList(Yii::$app->user->id);
-}
 $menuItems = [
-    [
-        'label'   => Yii::t('app', 'Categories'),
-        'url'     => ['/main-category/index'],
-        'items'   => items($teams, '/main-category/view'),
-        'visible' => Yii::$app->user->can('main-category.*'),
-    ],
     [
         'label'   => Yii::t('app', 'Merchandise'),
         'items'   => [

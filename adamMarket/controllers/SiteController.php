@@ -81,10 +81,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-     /*   $mainCategories = MainCategory::find()->select([
-                                                           'category_name',
-                                                           'id',
-                                                       ])->andWhere(['company_id' => 3])->createCommand()->queryAll(\PDO::FETCH_KEY_PAIR, \PDO::FETCH_COLUMN);*/
+        /*   $mainCategories = MainCategory::find()->select([
+                                                              'category_name',
+                                                              'id',
+                                                          ])->andWhere(['company_id' => 3])->createCommand()->queryAll(\PDO::FETCH_KEY_PAIR, \PDO::FETCH_COLUMN);*/
 
         $mainCategories = MainCategory::find()->andWhere(['company_id' => 3])->all();
         $articles       = ArticleInfo::find()->andWhere(['company_id' => 3]);
@@ -120,9 +120,18 @@ class SiteController extends Controller
         else
         {
             $model->password = '';
+            $mainCategories  = MainCategory::find()->andWhere(['company_id' => 3])->all();
+            $articles        = ArticleInfo::find()->andWhere(['company_id' => 3]);
+            $pages           = new Pagination(['totalCount' => $articles->count()]);
+            $articles->offset($pages->offset)->limit($pages->limit);
+
 
             return $this->render('login', [
-                'model' => $model,
+                'model'          => $model,
+                'mainCategories' => $mainCategories,
+                'articles'       => $articles->all(),
+                'pages'          => $pages,
+
             ]);
         }
     }
@@ -276,8 +285,8 @@ class SiteController extends Controller
      *
      * @param string $token
      *
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {

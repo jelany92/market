@@ -2,17 +2,29 @@
 
 use backend\components\LanguageDropdown;
 use common\models\MainCategory;
-use kartik\form\ActiveForm;
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 
+$mony     = [
+    [
+        'label' => Yii::t('app', 'Eur'),
+        'url'   => ['/incoming-revenue/index'],
+    ],
+    [
+        'label' => Yii::t('app', 'Usd'),
+        'url'   => ['/incoming-revenue/index'],
+    ],
+];
 $language = [
     [
         'label' => LanguageDropdown::label(Yii::$app->language),
         'items' => LanguageDropdown::widget([]),
+    ],
+    [
+        'label' => 'Eur',
+        'items' => $mony,
     ],
 ];
 
@@ -23,16 +35,17 @@ $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id
 <header class="header">
     <div class="header-top">
         <div class="container">
-            <div class="header-left">
-                <div class="header-dropdown">
-                    <a href="#">Usd</a>
-                    <div class="header-menu">
-                        <ul>
-                            <li><a href="#">Eur</a></li>
-                            <li><a href="#">Usd</a></li>
-                        </ul>
-                    </div><!-- End .header-menu -->
-                </div><!-- End .header-dropdown -->
+            <div class="col-10 col-md-5">
+                <!--   <div class="header-dropdown">
+                       <a href="#">Usd</a>
+                       <div class="header-menu">
+                           <ul>
+                               <li><a href="#">Eur</a></li>
+                               <li><a href="#">Usd</a></li>
+                           </ul>
+                       </div> End .header-menu
+                   </div>-->
+                <!-- End .header-dropdown -->
 
                 <div class="header-dropdown">
                     <?php
@@ -42,23 +55,33 @@ $categoryNameList = ArrayHelper::map(MainCategory::find()->andWhere(['company_id
                                      ]);
                     ?>
                 </div><!-- End .header-dropdown -->
-            </div><!-- End .header-left -->
-
-            <div class="header-right">
+            </div>
+            <div class="col-2 col-md-7">
                 <ul class="top-menu">
                     <li>
                         <a href="#">Links</a>
                         <ul>
-                            <?= Icon::show('phone-alt', ['style' => 'margin-right: 5px;']) ?>
-                            <li><?= Html::a('Call: +0123 456 789', '#') ?></li>
-                            <li><?= Html::a(Yii::t('app', 'About Us'), '#') ?></li>
-                            <li><?= Html::a(Yii::t('app', 'Contact Us'), '#') ?></li>
                             <?php
+                            $login = [
+                                [
+                                    'label' => ' Call: +0123 456 789',
+                                ],
+                                [
+                                    'label' => Yii::t('app', 'About Us'),
+                                    'url'   => ['/site/login'],
+                                ],
+                                [
+                                    'label' => Yii::t('app', 'Contact Us'),
+                                    'url'   => ['/site/login'],
+                                ],
+                            ];
                             if (Yii::$app->user->isGuest)
                             {
                                 $login[] = [
                                     'label' => Yii::t('app', 'Login'),
                                     'url'   => ['/site/login'],
+                                    'linkOptions' => [
+                                    ],
                                 ];
                             }
                             else

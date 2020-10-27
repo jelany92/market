@@ -18,7 +18,7 @@ use yii\helpers\Html;
 /**
  * This class is needed to properly show errors on form fields that are not standalone model attributes but values in an array of a model
  * It requires a custom validator which writes the the error attribute name like this [errorIndex]/attributeName where errorIndex is the index number specified in the fields errorOptions
- * Example code can be found in JobquickModulForm and backend/views/jobquick-module/_form.php
+ * Example code can be found in JobquickModulForm and backend/views/jobquick-module/_formDynamicFormWidget.php
  *
  * Class ExtendedKartikActiveFieldForArrayAttributes
  * @package common\components

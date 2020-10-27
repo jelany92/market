@@ -8,6 +8,7 @@ use common\models\Subcategory;
 use common\widgets\AccordionWidget;
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
+use yii\bootstrap4\Nav;
 
 function items($teams, $view, $param)
 {
@@ -77,28 +78,31 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
                                                         'style' => 'text-align: start; width: 265px;',
                                                     ],
                                                 ]) ?>
-<aside class="shadow collapsible collapsible-accordion">
-    <?= Html::label('<h3>' . Yii::t('app', 'Book Information') . '</h3>', '', [
-        'id'    => 'sidebar',
-        'class' => 'collapse navbar-collapse show',
-    ]) ?>
-    <?= Html::button(Icon::show('bars'), [
-        'class'         => 'navbar-toggler',
-        'data-toggle'   => 'collapse',
-        'data-target'   => '#sidebar',
-        'aria-controls' => 'sidebar',
-        'aria-expanded' => true,
-        'aria-label'    => 'Toggle navigation',
-        'style'         => 'float: right',
-    ]) ?>
+<div class="sidebar-filter-overlay"></div>
+<aside class="sidebar-shop sidebar-filter">
+    <aside class="shadow collapsible collapsible-accordion">
+        <?= Html::label('<h3>' . Yii::t('app', 'Book Information') . '</h3>', '', [
+            'id'    => 'sidebar',
+            'class' => 'collapse navbar-collapse show',
+        ]) ?>
+        <?= Html::button(Icon::show('bars'), [
+            'class'         => 'navbar-toggler',
+            'data-toggle'   => 'collapse',
+            'data-target'   => '#sidebar',
+            'aria-controls' => 'sidebar',
+            'aria-expanded' => true,
+            'aria-label'    => 'Toggle navigation',
+            'style'         => 'float: right',
+        ]) ?>
 
-    <?php echo \yii\bootstrap4\Nav::widget([
-                                               'options' => [
-                                                   'id'    => 'sidebar',
-                                                   'class' => 'collapse navbar-collapse show collapsible-header flex-container flex-column nav-pills ml-auto',
-                                                   'style' => 'align-items: start;',
-                                               ],
-                                               'items'   => $subMenuItems,
-                                           ]) ?>
+        <?= Nav::widget([
+                                            'options' => [
+                                                'id'    => 'sidebar',
+                                                'class' => 'collapse navbar-collapse show collapsible-header flex-container flex-column nav-pills ml-auto',
+                                                'style' => 'align-items: start;',
+                                            ],
+                                            'items'   => $subMenuItems,
+                                        ]) ?>
 
+    </aside>
 </aside>
