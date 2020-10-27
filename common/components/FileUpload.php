@@ -4,8 +4,8 @@ namespace common\components;
 
 use Yii;
 use yii\helpers\Url;
-use yii\web\UploadedFile;
 use yii\imagine\Image;
+use yii\web\UploadedFile;
 
 class FileUpload extends \yii\helpers\StringHelper
 {
@@ -36,14 +36,15 @@ class FileUpload extends \yii\helpers\StringHelper
         {
             foreach ($model->$file as $file)
             {
+                $id                   = isset($model->id) ? $model->id . '_' : '';
                 $randomNameString     = Yii::$app->security->generateRandomString() . '.' . $file->extension;
                 $this->writtenFiles[] = [
-                    'fileName'         => $model->id . '_' . $randomNameString,
+                    'fileName'         => $id . $randomNameString,
                     'fileExtension'    => $file->extension,
                     'originalFileName' => $file->baseName . '.' . $file->extension,
                 ];
                 $fileName             = $randomNameString;
-                $filePath             = Yii::getAlias('@backend') . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $model->id . '_' . $fileName;
+                $filePath             = Yii::getAlias('@backend') . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $id . $fileName;
                 $file->saveAs($filePath);
             }
             return true;
@@ -122,7 +123,7 @@ class FileUpload extends \yii\helpers\StringHelper
      */
     private static function generateFilename($path, $fileName)
     {
-        $file             = $path . DIRECTORY_SEPARATOR . $fileName;
+        $file = $path . DIRECTORY_SEPARATOR . $fileName;
         return $file;
     }
 }
