@@ -30,6 +30,9 @@ return [
                     'cdn' => true,
                     'cdnCSS' => ['//maxcdn.bootstrapcdn.com/font-awesome/5.11.0/css/font-awesome.min.css'],
                 ],
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                ],
             ],
         ],
         'log' => [
