@@ -29,6 +29,17 @@ class DropdownSide extends Widget
      *   Note that Bootstrap doesn't support dropdown submenu. You have to add your own CSS styles to support it.
      *
      * To insert divider use `<li role="presentation" class="divider"></li>`.
+     *
+     * <ul style='height: auto;max-height: 200px;overflow-x: hidden;' id="w7" class="treeview-menu">
+     * <li><a href="/index.php/site/index?id=16" tabindex="-1">برمجة</a></li>
+     * <br>
+     * <li><a href="/index.php/site/index?id=24" tabindex="-1">تعلم لغات</a></li>
+     * </ul style='height: auto
+     * ;
+     * max-height: 200px
+     * ;
+     * overflow-x: hidden
+     * ;'
      */
     public $items = [];
     /**
@@ -100,6 +111,6 @@ class DropdownSide extends Widget
             }
             $lines[] = Html::tag('li', $content, $options);
         }
-        return Html::tag('ul', implode("<br>", $lines), $this->options);
+        return Html::tag("ul style='height: auto;max-height: 200px;overflow-x: hidden;'", implode("<br>", $lines), $this->options);
     }
 }
