@@ -86,17 +86,20 @@ class Subcategory extends \yii\db\ActiveRecord
      *
      * @return array
      */
-    public static function getSubcategoryList(int $mainCategoryId = null) : array
+    public static function getSubcategoryList(int $mainCategoryId = null): array
     {
         if (isset($mainCategoryId))
         {
-            $all = self::find()->andWhere(['main_category_id' => $mainCategoryId])->all();
+            $all = self::find()->innerJoinWith('mainCategory')->andWhere([
+                                                                             'main_category_id' => $mainCategoryId,
+                                                                             'company_id'       => Yii::$app->user->id,
+                                                                         ])->all();
         }
         else
         {
-            $all = self::find()->all();
+            $all = self::find()->innerJoinWith('mainCategory')->andWhere(['company_id' => Yii::$app->user->id])->all();
         }
-        return ArrayHelper::map($all,'id', 'subcategory_name');
+        return ArrayHelper::map($all, 'id', 'subcategory_name');
     }
 
     /**
