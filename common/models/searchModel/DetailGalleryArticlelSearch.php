@@ -45,7 +45,7 @@ class DetailGalleryArticlelSearch extends DetailGalleryArticle
      */
     public function search($params, string $mainCategoryName = null, string $subcategoryId = null)
     {
-        $query = DetailGalleryArticle::find()->innerJoinWith('bookGalleries');
+        $query = DetailGalleryArticle::find()->innerJoinWith('bookGalleries')->innerJoinWith('bookAuthorName');
         if (isset($mainCategoryName))
         {
             $query->innerJoinWith('mainCategory')->andWhere(['main_category.category_name' => $mainCategoryName]);
@@ -83,7 +83,7 @@ class DetailGalleryArticlelSearch extends DetailGalleryArticle
         $query->andFilterWhere(['like', 'article_name_ar', $this->article_name_ar])
             ->andFilterWhere(['like', 'article_name_en', $this->article_name_en])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'authorName', $this->authorName])
+            ->andFilterWhere(['like', 'name', $this->authorName])
             ->andFilterWhere(['like', 'type', $this->type]);
 
         return $dataProvider;
