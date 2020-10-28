@@ -471,6 +471,10 @@ textarea.input {
     margin-right: -4px;
     border-radius: 40px 0px 0px 40px;
 }
+[dir='rtl'] .header-search form .input-select
+{
+    border-radius: 0px 40px 40px 0px;
+}
 
 .header-search form .input {
     width: calc(100% - 260px);
@@ -485,6 +489,16 @@ textarea.input {
     font-weight: 700;
     border: none;
     border-radius: 0px 40px 40px 0px;
+}
+
+[dir="rtl"] .header-search form .search-btn {
+    height: 40px;
+    width: 100px;
+    background: #d10024;
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+    border-radius: 40px 0px 0px 40px;
 }
 
 /*----------------------------*\
