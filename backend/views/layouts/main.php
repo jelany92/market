@@ -38,7 +38,9 @@ AppAsset::register($this);
     <?= $this->render('headerFirstNav') ?>
     <?php if (!Yii::$app->user->isGuest) : ?>
         <?= $this->render('headerSecondNav') ?>
+    <?php if (Yii::$app->user->id != 1) : ?>
         <?= $this->render('side') ?>
+    <?php endif; ?>
     <?php endif; ?>
     <div class="container p-3">
         <?= Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],]) ?>
