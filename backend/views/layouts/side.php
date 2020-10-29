@@ -76,43 +76,46 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
                                                                                               ]),
                                                         ],
                                                         [
-                                                            'label'   => Html::tag('div class="card-header"', Yii::t('app', 'Quiz')),
-                                                            'content' => DropdownSide::widget([
-                                                                                                  'items' => [
-                                                                                                      [
-                                                                                                          'label' => Yii::t('app', 'Main Category Excercise'),
-                                                                                                          'url'   => ['/quiz/main-category-exercise/index'],
+                                                            'label'         => Html::tag('div class="card-header"', Yii::t('app', 'Quiz')),
+                                                            'content'       => DropdownSide::widget([
+                                                                                                        'items' => [
+                                                                                                            [
+                                                                                                                'label' => Yii::t('app', 'Main Category Excercise'),
+                                                                                                                'url'   => ['/quiz/main-category-exercise/index'],
 
-                                                                                                      ],
-                                                                                                      [
-                                                                                                          'label' => Yii::t('app', 'Excercise'),
-                                                                                                          'url'   => ['/quiz/excercise/index'],
-                                                                                                      ],
-                                                                                                      [
-                                                                                                          'label' => Yii::t('app', 'Students'),
-                                                                                                          'url'   => ['quiz/students/index'],
-                                                                                                      ],
-                                                                                                      [
-                                                                                                          'label' => Yii::t('app', 'Token'),
-                                                                                                          'url'   => ['quiz/token/index'],
-                                                                                                      ],
-                                                                                                      [
-                                                                                                          'label' => Yii::t('app', 'Answers'),
-                                                                                                          'url'   => ['quiz/student-answers'],
-                                                                                                      ],
-                                                                                                      [
-                                                                                                          'label' => Yii::t('app', 'Summarize'),
-                                                                                                          'url'   => ['quiz/token/summary'],
-                                                                                                      ],
-                                                                                                  ],
-                                                                                              ]),
-                                                            'visible' => Yii::$app->user->can('*.*'),
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                'label' => Yii::t('app', 'Excercise'),
+                                                                                                                'url'   => ['/quiz/excercise/index'],
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                'label' => Yii::t('app', 'Students'),
+                                                                                                                'url'   => ['quiz/students/index'],
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                'label' => Yii::t('app', 'Token'),
+                                                                                                                'url'   => ['quiz/token/index'],
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                'label' => Yii::t('app', 'Answers'),
+                                                                                                                'url'   => ['quiz/student-answers'],
+                                                                                                            ],
+                                                                                                            [
+                                                                                                                'label' => Yii::t('app', 'Summarize'),
+                                                                                                                'url'   => ['quiz/token/summary'],
+                                                                                                            ],
+                                                                                                        ],
+                                                                                                    ]),
+                                                            'options'       => [
+                                                                'active' => false,
+                                                            ],
                                                         ],
 
 
                                                     ],
+
                                                     'options' => [
-                                                        'style' => 'text-align: start; width: 220px; color:antiquewhite',
+                                                        'style' => 'width: 230px; ul height: auto;max-height: 90%;overflow-x: hidden;',
                                                     ],
                                                 ]) ?>
 
@@ -127,16 +130,16 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
         <?php
         NavBar::begin([
                           'brandLabel' => Yii::t('app', 'Side bar'),
-                          'brandUrl' => Yii::$app->homeUrl,
-                          'options'  => [
-                              'class' => 'navbar navbar-default navbar-dark bg-dark',
+                          'brandUrl'   => Yii::$app->homeUrl,
+                          'options'    => [
+                              'class' => 'navbar navbar-default navbar-dark bg-dark ml-auto',
                           ],
                       ]);
         echo Nav::widget([
                              'items'   => $subMenuItems,
                              'options' => [
-                                 'class' => 'nav navbar-nav bg-dark list',
-                                 'style' => 'position: fixed; height: 100%;',
+                                 'class' => 'nav navbar-nav bg-dark',
+                                 'style' => 'position: fixed; height: 100%; margin-left: -16px; margin-right: -16px;',
                              ],
                          ]);
         ?>
