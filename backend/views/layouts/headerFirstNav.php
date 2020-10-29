@@ -38,7 +38,7 @@ $label = [
 ?>
 <!-- HEADER -->
 <!-- TOP HEADER -->
-<nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark ml-auto">
+<nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ml-auto">
     <div class="container">
         <div class="row col-md-12" style="display: -webkit-box">
             <div class="col-10 col-md-4" >

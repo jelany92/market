@@ -123,20 +123,20 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
 
 
 <div class="row">
-    <div class="col-sm-2 col-xs-12 bg-dark" style="position: fixed; height: 100%; top: 0px">
+    <div class="sticky-top" style="position: fixed; top: 0px;">
         <?php
         NavBar::begin([
-                          'brandLabel' => Yii::t('app', 'Option'),
-                          'brandUrl'   => Yii::$app->homeUrl,
-                          'options'    => [
-                              'class' => 'navbar navbar-default navbar-dark',
+                          'brandLabel' => Yii::t('app', 'Side bar'),
+                          'brandUrl' => Yii::$app->homeUrl,
+                          'options'  => [
+                              'class' => 'navbar navbar-default navbar-dark bg-dark',
                           ],
                       ]);
         echo Nav::widget([
                              'items'   => $subMenuItems,
                              'options' => [
-                                 'class' => 'nav navbar-nav list',
-                                 'style' => 'margin-top: 60px;',
+                                 'class' => 'nav navbar-nav bg-dark list',
+                                 'style' => 'position: fixed; height: 100%;',
                              ],
                          ]);
         ?>

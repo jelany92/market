@@ -165,7 +165,7 @@ $label = [
     <nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark ml-auto">
         <div class="container">
             <div class="row col-md-12" style="display: -webkit-box">
-                <div class="col-10 col-md-4">
+                <div class="col-10 col-md-5">
                     <?php
                     echo nav::widget([
                                          'options' => [
@@ -183,7 +183,7 @@ $label = [
                     'aria-expanded' => 'false',
                     'aria-label'    => 'Toggle navigation',
                 ]) ?>
-                <div class="col-md-8" style="display: -webkit-box">
+                <div class="col-md-7" style="display: -webkit-box">
                     <?php
                     echo nav::widget([
                                          'options' => [

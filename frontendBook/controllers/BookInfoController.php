@@ -2,8 +2,6 @@
 
 namespace frontendBook\controllers;
 
-use backend\models\searchModel\MainCategorySearch;
-use common\models\BookGallery;
 use common\models\DetailGalleryArticle;
 use common\models\MainCategory;
 use common\models\searchModel\BookAuthorNameSearch;
@@ -43,11 +41,11 @@ class BookInfoController extends Controller
     {
         if (isset($mainCategoryId))
         {
-            $subcategories = Subcategory::find()->andWhere(['main_category_id' => $mainCategoryId])->all();
+            $subcategories = Subcategory::find()->andWhere(['main_category_id' => $mainCategoryId])->orderBy(['subcategory_name' => SORT_ASC])->all();
         }
         else
         {
-            $subcategories = Subcategory::find()->all();
+            $subcategories = Subcategory::find()->orderBy(['subcategory_name' => SORT_ASC])->all();
         }
         return $this->render('subcategories', [
             'subcategories' => $subcategories,
