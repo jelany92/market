@@ -124,11 +124,12 @@ class Subcategory extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param array $nameList
+     * @param array      $nameList
+     * @param array|null $option
      *
      * @return string
      */
-    public static function getSubcategoryLink(array $nameList): string
+    public static function getSubcategoryLink(array $nameList, array $option = null): string
     {
         $subcategory = [];
         foreach ($nameList as $name)
@@ -136,7 +137,7 @@ class Subcategory extends \yii\db\ActiveRecord
             $subcategory[] = Html::a($name, [
                 'book-info/subcategory',
                 'subcategoryName' => $name,
-            ]);
+            ], $option);
         }
         return implode(', ', $subcategory);
     }
