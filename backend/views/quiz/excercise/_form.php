@@ -157,4 +157,3 @@ $this->registerJsFile('@web/js/quiz_list.js', ['depends' => [\yii\web\JqueryAsse
         <?php ActiveForm::end(); ?>
     </div>
 </div>
-</div>
