@@ -167,49 +167,6 @@ class TokenController extends Controller
         ]);
     }
 
-    public function actionAjaxSaveSingleAnswer(string $token)
-    {
-        $model = new StudentAnswers();
-        $ajax  = Yii::$app->request->isAjax;
-        $post  = Yii::$app->request->post();
-        if ($ajax)
-        {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            if ($model->validate())
-            {
-                var_dump($data);die();
-                $student = Students::find()->andWhere(['token' => $token])->one();
-                $model->student_id = $student->id;
-                foreach ($post['Answers'] as $key => $answer)
-                {
-                    $model->excercise_id   = $key;
-                    $model->student_answer     = $answer;
-                }
-                $model->save();
-                return [
-                    'data' => [
-                        'success' => true,
-                        'model'   => $model,
-                        'message' => 'Model has been saved.',
-                    ],
-                    'code' => 0,
-                ];
-            }
-            else
-            {
-                return [
-                    'data' => [
-                        'success' => false,
-                        'model'   => null,
-                        'message' => 'An error occured.',
-                    ],
-                    'code' => 1,
-                    // Some semantic codes that you know them for yourself
-                ];
-            }
-        }
-    }
-
     /**
      * @param int    $mainCategoryExerciseId
      * @param string $token
@@ -234,8 +191,8 @@ class TokenController extends Controller
                     $modelStudentAnswers->excercise_id   = $key;
                     $modelStudentAnswers->student_id     = $student->id;
                     $modelStudentAnswers->student_answer = $answer;
-                    $modelStudentAnswers->save();
                 }
+                $modelStudentAnswers->save();
 
                 $student->is_complete = 1;
                 $student->save();
@@ -258,6 +215,53 @@ class TokenController extends Controller
             'modelQuizAnswerForm' => $modelQuizAnswerForm,
             'token'               => $token,
         ]);
+    }
+
+    /**
+     * @param $token
+     *
+     * @return array
+     */
+    public function actionAjaxNextQuestion($token)
+    {
+        $student = Students::find()->andWhere(['token' => $token])->one();
+        $model   = new StudentAnswers();
+        $ajax    = Yii::$app->request->isAjax;
+        $post    = Yii::$app->request->post();
+        if ($ajax)
+        {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            if ($model->validate())
+            {
+                foreach ($post['Answers'] as $key => $answer)
+                {
+                    $model->excercise_id   = $key;
+                    $model->student_id     = $student->id;
+                    $model->student_answer = $answer;
+                    $model->save();
+                }
+                return [
+                    'data' => [
+                        'success' => true,
+                        'model'   => $model,
+                        'message' => 'Model has been saved.',
+                    ],
+                    'code' => 0,
+                ];
+            }
+            else
+            {
+                return [
+                    'data' => [
+                        'success' => false,
+                        'model'   => null,
+                        'message' => 'An error occured.',
+                    ],
+                    'code' => 1,
+                    // Some semantic codes that you know them for yourself
+                ];
+            }
+        }
     }
 
     /**

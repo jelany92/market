@@ -1,11 +1,10 @@
 <?php
 
+use aneeshikmat\yii2\Yii2TimerCountDown\Yii2TimerCountDown;
+use common\widgets\Card;
+use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\widgets\ActiveForm;
-use common\widgets\AccordionWidget;
-use common\widgets\Card;
-use aneeshikmat\yii2\Yii2TimerCountDown\Yii2TimerCountDown;
-use kartik\icons\Icon;
 
 /* @var $this yii\web\View */
 /* @var $exercises \backend\models\quiz\Excercise */
@@ -27,23 +26,20 @@ Card::begin([
 
 $this->registerJsFile('@web/js/quiz_answer.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
-<?php $form = ActiveForm::begin([
-        'action'     => Yii::$app->urlManager->createUrl([
-            'quiz/token/ajax-next-question',
-        ]),
-        'options' => [
-        'class' => 'comment-form'
-    ]]); ?>
-
-
-<div id="time-down-counter-2"></div>
-
 <?php
 $no         = 1;
 $isExpanded = true;
 foreach ($exercises as $exercise) : ?>
+    <?php $form = ActiveForm::begin([
+                                        'action'  => Yii::$app->urlManager->createUrl([
+                                                                                          'quiz/token/ajax-next-question',
+                                                                                          'token' => $token,
+                                                                                      ]),
+                                        'options' => [
+                                            'class' => 'answer-form',
+                                        ],
+                                    ]); ?>
     <?php
-
     $answers = [
         'answer_a' => $exercise['answer_a'],
         'answer_b' => $exercise['answer_b'],
@@ -65,7 +61,7 @@ foreach ($exercises as $exercise) : ?>
         $content = $form->field($modelQuizAnswerForm, 'answer')->radioList(array_filter($answers), [
             'name'      => 'Answers[' . $exercise['id'] . ']',
             'separator' => '<br>',
-            'class' => 'panel-body',
+            'class'     => 'panel-body',
         ])->label(false);
     }
     else
@@ -74,27 +70,28 @@ foreach ($exercises as $exercise) : ?>
                                                                                'maxlength' => true,
                                                                                'name'      => 'Answers[' . $exercise['id'] . ']',
                                                                                'class'     => 'panel-body',
-        ])->label(false);
+                                                                           ])->label(false);
     }
     ?>
     <?= $content ?>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Next Question'), [
-            'id'       => 'answer',
-            'class'    => 'btn btn-primary ajaxButton',
-            'onclick'  => 'myFunctionNextQuestion(' . $no . ')',
+            'id'      => 'answer',
+            'class'   => 'btn btn-primary ajaxButton',
+            'onclick' => 'myFunctionNextQuestion(' . $no . ')',
         ]) ?>
     </div>
     <?php
     $no++;
     $isExpanded = false;
     Card::end();
+    ActiveForm::end();
 endforeach;
 ?>
 <div class="form-group">
     <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
 </div>
-<?php ActiveForm::end(); ?>
+
 <?php Card::end(); ?>
 
 
