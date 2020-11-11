@@ -120,8 +120,9 @@ class DetailGalleryArticleController extends BaseController
                 $modelBookAuthorName = BookAuthorName::find()->andWhere(['name' => $modelGalleryBookForm->authorName])->one();
                 if ($modelBookAuthorName == null)
                 {
-                    $modelBookAuthorName       = new BookAuthorName();
-                    $modelBookAuthorName->name = $modelGalleryBookForm->authorName;
+                    $modelBookAuthorName             = new BookAuthorName();
+                    $modelBookAuthorName->company_id = Yii::$app->user->id;
+                    $modelBookAuthorName->name       = $modelGalleryBookForm->authorName;
                     $modelBookAuthorName->save();
                 }
                 $modelBookGallery = new BookGallery();
