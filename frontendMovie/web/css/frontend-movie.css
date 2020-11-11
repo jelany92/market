@@ -10477,6 +10477,12 @@ body.menu-ope {
     margin-left: 5px
 }
 
+.breadcrumb a:first-child::before {
+    content: "\e01c";
+    padding: 0;
+    margin-left: 5px;
+}
+
 .breadcrumb.pointing {
     white-space: nowrap;
     overflow: hidden;
