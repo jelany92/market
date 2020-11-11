@@ -117,7 +117,7 @@ class DetailGalleryArticleController extends BaseController
                     $modelGallerySaveCategory->detail_gallery_article_id = $modelDetailGalleryArticle->id;
                     $modelGallerySaveCategory->save();
                 }
-                $modelBookAuthorName = BookAuthorName::find()->andWhere(['name' => $modelGalleryBookForm->authorName])->one();
+                $modelBookAuthorName = BookAuthorName::find()->andWhere(['id' => $modelGalleryBookForm->authorName])->one();
                 if ($modelBookAuthorName == null)
                 {
                     $modelBookAuthorName             = new BookAuthorName();
