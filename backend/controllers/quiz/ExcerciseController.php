@@ -132,22 +132,17 @@ class ExcerciseController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model     = $this->findModel($id);
-        $modelForm = new ExerciseForm();
-        $modelForm->setValueFromModelToForm($model);
-        if ($modelForm->load(Yii::$app->request->post()) && $modelForm->validate())
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
-            dd($modelForm);
-            $model->setValueFromFormToModel($modelForm);
+            $model->save();
             return $this->redirect([
                                        'view',
                                        'id' => $model->id,
                                    ]);
         }
         return $this->render('update', [
-            'model'                          => $modelForm,
-            'modelModelMainCategoryExercise' => $model->mainCategoryExercise,
-            'modelsAddress'                  => (empty($model)) ? [new Excercise()] : [$model],
+            'model' => $model,
         ]);
     }
 

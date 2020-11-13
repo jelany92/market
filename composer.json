@@ -51,14 +51,12 @@
     "yidas/yii2-fontawesome": "^5.0",
     "kartik-v/yii2-helpers": "dev-master",
     "kartik-v/yii2-widget-depdrop": "dev-master",
-    "kartik-v/yii2-nav-x": "dev-master",
     "wbraganca/yii2-dynamicform": "dev-master",
-    "wokster/yii2-owl-carousel-widget": "*",
-    "kv4nt/yii2-owl-carousel2": "*",
     "bower-asset/font-awesome": "5.5.*",
     "kartik-v/yii2-widget-colorinput": "*",
     "evgeniyrru/yii2-slick": "*"
   },
+
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",
     "yiisoft/yii2-gii": "~2.1.0",
