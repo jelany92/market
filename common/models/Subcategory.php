@@ -125,19 +125,17 @@ class Subcategory extends \yii\db\ActiveRecord
 
     /**
      * @param array      $nameList
+     * @param array      $view
      * @param array|null $option
      *
      * @return string
      */
-    public static function getSubcategoryLink(array $nameList, array $option = null): string
+    public static function getSubcategoryLink(array $nameList, array $view, array $option = null): string
     {
         $subcategory = [];
         foreach ($nameList as $name)
         {
-            $subcategory[] = Html::a($name, [
-                'book-info/subcategory',
-                'subcategoryName' => $name,
-            ], $option);
+            $subcategory[] = Html::a($name, $view, $option);
         }
         return implode(', ', $subcategory);
     }

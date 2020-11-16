@@ -4,7 +4,12 @@ use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
+
 /* @var $model common\models\DetailGalleryArticle */
+
+use common\models\BookAuthorName;
+use common\models\Subcategory;
+use common\models\DetailGalleryArticle;
 
 $this->title = $model->article_name_ar;
 if (Yii::$app->user->can('detail-gallery-article.view') && Yii::$app->user->id == $model->company_id)
@@ -49,7 +54,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                        'attributes' => [
                                            'article_name_ar',
                                            'article_name_en',
-                                           'bookGalleries.bookAuthorName.name',
+                                           [
+                                               'attribute' => 'bookGalleries.bookAuthorName.name',
+                                               'value'     => function ($model) {
+                                                   return BookAuthorName::getBookAuthorNameLink($model->bookAuthorName->name);
+                                               },
+                                               'format'    => 'raw',
+                                           ],
                                            [
                                                'attribute' => 'bookGalleries.book_pdf',
                                                'value'     => function ($model) {
@@ -65,12 +76,34 @@ $this->params['breadcrumbs'][] = $this->title;
                                            ],
                                            'description:raw',
                                            'selected_date',
+                                           [
+                                               'label'  => Yii::t('app', 'Subcategory'),
+                                               'value'  => function ($model) {
+                                                   $subcategoryList = [];
+                                                   foreach ($model->gallerySaveCategory as $gallerySaveCategory)
+                                                   {
+                                                       $subcategoryList[$gallerySaveCategory->subcategory->id] = $gallerySaveCategory->subcategory->subcategory_name;
+                                                   }
+                                                   $subcategory = [];
+                                                   foreach ($subcategoryList as $key => $subcategoryName)
+                                                   {
+                                                       $subcategory[] = Html::a($subcategoryName, [
+                                                           'detail-gallery-article/index',
+                                                           'mainCategoryName' => $model->mainCategory->category_name,
+                                                           'subcategoryId'    => $key,
+                                                       ]);
+                                                   }
+                                                   return implode(', ', $subcategory);
+                                               },
+                                               'format' => 'raw',
+                                           ],
                                        ],
                                    ]) ?>
         </div>
         <div class="col-md-3">
-            <?= Html::img(\common\models\DetailGalleryArticle::subcategoryImagePath($model->bookGalleries->book_photo), ['class' => 'view-info']) ?>
-        </div>
+            <?= Html::a(Html::img(DetailGalleryArticle::subcategoryImagePath($model->bookGalleries->book_photo), [
+                'class' => 'view-info',
+            ]), DetailGalleryArticle::subcategoryImagePath($model->bookGalleries->book_photo), ['rel' => 'fancybox']); ?>        </div>
     </div>
 </div>
 <div>
@@ -82,3 +115,43 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 </div>
+
+<?php
+echo newerton\fancybox\FancyBox::widget([
+                                            'target'  => 'a[rel=fancybox]',
+                                            'helpers' => true,
+                                            'mouse'   => true,
+                                            'config'  => [
+                                                'maxWidth'    => '90%',
+                                                'maxHeight'   => '90%',
+                                                'playSpeed'   => 7000,
+                                                'padding'     => 0,
+                                                'fitToView'   => false,
+                                                'width'       => '70%',
+                                                'height'      => '70%',
+                                                'autoSize'    => false,
+                                                'closeClick'  => false,
+                                                'openEffect'  => 'elastic',
+                                                'closeEffect' => 'elastic',
+                                                'prevEffect'  => 'elastic',
+                                                'nextEffect'  => 'elastic',
+                                                'closeBtn'    => false,
+                                                'openOpacity' => true,
+                                                'helpers'     => [
+                                                    'title'   => ['type' => 'float'],
+                                                    'buttons' => [],
+                                                    'thumbs'  => [
+                                                        'width'  => 68,
+                                                        'height' => 50,
+                                                    ],
+                                                    'overlay' => [
+                                                        'css' => [
+                                                            'background' => 'rgba(0, 0, 0, 0.8)',
+                                                        ],
+                                                    ],
+                                                ],
+                                            ],
+                                        ]);
+
+?>
+

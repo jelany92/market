@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                           'attribute' => 'article_name_ar',
                                           'value'     => function ($model) {
                                               return Html::a($model->article_name_ar, [
-                                                  'book-info/book-details',
-                                                  'detailGalleryArticleId' => $model->id,
+                                                  'detail-gallery-article/view',
+                                                  'id' => $model->id,
                                               ]);
                                           },
                                           'format'    => 'raw',
@@ -46,15 +46,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                       [
                                           'label'  => Yii::t('app', 'Subcategory'),
                                           'value'  => function ($model) {
-                                              $subcategory = [];
+                                              $subcategoryList = [];
                                               foreach ($model->gallerySaveCategory as $gallerySaveCategory)
                                               {
-                                                  $subcategory[] = $gallerySaveCategory->subcategory->subcategory_name;
+                                                  $subcategoryList[$gallerySaveCategory->subcategory->id] = $gallerySaveCategory->subcategory->subcategory_name;
                                               }
-                                              return Subcategory::getSubcategoryLink($subcategory, [
-                                                  'book-info/subcategory',
-                                                  'subcategoryName' => $subcategory,
-                                              ]);
+                                              $subcategory = [];
+                                              foreach ($subcategoryList as $key => $subcategoryName)
+                                              {
+                                                  $subcategory[] = Html::a($subcategoryName, [
+                                                      'detail-gallery-article/index',
+                                                      'mainCategoryName' => $model->mainCategory->category_name,
+                                                      'subcategoryId'    => $key,
+                                                  ]);
+                                              }
+                                              return implode(', ', $subcategory);
                                           },
                                           'format' => 'raw',
                                       ],

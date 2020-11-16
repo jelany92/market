@@ -43,7 +43,7 @@ class BookAuthorName extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => AdminUser::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 

@@ -47,7 +47,10 @@ $tableContent = [
             ],
             [
                 'type' => 'td',
-                'html' =>  Subcategory::getSubcategoryLink($subcategory),
+                'html' => Subcategory::getSubcategoryLink($subcategory, [
+                    'book-info/subcategory',
+                    'subcategoryName' => $subcategory,
+                ]),
             ],
         ],
         [
