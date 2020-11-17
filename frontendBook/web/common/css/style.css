@@ -324,7 +324,7 @@ textarea.input {
 }
 
 .section-tab-nav li:last-child {
-    margin-right: 0px;
+    margin-right: 40px;
 }
 
 .section-tab-nav li a {
@@ -471,8 +471,8 @@ textarea.input {
     margin-right: -4px;
     border-radius: 40px 0px 0px 40px;
 }
-[dir='rtl'] .header-search form .input-select
-{
+
+[dir="rtl"] .header-search form .input-select {
     border-radius: 0px 40px 40px 0px;
 }
 
@@ -643,6 +643,10 @@ textarea.input {
 
 .main-nav > li + li {
     margin-left: 30px
+}
+[dir="rtl"] .main-nav > li + li {
+    margin-right: 30px;
+    margin-left: 0px;
 }
 
 .main-nav > li > a {
@@ -1098,6 +1102,7 @@ textarea.input {
 
 .product-widget {
     position: relative;
+    top: 15px;
 }
 
 .product-widget + .product-widget {
@@ -1200,7 +1205,7 @@ textarea.input {
 }
 
 .products-slick-nav {
-    position: absolute;
+    position: revert;
     right: 15px;
     z-index: 10;
 }
@@ -2216,3 +2221,5 @@ textarea.input {
         margin-top: 10px;
     }
 }
+
+

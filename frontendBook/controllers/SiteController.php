@@ -84,7 +84,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $mainCategories            = MainCategory::find()->andWhere(['company_id' => 2])->all();
+        $mainCategoryList          = MainCategory::find()->andWhere(['company_id' => AdminUser::JELANY_BOOK_CATEGORY])->all();
         $modelDetailGalleryArticle = DetailGalleryArticle::find()->limit(8)->all();
         $modelBookAuthorName       = BookAuthorName::find()->limit(3)->all();
         $authorNames               = [];
@@ -95,14 +95,10 @@ class SiteController extends Controller
             foreach ($bookAuthorName->bookGalleries as $bookGallery)
             {
                 $detailGalleryArticleList[] = $bookGallery->detailGalleryArticle;
-                //var_dump($detailGalleryArticleList);
             }
         }
-
-        //die();
-        //var_dump($detailGalleryArticleList);
         return $this->render('index', [
-            'mainCategories'            => $mainCategories,
+            'mainCategoryList'          => $mainCategoryList,
             'modelDetailGalleryArticle' => $modelDetailGalleryArticle,
             'modelBookAuthorName'       => $modelBookAuthorName,
             'authorNames'               => $authorNames,
