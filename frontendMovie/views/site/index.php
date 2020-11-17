@@ -6,6 +6,8 @@ use common\models\DetailGalleryArticle;
 
 /* @var $this yii\web\View */
 /* @var $mainCategoryList array */
+/* @var $subcategoryList array */
+/* @var $dateList array */
 
 $this->title = 'My Yii Application';
 ?>
@@ -102,24 +104,25 @@ $this->title = 'My Yii Application';
             'class' => 'col-lg-2',
         ]) ?>
 
-        <?= Html::dropDownList('', ['li data-tax="category" data-cat=""'], $mainCategoryList, [
-            'class'  => 'col-lg-3',
-            'prompt' => '--' . Yii::t('app', 'القسم') . '--',
+        <?= Html::dropDownList('mainCategory', ['li data-tax="category" data-cat=""'], $mainCategoryList, [
+            'id'       => isset($mainCategoryId) ? $mainCategoryId : '',
+            'class'    => 'col-lg-3 selectMainCategoryElement',
+            'onchange' => 'myFunctionMainCategory()',
+            'prompt'   => Yii::t('app', 'Category'),
         ]) ?>
 
-        <?= Html::dropDownList('text', null, $mainCategoryList, [
-            'class'  => 'col-lg-2',
-            'prompt' => '--' . Yii::t('app', 'النوع') . '--',
+        <?= Html::dropDownList('subcategory', null, $subcategoryList, [
+            'id'       => isset($subcategoryId) ? $subcategoryId : '',
+            'class'    => 'col-lg-4 selectSubcategoryElement',
+            'onchange' => 'myFunctionSubcategory(' . $mainCategoryId . ')',
+            'prompt'   => Yii::t('app', 'Subcategory'),
         ]) ?>
 
-        <?= Html::dropDownList('text', null, $mainCategoryList, [
-            'class'  => 'col-lg-3',
-            'prompt' => '--' . Yii::t('app', 'السنة') . '--',
-        ]) ?>
-
-        <?= Html::dropDownList('text', null, $mainCategoryList, [
-            'class'  => 'col-lg-2',
-            'prompt' => '--' . Yii::t('app', 'الجودة') . '--',
+        <?= Html::dropDownList('date', null, $dateList, [
+            'id'       => isset($date) ? $date : '',
+            'class'    => 'col-lg-3 selectDateElement',
+            'onchange' => 'myFunctionSubcategory(' . $mainCategoryId . ')',
+            'prompt'   => Yii::t('app', 'Date'),
         ]) ?>
 </div>
 

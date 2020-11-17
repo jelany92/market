@@ -3,15 +3,39 @@
 use common\components\GridView;
 use common\models\DetailGalleryArticle;
 use yii\bootstrap4\Html;
+use kartik\select2\Select2;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $subcategory \common\models\Subcategory */
 /* @var $subcategories array */
+/* @var $subcategoryList array */
 
 $this->title = Yii::t('app', 'Subcategory');
+$this->registerJsFile('@web/js/filter_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
-
 <div class="container">
+
+    <!-- row -->
+    <div class="row">
+        <!-- section title -->
+        <div class="col-md-12">
+            <div class="section-title">
+                <h3 class="title"><?= Yii::t('app', 'Book Gallery') ?></h3>
+            </div>
+        </div>
+        <!-- /section title -->
+
+        <?= Html::label(Yii::t('app', 'ترتيب حسب'), null, [
+            'class' => 'col-md-6',
+        ]) ?>
+        <?= Html::dropDownList('subcategory', null, $subcategoryList, [
+            'id'       => isset($subcategoryId) ? $subcategoryId : '',
+            'class'    => 'col-md-3 selectSubcategoryElement',
+            'onchange' => 'myFunctionSubcategory()',
+            'prompt'   => Yii::t('app', 'Subcategory'),
+        ]) ?>
+    </div>
     <br>
     <!-- Products tab & slick -->
     <?php foreach ($subcategories as $subcategory) : ?>

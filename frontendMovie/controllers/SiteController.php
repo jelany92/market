@@ -2,8 +2,10 @@
 
 namespace frontendMovie\controllers;
 
+use common\models\AdminUser;
 use common\models\DetailGalleryArticle;
 use common\models\MainCategory;
+use common\models\Subcategory;
 use frontendMovie\models\ResendVerificationEmailForm;
 use frontendMovie\models\VerifyEmailForm;
 use Yii;
@@ -77,16 +79,36 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
+     * @param int|null $mainCategoryId
+     * @param int|null $subcategoryId
+     * @param int|null $date
+     *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex(int $mainCategoryId = null, int $subcategoryId = null, int $date = null)
     {
-        $mainCategoryList          = MainCategory::find()->select('category_name')->createCommand()->queryAll(\PDO::FETCH_COLUMN);
         $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere(['company_id' => ContactForm::MOVIE_USER])->all();
+        $mainCategoryList = MainCategory::getMainCategoryList(AdminUser::JELANY_BOOK_CATEGORY);
+        $subcategoryList  = Subcategory::getSubcategoryList($mainCategoryId, AdminUser::JELANY_BOOK_CATEGORY);
+        $dateList         = DetailGalleryArticle::find()->select([
+                                                                     'YEAR(selected_date)',
+                                                                     'date' => 'YEAR(selected_date)',
+                                                                 ])->andWhere([
+                                                                                  'and',
+                                                                                  ['company_id' => AdminUser::JELANY_BOOK_CATEGORY],
+                                                                                  [
+                                                                                      'not',
+                                                                                      ['selected_date' => null],
+                                                                                  ],
+                                                                              ])->groupBy('selected_date')->orderBy(['selected_date' => SORT_DESC])->distinct(true)->createCommand()->queryAll(\PDO::FETCH_KEY_PAIR, \PDO::FETCH_COLUMN);
 
         return $this->render('index', [
-            'mainCategoryList'          => $mainCategoryList,
+            'mainCategoryId'            => $mainCategoryId,
+            'subcategoryId'             => $subcategoryId,
             'modelDetailGalleryArticle' => $modelDetailGalleryArticle,
+            'mainCategoryList'          => $mainCategoryList,
+            'subcategoryList'           => $subcategoryList,
+            'dateList'                  => $dateList,
         ]);
     }
 

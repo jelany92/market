@@ -8,7 +8,7 @@ use frontendBook\assets\AppAsset;
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 
-//Icon::map($this);
+Icon::map($this);
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>

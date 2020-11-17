@@ -2,6 +2,7 @@
 
 namespace frontendBook\controllers;
 
+use common\models\AdminUser;
 use common\models\DetailGalleryArticle;
 use common\models\MainCategory;
 use common\models\searchModel\BookAuthorNameSearch;
@@ -47,24 +48,29 @@ class BookInfoController extends Controller
         {
             $subcategories = Subcategory::find()->orderBy(['subcategory_name' => SORT_ASC])->all();
         }
+        $subcategoryList = Subcategory::getSubcategoryList($mainCategoryId, AdminUser::JELANY_BOOK_CATEGORY);
         return $this->render('subcategories', [
-            'subcategories' => $subcategories,
+            'subcategories'   => $subcategories,
+            'subcategoryList' => $subcategoryList,
         ]);
     }
 
     /**
      * Displays Main Category.
      *
-     * @param string $subcategoryName
+     * @param int $subcategoryId
      *
      * @return string
      * @throws \yii\db\Exception
      */
-    public function actionSubcategory(string $subcategoryName)
+    public function actionSubcategory(int $subcategoryId)
     {
-        $subcategories = Subcategory::find()->andWhere(['subcategory_name' => $subcategoryName])->all();
+        $subcategories   = Subcategory::find()->andWhere(['id' => $subcategoryId])->all();
+        $subcategoryList = Subcategory::getSubcategoryList(null, AdminUser::JELANY_BOOK_CATEGORY);
         return $this->render('subcategory', [
-            'subcategories' => $subcategories,
+            'subcategories'   => $subcategories,
+            'subcategoryList' => $subcategoryList,
+            'subcategoryId'   => $subcategoryId,
         ]);
     }
 

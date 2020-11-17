@@ -2,10 +2,12 @@
 
 namespace frontendBook\controllers;
 
+use common\models\AdminUser;
 use common\models\BookAuthorName;
 use common\models\BookGallery;
 use common\models\DetailGalleryArticle;
 use common\models\MainCategory;
+use common\models\Subcategory;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -111,16 +113,57 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
-     * @param  int $mainCategoryId
+     * @param int      $mainCategoryId
+     * @param int|null $subcategoryId
+     * @param int|null $date
+     *
      * @return mixed
      */
-    public function actionMainCategory(int $mainCategoryId)
+    public function actionMainCategory(int $mainCategoryId, int $subcategoryId = null, int $date = null)
     {
-        $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere(['main_category_id' => $mainCategoryId])->all();
-
-
+        //dd($date);
+        $ajax = Yii::$app->request->isAjax;
+        $post = Yii::$app->request->post();
+        if ($ajax)
+        {
+            dd($ajax, $post);
+        }
+        $modelDetailGalleryArticle = DetailGalleryArticle::find();
+        if (isset($subcategoryId))
+        {
+            $modelDetailGalleryArticle->innerJoinWith('gallerySaveCategory')->andWhere(['gallery_save_category.subcategory_id' => $subcategoryId]);
+        }
+        if (isset($date))
+        {
+            $modelDetailGalleryArticle->andWhere([
+                                                     'YEAR(selected_date)' => $date,
+                                                 ]);
+        }
+        $modelDetailGalleryArticle->andWhere([
+                                                 'detail_gallery_article.company_id'       => AdminUser::JELANY_BOOK_CATEGORY,
+                                                 'detail_gallery_article.main_category_id' => $mainCategoryId,
+                                             ]);
+        $mainCategoryList = MainCategory::getMainCategoryList(AdminUser::JELANY_BOOK_CATEGORY);
+        $subcategoryList  = Subcategory::getSubcategoryList($mainCategoryId, AdminUser::JELANY_BOOK_CATEGORY);
+        $dateList         = DetailGalleryArticle::find()->select([
+                                                                     'YEAR(selected_date)',
+                                                                     'date' => 'YEAR(selected_date)',
+                                                                 ])->andWhere([
+                                                                                  'and',
+                                                                                  ['company_id' => AdminUser::JELANY_BOOK_CATEGORY],
+                                                                                  [
+                                                                                      'not',
+                                                                                      ['selected_date' => null],
+                                                                                  ],
+                                                                              ])->groupBy('selected_date')->orderBy(['selected_date' => SORT_DESC])->distinct(true)->createCommand()->queryAll(\PDO::FETCH_KEY_PAIR, \PDO::FETCH_COLUMN);
         return $this->render('main-category', [
-            'modelDetailGalleryArticle' => $modelDetailGalleryArticle,
+            'mainCategoryId'            => $mainCategoryId,
+            'subcategoryId'             => $subcategoryId,
+            'date'                      => $date,
+            'modelDetailGalleryArticle' => $modelDetailGalleryArticle->all(),
+            'mainCategoryList'          => $mainCategoryList,
+            'subcategoryList'           => $subcategoryList,
+            'dateList'                  => $dateList,
         ]);
     }
 
@@ -300,8 +343,8 @@ class SiteController extends Controller
      *
      * @param string $token
      *
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {

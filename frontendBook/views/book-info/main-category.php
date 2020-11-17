@@ -35,7 +35,8 @@ $this->title = Yii::t('app', 'Main Category');
                             <div class="shop-body">
                                 <h3><?= $mainCategory->category_name ?><br>Collection</h3>
                                 <?= Html::a(Yii::t('app', 'See More') . ' ' . '<i class="fa fa-arrow-circle-right"></i>', [
-                                    'book-info/subcategories',
+                                    'site/main-category',
+                                    'mainCategoryId' => $mainCategory->id,
                                 ], [
                                                 'class' => 'cta-btn',
                                             ]) ?>

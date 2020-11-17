@@ -15,7 +15,7 @@ $this->title = $detailGalleryArticle->article_name_ar;
 $subcategory = [];
 foreach ($detailGalleryArticle->gallerySaveCategory as $gallerySaveCategory)
 {
-    $subcategory[] = $gallerySaveCategory->subcategory->subcategory_name;
+    $subcategory[$gallerySaveCategory->subcategory->id] = $gallerySaveCategory->subcategory->subcategory_name;
 }
 $tableContent = [
     'tableArray' => [
@@ -47,10 +47,7 @@ $tableContent = [
             ],
             [
                 'type' => 'td',
-                'html' => Subcategory::getSubcategoryLink($subcategory, [
-                    'book-info/subcategory',
-                    'subcategoryName' => $subcategory,
-                ]),
+                'html' => Subcategory::getSubcategoryLink($subcategory),
             ],
         ],
         [

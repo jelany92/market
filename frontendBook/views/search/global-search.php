@@ -49,12 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                               $subcategory = [];
                                               foreach ($model->gallerySaveCategory as $gallerySaveCategory)
                                               {
-                                                  $subcategory[] = $gallerySaveCategory->subcategory->subcategory_name;
+                                                  $subcategory[$gallerySaveCategory->subcategory->id] = $gallerySaveCategory->subcategory->subcategory_name;
                                               }
-                                              return Subcategory::getSubcategoryLink($subcategory, [
-                                                  'book-info/subcategory',
-                                                  'subcategoryName' => $subcategory,
-                                              ]);
+                                              return Subcategory::getSubcategoryLink($subcategory);
                                           },
                                           'format' => 'raw',
                                       ],

@@ -8,13 +8,37 @@ use yii\bootstrap4\Html;
 /* @var $subcategory \common\models\Subcategory */
 
 $this->title = Yii::t('app', 'Subcategory');
+$this->registerJsFile('@web/js/filter_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 
 <div class="container">
+    <!-- row -->
+    <div class="row">
+        <!-- section title -->
+        <div class="col-md-12">
+            <div class="section-title">
+                <h3 class="title"><?= Yii::t('app', 'Book Gallery') ?></h3>
+            </div>
+        </div>
+        <!-- /section title -->
+        <div class="advanced-search col-md-12">
+            <?= Html::label(Yii::t('app', 'ترتيب حسب'), null, [
+                'class' => 'col-lg-2',
+            ]) ?>
+            <?= Html::dropDownList('subcategory', null, $subcategoryList, [
+                'id'       => isset($subcategoryId) ? $subcategoryId : '',
+                'class'    => 'col-lg-4 selectSubcategoryElement',
+                'onchange' => 'myFunctionSubcategory()',
+                'prompt'   => Yii::t('app', 'Subcategory'),
+            ]) ?>
+        </div>
+    </div>
+    <!-- /row -->
     <?php foreach ($subcategories as $subcategory) : ?>
         <?= Html::a('<h1>' . $subcategory->subcategory_name . '</h1>', [
             'book-info/subcategory',
-            'subcategoryName' => $subcategory->subcategory_name,
+            //'mainCategoryId' => $subcategory->mainCategory->id,
+            'subcategoryId'  => $subcategory->id,
         ]) ?>
         <!-- Products tab & slick -->
         <div class="row">
