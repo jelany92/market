@@ -27,6 +27,7 @@ use yii\data\Pagination;
 use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -59,6 +60,7 @@ class SiteController extends Controller
                             'demo-data',
                             'index',
                             'get-events',
+                            'view-events',
                             'view',
                             'month-view',
                             'month-income',
@@ -218,6 +220,7 @@ class SiteController extends Controller
 
         ]);
     }
+
     /**
      * @return array
      */
@@ -237,13 +240,14 @@ class SiteController extends Controller
         // Zeigt all ArbeitsZeit für eingeloggt user von wann bis wann
         foreach ($incomingRevenues as $time)
         {
-            $Event         = new \yii2fullcalendar\models\Event();
-            $Event->id     = $time->id;
-            $Event->title  = 'الايراد: ' . $time->daily_incoming_revenue;
-            $Event->start  = $time->selected_date;
-            $Event->color  = '#36a6fc';
-            $Event->allDay = true;
-            $events[]      = $Event;
+            $Event            = new \yii2fullcalendar\models\Event();
+            $Event->id        = $time->id;
+            $Event->title     = 'الايراد: ' . $time->daily_incoming_revenue;
+            $Event->start     = $time->selected_date;
+            $Event->color     = '#36a6fc';
+            $Event->allDay    = true;
+            $Event->rendering = Url::to(["supermarket/incoming-revenue/update-event"]);
+            $events[]         = $Event;
         }
 
         foreach ($incomingRevenues as $time)
@@ -264,29 +268,32 @@ class SiteController extends Controller
             $Event->start          = $time['selected_date'];
             $Event->color          = '#03c94c'; // green
             $Event->allDay         = true;
+           // $Event->rendering      = Url::to(["incoming-revenues/update-event"]);
             $events[]              = $Event;
         }
 
         foreach ($purchases as $time)
         {
-            $Event         = new \yii2fullcalendar\models\Event();
-            $Event->id     = $time->id;
-            $Event->title  = $time->reason . ': ' . $time->purchases;
-            $Event->start  = $time->selected_date;
-            $Event->color  = '#ff6666';
-            $Event->allDay = true;
-            $events[]      = $Event;
+            $Event            = new \yii2fullcalendar\models\Event();
+            $Event->id        = $time->id;
+            $Event->title     = $time->reason . ': ' . $time->purchases;
+            $Event->start     = $time->selected_date;
+            $Event->color     = '#ff6666';
+            $Event->allDay    = true;
+            $Event->rendering = Url::to(["supermarket/purchases/update-event"]);
+            $events[]         = $Event;
         }
 
         foreach ($marketExpense as $time)
         {
-            $Event         = new \yii2fullcalendar\models\Event();
-            $Event->id     = $time->id;
-            $Event->title  = $time->reason . ': ' . $time->expense;
-            $Event->start  = $time->selected_date;
-            $Event->color  = '#ffc133';
-            $Event->allDay = true;
-            $events[]      = $Event;
+            $Event            = new \yii2fullcalendar\models\Event();
+            $Event->id        = $time->id;
+            $Event->title     = $time->reason . ': ' . $time->expense;
+            $Event->start     = $time->selected_date;
+            $Event->color     = '#ffc133';
+            $Event->allDay    = true;
+            $Event->rendering = Url::to(["supermarket/market-expense/update-event"]);
+            $events[]         = $Event;
         }
 
         return $events;

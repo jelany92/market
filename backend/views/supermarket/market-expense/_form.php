@@ -11,42 +11,44 @@ use kartik\select2\Select2;
 /* @var $reasonList array */
 ?>
 
-<div class="market-expense-form">
+<div class="col-xs-12 col-lg-12">
+    <div class="market-expense-form">
 
-    <?php $form = ActiveForm::begin([
-        'type' => ActiveForm::TYPE_HORIZONTAL,
-    ]) ?>
-    <?= $form->field($model, 'expense')->textInput() ?>
+        <?php $form = ActiveForm::begin([
+                                            'type' => ActiveForm::TYPE_HORIZONTAL,
+                                        ]) ?>
+        <?= $form->field($model, 'expense')->textInput() ?>
 
-    <?= $form->field($model, 'reason', [])->widget(Select2::class, [
-        'model'         => $model,
-        'attribute'     => 'reason',
-        'options'       => [
-            'placeholder' => 'Bitte auswählen ...',
-        ],
-        'pluginOptions' => [
-            'allowClear'         => false,
-            'tags'               => true,
-            'maximumInputLength' => false,
-        ],
-        'data'          => $reasonList,
-    ]) ?>
+        <?= $form->field($model, 'reason', [])->widget(Select2::class, [
+            'model'         => $model,
+            'attribute'     => 'reason',
+            'options'       => [
+                'placeholder' => 'Bitte auswählen ...',
+            ],
+            'pluginOptions' => [
+                'allowClear'         => false,
+                'tags'               => true,
+                'maximumInputLength' => false,
+            ],
+            'data'          => $reasonList,
+        ]) ?>
 
-    <?= $form->field($model, 'selected_date')->widget(DatePicker::class, [
-        'options'       => ['placeholder' => 'Enter event time ...'],
-        'pluginOptions' => [
-            'autoclose'    => true,
-            'showMeridian' => false,
-            'endDate'      => '+0d',
-            'format'       => 'yyyy-mm-dd'
-            //'format'       => 'dd.mm.yyyy'
-        ],
-    ]) ?>
+        <?= $form->field($model, 'selected_date')->widget(DatePicker::class, [
+            'options'       => ['placeholder' => 'Enter event time ...'],
+            'pluginOptions' => [
+                'autoclose'    => true,
+                'showMeridian' => false,
+                'endDate'      => '+0d',
+                'format'       => 'yyyy-mm-dd'
+                //'format'       => 'dd.mm.yyyy'
+            ],
+        ]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

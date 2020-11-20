@@ -1,8 +1,9 @@
 <?php
 
 use common\components\QueryHelper;
-use yii\bootstrap4\Html;
 use onmotion\apexcharts\ApexchartsWidget;
+use yii\bootstrap4\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $staticDailyInfoIncomingList array */
@@ -10,7 +11,6 @@ use onmotion\apexcharts\ApexchartsWidget;
 /* @var $staticDailyInfoPurchasesList array */
 
 $monthName = Yii::$app->params['months'];
-
 
 $incoming    = [];
 $dailyResult = [];
@@ -80,10 +80,9 @@ $this->title = 'My Yii Application';
     <?php endif; ?>
     <h1><?= Yii::t('app', 'Total income for the month') . ' ' . $monthName[date('n')] . ': ' . QueryHelper::getMonthData(date('Y'), date('m'), 'incoming_revenue', 'daily_incoming_revenue') ?></h1>
     <br>
-
     <?= yii2fullcalendar\yii2fullcalendar::widget([
                                                       'options'       => [
-                                                          'lang' => 'de',
+                                                          'lang' => Yii::$app->language == 'ar' ? 'en' : Yii::$app->language,
                                                           //... more options to be defined here!
                                                       ],
                                                       'themeSystem'   => 'bootstrap4',
@@ -96,18 +95,28 @@ $this->title = 'My Yii Application';
                                                           //'weekNumbersWithinDays'=> true,   // merge mit erste tag in ansicht
                                                           //'eventTextColor'=> 'black',       // fur textein farbe
                                                           'eventStartEditable' => true,
-
-                                                          'dayClick' => new \yii\web\JsExpression('           // wenn ein auswälleen
+                                                          //'editable'           => true,
+                                                          'eventClick'         => new \yii\web\JsExpression(\backend\components\FullCalenderEvent::eventClick()),
+                                                          'dayClick'           => new \yii\web\JsExpression('           // wenn ein auswälleen
                 function(date, jsEvent, view) {
-                window.location.href = "' . \yii\helpers\Url::toRoute([
-                                                                                                                                                                            '/site/view/',
-                                                                                                                                                                            'date' => '',
-                                                                                                                                                                        ]) . '" + date.format("YYYY-MM-DD");
+                window.location.href = "' . Url::toRoute([
+                                                                                                                                                                         '/site/view/',
+                                                                                                                                                                         'date' => '',
+                                                                                                                                                                     ]) . '" + date.format("YYYY-MM-DD");
                   }
                 '),
                                                       ],
-                                                      'events'        => \yii\helpers\Url::to(['/site/get-events']),
+                                                      'ajaxEvents'    => Url::to(['/site/get-events']),
                                                   ]); ?>
+    <?php
+    //open pupap
+    yii\bootstrap4\Modal::begin([
+                                    'id'    => 'eventModal',
+                                    'title' => "<h3>" . Yii::t('app', 'Add Event') . "</h3>",
+                                ]);
+
+    yii\bootstrap4\Modal::end();
+    ?>
     <br>
     <?= ApexchartsWidget::widget([
                                      'type'         => 'bar',

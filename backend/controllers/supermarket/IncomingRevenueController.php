@@ -1,17 +1,16 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\supermarket;
 
 use backend\models\History;
-use common\controller\BaseController;
-use Yii;
 use backend\models\IncomingRevenue;
 use backend\models\searchModel\IncomingRevenueSearch;
+use common\controller\BaseController;
+use Yii;
 use yii\bootstrap4\Html;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii2tech\spreadsheet\Spreadsheet;
 
@@ -115,6 +114,31 @@ class IncomingRevenueController extends BaseController
         }
 
         return $this->render('/supermarket/incoming-revenue/update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Events model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionUpdateEvent($event_id)
+    {
+        $model = $this->findModel($event_id);
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            if ($model->save())
+            {
+                Yii::$app->session->addFlash('success', Yii::t('app', 'تم تحديث المحتوى'));
+                return $this->redirect(['site/index']);
+            }
+        }
+
+        return $this->renderAjax('/supermarket/incoming-revenue/_form', [
             'model' => $model,
         ]);
     }

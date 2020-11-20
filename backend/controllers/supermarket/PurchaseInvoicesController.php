@@ -1,18 +1,15 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\supermarket;
 
 use backend\models\InvoicesPhoto;
 use backend\models\PurchaseInvoices;
 use backend\models\searchModel\PurchaseInvoicesSearch;
 use common\controller\BaseController;
 use common\models\ArticlePrice;
-use kartik\mpdf\Pdf;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
 use yii\filters\VerbFilter;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii2tech\spreadsheet\Spreadsheet;
@@ -39,6 +36,7 @@ class PurchaseInvoicesController extends BaseController
 
     /**
      * Lists all PurchaseInvoices models.
+     *
      * @return string
      */
     public function actionIndex(): string
@@ -65,8 +63,8 @@ class PurchaseInvoicesController extends BaseController
     {
         $model             = $this->findModel($id);
         $modelArticlePrice = new ActiveDataProvider([
-            'query' => ArticlePrice::find()->andWhere(['purchase_invoices_id' => $id]),
-        ]);
+                                                        'query' => ArticlePrice::find()->andWhere(['purchase_invoices_id' => $id]),
+                                                    ]);
         return $this->render($view, [
             'model'                    => $model,
             'dataProviderArticlePrice' => $modelArticlePrice,
@@ -77,6 +75,7 @@ class PurchaseInvoicesController extends BaseController
     /**
      * Creates a new PurchaseInvoices model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -94,7 +93,8 @@ class PurchaseInvoicesController extends BaseController
                 $model->save();
                 $model->saveInvoicesFile();
                 $transaction->commit();
-            } catch (\Exception $e)
+            }
+            catch (\Exception $e)
             {
                 $transaction->rollBack();
                 throw $e;
@@ -103,8 +103,8 @@ class PurchaseInvoicesController extends BaseController
             {
                 Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء مصروف لليوم'));
                 return $this->redirect([
-                    '/purchase-invoices/index',
-                ]);
+                                           '/purchase-invoices/index',
+                                       ]);
             }
         }
 
@@ -143,17 +143,47 @@ class PurchaseInvoicesController extends BaseController
             $model->saveInvoicesFile();
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم تحديث مصروف لليوم'));
             return $this->redirect([
-                '/purchase-invoices/index',
-                'id' => $model->id,
-            ]);
+                                       '/purchase-invoices/index',
+                                       'id' => $model->id,
+                                   ]);
         }
 
         return $this->render('/supermarket/purchase-invoices/update', [
             'model'           => $model,
             'fileUrls'        => $fileUrls,
             'invoiceFileList' => $invoiceFileList,
-
         ]);
+    }
+
+    /**
+     * Updates an existing Events model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionUpdateEvent($event_id)
+    {
+        $model           = $this->findModel($event_id);
+        $fileUrls        = [];
+        $invoiceFileList = [];
+        if ($model->load(Yii::$app->request->post()) || isset($_POST['Events']))
+        {
+            if ($model->save() && $model->saveInvoicesFile())
+            {
+                Yii::$app->session->addFlash('success', Yii::t('app', 'تم تحديث مصروف لليوم') . ' ' . $model->selected_date);
+                return $this->redirect(['site/index']);
+            }
+        }
+        else
+        {
+            return $this->renderAjax('/supermarket/purchase-invoices/_form', [
+                'model'           => $model,
+                'fileUrls'        => $fileUrls,
+                'invoiceFileList' => $invoiceFileList,
+            ]);
+        }
     }
 
     /**
@@ -222,21 +252,22 @@ class PurchaseInvoicesController extends BaseController
 
     /**
      * int $purchaseInvoicesId
+     *
      * @return Response
      */
     public function actionExport(int $purchaseInvoicesId): Response
     {
         $exporter = new Spreadsheet([
-            'dataProvider' => new ActiveDataProvider([
-                'query' => ArticlePrice::find()->select([
-                    'article_info_id',
-                    'purchase_invoices_id',
-                    'article_total_prise',
-                    'article_prise_per_piece',
-                    'selected_date',
-                ])->andWhere(['purchase_invoices_id' => $purchaseInvoicesId]),
-            ]),
-        ]);
+                                        'dataProvider' => new ActiveDataProvider([
+                                                                                     'query' => ArticlePrice::find()->select([
+                                                                                                                                 'article_info_id',
+                                                                                                                                 'purchase_invoices_id',
+                                                                                                                                 'article_total_prise',
+                                                                                                                                 'article_prise_per_piece',
+                                                                                                                                 'selected_date',
+                                                                                                                             ])->andWhere(['purchase_invoices_id' => $purchaseInvoicesId]),
+                                                                                 ]),
+                                    ]);
 
         $columnNames = [
             'articleInfo.article_name_ar',
@@ -260,21 +291,21 @@ class PurchaseInvoicesController extends BaseController
     public function actionViewPdf($purchaseInvoicesId)
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-        $model             = $this->findModel($purchaseInvoicesId);
-        $modelArticlePrice = new ActiveDataProvider([
-            'query' => ArticlePrice::find()->andWhere(['purchase_invoices_id' => $purchaseInvoicesId]),
-        ]);
-        $view = '@backend/components/pdf-file/price-per-invoices-pdf.php';
-        $content = $this->render($view, [
+        $model                      = $this->findModel($purchaseInvoicesId);
+        $modelArticlePrice          = new ActiveDataProvider([
+                                                                 'query' => ArticlePrice::find()->andWhere(['purchase_invoices_id' => $purchaseInvoicesId]),
+                                                             ]);
+        $view                       = '@backend/components/pdf-file/price-per-invoices-pdf.php';
+        $content                    = $this->render($view, [
             'model'                    => $model,
             'dataProviderArticlePrice' => $modelArticlePrice,
 
         ]);
         /* @var $mpdf \Mpdf\Mpdf */
-        $date    = date('d.m.Y');
+        $date = date('d.m.Y');
 
-        $pdf     = Yii::$app->pdf;
-        $mpdf    = $pdf->api;
+        $pdf  = Yii::$app->pdf;
+        $mpdf = $pdf->api;
         $mpdf->SetHeader($date . ' Kattan Shop');
         $mpdf->WriteHtml($content);
         return $mpdf->Output($date);

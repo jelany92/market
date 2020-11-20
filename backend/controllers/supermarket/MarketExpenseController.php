@@ -1,21 +1,18 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\supermarket;
 
 use backend\models\History;
+use backend\models\MarketExpense;
+use backend\models\searchModel\MarketExpenseSearch;
 use common\components\QueryHelper;
 use common\controller\BaseController;
 use Yii;
-use backend\models\MarketExpense;
-use backend\models\searchModel\MarketExpenseSearch;
 use yii\bootstrap4\Html;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
-use yii\db\Query;
-use yii\helpers\ArrayHelper;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
 
 /**
  * MarketExpenseController implements the CRUD actions for MarketExpense model.
@@ -152,6 +149,36 @@ class MarketExpenseController extends BaseController
             'reasonList' => $reasonList,
 
         ]);
+    }
+
+    /**
+     * Updates an existing Events model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function actionUpdateEvent($event_id)
+    {
+        $model      = $this->findModel($event_id);
+        $reasonList = ArrayHelper::map(MarketExpense::find()->select('reason')->andWhere(['company_id' => Yii::$app->user->id])->groupBy(['reason'])->all(), 'reason', 'reason');
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            if ($model->save())
+            {
+                Yii::$app->session->addFlash('success', Yii::t('app', 'تم تحديث مصروف للماركت لليوم') . ' ' . $model->selected_date);
+                return $this->redirect(['site/index']);
+            }
+        }
+        else
+        {
+            return $this->renderAjax('/supermarket/market-expense/_form', [
+                'model'      => $model,
+                'reasonList' => $reasonList,
+
+            ]);
+        }
     }
 
     /**

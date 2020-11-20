@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\supermarket;
 
 use common\controller\BaseController;
 use Yii;

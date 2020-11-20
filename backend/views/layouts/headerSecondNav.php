@@ -42,38 +42,38 @@ $menuItems = [
         'items'   => [
             [
                 'label'   => Yii::t('app', 'Incoming Revenues'),
-                'url'     => ['/incoming-revenue/index'],
-                'visible' => Yii::$app->user->can('incoming-revenue.*'),
+                'url'     => ['supermarket/incoming-revenue/index'],
+                'visible' => Yii::$app->user->can('supermarket/incoming-revenue.*'),
             ],
             [
                 'label'   => Yii::t('app', 'Purchases'),
-                'url'     => ['/purchases/index'],
-                'visible' => Yii::$app->user->can('purchases.*'),
+                'url'     => ['supermarket/purchases/index'],
+                'visible' => Yii::$app->user->can('supermarket/purchases.*'),
             ],
             [
                 'label'   => Yii::t('app', 'Market Expense'),
-                'url'     => ['/market-expense/index'],
-                'visible' => Yii::$app->user->can('market-expense.*'),
+                'url'     => ['supermarket/market-expense/index'],
+                'visible' => Yii::$app->user->can('supermarket/market-expense.*'),
             ],
             [
                 'label'   => Yii::t('app', 'Tax Office'),
-                'url'     => ['/tax-office/index'],
-                'visible' => Yii::$app->user->can('tax-office.*'),
+                'url'     => ['supermarket/tax-office/index'],
+                'visible' => Yii::$app->user->can('supermarket/tax-office.*'),
             ],
             [
                 'label'   => Yii::t('app', 'Purchase Invoices'),
-                'url'     => ['/purchase-invoices/index'],
-                'visible' => Yii::$app->user->can('purchase-invoices.*'),
+                'url'     => ['supermarket/purchase-invoices/index'],
+                'visible' => Yii::$app->user->can('supermarket/purchase-invoices.*'),
             ],
             [
                 'label'   => Yii::t('app', 'Capital'),
-                'url'     => ['/capital/index'],
-                'visible' => Yii::$app->user->can('capital.*'),
+                'url'     => ['supermarket/capital/index'],
+                'visible' => Yii::$app->user->can('supermarket/capital.*'),
             ],
             [
                 'label'   => Yii::t('app', 'Establish Markets'),
-                'url'     => ['/establish-market/index'],
-                'visible' => Yii::$app->user->can('establish-market.*'),
+                'url'     => ['supermarket/establish-market/index'],
+                'visible' => Yii::$app->user->can('supermarket/establish-market.*'),
             ],
             [
                 'label'   => Yii::t('app', 'History'),
@@ -81,7 +81,7 @@ $menuItems = [
                 'visible' => Yii::$app->user->can('history.*'),
             ],
         ],
-        'visible' => Yii::$app->user->can('incoming-revenue.*'),
+        'visible' => Yii::$app->user->can('supermarket/incoming-revenue.*'),
     ],
     [
         'label'   => Yii::t('app', 'Customer Info'),
