@@ -19,6 +19,7 @@ use common\models\ArticleInfo;
 use common\models\auth\AuthAssignment;
 use common\models\DetailGalleryArticle;
 use common\models\MainCategory;
+use common\models\Subcategory;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ArrayDataProvider;
@@ -140,13 +141,13 @@ class SiteController extends Controller
     /**
      * Displays homepage.
      *
-     * @param int    $mainCategory mainCategoryId
-     * @param int    $subcategory  subcategoryId
-     * @param string $author       authorName
+     * @param int    $mainCategoryId mainCategoryId
+     * @param int    $subcategoryId  subcategoryId
+     * @param string $author         authorName
      *
      * @return string
      */
-    public function actionIndex(int $mainCategory = null, int $subcategory = null, string $author = null): string
+    public function actionIndex(int $mainCategoryId = null, int $subcategoryId = null, string $author = null): string
     {
         $userId         = Yii::$app->user->id;
         $modelUserModel = AdminUser::find()->andWhere(['id' => $userId])->one();
@@ -170,18 +171,18 @@ class SiteController extends Controller
         if ($modelUserModel->category == AdminUser::BOOK_GALLERY_PROJECT)
         {
             $this->layout = 'mainGalleryBook';
-            if (isset($mainCategory))
+            if (isset($mainCategoryId))
             {
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere([
                                                                                         'company_id'       => Yii::$app->user->id,
-                                                                                        'main_category_id' => $mainCategory,
+                                                                                        'main_category_id' => $mainCategoryId,
                                                                                     ]);
             }
-            elseif (isset($subcategory))
+            elseif (isset($subcategoryId))
             {
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->innerJoinWith('gallerySaveCategory')->andWhere([
                                                                                                                               'company_id'     => Yii::$app->user->id,
-                                                                                                                              'subcategory_id' => $subcategory,
+                                                                                                                              'subcategory_id' => $subcategoryId,
                                                                                                                           ]);
             }
             elseif (isset($author))
@@ -189,9 +190,11 @@ class SiteController extends Controller
                 $modelDetailGalleryArticle = DetailGalleryArticle::find()->innerJoinWith('bookAuthorName')->andWhere([
                                                                                                                          'and',
                                                                                                                          ['detail_gallery_article.company_id' => Yii::$app->user->id],
-                                                                                                                         ['like',
-                                                                                                                         'name',
-                                                                                                                         $author],
+                                                                                                                         [
+                                                                                                                             'like',
+                                                                                                                             'name',
+                                                                                                                             $author,
+                                                                                                                         ],
                                                                                                                      ]);
 
             }
@@ -202,17 +205,19 @@ class SiteController extends Controller
             }
             $pages = new Pagination(['totalCount' => $modelDetailGalleryArticle->count()]);
             $modelDetailGalleryArticle->offset($pages->offset)->limit($pages->limit);
+            $subcategoryList = Subcategory::getSubcategoryList(null, Yii::$app->user->id);
             return $this->render('book-gallery', [
+                'mainCategoryId'            => $mainCategoryId,
+                'subcategoryId'             => $subcategoryId,
                 'modelDetailGalleryArticle' => $modelDetailGalleryArticle->all(),
                 'pages'                     => $pages,
+                'subcategoryList'           => $subcategoryList,
             ]);
         }
         return $this->render('supermarket/market', [
 
         ]);
     }
-
-
     /**
      * @return array
      */

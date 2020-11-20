@@ -53,14 +53,14 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
                                                                                                                 'style' => 'position: revert; float: right',
                                                                                                             ]))),
                                                             'content' => DropdownSide::widget([
-                                                                                                  'items' => items($mainCategory, '/site/index', 'mainCategory'),
+                                                                                                  'items' => items($mainCategory, '/site/index', 'mainCategoryId'),
                                                                                               ]),
                                                             //  'expanded' => true,
                                                         ],
                                                         [
                                                             'label'   => Html::tag('div class="card-header"', Yii::t('app', 'Subcategory')),
                                                             'content' => DropdownSide::widget([
-                                                                                                  'items' => items($subCategory, '/site/index', 'subcategory'),
+                                                                                                  'items' => items($subCategory, '/site/index', 'subcategoryId'),
                                                                                               ]),
                                                         ],
                                                         [
@@ -96,13 +96,13 @@ $subMenuItems[] = Html::tag("div class='card-header' style='text-align: start;wi
         ]) ?>
 
         <?= Nav::widget([
-                                            'options' => [
-                                                'id'    => 'sidebar',
-                                                'class' => 'collapse navbar-collapse show collapsible-header flex-container flex-column nav-pills ml-auto',
-                                                'style' => 'align-items: start;',
-                                            ],
-                                            'items'   => $subMenuItems,
-                                        ]) ?>
+                            'options' => [
+                                'id'    => 'sidebar',
+                                'class' => 'collapse navbar-collapse show collapsible-header flex-container flex-column nav-pills ml-auto',
+                                'style' => 'align-items: start;',
+                            ],
+                            'items'   => $subMenuItems,
+                        ]) ?>
 
     </aside>
 </aside>

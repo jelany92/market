@@ -3,10 +3,13 @@
 use yii\bootstrap4\Html;
 use common\models\DetailGalleryArticle;
 use evgeniyrru\yii2slick\Slick;
+use kartik\icons\Icon;
 
 /* @var $this yii\web\View */
 /* @var $modelDetailGalleryArticle \common\models\DetailGalleryArticle */
-$this->registerAssetBundle('backend\assets\BookGallery');
+/* @var $subcategoryList array */
+//$this->registerAssetBundle('backend\assets\BookGallery');
+$this->registerJsFile('@web/js/filter_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $image = [];
 ?>
 <?php foreach ($modelDetailGalleryArticle as $detailGalleryArticle) : ?>
@@ -34,62 +37,50 @@ $image = [];
         <h1><?= Yii::t('app', 'My Library') ?></h1>
     </div>
     <br>
-    <div style="direction: initial">
-        <?= Slick::widget([
-                                                    // Widget configuration. See example above.
-                                                    // settings for js plugin
-                                                    // @see http://kenwheeler.github.io/slick/#settings
-                                                    'clientOptions' => [
-                                                        'dots'           => true,
-                                                        'speed'          => 300,
-                                                        'autoplay'       => true,
-                                                        'infinite'       => true,
-                                                        'slidesToShow'   => 4,
-                                                        'slidesToScroll' => 1,
-                                                        'responsive'     => [
-                                                            [
-                                                                'breakpoint' => 1200,
-                                                                'settings'   => [
-                                                                    'slidesToShow'   => 4,
-                                                                    'slidesToScroll' => 4,
-                                                                    'infinite'       => true,
-                                                                    'autoplay'       => true,
-                                                                    'dots'           => true,
-                                                                ],
-                                                            ],
-                                                            [
-                                                                'breakpoint' => 992,
-                                                                'settings'   => [
-                                                                    'slidesToShow'   => 4,
-                                                                    'slidesToScroll' => 4,
-                                                                    'infinite'       => true,
-                                                                    'autoplay'       => true,
-                                                                    'dots'           => true,
-                                                                ],
-                                                            ],
-                                                            [
-                                                                'breakpoint' => 768,
-                                                                'settings'   => [
-                                                                    'slidesToShow'   => 2,
-                                                                    'slidesToScroll' => 2,
-                                                                    'infinite'       => true,
-                                                                    'autoplay'       => true,
-                                                                    'dots'           => true,
-                                                                ],
-                                                            ],
-                                                            [
-                                                                'breakpoint' => 480,
-                                                                'settings'   => 'unslick',
-                                                                // Destroy carousel, if screen width less than 480px
-                                                            ],
 
-                                                        ],
-                                                    ],
-                                                    'items'         => $image,
-                                                ]); ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-lg-4">
+                <div class="toolbox-left">
+                    <?= Html::a(Icon::show('bars', ['style' => 'margin-right: 5px;']) . Yii::t('app', 'Filters'), ['site/index#'], ['class' => 'sidebar-toggler']) ?>
+                </div><!-- End .toolbox-left -->
 
+                <div class="col-lg-4">
+                    <div class="toolbox-info">
+                        <?= Yii::t('app', 'Showing'); ?> <span><?= count($modelDetailGalleryArticle) ?> of <?= count($modelDetailGalleryArticle); ?> </span> <?= Yii::t('app', 'Products'); ?>
+                    </div><!-- End .toolbox-info -->
+                </div><!-- End .toolbox-center -->
 
+                <div class="col-lg-4">
+                    <?= Html::label(Yii::t('app', 'Sort by:'), 'sortby', ['class' => 'toolbox-sort']) ?>
+                    <?= Html::dropDownList('option', [
+                        'name'  => 'sortby',
+                        'id'    => 'sortby',
+                        'class' => 'form-control',
+                    ], [
+                                               'Most Popular',
+                                               'Most Rated',
+                                               'Date',
+                                           ], ['class' => 'select-custom']) ?>
+                </div><!-- End .toolbox-right -->
+            </div><!-- End .toolbox -->
+        </div>
     </div>
+
+    <div class="col-md-12">
+
+        <?= Html::label(Yii::t('app', 'ترتيب حسب'), null, [
+            'class' => 'col-lg-2',
+        ]) ?>
+
+        <?= Html::dropDownList('subcategory', null, $subcategoryList, [
+            'id'       => isset($subcategoryId) ? $subcategoryId : '',
+            'class'    => 'col-lg-5 selectSubcategoryElement',
+            'onchange' => 'myFunctionSubcategory()',
+            'prompt'   => Yii::t('app', 'Subcategory'),
+        ]) ?>
+    </div>
+
     <div class="row">
         <?php foreach ($modelDetailGalleryArticle as $detailGalleryArticle) : ?>
             <div class="books-view col-6 col-sm-3">

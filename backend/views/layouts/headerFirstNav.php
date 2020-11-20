@@ -6,6 +6,8 @@ use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\helpers\Url;
+use common\models\DetailGalleryArticle;
+use evgeniyrru\yii2slick\Slick;
 
 $firstMenuItems = [
     [
@@ -30,7 +32,7 @@ $label = [
         'label'       => Yii::t('app', 'Adam Market'),
         'url'         => ['/site/index'],
         'linkOptions' => [
-            'style' => 'text-align: start;'
+            'style' => 'text-align: start;',
         ],
     ],
 ];
@@ -41,7 +43,7 @@ $label = [
 <nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ml-auto">
     <div class="container">
         <div class="row col-md-12" style="display: -webkit-box">
-            <div class="col-10 col-md-4" >
+            <div class="col-10 col-md-4">
                 <?php
                 echo nav::widget([
                                      'options' => [
@@ -92,7 +94,7 @@ $label = [
                                      'options' => [
                                          'id'    => 'itemNavFirst',
                                          'class' => 'collapse navbar-collapse navbar-nav ml-auto',
-                                         'style' => 'align-items: revert;'
+                                         'style' => 'align-items: revert;',
                                      ],
                                      'items'   => $firstMenuItems,
                                  ]);
@@ -102,3 +104,75 @@ $label = [
     </div>
 </nav>
 
+<?php if (Yii::$app->controller->action == 'site' && Yii::$app->controller->action->id == 'index'): ?>
+
+    <?php $image               = [];
+    $modelDetailGalleryArticle = DetailGalleryArticle::find()->andWhere(['company_id' => Yii::$app->user->id])->all();
+    ?>
+
+    <?php foreach ($modelDetailGalleryArticle as $detailGalleryArticle) : ?>
+        <?php if ($detailGalleryArticle->bookGalleries->book_photo != null) : ?>
+            <?php $image[] = Html::a(Html::img(DetailGalleryArticle::subcategoryImagePath($detailGalleryArticle->bookGalleries->book_photo), [
+                'style' => 'width:100%;height: 350px',
+                'id'    => $detailGalleryArticle->id,
+            ]), [
+                                         'detail-gallery-article/view',
+                                         'id' => $detailGalleryArticle->id,
+                                     ]) ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <div style="direction: initial">
+        <?= Slick::widget([
+                              // Widget configuration. See example above.
+                              // settings for js plugin
+                              // @see http://kenwheeler.github.io/slick/#settings
+                              'clientOptions' => [
+                                  // 'dots'           => true,
+                                  'speed'          => 300,
+                                  'autoplay'       => true,
+                                  'infinite'       => true,
+                                  'slidesToShow'   => 4,
+                                  'slidesToScroll' => 1,
+                                  'responsive'     => [
+                                      [
+                                          'breakpoint' => 1200,
+                                          'settings'   => [
+                                              'slidesToShow'   => 4,
+                                              'slidesToScroll' => 4,
+                                              'infinite'       => true,
+                                              'autoplay'       => true,
+                                              'dots'           => true,
+                                          ],
+                                      ],
+                                      [
+                                          'breakpoint' => 992,
+                                          'settings'   => [
+                                              'slidesToShow'   => 4,
+                                              'slidesToScroll' => 4,
+                                              'infinite'       => true,
+                                              'autoplay'       => true,
+                                              'dots'           => true,
+                                          ],
+                                      ],
+                                      [
+                                          'breakpoint' => 768,
+                                          'settings'   => [
+                                              'slidesToShow'   => 2,
+                                              'slidesToScroll' => 2,
+                                              'infinite'       => true,
+                                              'autoplay'       => true,
+                                              'dots'           => true,
+                                          ],
+                                      ],
+                                      [
+                                          'breakpoint' => 480,
+                                          'settings'   => 'unslick',
+                                          // Destroy carousel, if screen width less than 480px
+                                      ],
+
+                                  ],
+                              ],
+                              'items'         => $image,
+                          ]); ?>
+    </div>
+<?php endif; ?>
