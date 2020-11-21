@@ -13,7 +13,11 @@ use kartik\date\DatePicker;
     <div class="incoming-revenue-form">
 
         <?php $form = ActiveForm::begin([
-                                            'type' => ActiveForm::TYPE_HORIZONTAL,
+                                            'type'       => ActiveForm::TYPE_HORIZONTAL,
+                                            'formConfig' => [
+                                                'labelSpan'  => 4,
+                                                'deviceSize' => ActiveForm::SIZE_SMALL,
+                                            ],
                                         ]) ?>
         <?= $form->field($model, 'daily_incoming_revenue')->textInput() ?>
 

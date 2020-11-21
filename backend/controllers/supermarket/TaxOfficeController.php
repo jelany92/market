@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\controllers\supermarket;
 
 use backend\models\History;
 use backend\models\TaxOffice;

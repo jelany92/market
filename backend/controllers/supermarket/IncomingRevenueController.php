@@ -88,11 +88,20 @@ class IncomingRevenueController extends BaseController
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء الدخل اليومي'));
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
         }
-
-        return $this->render('/supermarket/incoming-revenue/create', [
-            'model'       => $model,
-            'fileConfigs' => $fileConfigs,
-        ]);
+        if (Yii::$app->request->isAjax)
+        {
+            return $this->renderAjax('/supermarket/incoming-revenue/_form', [
+                'model'       => $model,
+                'fileConfigs' => $fileConfigs,
+            ]);
+        }
+        else
+        {
+            return $this->render('/supermarket/incoming-revenue/create', [
+                'model'       => $model,
+                'fileConfigs' => $fileConfigs,
+            ]);
+        }
     }
 
     /**

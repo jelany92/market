@@ -60,7 +60,6 @@ class SiteController extends Controller
                             'demo-data',
                             'index',
                             'get-events',
-                            'view-events',
                             'view',
                             'month-view',
                             'month-income',
@@ -268,8 +267,8 @@ class SiteController extends Controller
             $Event->start          = $time['selected_date'];
             $Event->color          = '#03c94c'; // green
             $Event->allDay         = true;
-           // $Event->rendering      = Url::to(["incoming-revenues/update-event"]);
-            $events[]              = $Event;
+            // $Event->rendering      = Url::to(["incoming-revenues/update-event"]);
+            $events[] = $Event;
         }
 
         foreach ($purchases as $time)
@@ -453,6 +452,20 @@ class SiteController extends Controller
         $staticDailyInfoIncomingList      = QueryHelper::getDailyInfo($date->format('Y'), $date->format('m'), 'incoming_revenue', 'daily_incoming_revenue', 'id');
         $staticDailyInfoMarketExpenseList = QueryHelper::getDailyInfo($date->format('Y'), $date->format('m'), 'market_expense', 'expense', 'id', 'selected_date');
         $staticDailyInfoPurchasesList     = QueryHelper::getDailyInfo($date->format('Y'), $date->format('m'), 'purchases', 'purchases', 'id', 'selected_date');
+
+        if (Yii::$app->request->isAjax)
+        {
+            return $this->renderAjax('supermarket/view', [
+                'date'                             => $date->format('Y-m-d'),
+                'showCreateIncomingRevenue'        => $showIncomingRevenue,
+                'dataProvider'                     => $dataProvider,
+                'dailyResult'                      => $dailyResult,
+                'establishMarketAmount'            => $establishMarketAmount,
+                'staticDailyInfoIncomingList'      => $staticDailyInfoIncomingList,
+                'staticDailyInfoMarketExpenseList' => $staticDailyInfoMarketExpenseList,
+                'staticDailyInfoPurchasesList'     => $staticDailyInfoPurchasesList,
+            ]);
+        }
         return $this->render('supermarket/view', [
             'date'                             => $date->format('Y-m-d'),
             'showCreateIncomingRevenue'        => $showIncomingRevenue,

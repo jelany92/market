@@ -118,10 +118,21 @@ class MarketExpenseController extends BaseController
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
         }
         $reasonList = ArrayHelper::map(MarketExpense::find()->select('reason')->groupBy(['reason'])->all(), 'reason', 'reason');
-        return $this->render('/supermarket/market-expense/create', [
-            'model'      => $model,
-            'reasonList' => $reasonList,
-        ]);
+        if (Yii::$app->request->isAjax)
+        {
+            return $this->renderAjax('/supermarket/market-expense/_form', [
+                'model'      => $model,
+                'reasonList' => $reasonList,
+            ]);
+        }
+        else
+        {
+            return $this->render('/supermarket/market-expense/create', [
+                'model'      => $model,
+                'reasonList' => $reasonList,
+            ]);
+        }
+
     }
 
     /**

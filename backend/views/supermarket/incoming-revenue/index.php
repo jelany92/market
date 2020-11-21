@@ -16,11 +16,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) . ': ' . IncomingRevenue::sumResultIncomingRevenue()['result'] ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Incoming Revenue'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::button(Yii::t('app', 'Create Incoming Revenue'), [
+            'id'      => 'incoming-revenue',
+            'value'   => \yii\helpers\Url::to(['/supermarket/incoming-revenue/create']),
+            'class'   => 'btn btn-success',
+        ]) ?>
         <?= Html::a(Yii::t('app', Yii::t('app', 'Incoming export')), [
             'incoming-revenue/export',
         ], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <?php
+    //open Popup
+    yii\bootstrap4\Modal::begin([
+                                    'id'    => 'modal',
+                                    'title' => "<h3>" . Yii::t('app', 'Create Incoming Revenue') . "</h3>",
+                                ]);
+    echo '<div id="modalContent"></div>';
+
+    yii\bootstrap4\Modal::end();
+    ?>
 
     <?= GridView::widget([
                              'dataProvider' => $dataProvider,

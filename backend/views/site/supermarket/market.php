@@ -4,6 +4,7 @@ use common\components\QueryHelper;
 use onmotion\apexcharts\ApexchartsWidget;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
+use backend\components\FullCalenderEvent;
 
 /* @var $this yii\web\View */
 /* @var $staticDailyInfoIncomingList array */
@@ -80,6 +81,7 @@ $this->title = 'My Yii Application';
     <?php endif; ?>
     <h1><?= Yii::t('app', 'Total income for the month') . ' ' . $monthName[date('n')] . ': ' . QueryHelper::getMonthData(date('Y'), date('m'), 'incoming_revenue', 'daily_incoming_revenue') ?></h1>
     <br>
+
     <?= yii2fullcalendar\yii2fullcalendar::widget([
                                                       'options'       => [
                                                           'lang' => Yii::$app->language == 'ar' ? 'en' : Yii::$app->language,
@@ -96,20 +98,13 @@ $this->title = 'My Yii Application';
                                                           //'eventTextColor'=> 'black',       // fur textein farbe
                                                           'eventStartEditable' => true,
                                                           //'editable'           => true,
-                                                          'eventClick'         => new \yii\web\JsExpression(\backend\components\FullCalenderEvent::eventClick()),
-                                                          'dayClick'           => new \yii\web\JsExpression('           // wenn ein auswälleen
-                function(date, jsEvent, view) {
-                window.location.href = "' . Url::toRoute([
-                                                                                                                                                                         '/site/view/',
-                                                                                                                                                                         'date' => '',
-                                                                                                                                                                     ]) . '" + date.format("YYYY-MM-DD");
-                  }
-                '),
+                                                          'eventClick'         => new \yii\web\JsExpression(FullCalenderEvent::eventClick()),
+                                                          'dayClick'           => new \yii\web\JsExpression(FullCalenderEvent::addEvent()),
                                                       ],
                                                       'ajaxEvents'    => Url::to(['/site/get-events']),
                                                   ]); ?>
     <?php
-    //open pupap
+    //open Popup
     yii\bootstrap4\Modal::begin([
                                     'id'    => 'eventModal',
                                     'title' => "<h3>" . Yii::t('app', 'Add Event') . "</h3>",
