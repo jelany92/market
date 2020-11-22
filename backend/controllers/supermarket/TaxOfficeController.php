@@ -76,11 +76,21 @@ class TaxOfficeController extends BaseController
 
         }
         $reasonList = ArrayHelper::map(TaxOffice::find()->select('reason')->andWhere(['company_id' => Yii::$app->user->id])->groupBy(['reason'])->all(), 'reason', 'reason');
-        return $this->render('/supermarket/tax-office/create', [
-            'model'      => $model,
-            'reasonList' => $reasonList,
+        if (Yii::$app->request->isAjax)
+        {
+            return $this->render('/supermarket/tax-office/_form', [
+                'model'      => $model,
+                'reasonList' => $reasonList,
+            ]);
+        }
+        else
+        {
+            return $this->render('/supermarket/tax-office/create', [
+                'model'      => $model,
+                'reasonList' => $reasonList,
 
-        ]);
+            ]);
+        }
     }
 
     /**

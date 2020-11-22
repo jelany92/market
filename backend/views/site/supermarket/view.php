@@ -6,11 +6,12 @@ use backend\models\MarketExpense;
 use backend\models\Purchases;
 use backend\models\TaxOffice;
 use common\components\GridView;
+use common\components\ListeHelper;
 use common\components\QueryHelper;
 use common\widgets\Table;
 use onmotion\apexcharts\ApexchartsWidget;
 use yii\bootstrap4\Html;
-use common\components\ListeHelper;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $showCreate boolean */
@@ -89,9 +90,21 @@ $series = [
     ],
 ];
 ?>
+
+<?php
+//open Popup
+yii\bootstrap4\Modal::begin([
+                                'id'    => 'modal',
+                                'title' => "<h3>" . Yii::t('app', 'Create Incoming Revenue') . "</h3>",
+                            ]);
+echo '<div id="modalContent"></div>';
+
+yii\bootstrap4\Modal::end();
+?>
+
 <p>
     <?php if ($showCreateIncomingRevenue): ?>
-        <?= Html::a(Yii::t('app', 'Incoming Revenue'), ['incoming-revenue/create'], [
+        <?= Html::a(Yii::t('app', 'Incoming Revenue'), ['supermarket/incoming-revenue/create'], [
             'class' => 'btn btn-success',
             'data'  => [
                 'method' => 'post',
@@ -99,34 +112,35 @@ $series = [
             ],
         ]) ?>
     <?php endif; ?>
-    <?= Html::a(Yii::t('app', 'Purchases'), ['purchases/create'], [
+    <?= Html::a(Yii::t('app', 'Purchases'), ['supermarket/purchases/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
             'params' => ['date' => $date],
         ],
     ]) ?>
-    <?= Html::a(Yii::t('app', 'Market Expense'), ['market-expense/create'], [
+    <?= Html::a(Yii::t('app', 'Market Expense'), ['supermarket/market-expense/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
             'params' => ['date' => $date],
         ],
     ]) ?>
-    <?= Html::a(Yii::t('app', 'Tax Office'), ['tax-office/create'], [
+    <?= Html::a(Yii::t('app', 'Tax Office'), ['supermarket/tax-office/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
             'params' => ['date' => $date],
         ],
     ]) ?>
-    <?= Html::a(Yii::t('app', 'Returned Goods'), ['returned-goods/create'], [
+    <?= Html::a(Yii::t('app', 'Returned Goods'), ['supermarket/returned-goods/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
             'params' => ['date' => $date],
         ],
     ]) ?>
+
     <?= Table::widget([
                           'tableArray' => [
                               [

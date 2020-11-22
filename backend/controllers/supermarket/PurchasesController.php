@@ -110,10 +110,20 @@ class PurchasesController extends BaseController
             return Yii::$app->runAction('site/view', ['date' => $model->selected_date]);
         }
         $reasonList = ArrayHelper::map(Purchases::find()->select('reason')->andWhere(['company_id' => Yii::$app->user->id])->groupBy(['reason'])->all(), 'reason', 'reason');
-        return $this->render('/supermarket/purchases/create', [
-            'model'      => $model,
-            'reasonList' => $reasonList,
-        ]);
+        if (Yii::$app->request->isAjax)
+        {
+            return $this->render('/supermarket/purchases/_form', [
+                'model'      => $model,
+                'reasonList' => $reasonList,
+            ]);
+        }
+        else
+        {
+            return $this->render('/supermarket/purchases/create', [
+                'model'      => $model,
+                'reasonList' => $reasonList,
+            ]);
+        }
     }
 
     /**

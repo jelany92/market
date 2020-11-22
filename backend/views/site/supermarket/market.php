@@ -99,7 +99,14 @@ $this->title = 'My Yii Application';
                                                           'eventStartEditable' => true,
                                                           //'editable'           => true,
                                                           'eventClick'         => new \yii\web\JsExpression(FullCalenderEvent::eventClick()),
-                                                          'dayClick'           => new \yii\web\JsExpression(FullCalenderEvent::addEvent()),
+                                                          'dayClick'           => new \yii\web\JsExpression('// wenn ein auswälleen
+                                                                                    function(date, jsEvent, view) {
+                                                                                    window.location.href = "' . Url::toRoute([
+                                                                                                  '/site/view/',
+                                                                                                  'date' => '',
+                                                                                                   ]) . '" + date.format("YYYY-MM-DD");}
+                                                                                    '),
+                                                          //  'dayClick'           => new \yii\web\JsExpression(FullCalenderEvent::addEvent()),
                                                       ],
                                                       'ajaxEvents'    => Url::to(['/site/get-events']),
                                                   ]); ?>
