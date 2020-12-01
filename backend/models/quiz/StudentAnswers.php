@@ -37,6 +37,7 @@ class StudentAnswers extends \yii\db\ActiveRecord
     {
         return [
             [['excercise_id', 'student_id'], 'integer'],
+            [['excercise_id', 'student_id'], 'unique', 'targetAttribute' => ['excercise_id', 'student_id']],
             [['created_at', 'updated_at'], 'safe'],
             [['student_answer'], 'string', 'max' => 10],
             [['excercise_id'], 'exist', 'skipOnError' => true, 'targetClass' => Excercise::class, 'targetAttribute' => ['excercise_id' => 'id']],

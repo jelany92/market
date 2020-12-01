@@ -28,9 +28,7 @@ jQuery(document).ready(function ($)
 
 function myFunctionNextQuestion($id)
 {
-    var mainCategory = document.getElementsByClassName('card sub-card card-open');
-    alert(mainCategory);
-    var name = mainCategory.collapse('hide');
-    $('.subcategory-field').show().attr(mainCategory);
-
-};
+    var nextId = $id + 1;
+    $("#collapseNext_" + nextId).collapse('show');
+    $("#collapseNext_" + $id).collapse('hide');
+}

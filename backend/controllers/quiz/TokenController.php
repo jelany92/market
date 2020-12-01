@@ -180,9 +180,18 @@ class TokenController extends Controller
     {
         $modelQuizAnswerForm = new QuizAnswerForm();
         $exercises           = Excercise::find()->andWhere(['main_category_exercise_id' => $mainCategoryExerciseId])->createCommand()->queryAll();
+        $student             = Students::find()->andWhere(['token' => $token])->one();
+        $modelStudentAnswers = StudentAnswers::find()->andWhere(['student_id' => $student->id])->createCommand()->queryAll();
+        $studentAnswer       = [];
+        if (0 < count($modelStudentAnswers))
+        {
+            foreach ($modelStudentAnswers as $modelStudentAnswer)
+            {
+                $studentAnswer[$modelStudentAnswer['excercise_id']] = $modelStudentAnswer['student_answer'];
+            }
+        }
         if (Yii::$app->request->post('Answers') && $modelQuizAnswerForm->validate())
         {
-            $student = Students::find()->andWhere(['token' => $token])->one();
             if ($student instanceof Students)
             {
                 foreach (Yii::$app->request->post('Answers') as $key => $answer)
@@ -212,8 +221,10 @@ class TokenController extends Controller
 
         return $this->render('exercise-without-token', [
             'exercises'           => $exercises,
-            'modelQuizAnswerForm' => $modelQuizAnswerForm,
             'token'               => $token,
+            'modelQuizAnswerForm' => $modelQuizAnswerForm,
+            'studentAnswer'       => $studentAnswer,
+            'studentId'           => $student->id,
         ]);
     }
 
@@ -235,10 +246,22 @@ class TokenController extends Controller
             {
                 foreach ($post['Answers'] as $key => $answer)
                 {
-                    $model->excercise_id   = $key;
-                    $model->student_id     = $student->id;
-                    $model->student_answer = $answer;
-                    $model->save();
+                    $modelStudentAnswer = StudentAnswers::findOne(['excercise_id' => $key]);
+                    if ($modelStudentAnswer instanceof StudentAnswers)
+                    {
+                        if ($modelStudentAnswer->student_answer != $answer)
+                        {
+                            $modelStudentAnswer->student_answer = $answer;
+                            $modelStudentAnswer->save();
+                        }
+                    }
+                    else
+                    {
+                        $model->excercise_id   = $key;
+                        $model->student_id     = $student->id;
+                        $model->student_answer = $answer;
+                        $model->save();
+                    }
                 }
                 return [
                     'data' => [
@@ -258,7 +281,6 @@ class TokenController extends Controller
                         'message' => 'An error occured.',
                     ],
                     'code' => 1,
-                    // Some semantic codes that you know them for yourself
                 ];
             }
         }

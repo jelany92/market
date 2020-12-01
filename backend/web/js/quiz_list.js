@@ -1,5 +1,6 @@
 jQuery(".dynamicform_wrapper").on("afterInsert", function(e, item) {
     jQuery(".dynamicform_wrapper .panel-title-address").each(function(index) {
+        //alert(index);
         jQuery(this).html("Question: " + (index + 1));
     });
 });

@@ -23,12 +23,17 @@ class Card extends Widget
     public $toggle         = 'collapse';
     public $collapseClass  = '';
     public $containerClass = '';
+    public $headerClass    = '';
+    public $titleClass     = '';
 
     public function init()
     {
         parent::init();
+        if (isset($this->id))
+        {
+            $idCapitalized = ucfirst($this->id);
+        }
 
-        $idCapitalized = ucfirst($this->id);
         if (!isset($this->icon))
         {
             $this->icon = Icon::show('circle', ['framework' => Icon::FAR]);
@@ -38,23 +43,28 @@ class Card extends Widget
             'class' => 'card' . ($this->inSubAccordion ? ' sub-card' : '') . (0 < strlen($this->containerClass) ? ' ' . $this->containerClass : ''),
             'id'    => $this->id,
         ]);
-        echo Html::beginTag('div', [
-            'class' => $this->inSubAccordion ? 'card-body' : 'card-header',
-            'id'    => 'heading' . $idCapitalized,
-        ]);
-        echo Html::tag($this->inSubAccordion ? 'h3' : 'h2', $this->icon . ' ' . $this->title, [
-            'class'         => ($this->inSubAccordion ? 'h6' : 'h5') . ' mb-0 text-primary collapsed',
-            'data-toggle'   => $this->toggle,
-            'data-target'   => '#collapse' . $idCapitalized,
-            'aria-expanded' => 'false',
-            'aria-controls' => 'collapse' . $idCapitalized,
-        ]);
-        echo Html::endTag('div');
+
+        if (isset($this->title))
+        {
+            echo Html::beginTag('div', [
+                'class'         => ($this->inSubAccordion ? 'card-body' : 'card-header') . (0 < strlen($this->headerClass) ? ' ' . $this->headerClass : ''),
+                'id'            => isset($idCapitalized) ? 'heading' . $idCapitalized : null,
+                'data-toggle'   => $this->toggle,
+                'data-target'   => isset($idCapitalized) ? '#collapse' . $idCapitalized : null,
+                'aria-expanded' => 'false',
+                'aria-controls' => isset($idCapitalized) ? 'collapse' . $idCapitalized : null,
+            ]);
+            echo Html::tag($this->inSubAccordion ? 'h3' : 'h2', $this->icon . ' ' . $this->title, [
+                'class' => ($this->inSubAccordion ? 'h6' : 'h5') . ' mb-0 text-primary collapsed' . (0 < strlen($this->titleClass) ? ' ' . $this->titleClass : ''),
+            ]);
+            echo Html::endTag('div');
+        }
+
         echo Html::beginTag('div', [
             'class'           => 'collapse' . ($this->collapsed ? '' : ' show') . (0 < strlen($this->collapseClass) ? ' ' . $this->collapseClass : ''),
-            'id'              => 'collapse' . $idCapitalized,
-            'aria-labelledby' => 'heading' . $idCapitalized,
-            'data-parent'     => '#' . $this->parent,
+            'id'              => isset($idCapitalized) ? 'collapse' . $idCapitalized : null,
+            'aria-labelledby' => isset($idCapitalized) ? 'heading' . $idCapitalized : null,
+            'data-parent'     => isset($this->parent) ? '#' . $this->parent : null,
         ]);
         echo Html::beginTag('div', [
             'class' => 'card-body' . ($this->inSubAccordion ? ' pt-0' : ''),

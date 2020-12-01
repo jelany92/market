@@ -8,10 +8,6 @@ use yii\base\Model;
 /**
  * This is the model class for table "{{%student_answers}}".
  *
- * @property int $id
- * @property int $excercise_id
- * @property int $student_id
- * @property string $student_answer
  * @property array $question
  * @property array $answer
  *
