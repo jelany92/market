@@ -6,6 +6,7 @@ use backend\models\quiz\Excercise;
 use backend\models\quiz\ExerciseForm;
 use backend\models\quiz\MainCategoryExercise;
 use backend\models\quiz\search\ExcerciseSearch;
+use common\components\base\Model;
 use kartik\form\ActiveForm;
 use Yii;
 use yii\filters\VerbFilter;
@@ -71,54 +72,59 @@ class ExcerciseController extends Controller
      */
     public function actionCreate(int $mainCategoryExerciseId)
     {
-        $modelForm         = new ExerciseForm();
-        $modelExerciseList = [new Excercise];
+        $model         = new Excercise();
+        $modelExerciseList = [new Excercise()];
 
         $modelModelMainCategoryExercise = $this->findModelMainCategoryExercise($mainCategoryExerciseId);
-        if ($modelForm->load(Yii::$app->request->post()))
+        if ($model->load(Yii::$app->request->post()))
         {
-            $modelExerciseFormList = ExerciseForm::createMultiple(ExerciseForm::class);
-            ExerciseForm::loadMultiple($modelExerciseList, Yii::$app->request->post());
+            $modelExerciseFormList = Model::createMultiple(Excercise::class);
+            Model::loadMultiple($modelExerciseList, Yii::$app->request->post());
+
             // ajax validation
             if (Yii::$app->request->isAjax)
             {
                 Yii::$app->response->format = Response::FORMAT_JSON;
-                return ArrayHelper::merge(ActiveForm::validateMultiple($modelExerciseList), ActiveForm::validate($modelForm));
+                return ArrayHelper::merge(ActiveForm::validateMultiple($modelExerciseList), ActiveForm::validate($model));
             }
-            $transaction = \Yii::$app->db->beginTransaction();
-            try
+            $valid = Model::validateMultiple($modelExerciseList);
+            if ($valid)
             {
-                foreach ($modelExerciseFormList as $modelExerciseForm)
+                $transaction = \Yii::$app->db->beginTransaction();
+                try
                 {
-                    $modelExercise                            = new Excercise();
-                    $modelExercise->main_category_exercise_id = $mainCategoryExerciseId;
-                    $modelExercise->question_type             = $modelExerciseForm->question_type;
-                    $modelExercise->question                  = $modelExerciseForm->question;
-                    $modelExercise->answer_a                  = $modelExerciseForm->answer_a;
-                    $modelExercise->answer_b                  = $modelExerciseForm->answer_b;
-                    $modelExercise->answer_c                  = $modelExerciseForm->answer_c;
-                    $modelExercise->answer_d                  = $modelExerciseForm->answer_d;
-                    $modelExercise->correct_answer            = $modelExerciseForm->correct_answer;
-                    if (!($modelExercise->save(false)))
+                    foreach ($modelExerciseList as $modelExerciseForm)
                     {
-                        $transaction->rollBack();
-                        break;
+                        $modelExercise                            = new Excercise();
+                        $modelExercise->main_category_exercise_id = $mainCategoryExerciseId;
+                        $modelExercise->question_type             = $modelExerciseForm->question_type;
+                        $modelExercise->question                  = $modelExerciseForm->question;
+                        $modelExercise->answer_a                  = $modelExerciseForm->answer_a;
+                        $modelExercise->answer_b                  = $modelExerciseForm->answer_b;
+                        $modelExercise->answer_c                  = $modelExerciseForm->answer_c;
+                        $modelExercise->answer_d                  = $modelExerciseForm->answer_d;
+                        $modelExercise->correct_answer            = $modelExerciseForm->correct_answer;
+                        if (!($modelExercise->save(false)))
+                        {
+                            $transaction->rollBack();
+                            break;
+                        }
                     }
+                    $transaction->commit();
+                    return $this->redirect([
+                                               'index',
+                                           ]);
                 }
-                $transaction->commit();
-                return $this->redirect([
-                                           'index',
-                                       ]);
-            }
-            catch (\Exception $e)
-            {
-                $transaction->rollBack();
+                catch (\Exception $e)
+                {
+                    $transaction->rollBack();
+                }
             }
         }
         return $this->render('create', [
-            'model'                          => $modelForm,
+            'model'                          => $model,
             'modelModelMainCategoryExercise' => $modelModelMainCategoryExercise,
-            'modelsAddress'                  => (empty($modelExerciseList)) ? [new Excercise()] : $modelExerciseList,
+            'modelsAddress'                  => $modelExerciseList,
         ]);
     }
 

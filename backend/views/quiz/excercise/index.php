@@ -33,7 +33,7 @@ $this->title = Yii::t('app', 'Question')
                                      'value'     => function ($model) {
                                          return Html::a($model->mainCategoryExercise->main_category_exercise_name, [
                                              'quiz/excercise/create',
-                                             'mainCategoryExerciseId' => $model->id,
+                                             'mainCategoryExerciseId' => $model->main_category_exercise_id,
                                          ]);
                                      },
                                      'format'    => 'raw',

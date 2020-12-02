@@ -3,6 +3,7 @@
 use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
 use common\components\GridView;
+use backend\models\quiz\Excercise;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\quiz\MainCategoryExercise */
@@ -50,12 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'excercise_id',
-            'question_type',
+            'question',
             [
                 'attribute' => 'question_type',
                 'value'     => function ($model) {
-                    return $model->question_type;
+                    return Excercise::getQuestionType()[$model->question_type];
                 },
             ],
             [

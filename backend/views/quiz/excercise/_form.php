@@ -132,7 +132,7 @@ $this->registerJsFile('@web/js/quiz_list.js', ['depends' => [\yii\web\JqueryAsse
                                 'prompt' => Yii::t('app', 'please Choose'),
                             ],
                             'pluginOptions' => [
-                                'depends'     => ['exerciseform-0-question_type'],
+                                'depends'     => ['excercise-0-question_type'],
                                 'placeholder' => 'Select...',
                                 'url'         => Url::to(['quiz/excercise/correct-answer']),
                             ],
