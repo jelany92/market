@@ -17,15 +17,6 @@ $this->title = Yii::t('app', 'Book Gallery');
 $this->registerJsFile('@web/js/filter_list.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 ?>
 
-<?php echo Select2::widget([
-                               'name'          => 'kv-state-200',
-                               'data'          => $subcategoryList,
-                               'size'          => Select2::SMALL,
-                               'options'       => ['placeholder' => 'Select a state ...'],
-                               'pluginOptions' => [
-                                   'allowClear' => true,
-                               ],
-                           ]) ?>
 <!-- SECTION -->
 <div class="section">
     <!-- container -->

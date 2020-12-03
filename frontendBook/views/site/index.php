@@ -62,7 +62,7 @@ $count = 0;
                         <ul class="section-title section-tab-nav tab-nav">
                             <li class="active"><a data-toggle="tab" href="#tab1"><?= Yii::t('app', 'New Book') ?></a></li>
                             <?php foreach ($mainCategoryList as $mainCategory) : ?>
-                                <?= Html::tag("li", Html::a($mainCategory->category_name, [''])) ?>
+                                <?= Html::tag("li", Html::a($mainCategory->category_name, ['main-category', 'mainCategoryId' => $mainCategory->id])) ?>
                             <?php endforeach; ?>
                         </ul>
                     </div>
