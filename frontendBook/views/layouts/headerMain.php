@@ -4,6 +4,7 @@ use common\models\MainCategory;
 use kartik\form\ActiveForm;
 use yii\bootstrap4\Html;
 use yii\helpers\Url;
+use kartik\icons\Icon;
 
 //var_dump($menuItems[0]['items']);die();
 ?>
@@ -29,9 +30,10 @@ use yii\helpers\Url;
 
                 <div class="col-md-6">
                     <div class="header-search">
-                        <?php $form = ActiveForm::begin(['id'     => 'navSearchForm',
-                                                         'method' => 'GET',
-                                                         'action' => Url::toRoute('/search/global-search'),
+                        <?php $form = ActiveForm::begin([
+                                                            'id'     => 'navSearchForm',
+                                                            'method' => 'GET',
+                                                            'action' => Url::toRoute('/search/global-search'),
                                                         ]);
                         ?>
                         <form>
@@ -56,11 +58,12 @@ use yii\helpers\Url;
                         <!-- Wishlist -->
                         <div>
                             <a href="#">
-                                <i class="fa fa-heart-o"></i>
+                                <?= Icon::show('heart') ?>
+                                <br>
                                 <span>
                                     <?= Yii::t('app', 'Your Book') ?>
                                 </span>
-                                <div class="qty">2</div>
+                                <div class="qty">0</div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -68,9 +71,10 @@ use yii\helpers\Url;
                         <!-- Cart -->
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
-                                <div class="qty">3</div>
+                                <?= Icon::show('shopping-cart') ?>
+                                <br>
+                                <span><?= Yii::t('app', 'Your Cart') ?></span>
+                                <div class="qty">0</div>
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">

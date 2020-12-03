@@ -42,12 +42,12 @@ $this->registerJsFile('@web/js/view_list_or_grid.js', ['depends' => [\yii\web\Jq
                 ]); ?>
             </div>
         </div>
-        <div class="row col-md-12">
+        <div id="gridView" class="row col-md-12">
             <!-- Products tab & slick -->
             <?php foreach ($dataProvider->models as $detailGalleryArticle) : ?>
                 <div class="col-md-3 col-xs-6" style="padding-bottom: 50px;">
                     <!-- product -->
-                    <div id="gridView" class="product">
+                    <div class="product">
                         <div class="product-img">
                             <?php if ($detailGalleryArticle->bookGalleries->book_photo != null) : ?>
                                 <?= Html::img(DetailGalleryArticle::subcategoryImagePath($detailGalleryArticle->bookGalleries->book_photo), ['style' => 'width:100%;height: 350px']) ?>
