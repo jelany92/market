@@ -1,7 +1,6 @@
 <?php
 
-use common\models\MainCategory;
-use yii\bootstrap4\Nav;
+use common\widgets\Nav;
 use yii\bootstrap4\Html;
 use kartik\icons\Icon;
 

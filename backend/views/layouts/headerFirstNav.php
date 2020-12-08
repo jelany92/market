@@ -4,7 +4,7 @@ use backend\components\LanguageDropdown;
 use kartik\form\ActiveForm;
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
+use common\widgets\Nav;
 use yii\helpers\Url;
 use common\models\DetailGalleryArticle;
 use evgeniyrru\yii2slick\Slick;

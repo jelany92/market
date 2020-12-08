@@ -6,7 +6,7 @@
 
 use backend\assets\AppAsset;
 use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
+use common\widgets\Nav;
 use yii\bootstrap4\NavBar;
 use common\widgets\Alert;
 use yii\bootstrap4\Breadcrumbs;

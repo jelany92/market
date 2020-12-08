@@ -8,7 +8,7 @@ use common\models\Subcategory;
 use common\widgets\AccordionWidget;
 use kartik\icons\Icon;
 use yii\bootstrap4\Html;
-use yii\bootstrap4\Nav;
+use common\widgets\Nav;
 
 function items($teams, $view, $param)
 {

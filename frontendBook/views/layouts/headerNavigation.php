@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap4\Nav;
+use common\widgets\Nav;
 
 $label = [
     [

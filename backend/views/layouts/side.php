@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap4\Nav;
+use common\widgets\Nav;
 use yii\bootstrap4\NavBar;
 use backend\components\DropdownSide;
 use common\models\BookGallery;
