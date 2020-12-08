@@ -3,17 +3,18 @@
 namespace common\models\auth;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "auth_assignment".
  *
- * @property string $item_name
- * @property string $user_id
- * @property int $created_at
+ * @property string   $item_name
+ * @property string   $user_id
+ * @property int      $created_at
  *
  * @property AuthItem $itemName
  */
-class AuthAssignment extends \yii\db\ActiveRecord
+class AuthAssignment extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -29,11 +30,13 @@ class AuthAssignment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            //@formatter:off
             [['item_name', 'user_id'], 'required'],
             [['created_at'], 'integer'],
             [['item_name', 'user_id'], 'string', 'max' => 64],
             [['item_name', 'user_id'], 'unique', 'targetAttribute' => ['item_name', 'user_id']],
             [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthItem::class, 'targetAttribute' => ['item_name' => 'name']],
+            //@formatter:on
         ];
     }
 

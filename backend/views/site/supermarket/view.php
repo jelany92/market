@@ -104,7 +104,7 @@ yii\bootstrap4\Modal::end();
 
 <p>
     <?php if ($showCreateIncomingRevenue): ?>
-        <?= Html::a(Yii::t('app', 'Incoming Revenue'), ['supermarket/incoming-revenue/create'], [
+        <?= Html::a(Yii::t('app', 'Incoming Revenue'), ['/supermarket/incoming-revenue/create'], [
             'class' => 'btn btn-success',
             'data'  => [
                 'method' => 'post',
@@ -112,28 +112,28 @@ yii\bootstrap4\Modal::end();
             ],
         ]) ?>
     <?php endif; ?>
-    <?= Html::a(Yii::t('app', 'Purchases'), ['supermarket/purchases/create'], [
+    <?= Html::a(Yii::t('app', 'Purchases'), ['/supermarket/purchases/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
             'params' => ['date' => $date],
         ],
     ]) ?>
-    <?= Html::a(Yii::t('app', 'Market Expense'), ['supermarket/market-expense/create'], [
+    <?= Html::a(Yii::t('app', 'Market Expense'), ['/supermarket/market-expense/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
             'params' => ['date' => $date],
         ],
     ]) ?>
-    <?= Html::a(Yii::t('app', 'Tax Office'), ['supermarket/tax-office/create'], [
+    <?= Html::a(Yii::t('app', 'Tax Office'), ['/supermarket/tax-office/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
             'params' => ['date' => $date],
         ],
     ]) ?>
-    <?= Html::a(Yii::t('app', 'Returned Goods'), ['supermarket/returned-goods/create'], [
+    <?= Html::a(Yii::t('app', 'Returned Goods'), ['/supermarket/returned-goods/create'], [
         'class' => 'btn btn-success',
         'data'  => [
             'method' => 'post',
@@ -166,7 +166,7 @@ yii\bootstrap4\Modal::end();
                               [
                                   [
                                       'type' => 'td',
-                                      'html' => Html::a(Html::encode(Yii::t('app', 'تاسيس المحل')), Yii::$app->urlManager->createUrl(['/establish-market/index'])),
+                                      'html' => Html::a(Html::encode(Yii::t('app', 'تاسيس المحل')), Yii::$app->urlManager->createUrl(['/supermarket/establish-market/index'])),
                                   ],
                                   [
                                       'type' => 'td',
@@ -176,51 +176,51 @@ yii\bootstrap4\Modal::end();
                               [
                                   [
                                       'type' => 'td',
-                                      'html' => Html::a(Html::encode(Yii::t('app', 'تاسيس المحل المؤسسين')), Yii::$app->urlManager->createUrl(['/capital/index'])),
+                                      'html' => Html::a(Html::encode(Yii::t('app', 'تاسيس المحل المؤسسين')), Yii::$app->urlManager->createUrl(['/supermarket/capital/index'])),
                                   ],
                                   [
                                       'type' => 'td',
-                                      'html' => isset($amountCapital) ? Html::a($amountCapital, Yii::$app->urlManager->createUrl(['/capital/index'])) : '',
-                                  ],
-                              ],
-                              [
-                                  [
-                                      'type' => 'td',
-                                      'html' => Html::a(Html::encode(Yii::t('app', 'مجموع الدخل اليومي')), Yii::$app->urlManager->createUrl(['/incoming-revenue/index'])),
-                                  ],
-                                  [
-                                      'type' => 'td',
-                                      'html' => isset($totalIncomeOfTheShop) ? Html::a($totalIncomeOfTheShop, Yii::$app->urlManager->createUrl(['/incoming-revenue/index'])) : '',
+                                      'html' => isset($amountCapital) ? Html::a($amountCapital, Yii::$app->urlManager->createUrl(['/supermarket/capital/index'])) : '',
                                   ],
                               ],
                               [
                                   [
                                       'type' => 'td',
-                                      'html' => Html::a(Html::encode(Yii::t('app', 'مجموع مسترجعات الدخل')), Yii::$app->urlManager->createUrl(['/tax-office/index'])),
+                                      'html' => Html::a(Html::encode(Yii::t('app', 'مجموع الدخل اليومي')), Yii::$app->urlManager->createUrl(['/supermarket/incoming-revenue/index'])),
                                   ],
                                   [
                                       'type' => 'td',
-                                      'html' => isset($taxOffice) ? Html::a(Html::encode($taxOffice), Yii::$app->urlManager->createUrl(['/tax-office/index'])) : '',
-                                  ],
-                              ],
-                              [
-                                  [
-                                      'type' => 'td',
-                                      'html' => Html::a(Html::encode(Yii::t('app', 'مشتريات البضاعة')), Yii::$app->urlManager->createUrl(['/purchases/index'])),
-                                  ],
-                                  [
-                                      'type' => 'td',
-                                      'html' => isset($amountPurchases) ? Html::a(Html::encode($amountPurchases), Yii::$app->urlManager->createUrl(['/purchases/index'])) : '',
+                                      'html' => isset($totalIncomeOfTheShop) ? Html::a($totalIncomeOfTheShop, Yii::$app->urlManager->createUrl(['supermarket/incoming-revenue/index'])) : '',
                                   ],
                               ],
                               [
                                   [
                                       'type' => 'td',
-                                      'html' => Html::a(Html::encode(Yii::t('app', 'مصاريف المحل')), Yii::$app->urlManager->createUrl(['/market-expense/index'])),
+                                      'html' => Html::a(Html::encode(Yii::t('app', 'مجموع مسترجعات الدخل')), Yii::$app->urlManager->createUrl(['/supermarket/tax-office/index'])),
                                   ],
                                   [
                                       'type' => 'td',
-                                      'html' => Html::a(Html::encode($amountExpense), Yii::$app->urlManager->createUrl(['/market-expense/index'])),
+                                      'html' => isset($taxOffice) ? Html::a(Html::encode($taxOffice), Yii::$app->urlManager->createUrl(['/supermarket/tax-office/index'])) : '',
+                                  ],
+                              ],
+                              [
+                                  [
+                                      'type' => 'td',
+                                      'html' => Html::a(Html::encode(Yii::t('app', 'مشتريات البضاعة')), Yii::$app->urlManager->createUrl(['/supermarketpurchases/index'])),
+                                  ],
+                                  [
+                                      'type' => 'td',
+                                      'html' => isset($amountPurchases) ? Html::a(Html::encode($amountPurchases), Yii::$app->urlManager->createUrl(['/supermarket/purchases/index'])) : '',
+                                  ],
+                              ],
+                              [
+                                  [
+                                      'type' => 'td',
+                                      'html' => Html::a(Html::encode(Yii::t('app', 'مصاريف المحل')), Yii::$app->urlManager->createUrl(['/supermarket/market-expense/index'])),
+                                  ],
+                                  [
+                                      'type' => 'td',
+                                      'html' => Html::a(Html::encode($amountExpense), Yii::$app->urlManager->createUrl(['/supermarket/market-expense/index'])),
                                   ],
                               ],
                               [
