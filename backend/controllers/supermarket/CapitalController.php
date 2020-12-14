@@ -107,7 +107,7 @@ class CapitalController extends BaseController
             History::saveAutomaticHistoryEntry('Capital', 'Gekündigt zum ', $url);
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم انشاء راس مال الماركت لليوم') . ' ' . $model->selected_date);
             return $this->redirect([
-                                       '/capital/index',
+                                       '/supermarket/capital/index',
                                    ]);
         }
 
@@ -129,11 +129,12 @@ class CapitalController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save())
+        if ($model->load(Yii::$app->request->post()) && $model->validate())
         {
+            $model->save();
             Yii::$app->session->addFlash('success', Yii::t('app', 'تم تحديث راس مال الماركت لليوم') . ' ' . $model->selected_date);
             return $this->redirect([
-                                       '/capital/index',
+                                       '/supermarket/capital/index',
                                    ]);
         }
 

@@ -31,7 +31,7 @@ use yii\helpers\ArrayHelper;
             'maximumInputLength' => false,
         ],
         'size'          => Select2::LARGE,
-        'data'          => ArrayHelper::map(Capital::find()->andWhere(['company_id' => Yii::$app->user->id])->groupBy(['name'])->all(), 'id', 'name'),
+        'data'          => ArrayHelper::map(Capital::find()->andWhere(['company_id' => Yii::$app->user->id])->groupBy(['name'])->all(), 'name', 'name'),
     ]) ?>
 
     <?= $form->field($model, 'amount')->textInput() ?>
