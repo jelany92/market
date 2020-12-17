@@ -51,6 +51,16 @@ return [
             'thousandSeparator' => '.',
             'currencyCode'      => 'EUR',
         ],
+        'i18n'        => [
+            'translations' => [
+                '*' => [
+                    'class'          => 'yii\i18n\GettextMessageSource',
+                    'basePath'       => realpath(Yii::getAlias('@common') . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'translation/translations'),
+                    'useMoFile'      => false,
+                    'sourceLanguage' => 'en-US',
+                ],
+            ],
+        ],
         'backup' => [
             'class' => 'demi\backup\Component',
             // The directory for storing backups files

@@ -51,6 +51,7 @@ class SiteController extends Controller
                             'login',
                             'error',
                             'create-company',
+                            'forgot-password',
                         ],
                         'allow'   => true,
                     ],
@@ -557,16 +558,21 @@ class SiteController extends Controller
             return $this->goHome();
         }
         $model = new ForgotPasswordForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate())
+        if ($model->load(Yii::$app->request->post()))
         {
-            $user = AdminUser::find()->where(['email' => $model->email])->one();
-            if ($user instanceof AdminUser && $user->isActive())
+            if ($model->validate())
             {
-                $user->setForgotPasswordToken();
-                $model->sendForgotPasswordMail($user);
+                try
+                {
+                    $model->sendPasswordResetMail();
+                }
+                catch (\Exception $e)
+                {
+                    throw $e;
+                }
             }
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Es wurde Ihnen eine E-Mail mit Informationen zum Zurücksetzen ihres Passworts zugesendet.'));
-            $model->email = '';
+            Yii::$app->session->addFlash('success', Yii::t('common', "We have sent you further instructions on how to reset your password via email."));
+            return $this->redirect(['/']);
         }
         return $this->render('forgotPassword', [
             'model' => $model,

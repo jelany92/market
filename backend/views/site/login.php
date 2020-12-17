@@ -10,15 +10,16 @@ use yii\bootstrap4\Html;
 
 $this->title                   = Yii::t('app', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
 <div class="site-login">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p><?= Yii::t('app', 'Please fill in the following fields') . ':'; ?></p>
-
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-12">
+            <h1><?= Html::encode($this->title) ?></h1>
+
+            <p><?= Yii::t('app', 'Please fill out the following fields to login:'); ?></p>
+
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
@@ -28,18 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
             <div class="form-group">
-                <?= Html::submitButton(Yii::t('app', 'Login'), [
-                    'class' => 'btn btn-primary',
+                <?= Html::submitButton(Yii::t('app', 'Log in'), [
+                    'class' => 'btn btn-primary btn-block',
                     'name'  => 'login-button',
                 ]) ?>
-
-<!--                --><?/*= Html::a(Yii::t('app', 'Create') . ' ' . Yii::t('app', 'New Customer'), ['site/create-company'], ['class' => 'btn btn-success']) */?>
-
             </div>
-
-            <?= Html::a(Yii::t('app', 'Passwort vergessen') . ' ' . Yii::t('app', '?'), ['forgot-password']) ?>
-
             <?php ActiveForm::end(); ?>
+
+            <p class="text-center mt-3">
+                <?= Html::a(Yii::t('app', 'Forgot password'), ['site/forgot-password'], ['class' => 'm3 text-muted']); ?>
+            </p>
         </div>
     </div>
 </div>

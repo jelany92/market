@@ -55,7 +55,9 @@
     "bower-asset/font-awesome": "5.5.*",
     "kartik-v/yii2-widget-colorinput": "*",
     "evgeniyrru/yii2-slick": "*",
-    "newerton/yii2-fancybox": "dev-master"
+    "newerton/yii2-fancybox": "dev-master",
+    "yiisoft/yii2-queue": "^2.3"
+
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

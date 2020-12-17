@@ -289,7 +289,7 @@ yii\bootstrap4\Modal::end();
                                      if ($action === 'update')
                                      {
                                          $url = Yii::$app->urlManager->createUrl([
-                                                                                     $model['site'] . '/update',
+                                                                                     '/supermarket/' . $model['site'] . '/update',
                                                                                      'id'   => $model['id'],
                                                                                      'data' => [
                                                                                          'method' => 'post',
@@ -303,7 +303,7 @@ yii\bootstrap4\Modal::end();
                                      if ($action === 'delete')
                                      {
                                          $url = Yii::$app->urlManager->createUrl([
-                                                                                     $model['site'] . '/delete',
+                                                                                     '/supermarket/' . $model['site'] . '/update',
                                                                                      'id' => $model['id'],
                                                                                  ]);
                                          return $url;
